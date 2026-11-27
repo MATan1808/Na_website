@@ -1,0 +1,64 @@
+{
+  "allowedWorkspace": "F:\\BACKUP_LINUX\\web_ban_hang",
+  "allowedWorkspaces": [
+    "F:\\BACKUP_LINUX\\web_ban_hang"
+  ],
+  "permissions": {
+    "allow": [],
+    "additionalDirectories": [
+      "F:\\BACKUP_LINUX\\aiac"
+    ]
+  },
+  "project": {
+    "name": "web_ban_hang",
+    "displayName": "Hệ Sinh Thái 2 Website Bán Hàng (Odoo 19.0 Community Multi-Store)",
+    "type": "odoo",
+    "edition": "community",
+    "license": "LGPL-3",
+    "enterpriseDependenciesAllowed": false,
+    "architecture": "odoo-multi-website",
+    "accountIsolation": "per-website",
+    "odooVersion": "19.0",
+    "pythonVersion": "3.12",
+    "owlVersion": "2.8.4",
+    "bootstrapVersion": "5.3.3",
+    "postgresVersion": "15",
+    "postgresImage": "postgres:15-bookworm",
+    "postgresOptionalImage": "360ai/postgres:15-ai",
+    "clientName": "web-ban-hang",
+    "dbFilter": "^web_ban_hang.*$",
+    "addonsPath": "F:\\BACKUP_LINUX\\web_ban_hang\\addons",
+    "roadmapStrategy": "catalog-first",
+    "milestones": {
+      "M1": [
+        "wbh_core",
+        "theme_gift_store",
+        "theme_fashion_store"
+      ],
+      "M2": [
+        "wbh_gift_store",
+        "wbh_fashion_store"
+      ],
+      "M3": [
+        "wbh_payment_vietqr",
+        "wbh_delivery_vn"
+      ]
+    },
+    "customModules": [
+      "wbh_core",
+      "theme_gift_store",
+      "theme_fashion_store",
+      "wbh_gift_store",
+      "wbh_fashion_store",
+      "wbh_payment_vietqr",
+      "wbh_delivery_vn"
+    ],
+    "referenceEnvPath": "F:\\BACKUP_LINUX\\save\\dev_env\\19.0",
+    "aiacRoot": "F:\\BACKUP_LINUX\\aiac",
+    "skills": [
+      "360-odoo",
+      "360-local-builder-env"
+    ],
+    "commitTrailer": "Authored-By: 360org <support@360.org.vn>"
+  }
+}
