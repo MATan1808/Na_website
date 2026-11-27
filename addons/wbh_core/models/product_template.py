@@ -34,6 +34,7 @@ class ProductTemplate(models.Model):
     wbh_is_low_stock = fields.Boolean(
         string='Sắp hết hàng',
         compute='_compute_wbh_is_low_stock',
+        compute_sudo=True,
         search='_search_wbh_is_low_stock',
         store=False,
         help='Bật khi sản phẩm thuộc loại hàng lưu kho (is_storable=True) và tồn kho khả dụng nhỏ hơn hoặc bằng ngưỡng cảnh báo.',
@@ -47,7 +48,7 @@ class ProductTemplate(models.Model):
 
     @api.depends('type', 'is_storable', 'qty_available', 'wbh_low_stock_threshold')
     def _compute_wbh_is_low_stock(self):
-        for product in self:
+        for product in self.sudo():
             product.wbh_is_low_stock = bool(
                 product.type == 'consu'
                 and product.is_storable

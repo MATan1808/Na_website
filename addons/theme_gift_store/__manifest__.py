@@ -3,12 +3,18 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.0.1 (2026-11-27)
+------------------------
+- [NEW] Bổ sung bộ nhận diện thương hiệu Manh Dao Dao Anime Goods Shop (logo.png ngang chuẩn eCommerce, logo_emblem_transparent.png tách nền trong suốt, favicon.ico).
+- [IMPROVE] Tối ưu CSS chiều cao logo Navbar 60px (desktop) / 46px (mobile) trong scope .wbh-store-gift.
+- [FIX] Đọc tồn kho qua product.sudo().qty_available trên thẻ sản phẩm /shop để tương thích quyền Public user.
 
 v19.0.1.0.0 (2026-11-26)
 ------------------------

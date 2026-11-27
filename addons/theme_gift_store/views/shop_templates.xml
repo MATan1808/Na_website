@@ -21,7 +21,7 @@
                     t-field="product.wbh_short_highlight"
                 />
                 <div class="wbh-gift-card-stock mt-1">
-                    <t t-if="product.is_storable and product.qty_available &lt;= 0">
+                    <t t-if="product.is_storable and product.sudo().qty_available &lt;= 0">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--out">
                             <i class="fa fa-clock-o me-1" aria-hidden="true"/>Tạm hết hàng
                         </span>

@@ -1,8 +1,8 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.0` — Hoàn tất **`/build` & cổng `/code-review` Milestone 1 (Catalog-First)** cho hạ tầng Docker di động và 3 module thuần **Odoo 19.0 Community (`LGPL-3`)** (`wbh_core`, `theme_gift_store`, `theme_fashion_store`), sẵn sàng chạy `docker compose up -d` & `/test` để Sếp up sản phẩm ngay.  
+> **Trạng thái dự án**: `v0.3.4` — Hoàn thiện bộ nhận diện thương hiệu **Manh Dao Dao Anime Goods Shop**, vá quyền đọc tồn kho `/shop` cho khách vãng lai và chuẩn hóa Docker Named Volumes triển khai trên Local Server (`wbh_core` `v19.0.1.0.1`, `theme_gift_store` `v19.0.1.0.1`, `theme_fashion_store` `v19.0.1.0.0`).  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
-> **Repository**: `https://github.com/MATan1808/web_ban_hang.git` (nhánh `main`)  
+> **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`
 
 ---

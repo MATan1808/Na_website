@@ -45,8 +45,8 @@ services:
     volumes:
       - ./addons:/mnt/extra-addons
       - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
-      - ./data/filestore:/var/lib/odoo/filestore
-      - ./data/sessions:/var/lib/odoo/sessions
+      - web_ban_hang_filestore:/var/lib/odoo/filestore
+      - web_ban_hang_sessions:/var/lib/odoo/sessions
     healthcheck:
       test: ["CMD-SHELL", "python3 -c \"import urllib.request; r = urllib.request.urlopen('http://localhost:8069/web/health', timeout=5); assert r.status == 200\""]
       interval: 30s
@@ -59,6 +59,10 @@ services:
 volumes:
   web_ban_hang_pgdata:
     name: "${CLIENT_NAME:-web-ban-hang}_pgdata"
+  web_ban_hang_filestore:
+    name: "${CLIENT_NAME:-web-ban-hang}_filestore"
+  web_ban_hang_sessions:
+    name: "${CLIENT_NAME:-web-ban-hang}_sessions"
 
 networks:
   web_ban_hang_net:

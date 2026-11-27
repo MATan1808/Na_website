@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.0.1 (2026-11-27)
+------------------------
+- [FIX] Bổ sung compute_sudo=True khi tính toán nhãn sắp hết hàng (wbh_is_low_stock) giúp khách vãng lai xem trang /shop an toàn không cần mở quyền đọc trực tiếp stock.move.
 
 v19.0.1.0.0 (2026-11-26)
 ------------------------

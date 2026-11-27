@@ -133,6 +133,47 @@
         }
     }
 
+    // -------------------------------------------------------------------------
+    // Header Navbar Brand Logo: hiển thị sắc nét chuẩn eCommerce, gỡ giới hạn 40px
+    // -------------------------------------------------------------------------
+    header#top,
+    header.o_header_standard,
+    header.o_header_affixed {
+        .navbar-brand.logo {
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+
+            img {
+                height: 60px !important;
+                max-height: 60px !important;
+                width: auto !important;
+                object-fit: contain;
+                transition: height 0.2s ease, max-height 0.2s ease;
+            }
+        }
+
+        &.o_header_is_scrolled .navbar-brand.logo img {
+            height: 48px !important;
+            max-height: 48px !important;
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand.logo img {
+                height: 46px !important;
+                max-height: 46px !important;
+            }
+        }
+    }
+
+    // Logo trong menu trượt Offcanvas trên Mobile
+    #top_menu_collapse_mobile .navbar-brand.logo img,
+    .offcanvas .navbar-brand.logo img {
+        height: 48px !important;
+        max-height: 48px !important;
+        width: auto !important;
+        object-fit: contain;
+    }
+
     .wbh-gift-footer-band {
         background-color: var(--wbh-gift-cream);
         border-top: 1px solid var(--wbh-gift-border);

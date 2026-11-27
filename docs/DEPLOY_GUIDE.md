@@ -25,7 +25,7 @@ Dự án được đóng gói **Docker di động 100% ngay trong kho Git** (`do
 | **Cổng Longpolling / Gevent** | `7089` | Không đụng `demo-19` (`7079`). |
 | **Cổng PostgreSQL Host** | `51901` | Chỉ bind `127.0.0.1:51901:5432` để an toàn nội bộ. |
 | **Database & Bộ lọc** | `web_ban_hang_dev` (local) / `web_ban_hang_prod` (prod)<br>`DB_FILTER=^web_ban_hang.*$` | Cấm dùng chung DB `demo-19` hay dump `vuahethong_v19_prod_test.dump`. |
-| **Docker Volume & Filestore** | Volume `web_ban_hang_pgdata`<br>Bind `data/filestore/`, `data/sessions/` | Tách biệt 100% với `odoo19-db` và `dev_env\19.0\data\filestore\demo-19`. |
+| **Docker Volume & Filestore** | Docker Named Volumes `web_ban_hang_pgdata`, `web_ban_hang_filestore`, `web_ban_hang_sessions` | Tách biệt 100% với `odoo19-db`; dùng Named Volumes trong `docker-compose.yml` giúp tương thích mọi filesystem (kể cả ổ đĩa mount NTFS/FUSE trên Linux Local Server và WSL2 Windows). |
 | **Custom Addons** | `F:\BACKUP_LINUX\web_ban_hang\addons\` | Mount vào `/mnt/extra-addons`; tuyệt đối không trộn vào `F:\BACKUP_LINUX\save\dev_env\19.0\modules\default\`. |
 
 > **Lưu ý khi tham chiếu mẫu `F:\BACKUP_LINUX\save\dev_env\19.0\`**: Mẫu `services\odoo-base.yml` cũ có chứa dòng bind mount cứng từ Linux (`/media/tanma/DATA/save/mobile_versions:...`) — đã loại bỏ hoàn toàn trong `docker-compose.yml` di động của `web_ban_hang`.
@@ -208,7 +208,7 @@ Compress-Archive -Path F:\BACKUP_LINUX\web_ban_hang\data\filestore\web_ban_hang_
 
 ```bash
 # Nếu lần đầu dựng trên server:
-git clone https://github.com/MATan1808/web_ban_hang.git /srv/projects/web_ban_hang
+git clone https://github.com/MATan1808/Na_website.git /srv/projects/web_ban_hang
 cd /srv/projects/web_ban_hang
 
 # Nếu đã có repo:

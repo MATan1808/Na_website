@@ -3,10 +3,23 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.0` — hoàn tất `/build` & `/code-review` Milestone 1 Catalog-First, sẵn sàng chạy Docker & `/test`).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.4` — hoàn thiện bộ nhận diện thương hiệu Manh Dao Dao, chuẩn hóa Docker Named Volumes & fix ACL `/shop` để triển khai lên Local Server).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.4 (2026-11-27)
+
+### Nhận Diện Thương Hiệu Manh Dao Dao, Chuẩn Hóa Docker Named Volumes & Vá Quyền Tồn Kho `/shop`
+- `[NEW]` **Bộ nhận diện thương hiệu Manh Dao Dao Anime Goods Shop** trong `addons/theme_gift_store/static/src/img/`:
+  - `logo.png` (`1020x280` px RGBA): Logo ngang chuẩn eCommerce tách sạch nền caro, kết hợp mascot Anime & lựu đạn/tia nổ cùng typography `MANH DAO DAO — ANIME GOODS SHOP`.
+  - `logo_emblem_transparent.png` (`931x945` px RGBA): Bản tròn nguyên bản tách nền trong suốt 100% dùng cho OpenGraph/chia sẻ MXH.
+  - `favicon.ico` (`32x32` & `64x64` px): Icon cận cảnh nhân vật sắc nét trên tab trình duyệt.
+- `[IMPROVE]` **Tối ưu CSS Logo Navbar** trong `addons/theme_gift_store/static/src/scss/theme_gift.scss`: Nâng chiều cao logo lên `60px` trên desktop (`48px` khi cuộn, `46px` trên mobile) bọc chặt trong `.wbh-store-gift`.
+- `[FIX]` **Sửa tận gốc lỗi `403 Forbidden` khi khách vãng lai xem `/shop`**: Bổ sung `compute_sudo=True` cho trường `wbh_is_low_stock` trong `wbh_core` (`v19.0.1.0.1`) và đọc `product.sudo().qty_available` trong `theme_gift_store` (`v19.0.1.0.1`), không cần mở quyền đọc trực tiếp `stock.move`/`stock.warehouse`.
+- `[IMPROVE]` **Chuẩn hóa Docker Named Volumes** trong `docker-compose.yml`: Chuyển `filestore` và `sessions` sang `web_ban_hang_filestore` và `web_ban_hang_sessions` để tương thích mọi filesystem trên Linux Local Server (kể cả ổ đĩa mount NTFS/FUSE) và Windows.
 
 ---
 
