@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_provider_form_vietqr" model="ir.ui.view">
+        <field name="name">payment.provider.form.inherit.wbh_vietqr</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='provider_credentials']" position="inside">
+                <group string="Tài khoản nhận VietQR (Napas 24/7)" invisible="code != 'vietqr'">
+                    <field name="wbh_vietqr_bank_bin" required="code == 'vietqr' and state != 'disabled'"/>
+                    <field name="wbh_vietqr_account_no" required="code == 'vietqr' and state != 'disabled'" placeholder="VD: 0123456789"/>
+                    <field name="wbh_vietqr_account_name" placeholder="VD: CONG TY TNHH 360 CORP"/>
+                    <field name="wbh_vietqr_prefix" placeholder="WBH"/>
+                </group>
+                <group string="Đối soát Webhook tự động" invisible="code != 'vietqr'">
+                    <field name="wbh_vietqr_gateway"/>
+                    <field name="wbh_vietqr_webhook_secret"
+                           password="True"
+                           invisible="wbh_vietqr_gateway == 'manual'"
+                           placeholder="API Key / Bearer Token từ SePay, PayOS hoặc Casso"/>
+                    <div colspan="2" class="text-muted small" invisible="wbh_vietqr_gateway == 'manual'">
+                        Endpoint Webhook SePay: <code>/payment/vietqr/webhook/sepay</code> (Header: <code>Authorization: Apikey &lt;Secret&gt;</code>)
+                    </div>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='credentials']" position="attributes">
+                <attribute name="invisible" separator="or" add="code == 'wbh_cod'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

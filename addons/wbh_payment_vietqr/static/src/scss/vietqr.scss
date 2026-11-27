@@ -1,0 +1,178 @@
+.wbh-vietqr-card {
+    border-radius: 12px;
+    border: 1px solid #E5DFD5;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(31, 27, 22, 0.06);
+    overflow: hidden;
+
+    &__header {
+        padding: 1rem 1.25rem;
+        background-color: #F7F4EE;
+        border-bottom: 1px solid #E5DFD5;
+        color: #1F1B16;
+    }
+
+    &__title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1F1B16;
+    }
+}
+
+.wbh-vietqr-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background-color: #FFF3CD;
+    color: #5C4300;
+    border: 1px solid #E6C86E;
+
+    &.is-done {
+        background-color: #D1E7DD;
+        color: #0F5132;
+        border-color: #9DD1B8;
+    }
+}
+
+.wbh-vietqr-qr-box {
+    max-width: 280px;
+    padding: 0.75rem;
+    border-radius: 12px;
+    border: 1px solid #E5DFD5;
+    background-color: #FFFFFF;
+}
+
+.wbh-vietqr-qr-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: crisp-edges;
+}
+
+.wbh-vietqr-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.wbh-vietqr-info-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    background-color: #FAF8F5;
+    border: 1px solid #EAE4DA;
+
+    &--highlight {
+        background-color: #FFF6F0;
+        border-color: #F3B8C6;
+    }
+}
+
+.wbh-vietqr-info-label {
+    font-size: 0.9rem;
+    color: #594A4C;
+    font-weight: 500;
+}
+
+.wbh-vietqr-info-value {
+    color: #1F1B16;
+    font-size: 0.95rem;
+}
+
+.wbh-vietqr-code-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    color: #1F1B16;
+}
+
+.wbh-vietqr-amount {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #B3264B;
+}
+
+.wbh-vietqr-copy-btn,
+.wbh-vietqr-action-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+}
+
+/* Cô lập phong cách cho Web 1 (Quà tặng) */
+#wrapwrap.wbh-store-gift {
+    .wbh-vietqr-card {
+        border-radius: 20px;
+        border-color: #F3D9DE;
+        box-shadow: 0 8px 24px rgba(255, 107, 139, 0.12);
+
+        &__header {
+            background-color: #FFF6F0;
+            color: #3D2C2E;
+        }
+    }
+
+    .wbh-vietqr-copy-btn,
+    .wbh-vietqr-action-btn {
+        border-radius: 999px;
+    }
+
+    .wbh-vietqr-copy-btn.btn-primary,
+    .wbh-vietqr-action-btn.btn-primary {
+        background-color: #C93058;
+        border-color: #C93058;
+        color: #FFFFFF;
+    }
+}
+
+/* Cô lập phong cách cho Web 2 (Thời trang) */
+#wrapwrap.wbh-store-fashion {
+    .wbh-vietqr-card {
+        border-radius: 4px;
+        border-color: #C8B6A6;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+        &__header {
+            background-color: #F5F5F3;
+            color: #111111;
+        }
+    }
+
+    .wbh-vietqr-info-row {
+        border-radius: 2px;
+
+        &--highlight {
+            background-color: #F5F5F3;
+            border-color: #111111;
+        }
+    }
+
+    .wbh-vietqr-amount {
+        color: #111111;
+    }
+
+    .wbh-vietqr-copy-btn,
+    .wbh-vietqr-action-btn {
+        border-radius: 2px;
+    }
+
+    .wbh-vietqr-copy-btn.btn-primary,
+    .wbh-vietqr-action-btn.btn-primary {
+        background-color: #111111;
+        border-color: #111111;
+        color: #FFFFFF;
+    }
+}

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wbh_payment_provider_manager,wbh.payment.provider.manager,payment.model_payment_provider,wbh_core.group_wbh_manager,1,1,0,0
+access_wbh_payment_method_manager,wbh.payment.method.manager,payment.model_payment_method,wbh_core.group_wbh_manager,1,1,0,0
+access_wbh_payment_transaction_manager,wbh.payment.transaction.manager,payment.model_payment_transaction,wbh_core.group_wbh_manager,1,0,0,0
+access_wbh_payment_transaction_catalog_user,wbh.payment.transaction.catalog.user,payment.model_payment_transaction,wbh_core.group_wbh_catalog_user,1,0,0,0

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ẩn chữ "Powered by Odoo" cho VietQR và COD giống payment_custom -->
+    <template id="vietqr_token_form" inherit_id="payment.token_form">
+        <xpath expr="//t[@t-set='hide_secured_by']" position="attributes">
+            <attribute name="t-value" separator=" " add="or provider_sudo.code in ('vietqr', 'wbh_cod')"/>
+        </xpath>
+    </template>
+
+    <template id="vietqr_method_form" inherit_id="payment.method_form">
+        <xpath expr="//t[@t-set='hide_secured_by']" position="attributes">
+            <attribute name="t-value" separator=" " add="or provider_sudo.code in ('vietqr', 'wbh_cod')"/>
+        </xpath>
+    </template>
+
+    <!-- Form chuyển hướng POST nội bộ cho VietQR & COD -->
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="post">
+            <input type="hidden" name="reference" t-att-value="reference"/>
+        </form>
+    </template>
+
+    <!-- Tóm tắt Inline trên /shop/payment khi chọn VietQR -->
+    <template id="vietqr_inline_form">
+        <div class="wbh-vietqr-inline alert alert-light border mb-0">
+            <div class="d-flex align-items-start gap-2">
+                <i data-lucide="qr-code" class="wbh-lucide-icon mt-1"/>
+                <div>
+                    <div class="fw-semibold">Chuyển khoản nhanh VietQR — Napas 24/7</div>
+                    <p class="mb-0 small text-muted">
+                        Mã QR kèm số tiền và nội dung chuyển khoản chính xác sẽ hiển thị ngay sau khi bạn bấm xác nhận thanh toán.
+                        <t t-if="provider_sudo.wbh_vietqr_bank_bin">
+                            Ngân hàng nhận: <strong t-out="provider_sudo._wbh_get_bank_display_name()"/>.
+                        </t>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Tóm tắt Inline trên /shop/payment khi chọn COD -->
+    <template id="cod_inline_form">
+        <div class="wbh-cod-inline alert alert-light border mb-0">
+            <div class="d-flex align-items-start gap-2">
+                <i data-lucide="banknote" class="wbh-lucide-icon mt-1"/>
+                <div>
+                    <div class="fw-semibold">Thanh toán tiền mặt khi nhận hàng (COD)</div>
+                    <p class="mb-0 small text-muted">
+                        Kiểm tra hàng trước khi thanh toán trực tiếp cho đơn vị vận chuyển.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Thông báo lý do giới hạn COD & gợi ý đặt cọc trên /shop/payment -->
+    <template id="website_sale_payment_cod_notice" inherit_id="website_sale.payment" priority="25">
+        <xpath expr="//div[@id='payment_method']" position="before">
+            <div t-if="website_sale_order and not website_sale_order.wbh_allow_cod and website_sale_order.wbh_cod_block_reason"
+                 class="wbh-cod-notice alert alert-warning d-flex align-items-start gap-2 mb-3"
+                 role="status">
+                <i data-lucide="info" class="wbh-lucide-icon mt-1"/>
+                <div>
+                    <div class="fw-semibold">Phương thức COD tạm thời không khả dụng cho đơn hàng này</div>
+                    <div class="small" t-out="website_sale_order.wbh_cod_block_reason"/>
+                    <div t-if="website_sale_order.wbh_cod_deposit_amount &gt; 0" class="small mt-1 fw-semibold">
+                        Gợi ý đặt cọc trước qua VietQR:
+                        <span t-out="int(round(website_sale_order.wbh_cod_deposit_amount))"
+                              t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Thẻ hướng dẫn thanh toán VietQR dùng chung cho /payment/status & /shop/confirmation -->
+    <template id="vietqr_instructions_card">
+        <t t-set="provider_sudo" t-value="tx.provider_id.sudo()"/>
+        <t t-set="qr_uri" t-value="tx._wbh_get_qr_data_uri()"/>
+        <t t-set="vietqr_ref" t-value="tx.wbh_vietqr_reference or tx.reference"/>
+        <t t-set="gateway_mode" t-value="provider_sudo.wbh_vietqr_gateway or 'sepay'"/>
+        <div class="wbh-vietqr-card card mb-4"
+             t-att-data-wbh-reference="tx.reference"
+             t-att-data-wbh-state="tx.state"
+             t-att-data-wbh-gateway="gateway_mode"
+             t-att-data-wbh-auto-poll="'1' if gateway_mode != 'manual' and tx.state == 'pending' else '0'"
+             t-att-data-wbh-landing-route="tx.landing_route or '/shop/confirmation'">
+            <div class="wbh-vietqr-card__header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <i data-lucide="qr-code" class="wbh-lucide-icon"/>
+                    <h4 class="mb-0 wbh-vietqr-card__title">Quét mã VietQR để hoàn tất thanh toán</h4>
+                </div>
+                <span class="wbh-vietqr-status-badge" data-wbh-status-badge="1">
+                    <i data-lucide="clock" class="wbh-lucide-icon"/>
+                    <span data-wbh-status-text="1">
+                        <t t-if="tx.state == 'done'">Đã thanh toán</t>
+                        <t t-else="">Đang chờ chuyển khoản...</t>
+                    </span>
+                </span>
+            </div>
+
+            <div class="card-body p-3 p-md-4">
+                <div class="row g-4 align-items-center">
+                    <div class="col-12 col-md-5 text-center">
+                        <div class="wbh-vietqr-qr-box mx-auto">
+                            <img t-if="qr_uri"
+                                 t-att-src="qr_uri"
+                                 alt="Mã QR chuyển khoản VietQR Napas 24/7"
+                                 class="wbh-vietqr-qr-img img-fluid"/>
+                            <div t-else="" class="p-4 text-muted small">
+                                Chưa cấu hình đầy đủ mã BIN / Số tài khoản ngân hàng cho VietQR.
+                            </div>
+                        </div>
+                        <div class="small text-muted mt-2">
+                            Mở ứng dụng ngân hàng bất kỳ hỗ trợ Napas 24/7 để quét mã
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-7">
+                        <div class="wbh-vietqr-info-list">
+                            <div class="wbh-vietqr-info-row">
+                                <span class="wbh-vietqr-info-label">Ngân hàng</span>
+                                <strong class="wbh-vietqr-info-value"
+                                        t-out="provider_sudo._wbh_get_bank_display_name() or 'Chưa cấu hình'"/>
+                            </div>
+
+                            <div class="wbh-vietqr-info-row">
+                                <span class="wbh-vietqr-info-label">Chủ tài khoản</span>
+                                <strong class="wbh-vietqr-info-value"
+                                        t-out="provider_sudo.wbh_vietqr_account_name or '-'"/>
+                            </div>
+
+                            <div class="wbh-vietqr-info-row">
+                                <span class="wbh-vietqr-info-label">Số tài khoản</span>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <strong class="wbh-vietqr-code-text"
+                                            t-out="provider_sudo.wbh_vietqr_account_no or '-'"/>
+                                    <button t-if="provider_sudo.wbh_vietqr_account_no"
+                                            type="button"
+                                            class="btn btn-outline-secondary wbh-vietqr-copy-btn"
+                                            t-att-data-wbh-copy="provider_sudo.wbh_vietqr_account_no"
+                                            aria-label="Sao chép số tài khoản">
+                                        <i data-lucide="copy" class="wbh-lucide-icon"/>
+                                        <span data-wbh-copy-label="1">Sao chép</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="wbh-vietqr-info-row">
+                                <span class="wbh-vietqr-info-label">Số tiền chính xác</span>
+                                <strong class="wbh-vietqr-amount"
+                                        t-out="tx.amount"
+                                        t-options="{'widget': 'monetary', 'display_currency': tx.currency_id}"/>
+                            </div>
+
+                            <div class="wbh-vietqr-info-row wbh-vietqr-info-row--highlight">
+                                <span class="wbh-vietqr-info-label">Nội dung chuyển khoản</span>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <strong class="wbh-vietqr-code-text" t-out="vietqr_ref"/>
+                                    <button type="button"
+                                            class="btn btn-primary wbh-vietqr-copy-btn"
+                                            t-att-data-wbh-copy="vietqr_ref"
+                                            aria-label="Sao chép nội dung chuyển khoản">
+                                        <i data-lucide="copy" class="wbh-lucide-icon"/>
+                                        <span data-wbh-copy-label="1">Sao chép</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <button type="button"
+                                    class="btn btn-primary wbh-vietqr-action-btn"
+                                    data-wbh-check-status="1">
+                                <i data-lucide="refresh-cw" class="wbh-lucide-icon"/>
+                                <span>Kiểm tra thanh toán ngay</span>
+                            </button>
+                            <a t-if="tx.landing_route"
+                               t-att-href="tx.landing_route"
+                               class="btn btn-outline-secondary wbh-vietqr-action-btn">
+                                <i data-lucide="arrow-right" class="wbh-lucide-icon"/>
+                                <span>Xem trạng thái đơn hàng</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Hiển thị thẻ VietQR trên /payment/status -->
+    <template id="vietqr_state_header" inherit_id="payment.state_header" priority="25">
+        <xpath expr="//div[@name='o_payment_status_alert']" position="before">
+            <t t-if="tx and tx.provider_id.sudo().code == 'vietqr' and tx.state == 'pending'">
+                <t t-call="wbh_payment_vietqr.vietqr_instructions_card"/>
+            </t>
+        </xpath>
+        <xpath expr="//div[@name='o_payment_status_alert']" position="attributes">
+            <attribute name="t-attf-class">{{o_payment_status_alert_class}}{{' d-none' if tx and tx.provider_id.sudo().code == 'vietqr' and tx.state == 'pending' else ''}}</attribute>
+        </xpath>
+    </template>
+
+    <!-- Hiển thị thẻ VietQR trên /shop/confirmation nếu giao dịch vẫn đang pending -->
+    <template id="website_sale_confirmation_vietqr" inherit_id="website_sale.payment_confirmation_status" priority="25">
+        <xpath expr="//div[@name='order_confirmation']" position="inside">
+            <t t-if="tx_sudo and tx_sudo.provider_id.sudo().code == 'vietqr' and tx_sudo.state == 'pending'">
+                <div class="mt-3">
+                    <t t-call="wbh_payment_vietqr.vietqr_instructions_card">
+                        <t t-set="tx" t-value="tx_sudo"/>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

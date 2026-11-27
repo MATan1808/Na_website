@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Cô lập quản trị cấu hình thanh toán WBH theo công ty được phép -->
+    <record id="wbh_payment_provider_manager_company_rule" model="ir.rule">
+        <field name="name">WBH: Quản trị viên chỉ quản lý Nhà cung cấp thanh toán thuộc Công ty được cấp quyền</field>
+        <field name="model_id" ref="payment.model_payment_provider"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[Command.link(ref('wbh_core.group_wbh_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>
