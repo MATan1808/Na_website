@@ -3,8 +3,9 @@
 
 > **Ngày cập nhật**: 2026-11-27  
 > **Nền tảng kỹ thuật**: 100% Odoo 19.0 Community (LGPL-3) + PostgreSQL 15 (Docker)  
-> **Cổng truy cập máy chủ**: [http://localhost:1901](http://localhost:1901)  
-> **Đơn vị quản lý & triển khai**: 360org (Sếp Châu)
+> **Cổng truy cập Local Server**: [http://100.64.56.52:1901](http://100.64.56.52:1901) *(LAN: `http://192.168.1.37:1901` · Local Docker: `http://localhost:1901`)*  
+> **Lộ trình & Tiến độ 4 giai đoạn**: Xem chi tiết tại [ROADMAP_TIEN_DO.md](file:///F:/BACKUP_LINUX/web_ban_hang/docs/ROADMAP_TIEN_DO.md)  
+> **Đơn vị quản lý & triển khai**: Sếp Châu (`tanma`)
 
 ---
 
@@ -14,7 +15,7 @@ Dự án vận hành trên kiến trúc **Multi-Website thuần Odoo 19.0 Commun
 
 | Thông số | Cửa Hàng 1 (Web 1) — Quà Tặng & Anime Goods | Cửa Hàng 2 (Web 2) — Thời Trang & Lookbook |
 |---|---|---|
-| **Tên hiển thị** | **U.A Hero Store — Búp Bê Cotton Doll 20cm & Anime Merch** | **Cửa Hàng Thời Trang — Quần Áo & Lookbook** |
+| **Tên hiển thị** | **Manh Dao Dao — Anime Goods & Quà Tặng** | **Cửa Hàng Thời Trang — Quần Áo & Lookbook** |
 | **Định vị ngành hàng** | Búp bê bông Doll 20cm, Outfit búp bê, Card bo góc, Huy hiệu Can Badge, Mochi ú, Blind Box theo phim *My Hero Academia* và các Anime hot. | Thời trang Unisex, Quần áo oversize, Streetwear, Lookbook editorial, đồ đôi & outfit búp bê. |
 | **Khách hàng mục tiêu** | Fan anime/manga (Otaku), Gen Z, giới trẻ đam mê sưu tầm goods và búp bê thần tượng (Bias/Oshi). | Giới trẻ yêu thích phong cách thời trang tối giản, năng động, streetwear và ảnh mẫu lookbook. |
 | **Theme nền tảng** | Custom `theme_gift_store` (kế thừa từ repo `odoo/design-themes`: `theme_kiddo` + `theme_buzzy`). | Custom `theme_fashion_store` (kế thừa `theme_loftspace` + `theme_clean`). |

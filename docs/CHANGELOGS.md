@@ -3,10 +3,22 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.6` — tích hợp bộ công cụ UI/UX & Animation từ kho MochiStudio: `GSAP 3.15.1`, `Lucide 1.82.0`, chuẩn audit `Impeccable` + `Front-End Checklist` + `UI UX Pro Max`).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.7` — chuẩn hóa lộ trình 4 giai đoạn thực chiến & bảng theo dõi tiến độ chi tiết `docs/ROADMAP_TIEN_DO.md`).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.7 (2026-11-27)
+
+### Chuẩn Hóa Lộ Trình 4 Giai Đoạn & Bảng Theo Dõi Tiến Độ (`docs/ROADMAP_TIEN_DO.md`)
+- `[NEW]` **Khởi tạo `docs/ROADMAP_TIEN_DO.md`**: Đặc tả chi tiết kèm checklist `[x]` / `[ ]` và `%` tiến độ cho 4 giai đoạn:
+  1. **Giai đoạn 1 (`~85%`)**: Website & Quản trị Sản phẩm CRUD đầy đủ (*Thêm · Xem · Sửa · Xóa/Lưu trữ*).
+  2. **Giai đoạn 2 (`~25%`)**: Bộ lọc động 100% (**Cấm Hardcode**) theo *Khoảng giá*, *Nhân vật & Bộ Anime* (`no_variant`), *Phân loại Doll/Goods Off* và *Nhãn ưu đãi/giảm giá động* (`product.tag`).
+  3. **Giai đoạn 3 (`~20%`)**: Tương tác & tư vấn chốt đơn **3 kênh** (*Chat Web trực tiếp · Facebook Messenger · Zalo*) cấu hình động.
+  4. **Giai đoạn 4 (`0%`)**: Thanh toán (`wbh_payment_vietqr`) & Vận chuyển (`wbh_delivery_vn` — đồng giá/Freeship/gom đơn + GHN/GHTK).
+- `[IMPROVE]` Đồng bộ lộ trình 4 giai đoạn và liên kết repo `https://github.com/MATan1808/Na_website.git` vào `README.md`, `AGENTS.md`, `.claude/CLAUDE.md` và `docs/THONG_TIN_WEBSITE.md`.
 
 ---
 

@@ -19,10 +19,11 @@
    - Đóng gói `docker-compose.yml`, `config/odoo.conf`, `.env.example` ngay tại root `F:\BACKUP_LINUX\web_ban_hang\`.
    - Image mặc định di động: `odoo:19.0` Community + `postgres:15-bookworm` (hỗ trợ tùy chọn `360ai/postgres:15-ai` kèm `pgvector` trên Local Server).
    - Chạy tạm trên máy Windows hiện tại (data đặt trên ổ `F:\` còn `227.22 GB`), khi Local Server ở nhà hoạt động lại chỉ cần `git pull` + `docker compose up -d` + restore DB/filestore.
-5. **Lộ trình ưu tiên 3 Milestone (Catalog-First)**:
-   - **Milestone 1 (LÀM NGAY)**: Hạ tầng Docker di động + **`wbh_core`** + **`theme_gift_store`** + **`theme_fashion_store`** để Sếp đăng nhập quản trị và **upload sản phẩm lên ngay** (danh mục, biến thể, hiển thị đẹp trên 2 web, giỏ hàng & COD/chuyển khoản cơ bản sẵn có của Odoo).
-   - **Milestone 2**: **`wbh_gift_store`** (gói quà + thiệp, khắc/thêu tên, so sánh kích thước, combo dịp lễ) + **`wbh_fashion_store`** (gợi ý size thông minh, bộ lọc thời trang, Shop The Look, video mẫu mặc R2/Stream CDN, đổi size Portal).
-   - **Milestone 3**: **`wbh_payment_vietqr`** + **`wbh_delivery_vn`** + Loyalty tách riêng theo thương hiệu & Flash Sale đếm ngược.
+5. **Lộ trình ưu tiên 4 Giai đoạn (`docs/ROADMAP_TIEN_DO.md`)**:
+   - **Giai đoạn 1 — Website & CRUD Sản phẩm**: Hoàn thiện nền tảng Docker + `wbh_core` + `theme_gift_store` + `theme_fashion_store` để Thêm/Xem/Sửa/Xóa & Lưu trữ sản phẩm nhanh gọn.
+   - **Giai đoạn 2 — Bộ lọc Động 100% (CẤM HARDCODE)**: Lọc theo Khoảng giá, Nhân vật, Bộ Anime, Phân loại (`Doll`/`Off`) và Nhãn trạng thái/giảm giá (`product.tag`) phải tự động sinh từ dữ liệu người quản trị gắn lúc thêm/sửa sản phẩm.
+   - **Giai đoạn 3 — Tương tác 3 Kênh**: Tư vấn & chốt đơn trực tiếp qua 3 kênh đồng bộ: **Web Livechat** + **Facebook Messenger** + **Zalo** (cấu hình động trong Backend).
+   - **Giai đoạn 4 — Thanh toán & Vận chuyển**: **`wbh_payment_vietqr`** (VietQR EMVCo + SePay Free + COD/đặt cọc) + **`wbh_delivery_vn`** (Ship đồng giá/Freeship/Gom đơn + GHN ➜ GHTK & Viettel Post).
 
 ---
 

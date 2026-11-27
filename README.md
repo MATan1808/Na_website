@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.6` — Tích hợp bộ công cụ UI/UX & Animation chuẩn MochiStudio (`GSAP 3.15.1`, `Lucide 1.82.0`, audit `Impeccable` + `Front-End Checklist` + `UI UX Pro Max`) vào 2 Storefronts thuần Odoo 19.0 Community (`wbh_core` `v19.0.1.1.0`, `theme_gift_store` `v19.0.1.1.0`, `theme_fashion_store` `v19.0.1.1.0`).  
+> **Trạng thái dự án**: `v0.3.7` — Hoàn thiện bộ nhận diện thương hiệu **Manh Dao Dao Anime Goods Shop**, sửa lỗi lặp 2 footer & nút cuộn đầu trang, tích hợp UI/UX & Motion (`GSAP`, `Lucide`) và chuẩn hóa lộ trình **4 Giai đoạn** ([docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)) chạy live trên Local Server (`http://100.64.56.52:1901`).  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`
@@ -49,15 +49,16 @@ Dự án xây dựng song song **2 website thương mại điện tử D2C độ
 
 ---
 
-## 3. Lộ Trình Triển Khai 3 Milestone & 7 Custom Modules (`addons/`)
+## 3. Lộ Trình Triển Khai 4 Giai Đoạn Thực Chiến (`docs/ROADMAP_TIEN_DO.md`)
 
-Tất cả 7 custom modules đặt trong `F:\BACKUP_LINUX\web_ban_hang\addons\`, **100% thuần Community (0% phụ thuộc Enterprise)**:
+Tất cả các custom modules đặt trong `F:\BACKUP_LINUX\web_ban_hang\addons\`, **100% thuần Odoo 19.0 Community (`LGPL-3`, 0% phụ thuộc Enterprise)**:
 
-| Milestone | Mục tiêu & Giá trị bàn giao | Modules phụ trách | Nhóm phụ thuộc Odoo 19.0 Community |
+| Giai đoạn | Mục tiêu & Giá trị bàn giao | Trạng thái | Modules phụ trách |
 |---|---|---|---|
-| **Milestone 1 — Catalog-First *(LÀM NGAY)*** | Dựng hạ tầng Docker di động (`docker-compose.yml`, `config/odoo.conf`, `.env.example`) + Backend cốt lõi + Giao diện cơ bản 2 Storefronts để Sếp **đăng nhập và up sản phẩm ngay** (danh mục, biến thể màu/size/chất liệu/form/blind box, hiển thị đẹp trên 2 web, giỏ hàng & đặt hàng COD/chuyển khoản cơ bản sẵn có của Odoo). | `wbh_core`<br>`theme_gift_store`<br>`theme_fashion_store` | `base`, `website`, `website_sale`, `website_sale_wishlist`, `website_sale_comparison`, `website_sale_stock`, `sale_management`, `stock`, `product`, `contacts`, `portal` |
-| **Milestone 2 — Storefront Features** | Hoàn thiện bộ tính năng đặc thù nâng cao chuyển đổi cho từng ngành hàng:<br>- Web 1: gói quà + thiệp viết tay, cá nhân hóa khắc/thêu tên, so sánh kích thước trực quan, combo theo dịp.<br>- Web 2: gợi ý size thông minh, bộ lọc thời trang nâng cao, Shop The Look thêm trọn bộ 1 click, video mẫu mặc (Cloudflare R2/Stream CDN), luồng yêu cầu đổi size trên Portal. | `wbh_gift_store`<br>`wbh_fashion_store` | `wbh_core`, `website_sale`, `sale_management`, `portal`, `stock` |
-| **Milestone 3 — VN Integrations & Growth** | Tự động hóa thanh toán, giao nhận nội địa và giữ chân khách hàng:<br>- VietQR động chuẩn EMVCo + Webhook SePay Free (mở rộng PayOS/Casso).<br>- Vận chuyển Ship nội bộ/Đồng giá + GHN (mở rộng GHTK & Viettel Post).<br>- Tích điểm Loyalty tách riêng từng thương hiệu & Flash Sale đếm ngược. | `wbh_payment_vietqr`<br>`wbh_delivery_vn`<br>*(mở rộng `wbh_core`)* | `payment`, `payment_custom`, `delivery`, `stock_delivery`, `loyalty`, `website_sale_loyalty`, `website_sale` |
+| **Giai đoạn 1 — Website & CRUD Sản phẩm** | Hạ tầng Docker di động + giao diện 2 storefront + **Thêm / Xem / Sửa / Xóa & Lưu trữ** sản phẩm nhanh gọn (`< 60 giây/món`), giá gốc gạch ngang, album ảnh & biến thể. | **~85%** *(Đang hoàn thiện)* | `wbh_core`<br>`theme_gift_store`<br>`theme_fashion_store` |
+| **Giai đoạn 2 — Bộ lọc Động 100% (Cấm Hardcode)** | Lọc theo **Khoảng giá (`Min–Max`)**, **Nhãn ưu đãi/giảm giá (`product.tag`)**, **Nhân vật & Bộ Anime (`no_variant`)**, **Phân loại Doll/Goods Off** — tự động sinh từ dữ liệu người dùng tích chọn lúc thêm/sửa SP. | **~25%** *(Sắp làm)* | `wbh_core`<br>`theme_gift_store` |
+| **Giai đoạn 3 — Tương tác & Chốt đơn 3 Kênh** | Cụm tư vấn & chốt đơn đồng bộ 3 kênh (**Chat Web Livechat** + **Facebook Messenger** + **Zalo**) gắn ngay trên trang sản phẩm & nút nổi đa kênh, cấu hình link động trong Backend. | **~20%** | `wbh_core`<br>`website_livechat`<br>`theme_gift_store` |
+| **Giai đoạn 4 — Thanh toán & Vận chuyển VN** | - **Thanh toán (`wbh_payment_vietqr`)**: VietQR EMVCo offline + Webhook SePay Free + COD/quy tắc đặt cọc.<br>- **Vận chuyển (`wbh_delivery_vn`)**: Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn + GHN ➜ GHTK & Viettel Post. | **0%** | `wbh_payment_vietqr`<br>`wbh_delivery_vn` |
 
 ---
 
@@ -65,24 +66,26 @@ Tất cả 7 custom modules đặt trong `F:\BACKUP_LINUX\web_ban_hang\addons\`,
 
 ```text
 F:\BACKUP_LINUX\web_ban_hang\
-├── README.md                        # Tổng quan dự án, 5 quyết định chốt, lộ trình 3 Milestone & cây thư mục
+├── README.md                        # Tổng quan dự án, 5 quyết định chốt, lộ trình 4 giai đoạn & cây thư mục
 ├── AGENTS.md                        # Quy chuẩn điều phối Multi-Agent, luật 100% Community & vòng đời 9 bước
 ├── .gitignore                       # Chuẩn Odoo 19.0 / Python / Docker (KHÔNG ignore .claude/ & .env.example)
-├── docker-compose.yml               # [Đã có — M1] Cấu hình Docker di động (odoo:19.0 + postgres:15-bookworm)
-├── .env.example                     # [Đã có — M1] Mẫu 11 biến môi trường sạch (copy sang .env khi chạy)
+├── docker-compose.yml               # [Đã có] Cấu hình Docker di động (odoo:19.0 + postgres:15-bookworm)
+├── .env.example                     # [Đã có] Mẫu 11 biến môi trường sạch (copy sang .env khi chạy)
 ├── config\
-│   └── odoo.conf                    # [Đã có — M1] Cấu hình Odoo 19.0 (13 tùy chọn: addons_path, dbfilter, proxy_mode...)
+│   └── odoo.conf                    # [Đã có] Cấu hình Odoo 19.0 (13 tùy chọn: addons_path, dbfilter, proxy_mode...)
 ├── .claude\                         # Cấu hình cục bộ Cấp 1 (AIaC — commit kèm repo private, sạch secret)
 │   ├── CLAUDE.md                    # Chỉ dẫn cục bộ dự án thuần Odoo 19.0 Community Multi-Store
 │   └── settings.local.json          # Cấu hình workspace & metadata AIaC (JSON hợp lệ, không secret)
 ├── docs\                            # Toàn bộ tài liệu dự án chuẩn AIaC 3.0
-│   ├── IDEA.md                      # [v1.2] Bối cảnh, bài toán, 5 quyết định chốt & lộ trình 3 Milestone
-│   ├── REQUIREMENTS.md              # [v1.1] Yêu cầu chức năng (FR) & phi chức năng (NFR) theo 3 Milestone
+│   ├── ROADMAP_TIEN_DO.md           # [v0.3.7 — CHÍNH] Lộ trình 4 giai đoạn & bảng theo dõi % tiến độ chi tiết
+│   ├── THONG_TIN_WEBSITE.md         # [Đã có] Thông tin nhận diện & định hướng Anime Goods Shop
+│   ├── IDEA.md                      # [v1.2] Bối cảnh, bài toán, 5 quyết định chốt
+│   ├── REQUIREMENTS.md              # [v1.1] Yêu cầu chức năng (FR) & phi chức năng (NFR)
 │   ├── ARCH.md                      # [v1.1] Kiến trúc kỹ thuật 100% Community, DB PG 15 & Docker di động
 │   ├── CONTEXT.md                   # [v1.0] Bảng thuật ngữ nghiệp vụ (Domain Glossary) chuẩn 360-odoo
-│   ├── SPEC.md                      # [v1.0] Đặc tả kỹ thuật chi tiết Milestone 1 sẵn sàng để /build ngay
-│   ├── DEPLOY_GUIDE.md              # [v1.0] Hướng dẫn chạy Docker Windows, up sản phẩm & chuyển sang Local Server
-│   ├── CHANGELOGS.md                # [v0.3.0] Nhật ký thay đổi các phiên bản dự án
+│   ├── SPEC.md                      # [v1.0] Đặc tả kỹ thuật chi tiết hệ thống lõi & theme
+│   ├── DEPLOY_GUIDE.md              # [v1.0] Hướng dẫn chạy Docker, up sản phẩm & chuyển sang Local Server
+│   ├── CHANGELOGS.md                # [v0.3.7] Nhật ký thay đổi các phiên bản dự án
 │   └── AUDIT_ROADMAP.md             # [Tạo ở /review-/ship] Checklist kiểm duyệt & bàn giao
 ├── addons\                          # 7 Custom Modules Odoo 19.0 Community (M1 đã build & qua /code-review)
 │   ├── wbh_core\                    # [Đã có — M1] Lõi Multi-Website tách tài khoản, danh mục/thuộc tính & form up SP
@@ -99,6 +102,7 @@ F:\BACKUP_LINUX\web_ban_hang\
 
 ## 5. Danh Mục Tài Liệu Dự Án
 
+- **Lộ Trình 4 Giai Đoạn & Bảng Theo Dõi Tiến Độ**: [docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)
 - **Thông Tin Website & Định Hướng Anime Goods**: [docs/THONG_TIN_WEBSITE.md](docs/THONG_TIN_WEBSITE.md)
 - **Hệ Thống Thiết Kế Giao Diện (Design System)**: [DESIGN.md](DESIGN.md)
 - **Ý tưởng & 5 Quyết định Chốt**: [docs/IDEA.md](docs/IDEA.md)

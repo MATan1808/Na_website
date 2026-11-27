@@ -23,19 +23,17 @@ Tài liệu này quy định cơ cấu vai trò, phân bổ mô hình AI, vòng 
 4. **Hạ tầng Docker di động 100% trong repo Git**:
    - Đóng gói `docker-compose.yml`, `config/odoo.conf`, `.env.example` ngay tại root repo dùng `odoo:19.0` Community + `postgres:15-bookworm` (hỗ trợ tùy chọn `360ai/postgres:15-ai`), chạy tạm trên máy Windows hiện tại (data trên ổ `F:\`) và chuyển sang Local Server ở nhà bằng `git pull` + `docker compose up -d` + restore DB/filestore.
 
-### 1.2. Thứ Tự Ưu Tiên 3 Milestone (Catalog-First) Cho 7 Custom Modules (`addons/`)
-1. **Milestone 1 — Catalog-First *(LÀM NGAY)***:
-   - Hạ tầng Docker di động (`docker-compose.yml`, `config/odoo.conf`, `.env.example`)
-   - `wbh_core` (Core Multi-Website tách tài khoản, danh mục/thuộc tính mẫu, form backend tối ưu up sản phẩm nhanh)
-   - `theme_gift_store` (Custom Theme Upgrade-Safe Web 1 — Quà tặng)
-   - `theme_fashion_store` (Custom Theme Upgrade-Safe Web 2 — Thời trang)
-2. **Milestone 2 — Storefront Features *(Làm sau Milestone 1)***:
-   - `wbh_gift_store` (gói quà + thiệp, cá nhân hóa khắc/thêu tên, so sánh kích thước trực quan, combo theo dịp)
-   - `wbh_fashion_store` (gợi ý size thông minh, bộ lọc chuyên sâu, Shop The Look, video mẫu mặc qua R2/Stream CDN, luồng đổi size trên Portal)
-3. **Milestone 3 — VN Integrations & Growth *(Làm sau Milestone 2)***:
-   - `wbh_payment_vietqr` (VietQR EMVCo offline + SePay Free webhook + COD)
-   - `wbh_delivery_vn` (Ship nội bộ/Đồng giá + GHN ➜ GHTK & Viettel Post)
-   - Mở rộng Loyalty tách riêng theo thương hiệu & Flash Sale đếm ngược.
+### 1.2. Thứ Tự Ưu Tiên 4 Giai Đoạn Triển Khai *(Đã Chốt Với Sếp — `docs/ROADMAP_TIEN_DO.md`)*
+1. **Giai đoạn 1 — Website & CRUD Sản phẩm *(Đang hoàn thiện `~85%`)***:
+   - Hạ tầng Docker di động (`docker-compose.yml`, `config/odoo.conf`, `.env.example`), `wbh_core`, `theme_gift_store`, `theme_fashion_store`.
+   - Hoàn thiện tối ưu CRUD Thêm – Xem – Sửa – Xóa/Lưu trữ sản phẩm nhanh gọn (`< 60 giây/món`), giá gốc gạch ngang & album ảnh thực tế.
+2. **Giai đoạn 2 — Bộ lọc Động 100% *(Làm tiếp theo — CẤM HARDCODE)***:
+   - Toàn bộ tiêu chí lọc ngoài `/shop` (Khoảng giá `Min–Max`, Nhãn ưu đãi/giảm giá `product.tag`, Nhân vật & Bộ Anime `no_variant`, Phân loại `Doll`/`Goods Off`/Danh mục) **bắt buộc sinh tự động** từ dữ liệu người dùng gắn lúc thêm/sửa sản phẩm; không viết cứng tên nhân vật hay bộ lọc trong code.
+3. **Giai đoạn 3 — Tương tác & Tư vấn 3 Kênh *(Web Livechat · Facebook · Zalo)***:
+   - Tích hợp đồng bộ 3 kênh trả lời khách: Chat trực tiếp ngay trên Web (`website_livechat` tự gắn ngữ cảnh sản phẩm đang xem), Facebook Messenger (`m.me/...`) và Zalo (`zalo.me/...`) trên trang chi tiết sản phẩm + nút nổi đa kênh, cấu hình link động trong Backend.
+4. **Giai đoạn 4 — Thanh toán & Vận chuyển VN**:
+   - `wbh_payment_vietqr` (VietQR EMVCo offline + SePay Free webhook + COD/đặt cọc).
+   - `wbh_delivery_vn` (Địa giới VN 3 cấp + Ship đồng giá/Freeship/Gom đơn + GHN ➜ GHTK & Viettel Post).
 
 ### 1.3. Thứ Tự Ưu Tiên Chỉ Dẫn (3 Cấp)
 1. **Cấp 1 (Cao nhất)**: `F:\BACKUP_LINUX\web_ban_hang\.claude\` (`CLAUDE.md`, `settings.local.json`) và `AGENTS.md` này.
