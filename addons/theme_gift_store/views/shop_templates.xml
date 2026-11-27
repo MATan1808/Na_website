@@ -232,7 +232,7 @@
         priority="20"
     >
         <!-- Sidebar Desktop -->
-        <xpath expr="//aside[@id='products_grid_before']//div[hasclass('products_attributes_filters')]" position="before">
+        <xpath expr="//aside[@id='products_grid_before']//div[contains(@t-attf-class, 'products_attributes_filters')]" position="before">
             <t t-if="website and website.wbh_store_type == 'gift'">
                 <t t-call="theme_gift_store.gift_dynamic_filters_panel">
                     <t t-set="wbh_filter_mobile" t-value="False"/>

@@ -222,7 +222,7 @@
         name="WBH Fashion — Bộ lọc động /shop"
         priority="25"
     >
-        <xpath expr="//aside[@id='products_grid_before']//div[hasclass('products_attributes_filters')]" position="before">
+        <xpath expr="//aside[@id='products_grid_before']//div[contains(@t-attf-class, 'products_attributes_filters')]" position="before">
             <t t-if="website and website.wbh_store_type == 'fashion'">
                 <t t-call="theme_fashion_store.fashion_dynamic_filters_panel">
                     <t t-set="wbh_filter_mobile" t-value="False"/>
