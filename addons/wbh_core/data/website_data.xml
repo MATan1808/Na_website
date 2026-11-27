@@ -5,6 +5,11 @@
         Không gán trường `domain` (để NULL) để không xung đột với ràng buộc unique(domain)
         của `website.default_website`, đồng thời giữ nguyên `website.default_website` theo chuẩn Odoo 19.0.
     -->
+    <record id="base.VND" model="res.currency">
+        <field name="active" eval="True"/>
+        <field name="position">after</field>
+    </record>
+
     <record id="website_gift_store" model="website">
         <field name="name">Cửa Hàng Quà Tặng — Móc Khóa, Gấu Bông &amp; Blind Box</field>
         <field name="sequence" eval="10"/>

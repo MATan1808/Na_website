@@ -3,7 +3,7 @@
 
 > **Ngày cập nhật**: 2026-11-27  
 > **Nền tảng kỹ thuật**: 100% Odoo 19.0 Community (LGPL-3) + PostgreSQL 15 (Docker)  
-> **Cổng truy cập Local Server**: [http://100.64.56.52:1901](http://100.64.56.52:1901) *(LAN: `http://192.168.1.37:1901` · Local Docker: `http://localhost:1901`)*  
+> **Cổng truy cập Local Server**: [http://100.64.56.52:1901](http://100.64.56.52:1901) *(LAN: `http://192.168.1.37:1901` · Local Docker: `http://localhost:1901` · Tiền tệ hiển thị chuẩn: **`VNĐ (₫)`**)*  
 > **Lộ trình & Tiến độ 4 giai đoạn**: Xem chi tiết tại [ROADMAP_TIEN_DO.md](file:///F:/BACKUP_LINUX/web_ban_hang/docs/ROADMAP_TIEN_DO.md)  
 > **Đơn vị quản lý & triển khai**: Sếp Châu (`tanma`)
 

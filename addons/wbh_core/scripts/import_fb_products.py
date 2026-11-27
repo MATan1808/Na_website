@@ -187,6 +187,118 @@ def generate_csv_from_json(payload):
             })
 
 
+def ensure_vnd_currency_and_pricelist(env):
+    """Kích hoạt đơn vị tiền tệ VNĐ (₫), cập nhật Công ty và Bảng giá dùng chung cho 2 website."""
+    Currency = env["res.currency"].with_context(active_test=False)
+    vnd = Currency.search([("name", "=", "VND")], limit=1)
+    if not vnd:
+        print("[WARN] Không tìm thấy tiền tệ VND trong res.currency.")
+        return None
+
+    vnd.write({
+        "active": True,
+        "position": "after",
+        "rounding": 1.0,
+    })
+
+    for company in env["res.company"].search([]):
+        if company.currency_id.id != vnd.id:
+            try:
+                with env.cr.savepoint():
+                    company.write({"currency_id": vnd.id})
+                    print(f"[CURRENCY] Đã chuyển công ty '{company.name}' (ID={company.id}) sang VND.")
+            except Exception as exc:
+                print(f"[WARN] Không thể đổi currency_id cho công ty '{company.name}': {exc}")
+
+    Pricelist = env["product.pricelist"].with_context(active_test=False)
+    active_vnd_pricelist = False
+    for pl in Pricelist.search([]).sorted("id"):
+        if pl.currency_id.id != vnd.id:
+            try:
+                with env.cr.savepoint():
+                    vals = {
+                        "currency_id": vnd.id,
+                        "website_id": False,
+                        "active": True,
+                        "sequence": 1,
+                    }
+                    if "USD" in (pl.name or ""):
+                        vals["name"] = "Bảng Giá Tiêu Chuẩn (VNĐ)"
+                    pl.write(vals)
+                    active_vnd_pricelist = pl
+                    print(f"[PRICELIST] Đã chuyển bảng giá ID={pl.id} sang VND (dùng chung 2 website).")
+            except Exception as exc:
+                print(f"[WARN] Không đổi được bảng giá ID={pl.id} sang VND ({exc}); tạo bảng giá VNĐ mới.")
+                pl.write({"active": False})
+        else:
+            pl.write({"website_id": False, "active": True, "sequence": 1})
+            active_vnd_pricelist = pl
+
+    if not active_vnd_pricelist:
+        active_vnd_pricelist = Pricelist.create({
+            "name": "Bảng Giá Tiêu Chuẩn (VNĐ)",
+            "currency_id": vnd.id,
+            "website_id": False,
+            "active": True,
+            "sequence": 1,
+        })
+        print(f"[PRICELIST] Đã tạo mới bảng giá VNĐ ID={active_vnd_pricelist.id}.")
+    return vnd
+
+
+def cleanup_and_organize_catalog(env, gift_website, fashion_website):
+    """Dọn sạch sản phẩm test rác, ẩn dịch vụ trên /shop và cô lập đúng website cho từng sản phẩm."""
+    Prod = env["product.template"].with_context(active_test=False)
+
+    # 1. Gỡ đăng khỏi /shop các sản phẩm dịch vụ (Standard delivery, Gift Card, Top-up eWallet...)
+    service_prods = Prod.search([("type", "=", "service"), ("is_published", "=", True)])
+    if service_prods:
+        service_prods.write({"is_published": False})
+        print(f"[CLEANUP] Đã ẩn {len(service_prods)} sản phẩm dịch vụ khỏi /shop: {service_prods.ids}")
+
+    # 2. Xóa hoặc lưu trữ các sản phẩm test rác tên 'T1'
+    junk_prods = Prod.search([("name", "=", "T1")])
+    for jp in junk_prods:
+        unlinked = False
+        try:
+            with env.cr.savepoint():
+                jp.unlink()
+                unlinked = True
+                print(f"[CLEANUP] Đã xóa sản phẩm test rác ID={jp.id} ('T1').")
+        except Exception:
+            unlinked = False
+        if not unlinked:
+            jp.write({
+                "active": False,
+                "is_published": False,
+                "is_storable": False,
+            })
+            print(f"[CLEANUP] Đã lưu trữ & gỡ đăng sản phẩm test rác ID={jp.id} ('T1').")
+
+    # 3. Cô lập lại website_id cho các sản phẩm chưa gắn đúng website
+    orphan_prods = Prod.search([("active", "=", True), ("type", "!=", "service")])
+    for p in orphan_prods:
+        if p.wbh_store_scope == "fashion" and fashion_website and p.website_id.id != fashion_website.id:
+            p.write({"website_id": fashion_website.id})
+            print(f"[SCOPE] Đã chuyển SP '{p.name}' (ID={p.id}) sang Web 2 Thời trang (website_id={fashion_website.id}).")
+        elif p.wbh_store_scope == "gift" and gift_website and not p.website_id:
+            p.write({"website_id": gift_website.id})
+            print(f"[SCOPE] Đã gán SP '{p.name}' (ID={p.id}) vào Web 1 Quà tặng (website_id={gift_website.id}).")
+
+    # 4. Trên Web 1, ẩn các sản phẩm mẫu cũ chưa có ảnh đại diện để trang /shop chỉ hiển thị hàng thật có ảnh đẹp
+    if gift_website:
+        no_img_gift = Prod.search([
+            ("active", "=", True),
+            ("is_published", "=", True),
+            ("type", "!=", "service"),
+            ("website_id", "=", gift_website.id),
+            ("image_1920", "=", False),
+        ])
+        if no_img_gift:
+            no_img_gift.write({"is_published": False})
+            print(f"[CLEANUP] Đã ẩn {len(no_img_gift)} SP Web 1 chưa có ảnh đại diện: {no_img_gift.ids}")
+
+
 def run_import(env):
     """Thực thi nạp toàn bộ sản phẩm từ fb_manhdaodao_products.json vào Odoo."""
     if not os.path.exists(DATA_JSON_PATH):
@@ -196,6 +308,11 @@ def run_import(env):
         payload = json.load(f)
 
     gift_website = env.ref("wbh_core.website_gift_store", raise_if_not_found=False)
+    fashion_website = env.ref("wbh_core.website_fashion_store", raise_if_not_found=False)
+
+    ensure_vnd_currency_and_pricelist(env)
+    cleanup_and_organize_catalog(env, gift_website, fashion_website)
+
     parent_cat, cat_records = ensure_categories(env, gift_website)
 
     attr_series = get_or_create_attr(env, "Bộ Phim (Anime)", "radio", "no_variant")
@@ -212,7 +329,8 @@ def run_import(env):
     products_data = payload.get("products", [])
     print(f"=== BAT DAU IMPORT {len(products_data)} SAN PHAM TU MANH DAO DAO FB ===")
 
-    for item in products_data:
+    fb_prod_ids = []
+    for item_idx, item in enumerate(products_data, start=1):
         sku = item["sku"]
         series_val = get_or_create_attr_value(env, attr_series, item["anime_series"])
         char_vals = [get_or_create_attr_value(env, attr_char, c) for c in item.get("characters", [])]
@@ -254,6 +372,8 @@ def run_import(env):
             "default_code": sku,
             "list_price": float(item["list_price"]),
             "wbh_store_scope": item.get("wbh_store_scope", "gift"),
+            "website_id": gift_website.id if gift_website else False,
+            "website_sequence": item_idx * 10,
             "wbh_short_highlight": item.get("wbh_short_highlight", ""),
             "wbh_care_note": item.get("wbh_care_note", ""),
             "description_sale": item.get("description_sale", ""),
@@ -323,11 +443,32 @@ def run_import(env):
         gallery_count = sync_gallery_images(env, prod, item)
         if prod.is_storable:
             ensure_stock_for_product(env, prod, default_qty=20.0)
+        fb_prod_ids.append(prod.id)
 
         print(
             f"[{action_label}] {sku} | ID={prod.id} | Variants={len(prod.product_variant_ids)} "
-            f"| Gallery={gallery_count} | URL={prod.website_url}"
+            f"| Gallery={gallery_count} | Seq={prod.website_sequence} | URL={prod.website_url}"
         )
+
+    # Sắp xếp các sản phẩm thật có ảnh khác (VD: 5 SP MHA chủ lực ID 40..44) ngay phía sau 10 lô FB trên Trang 1
+    if gift_website:
+        other_real_prods = Prod.search([
+            ("active", "=", True),
+            ("is_published", "=", True),
+            ("type", "!=", "service"),
+            ("website_id", "=", gift_website.id),
+            ("id", "not in", fb_prod_ids),
+            ("image_1920", "!=", False),
+        ]).sorted("id")
+        base_seq = len(products_data) * 10
+        for idx, extra_prod in enumerate(other_real_prods, start=1):
+            extra_prod.write({"website_sequence": base_seq + idx * 10})
+            if extra_prod.is_storable:
+                ensure_stock_for_product(env, extra_prod, default_qty=20.0)
+            print(
+                f"[PRIORITY] Extra SP ID={extra_prod.id} | {extra_prod.name} "
+                f"| Seq={extra_prod.website_sequence}"
+            )
 
 
 if "env" in globals():

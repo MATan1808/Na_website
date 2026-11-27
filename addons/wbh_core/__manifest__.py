@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.1.1',
+    'version': '19.0.1.1.2',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.1.2 (2026-11-27)
+------------------------
+- [FIX] Kích hoạt mặc định tiền tệ `VND (₫)` trong `data/website_data.xml` và bổ sung bước chuyển Công ty + Bảng giá sang `VNĐ (₫)` trong `scripts/import_fb_products.py` để khắc phục hiển thị `$ USD` trên `/shop`.
+- [IMPROVE] Tự động dọn sản phẩm test rác (`T1`), ẩn sản phẩm dịch vụ trên `/shop`, cô lập đúng `website_id` giữa Web 1 & Web 2 và ưu tiên `website_sequence` đưa 15 sản phẩm thật Anime Goods lên đầu Trang 1 `/shop`.
 
 v19.0.1.1.1 (2026-11-27)
 ------------------------

@@ -3,10 +3,21 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.10` — tích hợp sẵn `cloudflared` profile `tunnel` và hướng dẫn public domain miễn phí `manhdaodao.*` từ máy ở nhà).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.11` — chuyển đơn vị tiền tệ mặc định sang `VNĐ (₫)`, dọn sạch sản phẩm test rác `T1` và đưa 15 sản phẩm thật Anime Goods lên đầu Trang 1 `/shop`).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.11 (2026-11-27)
+
+### Chuẩn Hóa Tiền Tệ `VNĐ (₫)` & Đưa 15 Sản Phẩm Thật Anime Goods Lên Đầu Trang 1 `/shop`
+- `[FIX]` **Chuyển đơn vị tiền tệ hiển thị trên `/shop` từ `$ USD` sang `₫ VNĐ`** (`wbh_core` `v19.0.1.1.2`): Kích hoạt `base.VND` (`active=True`, `position='after'`, `rounding=1.0`), cập nhật `res.company` và `product.pricelist` dùng chung cho cả 2 website sang `VNĐ (₫)`.
+- `[IMPROVE]` **Dọn sạch rác & tối ưu thứ tự hiển thị `/shop`** trong `addons/wbh_core/scripts/import_fb_products.py`:
+  - Xóa/lưu trữ toàn bộ sản phẩm test rác (`T1`), ẩn sản phẩm dịch vụ (`Standard delivery`, `Gift Card`, `Top-up eWallet`) và sản phẩm mẫu chưa có ảnh khỏi `/shop`.
+  - Cô lập đúng sản phẩm Thời trang sang Web 2 (`website_fashion_store`), tránh rò sang Web 1.
+  - Sắp xếp `website_sequence` (`10..150`) đưa toàn bộ **10 lô sản phẩm Facebook Manh Dao Dao (`MDD-FB-001`..`MDD-FB-010`)** và **5 sản phẩm MHA chủ lực** lên ngay đầu Trang 1 `/shop`.
 
 ---
 
