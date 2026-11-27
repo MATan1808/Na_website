@@ -10,6 +10,20 @@ Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản c�
 
 ---
 
+## v0.3.3 (2026-11-27)
+
+### Design System & Nạp Bộ Sản Phẩm Anime Goods & Búp Bê Cotton Doll 20cm
+- `[NEW]` **Hệ Thống Thiết Kế Chuẩn**: Tạo `DESIGN.md`, `css/variables.css`, `css/system.css` và trang xem trước trực quan `html/preview.html`.
+- `[NEW]` **Nạp Dòng Sản Phẩm Anime Goods & Cotton Doll 20cm Thực Tế**:
+  - `Doll Bông Cotton Doll 20cm Bakugo Katsuki (Tóc Xù Kèm Outfit Sporty)`: Biến thể Fullset 380k, Body trần thêu sầu riêng 280k, Outfit rời 120k.
+  - `Bộ Sưu Tập Card Bo Góc & Photocards Todoroki Shoto`: Card thường 20k - 40k, Hologram bạc hiếm 85k, Set 2 card kèm khung 120k.
+  - `Huy Hiệu Kim Loại Can Badge Todoroki Shoto 58mm`: Phủ kim tuyến / dạ quang (20k - 40k).
+  - `Mochi Kororin Bông Tròn Todoroki Shoto 10cm`: Nuigurumi ú mini treo balo (130k).
+  - `Tranh Ký Shikishi Viền Vàng Bakugo Katsuki`: Awakening Explosion Special (65k).
+- `[IMPROVE]` Cập nhật thanh danh mục và Hero Banner trang chủ Web 1 dẫn trực tiếp vào bộ sưu tập Anime Doll & Goods.
+
+---
+
 ## v0.3.2 (2026-11-27)
 
 ### Mở Rộng Ứng Dụng E-Commerce & Chăm Sóc Khách Hàng Odoo 19.0

@@ -13,19 +13,35 @@
                 </div>
                 <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-6">
                     <div class="col">
-                        <a href="/shop?search=Gấu+bông" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i class="fa fa-heart" aria-hidden="true"/>
+                                <i class="fa fa-user-circle" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Gấu bông</span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Doll Bông 20cm</span>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop?search=Móc+khóa" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop/category/anime-goods-merch-card-bo-goc-photocards-23" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i class="fa fa-key" aria-hidden="true"/>
+                                <i class="fa fa-clone" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Móc khóa</span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Card Bo Góc</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop/category/anime-goods-merch-huy-hieu-can-badges-pin-balo-24" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-certificate" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Huy Hiệu Pin</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop/category/anime-goods-merch-mochi-bong-tron-tui-mu-25" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-circle" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Mochi Ú Mini</span>
                         </a>
                     </div>
                     <div class="col">
@@ -37,27 +53,11 @@
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop?search=Sinh+nhật" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
-                            <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i class="fa fa-birthday-cake" aria-hidden="true"/>
-                            </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Sinh nhật</span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="/shop?search=Valentine" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop/category/anime-goods-merch-21" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i class="fa fa-star" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Valentine</span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="/shop?search=Combo" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
-                            <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i class="fa fa-gift" aria-hidden="true"/>
-                            </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Combo quà tặng</span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Tất Cả Merch</span>
                         </a>
                     </div>
                 </div>

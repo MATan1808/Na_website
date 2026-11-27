@@ -20,13 +20,13 @@
                             Từ gấu bông bông PP siêu mềm, móc khóa thiết kế dễ thương đến những hộp Blind Box đầy bất ngờ — tất cả đều sẵn sàng gói đẹp và giao tận tay người thương.
                         </p>
                         <div class="d-flex flex-wrap gap-3">
-                            <a href="/shop" class="btn btn-lg wbh-gift-btn-primary">
-                                <i class="fa fa-gift me-2" aria-hidden="true"/>
-                                Chọn quà theo dịp
+                            <a href="/shop/category/anime-goods-merch-21" class="btn btn-lg wbh-gift-btn-primary">
+                                <i class="fa fa-star me-2" aria-hidden="true"/>
+                                Anime Doll &amp; Goods Mới
                             </a>
-                            <a href="/shop?search=Blind+Box" class="btn btn-lg wbh-gift-btn-secondary">
-                                <i class="fa fa-cube me-2" aria-hidden="true"/>
-                                Khám phá Blind Box
+                            <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="btn btn-lg wbh-gift-btn-secondary">
+                                <i class="fa fa-heart me-2" aria-hidden="true"/>
+                                Búp Bê Cotton Doll 20cm
                             </a>
                         </div>
                         <div class="wbh-gift-hero__trust d-flex flex-wrap gap-4 mt-4 pt-2">

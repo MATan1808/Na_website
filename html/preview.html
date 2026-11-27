@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Xem Trước Hệ Thống Thiết Kế — 2 Website Bán Hàng (Design System Preview)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/system.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #FAFAFA;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #333;
+    }
+    .header-bar {
+      max-width: 1200px;
+      margin: 0 auto 3rem auto;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #EAEAEA;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .showcase-panel {
+      padding: 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    }
+    .color-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .color-chip {
+      flex: 1;
+      height: 70px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .section-title {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed rgba(0,0,0,0.15);
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .card-preview {
+      max-width: 300px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <div>
+      <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800;">HỆ THỐNG THIẾT KẾ ĐA WEBSITE (DESIGN SYSTEM)</h1>
+      <p style="margin: 5px 0 0 0; color: #666; font-size: 0.95rem;">Đặc tả Visual Style: Cửa Hàng Quà Tặng (Warm & Playful) vs Cửa Hàng Thời Trang (Editorial & Clean)</p>
+    </div>
+    <div style="background: #E8F5E9; color: #2E7D32; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
+      ✓ Odoo 19.0 Community Ready
+    </div>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- CỘT 1: CỬA HÀNG QUÀ TẶNG -->
+    <div class="showcase-panel wbh-gift-scope">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+        <h2 class="wbh-gift-heading" style="margin: 0; font-size: 1.5rem;">STORE 1: QUÀ TẶNG</h2>
+        <span style="background: #FFE4D6; color: #FF6B8B; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">Gấu Bông &amp; Blind Box</span>
+      </div>
+
+      <!-- Colors -->
+      <div class="section-title wbh-gift-heading">Bảng Màu Chủ Đạo (Palette)</div>
+      <div class="color-row">
+        <div class="color-chip" style="background: #FF6B8B; color: #fff;">#FF6B8B<span>Primary</span></div>
+        <div class="color-chip" style="background: #FFB347; color: #fff;">#FFB347<span>Vàng Mật</span></div>
+        <div class="color-chip" style="background: #FFF6F0; color: #3D2C2E; border: 1px solid #FFE4D6;">#FFF6F0<span>Nền Ấm</span></div>
+        <div class="color-chip" style="background: #3D2C2E; color: #fff;">#3D2C2E<span>Cacao Text</span></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="section-title wbh-gift-heading">Kiểu Chữ (Typography)</div>
+      <p class="wbh-gift-heading" style="font-size: 1.3rem; margin: 0 0 8px 0;">Heading: Quicksand Rounded 700</p>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem 0;">Body: Be Vietnam Pro 400/500/600 — Đậm nét cảm xúc ngọt ngào, gần gũi, phù hợp giới trẻ và các dịp kỷ niệm.</p>
+
+      <!-- Buttons -->
+      <div class="section-title wbh-gift-heading">Nút Bấm &amp; Tương Tác (Buttons)</div>
+      <div class="btn-group">
+        <a href="#gift" class="wbh-gift-btn-primary">
+          <span>🎁</span> Chọn Quà Ngay
+        </a>
+        <a href="#gift" class="wbh-gift-btn-secondary">
+          <span>🔍</span> Tìm Blind Box
+        </a>
+      </div>
+
+      <!-- Card Preview -->
+      <div class="section-title wbh-gift-heading">Thẻ Sản Phẩm Quà Tặng (Card 1:1)</div>
+      <div class="card-preview">
+        <div class="wbh-gift-card">
+          <span class="wbh-gift-card__badge">Bán Chạy 🔥</span>
+          <div class="wbh-gift-card__img-wrap">
+            <span style="font-size: 3.5rem;">🧸</span>
+          </div>
+          <h4 class="wbh-gift-heading" style="margin: 0 0 6px 0; font-size: 1rem;">Gấu Bông Capybara Rùa</h4>
+          <p style="margin: 0 0 12px 0; font-size: 0.85rem; color: var(--wbh-gift-color-text-muted);">Mềm mịn, nhồi bông PP 100%</p>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 700; color: var(--wbh-gift-color-primary); font-size: 1.1rem;">185.000 đ</span>
+            <button class="wbh-gift-btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">Thêm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- CỘT 2: CỬA HÀNG THỜI TRANG -->
+    <div class="showcase-panel wbh-fashion-scope">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+        <h2 class="wbh-fashion-heading" style="margin: 0; font-size: 1.5rem;">STORE 2: THỜI TRANG</h2>
+        <span style="background: #EAEAE7; color: #111; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Lookbook &amp; Apparel</span>
+      </div>
+
+      <!-- Colors -->
+      <div class="section-title wbh-fashion-heading">Bảng Màu Chủ Đạo (Palette)</div>
+      <div class="color-row">
+        <div class="color-chip" style="background: #111111; color: #fff;">#111111<span>Đen Than</span></div>
+        <div class="color-chip" style="background: #C8B6A6; color: #fff;">#C8B6A6<span>Be Cát</span></div>
+        <div class="color-chip" style="background: #F5F5F3; color: #222; border: 1px solid #E5E5E2;">#F5F5F3<span>Xám Đá</span></div>
+        <div class="color-chip" style="background: #222222; color: #fff;">#222222<span>Text Đậm</span></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="section-title wbh-fashion-heading">Kiểu Chữ (Typography)</div>
+      <p class="wbh-fashion-heading" style="font-size: 1.3rem; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.05em;">Heading: Plus Jakarta Sans 800</p>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem 0;">Body: Inter 400/500 — Phong cách tạp chí thời trang quốc tế, tối giản, sắc sảo, tôn chất liệu vải.</p>
+
+      <!-- Buttons -->
+      <div class="section-title wbh-fashion-heading">Nút Bấm &amp; Tương Tác (Buttons)</div>
+      <div class="btn-group">
+        <a href="#fashion" class="wbh-fashion-btn-primary">
+          Khám Phá BST Mới
+        </a>
+        <a href="#fashion" class="wbh-fashion-btn-outline">
+          Xem Lookbook
+        </a>
+      </div>
+
+      <!-- Card Preview -->
+      <div class="section-title wbh-fashion-heading">Thẻ Sản Phẩm Thời Trang (Card 3:4)</div>
+      <div class="card-preview">
+        <div class="wbh-fashion-card">
+          <div class="wbh-fashion-card__img-wrap" style="display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 3.5rem;">🧥</span>
+          </div>
+          <div class="wbh-fashion-card__tag">SUMMER 2026 EDITION</div>
+          <h4 class="wbh-fashion-heading" style="margin: 4px 0 6px 0; font-size: 0.95rem;">Áo Thun Cotton Oversize</h4>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+            <span style="font-weight: 700; color: #111; font-size: 1.05rem;">280.000 đ</span>
+            <span style="font-size: 0.8rem; color: #777;">S / M / L / XL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
