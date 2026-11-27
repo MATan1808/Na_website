@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.1.3',
+    'version': '19.0.1.2.0',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.2.0 (2026-11-28)
+------------------------
+- [NEW] Giai đoạn 1: Bổ sung `wbh_discount_percent` và `wbh_has_discount` trên `product.template`, đưa album ảnh `product_template_image_ids`, `product_tag_ids`, `compare_list_price` lên ngay tab Thông tin chung, kèm view sửa nhanh `<list editable="bottom">` và bộ lọc `Đang giảm giá`.
+- [NEW] Giai đoạn 2: Mở rộng `product.tag` (`wbh_show_in_filter`, `wbh_filter_group`, `wbh_badge_hex`), tạo model `wbh.price.range` cấu hình khoảng giá theo website (`data/wbh_filter_data.xml`) và controller `controllers/shop.py` lọc kết hợp động 100% (`tags`, `attrib`/`attribute_values`, `min_price`/`max_price`, `category`, `search`, `wbh_on_sale=1`), tự ẩn hoàn toàn nhãn/thuộc tính/khoảng giá có count = 0.
+- [NEW] Giai đoạn 3: Mở rộng model `website` (`wbh_fb_messenger_url`, `wbh_livechat_enabled`, `wbh_contact_prompt`) phục vụ hộp tư vấn 3 kênh (Web Livechat, Facebook Messenger, Zalo).
 
 v19.0.1.1.3 (2026-11-28)
 ------------------------
@@ -60,7 +66,10 @@ v19.0.1.0.0 (2026-11-26)
         'data/website_data.xml',
         'data/product_public_category_data.xml',
         'data/product_attribute_data.xml',
+        'data/wbh_filter_data.xml',
         'views/website_views.xml',
+        'views/product_tag_views.xml',
+        'views/wbh_price_range_views.xml',
         'views/product_template_views.xml',
         'views/wbh_menus.xml',
         'views/website_sale_vi_templates.xml',

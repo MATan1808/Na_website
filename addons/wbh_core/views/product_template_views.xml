@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Form sản phẩm: Chèn nhóm "Thông tin Đăng bán WBH" ngay trong General Information -->
+    <!-- Form sản phẩm: Chèn nhóm "Thông tin Đăng bán WBH" + Album ảnh ngay trong General Information -->
     <record id="wbh_product_template_only_form_view" model="ir.ui.view">
         <field name="name">product.template.form.inherit.wbh_core</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="priority" eval="30"/>
         <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']//group[@name='product_template_images']" position="replace"/>
             <xpath expr="//page[@name='general_information']//group[@name='internal_notes']" position="before">
                 <group name="wbh_store_info" string="Thông tin Đăng bán WBH" invisible="not sale_ok">
                     <group name="wbh_store_info_left">
@@ -19,6 +21,16 @@
                                widget="many2many_tags"
                                string="Danh mục Website"
                                options="{'no_create_edit': True}"/>
+                        <field name="product_tag_ids"
+                               widget="many2many_tags"
+                               options="{'color_field': 'color'}"
+                               context="{'product_template_id': id}"/>
+                        <field name="compare_list_price"
+                               widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"
+                               string="Giá gốc (gạch ngang)"/>
+                        <field name="wbh_discount_percent" readonly="1" invisible="not wbh_has_discount"/>
+                        <field name="wbh_has_discount" invisible="1"/>
                         <field name="is_published" widget="boolean_toggle"/>
                     </group>
                     <group name="wbh_store_info_right">
@@ -29,8 +41,56 @@
                         <field name="wbh_low_stock_threshold"/>
                         <field name="wbh_is_low_stock" readonly="1"/>
                     </group>
+                    <group colspan="2" name="product_template_images" string="Album ảnh sản phẩm">
+                        <field
+                            colspan="2"
+                            name="product_template_image_ids"
+                            class="o_website_sale_image_list"
+                            context="{'default_name': name}"
+                            mode="kanban"
+                            add-label="Thêm ảnh"
+                            nolabel="1"
+                            widget="x2_many_media_viewer"
+                            options="{'convert_to_webp': True}"
+                        />
+                    </group>
                 </group>
             </xpath>
+        </field>
+    </record>
+
+    <!-- List View Sửa Nhanh (<60s/món): Giá bán, Giá gốc, Tag, Danh mục & Đăng bán -->
+    <record id="wbh_product_template_quick_edit_list_view" model="ir.ui.view">
+        <field name="name">product.template.quick.edit.list.wbh_core</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <list string="Cập nhật nhanh Sản phẩm WBH" editable="bottom" default_order="website_sequence, id">
+                <field name="currency_id" column_invisible="True"/>
+                <field name="website_sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="wbh_store_scope"/>
+                <field name="website_id" optional="hide" readonly="1"/>
+                <field name="public_categ_ids"
+                       widget="many2many_tags"
+                       string="Danh mục Web"
+                       options="{'no_create_edit': True}"
+                       optional="show"/>
+                <field name="product_tag_ids"
+                       widget="many2many_tags"
+                       options="{'color_field': 'color'}"
+                       optional="show"/>
+                <field name="list_price"
+                       string="Giá bán"
+                       widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="compare_list_price"
+                       string="Giá gốc"
+                       widget="monetary"
+                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                <field name="wbh_discount_percent" string="Giảm (%)" readonly="1" optional="show"/>
+                <field name="is_published" widget="boolean_toggle"/>
+                <field name="wbh_short_highlight" optional="hide"/>
+            </list>
         </field>
     </record>
 
@@ -49,6 +109,8 @@
                        optional="show"/>
             </xpath>
             <xpath expr="//field[@name='list_price']" position="after">
+                <field name="compare_list_price" optional="hide"/>
+                <field name="wbh_discount_percent" optional="hide"/>
                 <field name="wbh_is_low_stock" optional="hide"/>
             </xpath>
         </field>
@@ -70,7 +132,7 @@
         </field>
     </record>
 
-    <!-- Search View sản phẩm: Bộ lọc nhanh Web 1 / Web 2 / Đăng bán / Sắp hết hàng & Group By -->
+    <!-- Search View sản phẩm: Bộ lọc nhanh Web 1 / Web 2 / Đăng bán / Đang giảm giá / Sắp hết hàng & Group By -->
     <record id="wbh_product_template_search_view" model="ir.ui.view">
         <field name="name">product.template.search.inherit.wbh_core</field>
         <field name="model">product.template</field>
@@ -91,6 +153,9 @@
                 <filter string="Chưa đăng bán"
                         name="wbh_filter_unpublished"
                         domain="[('is_published', '=', False)]"/>
+                <filter string="Đang giảm giá"
+                        name="wbh_filter_on_sale"
+                        domain="[('wbh_has_discount', '=', True)]"/>
                 <filter string="Sắp hết hàng"
                         name="wbh_filter_low_stock"
                         domain="[('wbh_is_low_stock', '=', True)]"/>

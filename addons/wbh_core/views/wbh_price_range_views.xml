@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wbh_price_range_list_view" model="ir.ui.view">
+        <field name="name">wbh.price.range.list</field>
+        <field name="model">wbh.price.range</field>
+        <field name="arch" type="xml">
+            <list string="Khoảng giá lọc nhanh WBH" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="website_id"
+                       groups="website.group_multi_website"
+                       options="{'no_create': True}"/>
+                <field name="min_price"/>
+                <field name="max_price"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="wbh_price_range_form_view" model="ir.ui.view">
+        <field name="name">wbh.price.range.form</field>
+        <field name="model">wbh.price.range</field>
+        <field name="arch" type="xml">
+            <form string="Khoảng giá lọc nhanh WBH">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="website_id"
+                                   groups="website.group_multi_website"
+                                   options="{'no_create': True}"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="min_price"/>
+                            <field name="max_price"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="wbh_price_range_search_view" model="ir.ui.view">
+        <field name="name">wbh.price.range.search</field>
+        <field name="model">wbh.price.range</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Khoảng giá">
+                <field name="name"/>
+                <field name="website_id" groups="website.group_multi_website"/>
+                <filter string="Đã lưu trữ" name="inactive" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Website" name="group_by_website_id" context="{'group_by': 'website_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

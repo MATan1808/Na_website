@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wbh_product_tag_form_view" model="ir.ui.view">
+        <field name="name">product.tag.form.inherit.wbh_core</field>
+        <field name="model">product.tag</field>
+        <field name="inherit_id" ref="product.product_tag_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//group" position="inside">
+                <field name="website_id"
+                       groups="website.group_multi_website"
+                       options="{'no_create': True}"
+                       placeholder="Cả 2 Website"/>
+                <field name="wbh_show_in_filter" widget="boolean_toggle"/>
+                <field name="wbh_filter_group" invisible="not wbh_show_in_filter"/>
+                <field name="wbh_badge_hex"
+                       placeholder="#D9483B"
+                       invisible="not wbh_show_in_filter"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="wbh_product_tag_list_view" model="ir.ui.view">
+        <field name="name">product.tag.list.inherit.wbh_core</field>
+        <field name="model">product.tag</field>
+        <field name="inherit_id" ref="product.product_tag_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='visible_to_customers']" position="after">
+                <field name="wbh_show_in_filter" widget="boolean_toggle" optional="show"/>
+                <field name="wbh_filter_group" optional="show"/>
+                <field name="wbh_badge_hex" optional="hide"/>
+                <field name="website_id"
+                       groups="website.group_multi_website"
+                       optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class ProductTemplate(models.Model):
@@ -39,12 +40,62 @@ class ProductTemplate(models.Model):
         store=False,
         help='Bật khi sản phẩm thuộc loại hàng lưu kho (is_storable=True) và tồn kho khả dụng nhỏ hơn hoặc bằng ngưỡng cảnh báo.',
     )
+    wbh_discount_percent = fields.Integer(
+        string='Giảm giá (%)',
+        compute='_compute_wbh_discount_percent',
+        store=False,
+        help='Phần trăm giảm giá tính từ Giá so sánh (compare_list_price) và Giá bán (list_price).',
+    )
+    wbh_has_discount = fields.Boolean(
+        string='Đang giảm giá',
+        compute='_compute_wbh_discount_percent',
+        search='_search_wbh_has_discount',
+        store=False,
+        help='Bật khi sản phẩm có Giá so sánh lớn hơn Giá bán và Giá bán > 0.',
+    )
 
     _check_wbh_low_stock_threshold = models.Constraint(
         'CHECK(wbh_low_stock_threshold >= 0)',
         'Ngưỡng cảnh báo tồn kho phải lớn hơn hoặc bằng 0.',
     )
     _wbh_store_scope_published_idx = models.Index('(wbh_store_scope, is_published)')
+
+    @api.depends('compare_list_price', 'list_price')
+    def _compute_wbh_discount_percent(self):
+        for product in self:
+            compare_price = product.compare_list_price or 0.0
+            sale_price = product.list_price or 0.0
+            if compare_price > sale_price > 0:
+                pct = int(round((compare_price - sale_price) * 100.0 / compare_price))
+                product.wbh_discount_percent = max(1, pct)
+                product.wbh_has_discount = True
+            else:
+                product.wbh_discount_percent = 0
+                product.wbh_has_discount = False
+
+    def _search_wbh_has_discount(self, operator, value):
+        if operator == 'in':
+            want_discount = True in value
+        elif operator == 'not in':
+            want_discount = True not in value
+        elif operator == '=':
+            want_discount = bool(value)
+        elif operator == '!=':
+            want_discount = not bool(value)
+        else:
+            return [('id', '=', 0)]
+
+        self.env.flush_all()
+        self.env.cr.execute("""
+            SELECT id
+            FROM product_template
+            WHERE COALESCE(compare_list_price, 0) > list_price
+              AND list_price > 0
+        """)
+        discounted_ids = [row[0] for row in self.env.cr.fetchall()]
+        if want_discount:
+            return [('id', 'in', discounted_ids)]
+        return [('id', 'not in', discounted_ids)]
 
     @api.depends('type', 'is_storable', 'qty_available', 'wbh_low_stock_threshold')
     def _compute_wbh_is_low_stock(self):
@@ -79,6 +130,27 @@ class ProductTemplate(models.Model):
         if want_low_stock:
             return [('id', 'in', low_stock_ids)]
         return [('id', 'not in', low_stock_ids)]
+
+    @api.model
+    def _search_get_detail(self, website, order, options):
+        res = super()._search_get_detail(website, order, options)
+        base_domain = res.get('base_domain', [])
+
+        # Hỗ trợ lọc tags kể cả khi view website_sale.filter_products_tags chưa bật
+        wbh_tag_ids = options.get('wbh_tag_ids')
+        if wbh_tag_ids and not options.get('tags'):
+            tag_ids = [int(tid) for tid in wbh_tag_ids]
+            base_domain.append(Domain.OR([
+                Domain('product_tag_ids', 'in', tag_ids),
+                Domain('product_variant_ids.additional_product_tag_ids', 'in', tag_ids),
+            ]))
+
+        # Hỗ trợ lọc các sản phẩm đang giảm giá (compare_list_price > list_price > 0)
+        if options.get('wbh_on_sale'):
+            base_domain.append(self._search_wbh_has_discount('=', True))
+
+        res['base_domain'] = base_domain
+        return res
 
     @api.model
     def _wbh_resolve_website_id(self, scope, company_id=False):

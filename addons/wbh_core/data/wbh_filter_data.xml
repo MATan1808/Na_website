@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+        Dữ liệu khởi tạo mẫu cho khoảng giá lọc nhanh (VNĐ).
+        Admin có thể chỉnh sửa, thêm mới hoặc tắt trực tiếp trong Backend (2 Cửa Hàng (WBH) -> Khoảng giá lọc nhanh).
+    -->
+    <record id="wbh_price_range_under_100k" model="wbh.price.range">
+        <field name="name">Dưới 100.000₫</field>
+        <field name="min_price" eval="0.0"/>
+        <field name="max_price" eval="100000.0"/>
+        <field name="sequence" eval="10"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="wbh_price_range_100k_300k" model="wbh.price.range">
+        <field name="name">100.000₫ – 300.000₫</field>
+        <field name="min_price" eval="100000.0"/>
+        <field name="max_price" eval="300000.0"/>
+        <field name="sequence" eval="20"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="wbh_price_range_300k_500k" model="wbh.price.range">
+        <field name="name">300.000₫ – 500.000₫</field>
+        <field name="min_price" eval="300000.0"/>
+        <field name="max_price" eval="500000.0"/>
+        <field name="sequence" eval="30"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="wbh_price_range_above_500k" model="wbh.price.range">
+        <field name="name">Trên 500.000₫</field>
+        <field name="min_price" eval="500000.0"/>
+        <field name="max_price" eval="0.0"/>
+        <field name="sequence" eval="40"/>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

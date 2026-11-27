@@ -27,5 +27,20 @@ class Website(models.Model):
         string='Link Zalo CSKH',
         help='Đường dẫn liên hệ nhanh qua Zalo hiển thị riêng cho từng cửa hàng.',
     )
+    wbh_fb_messenger_url = fields.Char(
+        string='Link Facebook Messenger',
+        help='Đường dẫn nhắn tin Facebook Messenger riêng cho từng cửa hàng (VD: https://m.me/tenpage).',
+    )
+    wbh_livechat_enabled = fields.Boolean(
+        string='Bật Chat trực tiếp trên Web',
+        default=True,
+        help='Hiển thị kênh Chat trực tiếp tại Web trên trang sản phẩm, giỏ hàng và nút hỗ trợ nổi.',
+    )
+    wbh_contact_prompt = fields.Char(
+        string='Lời nhắc tư vấn',
+        translate=True,
+        default='Cần xem ảnh thật hoặc tư vấn chọn hàng?',
+        help='Câu gợi ý hiển thị trong hộp tư vấn 3 kênh trên trang chi tiết sản phẩm.',
+    )
 
     _wbh_store_type_idx = models.Index('(wbh_store_type)')

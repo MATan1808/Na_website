@@ -5,4 +5,10 @@ access_wbh_product_attribute_value_catalog_user,wbh.product.attribute.value.cata
 access_wbh_product_template_catalog_user,wbh.product.template.catalog.user,product.model_product_template,wbh_core.group_wbh_catalog_user,1,1,1,1
 access_wbh_product_product_catalog_user,wbh.product.product.catalog.user,product.model_product_product,wbh_core.group_wbh_catalog_user,1,1,1,1
 access_wbh_product_template_attribute_line_catalog_user,wbh.product.template.attribute.line.catalog.user,product.model_product_template_attribute_line,wbh_core.group_wbh_catalog_user,1,1,1,1
+access_wbh_product_tag_catalog_user,wbh.product.tag.catalog.user,product.model_product_tag,wbh_core.group_wbh_catalog_user,1,1,1,1
 access_wbh_website_manager,wbh.website.manager,website.model_website,wbh_core.group_wbh_manager,1,1,1,0
+access_wbh_price_range_public,wbh.price.range.public,wbh_core.model_wbh_price_range,base.group_public,1,0,0,0
+access_wbh_price_range_portal,wbh.price.range.portal,wbh_core.model_wbh_price_range,base.group_portal,1,0,0,0
+access_wbh_price_range_user,wbh.price.range.user,wbh_core.model_wbh_price_range,base.group_user,1,0,0,0
+access_wbh_price_range_catalog_user,wbh.price.range.catalog.user,wbh_core.model_wbh_price_range,wbh_core.group_wbh_catalog_user,1,1,1,1
+access_wbh_price_range_manager,wbh.price.range.manager,wbh_core.model_wbh_price_range,wbh_core.group_wbh_manager,1,1,1,1

@@ -45,6 +45,21 @@
         </field>
     </record>
 
+    <record id="action_wbh_products_quick_edit" model="ir.actions.act_window">
+        <field name="name">Sửa nhanh Giá &amp; Nhãn</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="wbh_core.wbh_product_template_quick_edit_list_view"/>
+        <field name="domain">[('sale_ok', '=', True)]</field>
+        <field name="search_view_id" ref="website_sale.product_template_search_view_website"/>
+        <field name="context">{'default_is_storable': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chỉnh sửa nhanh Giá bán, Giá gốc, Nhãn lọc và Trạng thái đăng bán trực tiếp trên bảng
+            </p>
+        </field>
+    </record>
+
     <record id="action_wbh_public_categories" model="ir.actions.act_window">
         <field name="name">Danh mục Website</field>
         <field name="res_model">product.public.category</field>
@@ -68,6 +83,29 @@
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Quản lý bộ thuộc tính biến thể dùng chung cho 2 cửa hàng
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_product_tags" model="ir.actions.act_window">
+        <field name="name">Nhãn lọc Sản phẩm (Tags)</field>
+        <field name="res_model">product.tag</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo nhãn sản phẩm mới để bộ lọc /shop tự động nhận diện
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_price_ranges" model="ir.actions.act_window">
+        <field name="name">Khoảng giá lọc nhanh</field>
+        <field name="res_model">wbh.price.range</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="wbh_core.wbh_price_range_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Thiết lập các mốc khoảng giá hiển thị trên bộ lọc /shop
             </p>
         </field>
     </record>
@@ -96,7 +134,7 @@
         <field name="view_id" ref="website.view_website_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Cấu hình thông tin thương hiệu, hotline và link Zalo cho từng Website
+                Cấu hình thông tin thương hiệu, hotline, Zalo, Facebook Messenger và Livechat cho từng Website
             </p>
         </field>
     </record>
@@ -119,6 +157,12 @@
               action="action_wbh_fashion_products"
               sequence="20"/>
 
+    <menuitem id="menu_wbh_products_quick_edit"
+              name="Sửa nhanh Giá &amp; Nhãn"
+              parent="menu_wbh_root"
+              action="action_wbh_products_quick_edit"
+              sequence="25"/>
+
     <menuitem id="menu_wbh_public_categories"
               name="Danh mục Website"
               parent="menu_wbh_root"
@@ -130,6 +174,18 @@
               parent="menu_wbh_root"
               action="action_wbh_product_attributes"
               sequence="40"/>
+
+    <menuitem id="menu_wbh_product_tags"
+              name="Nhãn lọc Sản phẩm (Tags)"
+              parent="menu_wbh_root"
+              action="action_wbh_product_tags"
+              sequence="42"/>
+
+    <menuitem id="menu_wbh_price_ranges"
+              name="Khoảng giá lọc nhanh"
+              parent="menu_wbh_root"
+              action="action_wbh_price_ranges"
+              sequence="45"/>
 
     <menuitem id="menu_wbh_website_orders"
               name="Đơn hàng 2 Website"

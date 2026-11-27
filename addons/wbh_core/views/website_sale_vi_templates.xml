@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--
-        Chuẩn hóa chuỗi giao diện Thương mại điện tử sang tiếng Việt cho 2 storefront WBH.
+        Chuẩn hóa chuỗi giao diện Thương mại điện tử sang tiếng Việt cho 2 storefront WBH
+        và tự động ẩn các thuộc tính / giá trị thuộc tính không có sản phẩm trên Website hiện tại.
         Khóa chặt trong website.wbh_store_type in ('gift', 'fashion') để đảm bảo an toàn Multi-Website.
     -->
     <template
@@ -51,6 +52,73 @@
                 <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">So sánh sản phẩm</t>
                 <t t-else="">Add to compare</t>
             </span>
+        </xpath>
+    </template>
+
+    <!-- Ẩn giá trị thuộc tính rỗng trên từng Website WBH cho đủ 5 kiểu hiển thị -->
+    <template
+        id="wbh_filter_color_attributes_dynamic"
+        inherit_id="website_sale.filter_color_attributes"
+        name="WBH — Ẩn màu sắc không có sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else a.value_ids</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_filter_image_attributes_dynamic"
+        inherit_id="website_sale.filter_image_attributes"
+        name="WBH — Ẩn ảnh thuộc tính không có sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else a.value_ids</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_filter_select_attributes_dynamic"
+        inherit_id="website_sale.filter_select_attributes"
+        name="WBH — Ẩn tùy chọn select không có sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else a.value_ids</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_filter_radio_and_multi_attributes_dynamic"
+        inherit_id="website_sale.filter_radio_and_multi_attributes"
+        name="WBH — Ẩn giá trị radio/checkbox không có sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//t[@t-set='sorted_values']" position="attributes">
+            <attribute name="t-value">sorted(a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else a.value_ids, key=lambda v: v.id not in attrib_set)</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_filter_pills_attributes_dynamic"
+        inherit_id="website_sale.filter_pills_attributes"
+        name="WBH — Ẩn giá trị pills không có sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//t[@t-foreach='a.value_ids']" position="attributes">
+            <attribute name="t-foreach">a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else a.value_ids</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_product_attribute_filters_form_dynamic"
+        inherit_id="website_sale.product_attribute_filters_form"
+        name="WBH — Ẩn nhóm thuộc tính không có sản phẩm trên Website"
+        priority="25"
+    >
+        <xpath expr="//t[@t-foreach='attributes']/div" position="attributes">
+            <attribute name="t-if">(a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids)) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else (a.value_ids and len(a.value_ids) &gt; 1)</attribute>
         </xpath>
     </template>
 </odoo>
