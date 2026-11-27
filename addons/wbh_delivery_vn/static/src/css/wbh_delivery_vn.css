@@ -1,0 +1,16 @@
+/* WBH Delivery VN — Checkout & Portal Styles (Mobile >= 44px touch targets) */
+.wbh-vn-address-field .wbh-vn-select {
+    min-height: 44px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.wbh-hold-order-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.wbh-portal-hold-banner {
+    border-radius: 0.5rem;
+}

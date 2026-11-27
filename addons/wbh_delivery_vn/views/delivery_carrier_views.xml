@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_delivery_carrier_list_wbh_vn" model="ir.ui.view">
+        <field name="name">delivery.carrier.list.wbh.vn</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='delivery_type']" position="after">
+                <field name="wbh_flat_price" string="Phí đồng giá" optional="show"/>
+                <field name="wbh_free_over_amount" string="Ngưỡng Freeship" optional="show"/>
+                <field name="wbh_is_hold_order" string="Gom đơn 0đ" optional="show"/>
+                <field name="is_published" string="Hiển thị Web" widget="boolean_toggle" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_delivery_carrier_form_wbh_vn" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.wbh.vn</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="wbh_vn_config"
+                      string="Cấu hình Giao hàng VN"
+                      invisible="delivery_type not in ('wbh_local', 'wbh_ghn')">
+                    <group>
+                        <group string="Vận chuyển Nội bộ / Đồng giá / Gom đơn"
+                               invisible="delivery_type != 'wbh_local'">
+                            <field name="wbh_is_hold_order"/>
+                            <field name="wbh_flat_price"
+                                   widget="monetary"
+                                   invisible="wbh_is_hold_order"/>
+                            <field name="wbh_free_over_amount"
+                                   widget="monetary"
+                                   invisible="wbh_is_hold_order"/>
+                            <field name="wbh_provider_note"/>
+                        </group>
+                        <group string="Kết nối Giao Hàng Nhanh (GHN)"
+                               invisible="delivery_type != 'wbh_ghn'">
+                            <field name="wbh_ghn_sandbox"/>
+                            <field name="wbh_ghn_token" password="True"/>
+                            <field name="wbh_ghn_shop_id"/>
+                            <field name="wbh_ghn_from_district_id"/>
+                            <field name="wbh_ghn_service_type_id"/>
+                            <field name="wbh_flat_price"
+                                   string="Cước dự phòng khi ngoại tuyến"
+                                   widget="monetary"/>
+                            <field name="wbh_provider_note"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

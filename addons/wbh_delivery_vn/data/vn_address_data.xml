@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ==================== 1. TP. HỒ CHÍ MINH ==================== -->
+    <record id="vn_province_hcm" model="wbh.vn.province">
+        <field name="name">TP. Hồ Chí Minh</field>
+        <field name="code">HCM</field>
+        <field name="sequence">1</field>
+        <field name="ghn_province_id">202</field>
+    </record>
+
+    <record id="vn_district_hcm_q1" model="wbh.vn.district">
+        <field name="name">Quận 1</field>
+        <field name="code">HCM-Q1</field>
+        <field name="sequence">1</field>
+        <field name="province_id" ref="vn_province_hcm"/>
+        <field name="ghn_district_id">1442</field>
+    </record>
+    <record id="vn_ward_hcm_q1_ben_nghe" model="wbh.vn.ward">
+        <field name="name">Phường Bến Nghé</field>
+        <field name="code">26740</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hcm_q1"/>
+        <field name="ghn_ward_code">20101</field>
+    </record>
+    <record id="vn_ward_hcm_q1_ben_thanh" model="wbh.vn.ward">
+        <field name="name">Phường Bến Thành</field>
+        <field name="code">26743</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hcm_q1"/>
+        <field name="ghn_ward_code">20102</field>
+    </record>
+    <record id="vn_ward_hcm_q1_da_kao" model="wbh.vn.ward">
+        <field name="name">Phường Đa Kao</field>
+        <field name="code">26737</field>
+        <field name="sequence">3</field>
+        <field name="district_id" ref="vn_district_hcm_q1"/>
+        <field name="ghn_ward_code">20104</field>
+    </record>
+    <record id="vn_ward_hcm_q1_tan_dinh" model="wbh.vn.ward">
+        <field name="name">Phường Tân Định</field>
+        <field name="code">26734</field>
+        <field name="sequence">4</field>
+        <field name="district_id" ref="vn_district_hcm_q1"/>
+        <field name="ghn_ward_code">20110</field>
+    </record>
+
+    <record id="vn_district_hcm_q3" model="wbh.vn.district">
+        <field name="name">Quận 3</field>
+        <field name="code">HCM-Q3</field>
+        <field name="sequence">2</field>
+        <field name="province_id" ref="vn_province_hcm"/>
+        <field name="ghn_district_id">1444</field>
+    </record>
+    <record id="vn_ward_hcm_q3_vo_thi_sau" model="wbh.vn.ward">
+        <field name="name">Phường Võ Thị Sáu</field>
+        <field name="code">27139</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hcm_q3"/>
+        <field name="ghn_ward_code">20308</field>
+    </record>
+    <record id="vn_ward_hcm_q3_p1" model="wbh.vn.ward">
+        <field name="name">Phường 1</field>
+        <field name="code">27154</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hcm_q3"/>
+        <field name="ghn_ward_code">20301</field>
+    </record>
+
+    <record id="vn_district_hcm_binh_thanh" model="wbh.vn.district">
+        <field name="name">Quận Bình Thạnh</field>
+        <field name="code">HCM-BT</field>
+        <field name="sequence">3</field>
+        <field name="province_id" ref="vn_province_hcm"/>
+        <field name="ghn_district_id">1462</field>
+    </record>
+    <record id="vn_ward_hcm_bt_p1" model="wbh.vn.ward">
+        <field name="name">Phường 1</field>
+        <field name="code">26932</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hcm_binh_thanh"/>
+        <field name="ghn_ward_code">21601</field>
+    </record>
+    <record id="vn_ward_hcm_bt_p25" model="wbh.vn.ward">
+        <field name="name">Phường 25</field>
+        <field name="code">26911</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hcm_binh_thanh"/>
+        <field name="ghn_ward_code">21625</field>
+    </record>
+
+    <record id="vn_district_hcm_thu_duc" model="wbh.vn.district">
+        <field name="name">TP. Thủ Đức</field>
+        <field name="code">HCM-TD</field>
+        <field name="sequence">4</field>
+        <field name="province_id" ref="vn_province_hcm"/>
+        <field name="ghn_district_id">3695</field>
+    </record>
+    <record id="vn_ward_hcm_td_thao_dien" model="wbh.vn.ward">
+        <field name="name">Phường Thảo Điền</field>
+        <field name="code">27088</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hcm_thu_duc"/>
+        <field name="ghn_ward_code">90737</field>
+    </record>
+    <record id="vn_ward_hcm_td_linh_trung" model="wbh.vn.ward">
+        <field name="name">Phường Linh Trung</field>
+        <field name="code">26797</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hcm_thu_duc"/>
+        <field name="ghn_ward_code">90746</field>
+    </record>
+
+    <!-- ==================== 2. HÀ NỘI ==================== -->
+    <record id="vn_province_hn" model="wbh.vn.province">
+        <field name="name">Hà Nội</field>
+        <field name="code">HN</field>
+        <field name="sequence">2</field>
+        <field name="ghn_province_id">201</field>
+    </record>
+
+    <record id="vn_district_hn_hoan_kiem" model="wbh.vn.district">
+        <field name="name">Quận Hoàn Kiếm</field>
+        <field name="code">HN-HK</field>
+        <field name="sequence">1</field>
+        <field name="province_id" ref="vn_province_hn"/>
+        <field name="ghn_district_id">1482</field>
+    </record>
+    <record id="vn_ward_hn_hk_hang_bac" model="wbh.vn.ward">
+        <field name="name">Phường Hàng Bạc</field>
+        <field name="code">00049</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hn_hoan_kiem"/>
+        <field name="ghn_ward_code">1A0105</field>
+    </record>
+    <record id="vn_ward_hn_hk_trang_tien" model="wbh.vn.ward">
+        <field name="name">Phường Tràng Tiền</field>
+        <field name="code">00073</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hn_hoan_kiem"/>
+        <field name="ghn_ward_code">1A0115</field>
+    </record>
+
+    <record id="vn_district_hn_ba_dinh" model="wbh.vn.district">
+        <field name="name">Quận Ba Đình</field>
+        <field name="code">HN-BD</field>
+        <field name="sequence">2</field>
+        <field name="province_id" ref="vn_province_hn"/>
+        <field name="ghn_district_id">1484</field>
+    </record>
+    <record id="vn_ward_hn_bd_dien_bien" model="wbh.vn.ward">
+        <field name="name">Phường Điện Biên</field>
+        <field name="code">00019</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hn_ba_dinh"/>
+        <field name="ghn_ward_code">1A0203</field>
+    </record>
+    <record id="vn_ward_hn_bd_kim_ma" model="wbh.vn.ward">
+        <field name="name">Phường Kim Mã</field>
+        <field name="code">00028</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hn_ba_dinh"/>
+        <field name="ghn_ward_code">1A0207</field>
+    </record>
+
+    <record id="vn_district_hn_cau_giay" model="wbh.vn.district">
+        <field name="name">Quận Cầu Giấy</field>
+        <field name="code">HN-CG</field>
+        <field name="sequence">3</field>
+        <field name="province_id" ref="vn_province_hn"/>
+        <field name="ghn_district_id">1485</field>
+    </record>
+    <record id="vn_ward_hn_cg_dich_vong" model="wbh.vn.ward">
+        <field name="name">Phường Dịch Vọng</field>
+        <field name="code">00166</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hn_cau_giay"/>
+        <field name="ghn_ward_code">1A0601</field>
+    </record>
+    <record id="vn_ward_hn_cg_trung_hoa" model="wbh.vn.ward">
+        <field name="name">Phường Trung Hòa</field>
+        <field name="code">00175</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hn_cau_giay"/>
+        <field name="ghn_ward_code">1A0607</field>
+    </record>
+
+    <!-- ==================== 3. ĐÀ NẴNG ==================== -->
+    <record id="vn_province_dn" model="wbh.vn.province">
+        <field name="name">Đà Nẵng</field>
+        <field name="code">DN</field>
+        <field name="sequence">3</field>
+        <field name="ghn_province_id">203</field>
+    </record>
+
+    <record id="vn_district_dn_hai_chau" model="wbh.vn.district">
+        <field name="name">Quận Hải Châu</field>
+        <field name="code">DN-HC</field>
+        <field name="sequence">1</field>
+        <field name="province_id" ref="vn_province_dn"/>
+        <field name="ghn_district_id">1526</field>
+    </record>
+    <record id="vn_ward_dn_hc_hai_chau_1" model="wbh.vn.ward">
+        <field name="name">Phường Hải Châu I</field>
+        <field name="code">20203</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_dn_hai_chau"/>
+        <field name="ghn_ward_code">40101</field>
+    </record>
+    <record id="vn_ward_dn_hc_thach_thang" model="wbh.vn.ward">
+        <field name="name">Phường Thạch Thang</field>
+        <field name="code">20197</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_dn_hai_chau"/>
+        <field name="ghn_ward_code">40108</field>
+    </record>
+
+    <record id="vn_district_dn_thanh_khe" model="wbh.vn.district">
+        <field name="name">Quận Thanh Khê</field>
+        <field name="code">DN-TK</field>
+        <field name="sequence">2</field>
+        <field name="province_id" ref="vn_province_dn"/>
+        <field name="ghn_district_id">1528</field>
+    </record>
+    <record id="vn_ward_dn_tk_chinh_gian" model="wbh.vn.ward">
+        <field name="name">Phường Chính Gián</field>
+        <field name="code">20245</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_dn_thanh_khe"/>
+        <field name="ghn_ward_code">40203</field>
+    </record>
+    <record id="vn_ward_dn_tk_xuan_ha" model="wbh.vn.ward">
+        <field name="name">Phường Xuân Hà</field>
+        <field name="code">20233</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_dn_thanh_khe"/>
+        <field name="ghn_ward_code">40210</field>
+    </record>
+
+    <!-- ==================== 4. HẢI PHÒNG ==================== -->
+    <record id="vn_province_hp" model="wbh.vn.province">
+        <field name="name">Hải Phòng</field>
+        <field name="code">HP</field>
+        <field name="sequence">4</field>
+        <field name="ghn_province_id">224</field>
+    </record>
+
+    <record id="vn_district_hp_hong_bang" model="wbh.vn.district">
+        <field name="name">Quận Hồng Bàng</field>
+        <field name="code">HP-HB</field>
+        <field name="sequence">1</field>
+        <field name="province_id" ref="vn_province_hp"/>
+        <field name="ghn_district_id">1621</field>
+    </record>
+    <record id="vn_ward_hp_hb_hoang_van_thu" model="wbh.vn.ward">
+        <field name="name">Phường Hoàng Văn Thụ</field>
+        <field name="code">11314</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hp_hong_bang"/>
+        <field name="ghn_ward_code">30101</field>
+    </record>
+    <record id="vn_ward_hp_hb_minh_khai" model="wbh.vn.ward">
+        <field name="name">Phường Minh Khai</field>
+        <field name="code">11311</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hp_hong_bang"/>
+        <field name="ghn_ward_code">30103</field>
+    </record>
+
+    <record id="vn_district_hp_ngo_quyen" model="wbh.vn.district">
+        <field name="name">Quận Ngô Quyền</field>
+        <field name="code">HP-NQ</field>
+        <field name="sequence">2</field>
+        <field name="province_id" ref="vn_province_hp"/>
+        <field name="ghn_district_id">1622</field>
+    </record>
+    <record id="vn_ward_hp_nq_lach_tray" model="wbh.vn.ward">
+        <field name="name">Phường Lạch Tray</field>
+        <field name="code">11359</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_hp_ngo_quyen"/>
+        <field name="ghn_ward_code">30205</field>
+    </record>
+    <record id="vn_ward_hp_nq_gia_vien" model="wbh.vn.ward">
+        <field name="name">Phường Gia Viên</field>
+        <field name="code">11347</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_hp_ngo_quyen"/>
+        <field name="ghn_ward_code">30203</field>
+    </record>
+
+    <!-- ==================== 5. CẦN THƠ ==================== -->
+    <record id="vn_province_ct" model="wbh.vn.province">
+        <field name="name">Cần Thơ</field>
+        <field name="code">CT</field>
+        <field name="sequence">5</field>
+        <field name="ghn_province_id">220</field>
+    </record>
+
+    <record id="vn_district_ct_ninh_kieu" model="wbh.vn.district">
+        <field name="name">Quận Ninh Kiều</field>
+        <field name="code">CT-NK</field>
+        <field name="sequence">1</field>
+        <field name="province_id" ref="vn_province_ct"/>
+        <field name="ghn_district_id">1572</field>
+    </record>
+    <record id="vn_ward_ct_nk_tan_an" model="wbh.vn.ward">
+        <field name="name">Phường Tân An</field>
+        <field name="code">31126</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_ct_ninh_kieu"/>
+        <field name="ghn_ward_code">550101</field>
+    </record>
+    <record id="vn_ward_ct_nk_xuan_khanh" model="wbh.vn.ward">
+        <field name="name">Phường Xuân Khánh</field>
+        <field name="code">31144</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_ct_ninh_kieu"/>
+        <field name="ghn_ward_code">550111</field>
+    </record>
+
+    <record id="vn_district_ct_cai_rang" model="wbh.vn.district">
+        <field name="name">Quận Cái Răng</field>
+        <field name="code">CT-CR</field>
+        <field name="sequence">2</field>
+        <field name="province_id" ref="vn_province_ct"/>
+        <field name="ghn_district_id">1574</field>
+    </record>
+    <record id="vn_ward_ct_cr_le_binh" model="wbh.vn.ward">
+        <field name="name">Phường Lê Bình</field>
+        <field name="code">31168</field>
+        <field name="sequence">1</field>
+        <field name="district_id" ref="vn_district_ct_cai_rang"/>
+        <field name="ghn_ward_code">550301</field>
+    </record>
+    <record id="vn_ward_ct_cr_hung_phu" model="wbh.vn.ward">
+        <field name="name">Phường Hưng Phú</field>
+        <field name="code">31171</field>
+        <field name="sequence">2</field>
+        <field name="district_id" ref="vn_district_ct_cai_rang"/>
+        <field name="ghn_ward_code">550304</field>
+    </record>
+</odoo>

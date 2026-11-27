@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_wbh_delivery_root"
+              name="Vận chuyển &amp; Địa giới VN"
+              parent="wbh_core.menu_wbh_root"
+              sequence="55"
+              groups="wbh_core.group_wbh_catalog_user"/>
+
+    <menuitem id="menu_wbh_delivery_carriers"
+              name="Phương thức giao hàng"
+              parent="menu_wbh_delivery_root"
+              action="delivery.action_delivery_carrier_form"
+              groups="wbh_core.group_wbh_manager"
+              sequence="10"/>
+
+    <menuitem id="menu_wbh_hold_orders"
+              name="Đơn hàng Gom đơn"
+              parent="menu_wbh_delivery_root"
+              action="action_wbh_hold_orders"
+              sequence="20"/>
+
+    <menuitem id="menu_wbh_vn_provinces"
+              name="Tỉnh / Thành phố (VN)"
+              parent="menu_wbh_delivery_root"
+              action="action_wbh_vn_province"
+              sequence="30"/>
+
+    <menuitem id="menu_wbh_vn_districts"
+              name="Quận / Huyện (VN)"
+              parent="menu_wbh_delivery_root"
+              action="action_wbh_vn_district"
+              sequence="40"/>
+
+    <menuitem id="menu_wbh_vn_wards"
+              name="Phường / Xã (VN)"
+              parent="menu_wbh_delivery_root"
+              action="action_wbh_vn_ward"
+              sequence="50"/>
+</odoo>
