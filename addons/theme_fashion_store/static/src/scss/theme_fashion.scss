@@ -402,6 +402,11 @@
             font-size: 0.9375rem;
             font-weight: 600;
             color: var(--wbh-fashion-ink);
+            font-variant-numeric: tabular-nums;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.35rem;
         }
 
         .wbh-fashion-card-swatches {
@@ -425,6 +430,61 @@
                 border: 1px solid rgba(17, 17, 17, 0.25);
             }
         }
+    }
+
+    .wbh-fashion-compare-price {
+        color: #6E6E6E !important;
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .wbh-fashion-discount-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--wbh-fashion-ink);
+        color: #FFFFFF;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        line-height: 1.1;
+        padding: 0.18rem 0.42rem;
+        border-radius: 2px;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+
+        &--pdp {
+            font-size: 0.8rem;
+            padding: 0.24rem 0.55rem;
+        }
+    }
+
+    .wbh-fashion-card-tags {
+        min-height: 0;
+    }
+
+    .wbh-fashion-card-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background-color: var(--wbh-fashion-stone);
+        color: var(--wbh-fashion-ink);
+        border: 1px solid var(--wbh-fashion-border);
+        border-radius: 2px;
+        font-size: 0.72rem;
+        font-weight: 500;
+        line-height: 1.2;
+        padding: 0.14rem 0.42rem;
+        max-width: 100%;
+    }
+
+    .wbh-tag-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--wbh-fashion-ink);
+        flex-shrink: 0;
+        display: inline-block;
     }
 
     // -------------------------------------------------------------------------
@@ -558,7 +618,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Bộ lọc Sidebar & Mobile Drawer trên trang /shop
+    // Bộ lọc Sidebar & Mobile Drawer trên trang /shop (100% động)
     // -------------------------------------------------------------------------
     .o_wsale_products_page {
         #products_grid_before {
@@ -567,6 +627,14 @@
 
         .o_wsale_offcanvas {
             background-color: var(--wbh-fashion-paper);
+        }
+
+        button[data-bs-target="#o_wsale_offcanvas"]:not(.wbh-mobile-filter-btn),
+        #o_wsale_offcanvas_tags_header,
+        #o_wsale_offcanvas_tags,
+        .accordion-item:has(> #o_wsale_tags_option_inner),
+        #o_wsale_offcanvas .offcanvas-body > a[title="Clear Filters"] {
+            display: none !important;
         }
 
         @media (max-width: 767.98px) {
@@ -586,6 +654,314 @@
                     min-width: 0 !important;
                 }
             }
+        }
+    }
+
+    .wbh-mobile-filter-btn {
+        min-height: 44px !important;
+        min-width: 44px;
+        padding: 0.5rem 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.4rem;
+        text-transform: none;
+        letter-spacing: 0.01em;
+    }
+
+    .wbh-mobile-filter-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 0.35rem;
+        border-radius: 2px;
+        background-color: var(--wbh-fashion-ink);
+        color: #FFFFFF;
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .wbh-fashion-filter-panel {
+        .wbh-fashion-filter-heading {
+            font-size: 0.8125rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: var(--wbh-fashion-ink);
+        }
+
+        .wbh-fashion-sale-toggle,
+        .wbh-fashion-price-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            min-height: 44px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 2px;
+            border: 1px solid var(--wbh-fashion-border);
+            background-color: var(--wbh-fashion-paper);
+            color: var(--wbh-fashion-ink);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+
+            &:hover {
+                border-color: var(--wbh-fashion-ink);
+            }
+
+            &.is-active {
+                background-color: var(--wbh-fashion-ink);
+                border-color: var(--wbh-fashion-ink);
+                color: #FFFFFF;
+
+                .wbh-fashion-filter-count {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #FFFFFF;
+                }
+            }
+        }
+
+        .wbh-fashion-tag-filter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            min-height: 38px;
+            padding: 0.35rem 0.65rem;
+            border-radius: 2px;
+            border: 1px solid var(--wbh-fashion-border);
+            background-color: var(--wbh-fashion-paper);
+            color: var(--wbh-fashion-ink);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+
+            &:hover {
+                border-color: var(--wbh-fashion-ink);
+            }
+
+            &.is-active {
+                background-color: var(--wbh-fashion-ink);
+                border-color: var(--wbh-fashion-ink);
+                color: #FFFFFF;
+
+                .wbh-fashion-filter-count {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    color: #FFFFFF;
+                }
+            }
+        }
+
+        .wbh-fashion-filter-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            padding: 0.1rem 0.4rem;
+            border-radius: 2px;
+            background-color: var(--wbh-fashion-stone);
+            color: var(--wbh-fashion-text);
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        @media (max-width: 991.98px) {
+            .wbh-fashion-tag-filter {
+                min-height: 44px;
+            }
+        }
+    }
+
+    .wbh-fashion-active-chips {
+        .wbh-fashion-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            min-height: 36px;
+            padding: 0.3rem 0.7rem;
+            border-radius: 2px;
+            background-color: var(--wbh-fashion-paper);
+            border: 1px solid rgba(17, 17, 17, 0.22);
+            color: var(--wbh-fashion-ink);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+
+            &:hover {
+                border-color: var(--wbh-fashion-ink);
+            }
+
+            @media (max-width: 991.98px) {
+                min-height: 44px;
+            }
+        }
+
+        .wbh-fashion-chip-clear {
+            display: inline-flex;
+            align-items: center;
+            min-height: 36px;
+            padding: 0.3rem 0.7rem;
+            color: var(--wbh-fashion-ink);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-decoration: underline;
+
+            @media (max-width: 991.98px) {
+                min-height: 44px;
+            }
+        }
+    }
+
+    .wbh-fashion-offcanvas-clear {
+        min-height: 44px !important;
+    }
+
+    // -------------------------------------------------------------------------
+    // Hộp Tư vấn 3 kênh (PDP & /shop/cart) + Floating 3-in-1 + Toast
+    // -------------------------------------------------------------------------
+    .wbh-fashion-support-box {
+        background-color: var(--wbh-fashion-stone);
+        border: 1px solid var(--wbh-fashion-border);
+        border-radius: 2px;
+        padding: 0.9rem 1rem;
+
+        .wbh-fashion-support-hotline {
+            color: var(--wbh-fashion-ink);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .wbh-fashion-channel-btn {
+            min-height: 40px;
+            text-transform: none;
+            letter-spacing: 0.01em;
+
+            @media (max-width: 991.98px) {
+                min-height: 44px;
+            }
+        }
+    }
+
+    .wbh-fashion-floating-contact {
+        position: fixed;
+        right: 20px;
+        bottom: 88px;
+        z-index: 1035;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+
+        @media (max-width: 991.98px) {
+            right: 16px;
+            bottom: 88px;
+        }
+
+        .wbh-fashion-floating-fab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-width: 48px;
+            min-height: 48px;
+            padding: 0.65rem 0.95rem;
+            border-radius: 2px;
+            background-color: var(--wbh-fashion-ink);
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            box-shadow: 0 6px 18px rgba(17, 17, 17, 0.2);
+            cursor: pointer;
+            transition: background-color 0.18s ease;
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--wbh-fashion-text);
+            }
+
+            .wbh-fashion-floating-fab__icon-close {
+                display: none;
+            }
+        }
+
+        &.is-open .wbh-fashion-floating-fab {
+            .wbh-fashion-floating-fab__icon-open {
+                display: none;
+            }
+
+            .wbh-fashion-floating-fab__icon-close {
+                display: inline-block;
+            }
+        }
+
+        .wbh-fashion-floating-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 196px;
+            padding: 0.5rem;
+            background-color: var(--wbh-fashion-paper);
+            border: 1px solid var(--wbh-fashion-ink);
+            border-radius: 2px;
+            box-shadow: 0 10px 28px rgba(17, 17, 17, 0.16);
+
+            &[hidden] {
+                display: none !important;
+            }
+        }
+
+        .wbh-fashion-floating-item {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            width: 100%;
+            min-height: 44px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--wbh-fashion-border);
+            border-radius: 2px;
+            background-color: var(--wbh-fashion-stone);
+            color: var(--wbh-fashion-ink);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease;
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--wbh-fashion-ink);
+                border-color: var(--wbh-fashion-ink);
+                color: #FFFFFF;
+            }
+        }
+    }
+
+    .wbh-fashion-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 148px;
+        transform: translateX(-50%);
+        z-index: 1050;
+        max-width: calc(100vw - 32px);
+        padding: 0.6rem 1rem;
+        border-radius: 2px;
+        background-color: var(--wbh-fashion-ink);
+        color: #FFFFFF;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(17, 17, 17, 0.22);
+
+        &[hidden] {
+            display: none !important;
         }
     }
 

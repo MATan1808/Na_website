@@ -131,5 +131,88 @@
                 <t t-else="">Bản quyền &amp;copy; <span t-field="res_company.name"/></t>
             </span>
         </xpath>
+
+        <!-- Widget Liên hệ nổi 3 trong 1 + Toast thông báo (riêng Web 1, tránh đè scrolltop và sticky bar) -->
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <t t-if="website and website.wbh_store_type == 'gift'">
+                <t t-set="wbh_has_any_contact" t-value="website.wbh_livechat_enabled or website.wbh_fb_messenger_url or website.wbh_support_zalo_url or website.wbh_support_hotline"/>
+                <div
+                    t-if="wbh_has_any_contact"
+                    class="wbh-gift-floating-contact o_not_editable d-print-none"
+                    data-wbh-floating-root="true"
+                >
+                    <div
+                        id="wbhGiftFloatingMenu"
+                        class="wbh-gift-floating-menu"
+                        role="menu"
+                        aria-label="Kênh tư vấn nhanh"
+                        hidden="hidden"
+                    >
+                        <button
+                            t-if="website.wbh_livechat_enabled"
+                            type="button"
+                            class="wbh-gift-floating-item wbh-gift-floating-item--livechat"
+                            role="menuitem"
+                            data-wbh-action="livechat"
+                            t-att-data-wbh-product-name="website.name"
+                        >
+                            <i data-lucide="message-square" class="wbh-lucide-icon" aria-hidden="true"/>
+                            <span>Chat tại Web</span>
+                        </button>
+                        <a
+                            t-if="website.wbh_fb_messenger_url"
+                            t-att-href="website.wbh_fb_messenger_url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="wbh-gift-floating-item wbh-gift-floating-item--fb"
+                            role="menuitem"
+                        >
+                            <i data-lucide="send" class="wbh-lucide-icon" aria-hidden="true"/>
+                            <span>Nhắn Facebook</span>
+                        </a>
+                        <a
+                            t-if="website.wbh_support_zalo_url"
+                            t-att-href="website.wbh_support_zalo_url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="wbh-gift-floating-item wbh-gift-floating-item--zalo"
+                            role="menuitem"
+                        >
+                            <i data-lucide="message-circle" class="wbh-lucide-icon" aria-hidden="true"/>
+                            <span>Nhắn Zalo</span>
+                        </a>
+                        <a
+                            t-if="website.wbh_support_hotline"
+                            t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
+                            class="wbh-gift-floating-item"
+                            role="menuitem"
+                        >
+                            <i data-lucide="phone" class="wbh-lucide-icon" aria-hidden="true"/>
+                            <span t-out="website.wbh_support_hotline"/>
+                        </a>
+                    </div>
+                    <button
+                        type="button"
+                        class="wbh-gift-floating-fab"
+                        data-wbh-floating-toggle="true"
+                        aria-expanded="false"
+                        aria-controls="wbhGiftFloatingMenu"
+                        aria-label="Mở kênh tư vấn nhanh"
+                    >
+                        <i data-lucide="messages-square" class="wbh-lucide-icon wbh-gift-floating-fab__icon-open" aria-hidden="true"/>
+                        <i data-lucide="x" class="wbh-lucide-icon wbh-gift-floating-fab__icon-close" aria-hidden="true"/>
+                        <span class="wbh-gift-floating-fab__label d-none d-md-inline">Tư vấn</span>
+                    </button>
+                </div>
+
+                <div
+                    id="wbhGiftToast"
+                    class="wbh-gift-toast o_not_editable d-print-none"
+                    role="status"
+                    aria-live="polite"
+                    hidden="hidden"
+                />
+            </t>
+        </xpath>
     </template>
 </odoo>

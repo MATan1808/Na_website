@@ -3,12 +3,18 @@
 
 {
     'name': 'Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook)',
-    'version': '19.0.1.2.2',
+    'version': '19.0.1.3.0',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện tối giản phong cách Editorial & Lookbook dành riêng cho Web 2 Thời trang (Odoo 19.0 Community)',
     'description': """
 Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook) — Changelog
 ==================================================================
+
+v19.0.1.3.0 (2026-11-28)
+------------------------
+- [NEW] Giai đoạn 1 UI: Hiển thị giá gốc gạch ngang `compare_list_price` (chống trùng với core) kèm huy hiệu giảm giá `-XX%` phong cách Editorial trên thẻ `/shop` và PDP.
+- [NEW] Giai đoạn 2 UI: Bộ lọc động 100% từ `wbh_filter_ctx` (Đang giảm giá, Khoảng giá, Nhãn & Bộ sưu tập) trên Sidebar Desktop và Offcanvas Mobile; thanh Active Filter Chips có nút `×` và `Xóa tất cả`, gắn tối đa 2 nhãn động lên thẻ `/shop`, nút `Bộ lọc` mobile đạt `>= 44px` kèm số bộ lọc đang bật.
+- [NEW] Giai đoạn 3 UI: Bổ sung hộp tư vấn 3 kênh trên PDP và `/shop/cart` (`Chat tại Web` mở Livechat + chép tên & link SP, `Nhắn Facebook`, `Nhắn Zalo`, `Chép tên & link SP`); thêm Widget Liên hệ nổi 3 trong 1 dùng Lucide + GSAP (có đủ 3 chốt bảo vệ) đặt phía trên `#o_footer_scrolltop_wrapper` và `.wbh-fashion-mobile-sticky-bar`.
 
 v19.0.1.2.2 (2026-11-28)
 ------------------------

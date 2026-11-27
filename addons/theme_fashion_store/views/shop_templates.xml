@@ -1,6 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- 1. Thẻ sản phẩm trên trang /shop — Tỷ lệ dọc 3:4, Color Swatch & Highlight (chỉ Web 2) -->
+    <!--
+        Trang Shop, Chi Tiết Sản Phẩm & Giỏ Hàng cho Web 2 — Thời Trang Editorial (Odoo 19.0 Community).
+        Cô lập tuyệt đối qua t-if="website and website.wbh_store_type == 'fashion'" và dùng .get() phòng thủ.
+    -->
+
+    <!-- 0A. Sub-template: Bộ lọc động 100% (Đang giảm giá, Khoảng giá, Nhãn & Chủ đề) -->
+    <template id="fashion_dynamic_filters_panel" name="WBH Fashion — Bộ lọc động">
+        <t t-set="wbh_fctx" t-value="wbh_filter_ctx or {}"/>
+        <t t-set="wbh_on_sale" t-value="wbh_fctx.get('on_sale') or {}"/>
+        <t t-set="wbh_price_ranges" t-value="wbh_fctx.get('price_ranges') or []"/>
+        <t t-set="wbh_tags" t-value="wbh_fctx.get('tags') or []"/>
+        <t t-set="wbh_has_sale" t-value="wbh_on_sale.get('count', 0) &gt; 0"/>
+        <t t-set="wbh_visible_prices" t-value="[p for p in wbh_price_ranges if p.get('count', 0) &gt; 0]"/>
+        <t t-set="wbh_visible_tags" t-value="[tg for tg in wbh_tags if tg.get('count', 0) &gt; 0]"/>
+
+        <div
+            t-if="wbh_has_sale or wbh_visible_prices or wbh_visible_tags"
+            t-attf-class="wbh-fashion-filter-panel {{'wbh-fashion-filter-panel--mobile px-3 py-3 border-bottom' if wbh_filter_mobile else 'pb-3 mb-3 border-bottom'}}"
+        >
+            <!-- Đang giảm giá -->
+            <div t-if="wbh_has_sale" class="wbh-fashion-filter-group mb-3">
+                <a
+                    t-att-href="wbh_on_sale.get('toggle_url', '/shop')"
+                    t-attf-class="wbh-fashion-sale-toggle {{'is-active' if wbh_on_sale.get('active') else ''}}"
+                    t-att-aria-pressed="'true' if wbh_on_sale.get('active') else 'false'"
+                >
+                    <span class="d-inline-flex align-items-center gap-2">
+                        <i data-lucide="tag" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span>Đang giảm giá</span>
+                    </span>
+                    <span class="wbh-fashion-filter-count" t-out="wbh_on_sale.get('count', 0)"/>
+                </a>
+            </div>
+
+            <!-- Khoảng giá động theo website -->
+            <div t-if="wbh_visible_prices" class="wbh-fashion-filter-group mb-3">
+                <h6 class="wbh-fashion-filter-heading mb-2">Khoảng giá</h6>
+                <div class="d-flex flex-column gap-1">
+                    <a
+                        t-foreach="wbh_visible_prices"
+                        t-as="pr"
+                        t-att-href="pr.get('url', '/shop')"
+                        t-attf-class="wbh-fashion-price-option {{'is-active' if pr.get('active') else ''}}"
+                        t-att-aria-current="'true' if pr.get('active') else None"
+                    >
+                        <span class="text-truncate" t-out="pr.get('name')"/>
+                        <span class="wbh-fashion-filter-count" t-out="pr.get('count', 0)"/>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Nhãn & Chủ đề động từ product.tag -->
+            <div t-if="wbh_visible_tags" class="wbh-fashion-filter-group">
+                <h6 class="wbh-fashion-filter-heading mb-2">Nhãn &amp; Bộ sưu tập</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    <a
+                        t-foreach="wbh_visible_tags"
+                        t-as="tag"
+                        t-att-href="tag.get('toggle_url', '/shop')"
+                        t-attf-class="wbh-fashion-tag-filter {{'is-active' if tag.get('active') else ''}}"
+                        t-att-aria-pressed="'true' if tag.get('active') else 'false'"
+                    >
+                        <span
+                            t-if="tag.get('hex_color')"
+                            class="wbh-tag-dot"
+                            t-att-data-wbh-dot-color="tag.get('hex_color')"
+                            aria-hidden="true"
+                        />
+                        <span t-out="tag.get('name')"/>
+                        <span class="wbh-fashion-filter-count" t-out="tag.get('count', 0)"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 0B. Sub-template: Hộp Tư vấn 3 kênh (Chat tại Web · Facebook · Zalo · Chép link) -->
+    <template id="fashion_contact_channels_box" name="WBH Fashion — Hộp Tư Vấn 3 Kênh">
+        <t t-set="wbh_can_livechat" t-value="bool(website.wbh_livechat_enabled)"/>
+        <t t-set="wbh_fb_url" t-value="website.wbh_fb_messenger_url"/>
+        <t t-set="wbh_zalo_url" t-value="website.wbh_support_zalo_url"/>
+        <t t-set="wbh_hotline" t-value="website.wbh_support_hotline"/>
+        <t t-set="wbh_has_channels" t-value="wbh_can_livechat or wbh_fb_url or wbh_zalo_url or wbh_hotline"/>
+        <div
+            t-if="wbh_has_channels"
+            t-attf-class="wbh-fashion-support-box {{'wbh-fashion-support-box--cart mt-4' if wbh_contact_mode == 'cart' else 'mb-4'}}"
+        >
+            <div class="d-flex flex-column gap-2">
+                <div class="wbh-fashion-support-box__header d-flex align-items-center justify-content-between gap-2 flex-wrap">
+                    <span class="small fw-semibold d-inline-flex align-items-center gap-2">
+                        <i data-lucide="headphones" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span t-out="website.wbh_contact_prompt or ('Cần tư vấn chọn size hoặc phối đồ?' if wbh_contact_mode != 'cart' else 'Cần tư vấn size, kiểm tra đơn hoặc phí ship?')"/>
+                    </span>
+                    <a
+                        t-if="wbh_hotline"
+                        t-attf-href="tel:{{wbh_hotline.replace(' ', '')}}"
+                        class="wbh-fashion-support-hotline small text-decoration-none d-inline-flex align-items-center gap-1"
+                    >
+                        <i data-lucide="phone" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span t-out="wbh_hotline"/>
+                    </a>
+                </div>
+                <div class="wbh-fashion-support-box__actions d-flex flex-wrap gap-2">
+                    <button
+                        t-if="wbh_can_livechat"
+                        type="button"
+                        class="btn btn-sm wbh-fashion-btn-solid wbh-fashion-channel-btn"
+                        data-wbh-action="livechat"
+                        t-att-data-wbh-product-name="wbh_contact_item_title or website.name"
+                    >
+                        <i data-lucide="message-square" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span>Chat tại Web</span>
+                    </button>
+                    <a
+                        t-if="wbh_fb_url"
+                        t-att-href="wbh_fb_url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-sm wbh-fashion-btn-outline wbh-fashion-channel-btn"
+                    >
+                        <i data-lucide="send" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span>Nhắn Facebook</span>
+                    </a>
+                    <a
+                        t-if="wbh_zalo_url"
+                        t-att-href="wbh_zalo_url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-sm wbh-fashion-btn-outline wbh-fashion-channel-btn"
+                    >
+                        <i data-lucide="message-circle" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span>Nhắn Zalo</span>
+                    </a>
+                    <button
+                        type="button"
+                        class="btn btn-sm wbh-fashion-btn-outline wbh-fashion-channel-btn"
+                        data-wbh-action="copy-product"
+                        t-att-data-wbh-product-name="wbh_contact_item_title or website.name"
+                    >
+                        <i data-lucide="copy" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span>Chép tên &amp; link SP</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 1. Thẻ sản phẩm trên trang /shop — Tỷ lệ dọc 3:4, Color Swatch, Tag động (tối đa 2), Highlight & Giảm giá -->
     <template id="products_item_fashion" inherit_id="website_sale.products_item" name="WBH Fashion — Thẻ Sản Phẩm 3:4">
         <xpath expr="//form[contains(@t-attf-class, 'oe_product_cart')]" position="attributes">
             <attribute name="t-attf-class" add="#{'wbh-fashion-product-card' if website and website.wbh_store_type == 'fashion' else ''}" separator=" "/>
@@ -23,15 +170,148 @@
                     </span>
                 </div>
             </t>
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-set="wbh_card_tags" t-value="product.product_tag_ids.filtered(lambda t: t.wbh_show_in_filter)[:2]"/>
+                <div t-if="wbh_card_tags" class="wbh-fashion-card-tags d-flex flex-wrap gap-1 mb-1">
+                    <span t-foreach="wbh_card_tags" t-as="card_tag" class="wbh-fashion-card-tag">
+                        <span
+                            t-if="card_tag.wbh_badge_hex"
+                            class="wbh-tag-dot"
+                            t-att-data-wbh-dot-color="card_tag.wbh_badge_hex"
+                            aria-hidden="true"
+                        />
+                        <span t-out="card_tag.name"/>
+                    </span>
+                </div>
+            </t>
         </xpath>
         <xpath expr="//h2[hasclass('o_wsale_products_item_title')]" position="after">
             <p t-if="website and website.wbh_store_type == 'fashion' and product.wbh_short_highlight"
                class="wbh-fashion-card-highlight text-muted small mb-1 text-truncate"
                t-field="product.wbh_short_highlight"/>
         </xpath>
+        <xpath expr="//div[hasclass('product_price')]" position="inside">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-set="wbh_price_map" t-value="template_price_vals or {}"/>
+                <t t-set="wbh_has_compare" t-value="bool(product.compare_list_price and product.list_price and product.compare_list_price &gt; product.list_price)"/>
+                <t t-set="wbh_core_has_base" t-value="bool('base_price' in wbh_price_map and (wbh_price_map.get('base_price') or 0) &gt; (wbh_price_map.get('price_reduce') or 0))"/>
+                <del
+                    t-if="wbh_has_compare and not wbh_core_has_base"
+                    aria-label="Giá gốc"
+                    class="wbh-fashion-compare-price text-muted small mb-0 text-nowrap"
+                >
+                    <span
+                        t-out="product.compare_list_price"
+                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+                    />
+                </del>
+                <span
+                    t-if="wbh_has_compare and product.wbh_discount_percent and product.wbh_discount_percent &gt; 0"
+                    class="wbh-fashion-discount-badge"
+                >
+                    -<t t-out="product.wbh_discount_percent"/>%
+                </span>
+            </t>
+        </xpath>
     </template>
 
-    <!-- 2. Tiêu đề trang chi tiết sản phẩm — Điểm nổi bật ngắn (wbh_short_highlight) -->
+    <!-- 2. Trang /shop: Sidebar lọc động, Chips đang lọc, Nút Bộ lọc mobile >= 44px -->
+    <template
+        id="fashion_shop_filters_and_chips"
+        inherit_id="website_sale.products"
+        name="WBH Fashion — Bộ lọc động /shop"
+        priority="25"
+    >
+        <xpath expr="//aside[@id='products_grid_before']//div[hasclass('products_attributes_filters')]" position="before">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-call="theme_fashion_store.fashion_dynamic_filters_panel">
+                    <t t-set="wbh_filter_mobile" t-value="False"/>
+                </t>
+            </t>
+        </xpath>
+
+        <xpath expr="//header[@id='o_wsale_products_header']" position="after">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-set="wbh_fctx" t-value="wbh_filter_ctx or {}"/>
+                <t t-set="wbh_chips" t-value="wbh_fctx.get('active_chips') or []"/>
+                <div
+                    t-if="wbh_chips"
+                    class="wbh-fashion-active-chips d-flex flex-wrap align-items-center gap-2 mb-3"
+                    role="region"
+                    aria-label="Bộ lọc đang áp dụng"
+                >
+                    <a
+                        t-foreach="wbh_chips"
+                        t-as="chip"
+                        t-att-href="chip.get('remove_url', '/shop')"
+                        t-attf-class="wbh-fashion-chip wbh-fashion-chip--{{chip.get('kind', 'other')}}"
+                        t-attf-aria-label="Bỏ lọc {{chip.get('label', '')}}"
+                    >
+                        <span class="wbh-fashion-chip__label" t-out="chip.get('label')"/>
+                        <i data-lucide="x" class="wbh-lucide-icon wbh-fashion-chip__close" aria-hidden="true"/>
+                    </a>
+                    <a
+                        t-att-href="wbh_fctx.get('clear_all_url', '/shop')"
+                        class="wbh-fashion-chip-clear"
+                    >
+                        Xóa tất cả
+                    </a>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('products_header')]//button[@data-bs-target='#o_wsale_offcanvas']" position="after">
+            <t t-if="website and website.wbh_store_type == 'fashion' and wsale_has_filters_btn">
+                <t t-set="wbh_fctx" t-value="wbh_filter_ctx or {}"/>
+                <t t-set="wbh_active_count" t-value="wbh_fctx.get('total_active_filters', 0) or 0"/>
+                <button
+                    type="button"
+                    t-attf-class="btn wbh-fashion-btn-outline wbh-mobile-filter-btn position-relative {{not wsale_has_filters_btn_lg and 'd-lg-none'}} text-nowrap"
+                    title="Bộ lọc"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#o_wsale_offcanvas"
+                >
+                    <i data-lucide="sliders-horizontal" class="wbh-lucide-icon" aria-hidden="true"/>
+                    <span>Bộ lọc</span>
+                    <span
+                        t-if="wbh_active_count &gt; 0"
+                        class="wbh-mobile-filter-badge"
+                        t-out="wbh_active_count"
+                    />
+                </button>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- 2B. Mobile Offcanvas Drawer: Bộ lọc động & Nút Xóa bộ lọc -->
+    <template
+        id="fashion_shop_offcanvas_filters"
+        inherit_id="website_sale.o_wsale_offcanvas"
+        name="WBH Fashion — Bộ lọc động Mobile"
+        priority="25"
+    >
+        <xpath expr="//div[@id='o_wsale_offcanvas_content']/div[1]" position="before">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-call="theme_fashion_store.fashion_dynamic_filters_panel">
+                    <t t-set="wbh_filter_mobile" t-value="True"/>
+                </t>
+            </t>
+        </xpath>
+        <xpath expr="//aside[@id='o_wsale_offcanvas']/div[last()]" position="inside">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-set="wbh_fctx" t-value="wbh_filter_ctx or {}"/>
+                <a
+                    t-if="(wbh_fctx.get('total_active_filters', 0) or 0) &gt; 0"
+                    t-att-href="wbh_fctx.get('clear_all_url', '/shop')"
+                    class="btn wbh-fashion-btn-outline w-100 wbh-fashion-offcanvas-clear"
+                >
+                    Xóa tất cả bộ lọc
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- 3. Tiêu đề trang chi tiết sản phẩm — Điểm nổi bật ngắn (wbh_short_highlight) -->
     <template id="product_title_fashion" inherit_id="website_sale.product_title" name="WBH Fashion — Điểm Nổi Bật Sản Phẩm">
         <xpath expr="//h1[@t-field='product.name']" position="after">
             <div t-if="website and website.wbh_store_type == 'fashion' and product.wbh_short_highlight"
@@ -41,7 +321,42 @@
         </xpath>
     </template>
 
-    <!-- 3. Trang chi tiết sản phẩm — 4 Extension Slots M2/M3, Accordion Bảo quản & Sticky Mobile Bar -->
+    <!-- 3B. PDP Giá gạch compare_list_price & Huy hiệu -XX% (không trùng với core) -->
+    <template
+        id="fashion_product_price_discount"
+        inherit_id="website_sale.product_price"
+        name="WBH Fashion — PDP Giá Gạch &amp; Giảm Giá"
+        priority="25"
+    >
+        <xpath expr="//div[@name='product_price_container']" position="inside">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-set="wbh_comb" t-value="combination_info or {}"/>
+                <t t-set="wbh_has_compare" t-value="bool(product.compare_list_price and product.list_price and product.compare_list_price &gt; product.list_price)"/>
+                <t t-set="wbh_core_strike" t-value="bool(wbh_comb.get('has_discounted_price') or (wbh_comb.get('compare_list_price') and (wbh_comb.get('compare_list_price') or 0) &gt; (wbh_comb.get('price') or 0)))"/>
+                <del
+                    t-if="wbh_has_compare and not wbh_core_strike"
+                    name="wbh_product_price_strikethrough"
+                    aria-label="Giá gốc"
+                    class="wbh-fashion-compare-price text-muted ms-1 h6 mb-0"
+                >
+                    <bdi dir="inherit">
+                        <span
+                            t-out="product.compare_list_price"
+                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+                        />
+                    </bdi>
+                </del>
+                <span
+                    t-if="wbh_has_compare and product.wbh_discount_percent and product.wbh_discount_percent &gt; 0"
+                    class="wbh-fashion-discount-badge wbh-fashion-discount-badge--pdp"
+                >
+                    -<t t-out="product.wbh_discount_percent"/>%
+                </span>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- 4. Trang chi tiết sản phẩm — 4 Extension Slots M2/M3, Accordion Bảo quản, Hộp 3 kênh & Sticky Mobile Bar -->
     <template id="product_detail_fashion" inherit_id="website_sale.product" name="WBH Fashion — Chi Tiết Sản Phẩm &amp; Extension Slots">
         <!-- Extension Slot M2: Video người mẫu dọc 9:16 trong khu vực media gallery -->
         <xpath expr="//div[contains(@t-attf-class, 'o_wsale_product_images')]" position="inside">
@@ -64,32 +379,39 @@
             </t>
         </xpath>
 
-        <!-- Accordion Chất liệu & Hướng dẫn giặt ủi (product.wbh_care_note) -->
+        <!-- Accordion Chất liệu & Hướng dẫn giặt ủi (product.wbh_care_note) + Hộp Tư vấn 3 kênh -->
         <xpath expr="//div[hasclass('o_wsale_product_details_content_section_cta')]" position="after">
-            <div t-if="website and website.wbh_store_type == 'fashion' and product.wbh_care_note"
-                 class="wbh-fashion-care-accordion accordion accordion-flush border-top border-bottom my-4"
-                 id="wbh_fashion_care_accordion">
-                <div class="accordion-item bg-transparent border-0">
-                    <h2 class="accordion-header" id="wbh_fashion_care_heading">
-                        <button class="accordion-button collapsed bg-transparent px-0 py-3 fw-semibold text-uppercase"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#wbh_fashion_care_collapse"
-                                aria-expanded="false"
-                                aria-controls="wbh_fashion_care_collapse">
-                            Chất liệu &amp; Hướng dẫn giặt ủi
-                        </button>
-                    </h2>
-                    <div id="wbh_fashion_care_collapse"
-                         class="accordion-collapse collapse"
-                         aria-labelledby="wbh_fashion_care_heading"
-                         data-bs-parent="#wbh_fashion_care_accordion">
-                        <div class="accordion-body px-0 pt-0 pb-3 wbh-fashion-care-body">
-                            <p class="mb-0" t-field="product.wbh_care_note"/>
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <div t-if="product.wbh_care_note"
+                     class="wbh-fashion-care-accordion accordion accordion-flush border-top border-bottom my-4"
+                     id="wbh_fashion_care_accordion">
+                    <div class="accordion-item bg-transparent border-0">
+                        <h2 class="accordion-header" id="wbh_fashion_care_heading">
+                            <button class="accordion-button collapsed bg-transparent px-0 py-3 fw-semibold text-uppercase"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#wbh_fashion_care_collapse"
+                                    aria-expanded="false"
+                                    aria-controls="wbh_fashion_care_collapse">
+                                Chất liệu &amp; Hướng dẫn giặt ủi
+                            </button>
+                        </h2>
+                        <div id="wbh_fashion_care_collapse"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="wbh_fashion_care_heading"
+                             data-bs-parent="#wbh_fashion_care_accordion">
+                            <div class="accordion-body px-0 pt-0 pb-3 wbh-fashion-care-body">
+                                <p class="mb-0" t-field="product.wbh_care_note"/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <t t-call="theme_fashion_store.fashion_contact_channels_box">
+                    <t t-set="wbh_contact_item_title" t-value="product.name"/>
+                    <t t-set="wbh_contact_mode" t-value="'pdp'"/>
+                </t>
+            </t>
         </xpath>
 
         <!-- Extension Slot M2 (Shop The Look) + Thanh Sticky Bottom Add-to-Cart trên Mobile -->
@@ -105,7 +427,7 @@
                         <div class="wbh-fashion-sticky-price">
                             <span class="d-block small text-muted text-truncate" t-out="product.name"/>
                             <strong class="wbh-fashion-sticky-amount"
-                                    t-out="combination_info.get('price', product.list_price) if combination_info else product.list_price"
+                                    t-out="(combination_info or {}).get('price', product.list_price)"
                                     t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                         </div>
                         <button type="button"
@@ -116,6 +438,27 @@
                         </button>
                     </div>
                 </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- 5. Giỏ hàng (/shop/cart): Thanh Tư vấn 3 Kênh trước khi đặt -->
+    <template
+        id="fashion_cart_consultation"
+        inherit_id="website_sale.cart"
+        name="WBH Fashion — Thanh Tư Vấn Giỏ Hàng"
+        priority="25"
+    >
+        <xpath expr="//div[@id='oe_structure_website_sale_cart_1']" position="before">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t
+                    t-set="wbh_cart_summary_title"
+                    t-value="', '.join(website_sale_order.website_order_line.mapped('product_id.name')[:3]) if website_sale_order and website_sale_order.website_order_line else 'Giỏ hàng của tôi'"
+                />
+                <t t-call="theme_fashion_store.fashion_contact_channels_box">
+                    <t t-set="wbh_contact_item_title" t-value="wbh_cart_summary_title"/>
+                    <t t-set="wbh_contact_mode" t-value="'cart'"/>
+                </t>
             </t>
         </xpath>
     </template>
