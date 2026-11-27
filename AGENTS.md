@@ -119,6 +119,7 @@ Mọi Agent sinh mã hoặc kiểm duyệt cho dự án này **bắt buộc** tu
   - Khi tắt view/header/footer mặc định của core phải khai báo qua `data/presets.xml` (`active=False`), không xóa cưỡng bức record gốc.
   - Bảng màu động của từng cửa hàng quản lý qua biến SCSS `$o-color-1..5` trong `primary_variables.scss`.
   - Khai báo đúng asset bundles chuẩn Odoo 19.0: `web._assets_primary_variables`, `web.assets_frontend`, `website.assets_wysiwyg`, `web.assets_backend`.
+  - Kích hoạt bắt buộc skill **`360-frontend-polish`** (đối với cả 4 giai đoạn): dùng thống nhất **Lucide SVG** (`data-lucide`), **GSAP + ScrollTrigger** self-hosted trong `addons/wbh_core/static/lib/` (đủ 3 chốt bảo vệ: cô lập `.wbh-store-*`, tắt khi bật Website Builder edit mode, tôn trọng `prefers-reduced-motion`), cấm inline `onclick=`, vùng chạm mobile `>= 44px`, tương phản WCAG AA `>= 4.5:1`, và kiểm định bằng `F:\BACKUP_LINUX\aiac\360org\plugins\360-frontend-polish\scripts\run-impeccable-audit.ps1` trước khi ship.
   - Tài nguyên media dung lượng lớn (video người mẫu Web 2 ở Milestone 2, ảnh chất lượng cao) phục vụ qua **Cloudflare R2 / Stream CDN**, không làm phình database PostgreSQL.
 
 ### 4.4. Chuẩn Changelog trong `__manifest__.py`

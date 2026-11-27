@@ -3,10 +3,18 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.7` — chuẩn hóa lộ trình 4 giai đoạn thực chiến & bảng theo dõi tiến độ chi tiết `docs/ROADMAP_TIEN_DO.md`).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.8` — đăng ký skill `360-frontend-polish` vào AIaC + cấu hình dự án và nâng cấp live `GSAP`/`Lucide` lên Local Server).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.8 (2026-11-27)
+
+### Đồng Bộ Skill `360-frontend-polish`, Bộ Repo MochiStudio & Nâng Cấp Live (`100.64.56.52:1901`)
+- `[IMPROVE]` **Đăng ký và ràng buộc skill `360-frontend-polish`** (`GSAP 3.15.1`, `Lucide 1.82.0`, `Impeccable`, `Front-End Checklist`, `UI UX Pro Max`) vào `F:\BACKUP_LINUX\aiac\CLAUDE.md`, `.claude/settings.local.json`, `.claude/CLAUDE.md`, `AGENTS.md` và lộ trình 4 giai đoạn trong `docs/ROADMAP_TIEN_DO.md` (nâng Giai đoạn 1 lên **~90%**).
+- `[IMPROVE]` Nâng cấp live 3 module (`wbh_core`, `theme_gift_store`, `theme_fashion_store` `v19.0.1.1.0`) trên Local Server `100.64.56.52:1901` và kiểm định `Impeccable` trực tiếp trên HTML live.
 
 ---
 

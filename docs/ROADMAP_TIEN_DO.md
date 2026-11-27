@@ -1,9 +1,10 @@
 # LỘ TRÌNH PHÁT TRIỂN & THEO DÕI TIẾN ĐỘ — 4 GIAI ĐOẠN (`web_ban_hang`)
 
 > **Thương hiệu triển khai**: **Manh Dao Dao — Anime Goods & Quà Tặng** *(hệ sinh thái Multi-Website Odoo 19.0 Community LGPL-3)*  
-> **Phiên bản tài liệu**: `v0.3.7` · **Cập nhật lần cuối**: `2026-11-27`  
+> **Phiên bản tài liệu**: `v0.3.8` · **Cập nhật lần cuối**: `2026-11-27`  
 > **Môi trường đang chạy live**: Local Server `http://100.64.56.52:1901` (LAN: `http://192.168.1.37:1901`)  
-> **Repository GitHub**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)
+> **Repository GitHub**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
+> **Bộ công cụ UI/UX chuẩn (`360-frontend-polish`)**: `GSAP 3.15.1 (ScrollTrigger)` · `Lucide 1.82.0` · `Impeccable 4.11.1` · `Front-End Checklist` · `UI UX Pro Max`
 
 ---
 
@@ -11,7 +12,7 @@
 
 | Giai đoạn | Trọng tâm & Mục tiêu cốt lõi | Trạng thái hiện tại | Tiến độ | Module phụ trách |
 |---|---|---|:---:|---|
-| **Giai đoạn 1** | **Website & Quản trị Sản phẩm CRUD đầy đủ** *(Thêm · Xem · Sửa · Xóa/Lưu trữ)* | Đang hoàn thiện tối ưu đăng nhanh | **~85%** | `wbh_core`, `theme_gift_store`, `theme_fashion_store` |
+| **Giai đoạn 1** | **Website & Quản trị Sản phẩm CRUD đầy đủ** *(Thêm · Xem · Sửa · Xóa/Lưu trữ + Đánh bóng UI/UX)* | Đang hoàn thiện tối ưu đăng nhanh | **~90%** | `wbh_core`, `theme_gift_store`, `theme_fashion_store` |
 | **Giai đoạn 2** | **Bộ lọc Sản phẩm Linh động 100% — Cấm Hardcode** *(Giá · Nhân vật · Phân loại · Nhãn ưu đãi/giảm giá động)* | Đã có khung cơ bản, sắp build tính năng động | **~25%** | `wbh_core`, `theme_gift_store` |
 | **Giai đoạn 3** | **Tương tác & Tư vấn Chốt đơn 3 Kênh** *(Web Chat · Facebook · Zalo)* | Đã cài `im_livechat` & nút Zalo footer, sắp build cụm 3 kênh | **~20%** | `wbh_core`, `website_livechat`, `theme_gift_store` |
 | **Giai đoạn 4** | **Thanh toán & Vận chuyển VN** *(VietQR · COD · Gom đơn · GHN/GHTK)* | Chưa triển khai *(làm sau Giai đoạn 3)* | **0%** | `wbh_payment_vietqr`, `wbh_delivery_vn` |
@@ -22,7 +23,7 @@
 
 ---
 
-### GIAI ĐOẠN 1 — Xây dựng Website & Quản trị Sản phẩm CRUD (`~85%`)
+### GIAI ĐOẠN 1 — Xây dựng Website & Quản trị Sản phẩm CRUD (`~90%`)
 
 **Mục tiêu**: Website hoạt động ổn định trên cả điện thoại và máy tính; chủ shop đăng nhập Backend có thể **Thêm – Xem – Sửa – Xóa / Lưu trữ** sản phẩm trơn tru, quản lý được giá, tồn kho, biến thể và ảnh chụp thực tế.
 
@@ -49,6 +50,7 @@
 - [x] Hạ tầng Docker di động (`odoo:19.0` Community + `postgres:15-bookworm`) chạy live trên Local Server `100.64.56.52:1901`.
 - [x] Giao diện `theme_gift_store` + Bộ nhận diện **Manh Dao Dao** (Logo ngang `1020x280`, Favicon cận mặt, sửa triệt để lặp 2 footer & scrolltop mobile).
 - [x] Fix tận gốc quyền đọc tồn kho trang `/shop` cho khách vãng lai (`compute_sudo=True` trên `wbh_is_low_stock` & `product.sudo().qty_available`).
+- [x] Tích hợp & nâng cấp live bộ công cụ UI/UX từ MochiStudio qua skill `360-frontend-polish` (`GSAP 3.15.1 + ScrollTrigger`, `Lucide 1.82.0` self-hosted, kiểm định `Impeccable`, `Front-End Checklist` & `UI UX Pro Max`, WCAG AA `>= 4.5:1`, vùng chạm `>= 44px`).
 - [x] Nạp bộ sản phẩm mẫu Anime Goods (Cotton Doll 20cm Bakugo, Card/Can Badge/Mochi Todoroki, Shikishi) đầy đủ biến thể.
 - [ ] **Tối ưu Form đăng nhanh sản phẩm Anime Goods (`< 60 giây/món`)**: Gom toàn bộ ô cần thiết (*Tên, Giá bán, Giá gốc, Website, Ảnh/Album, Tồn kho, Nhãn lọc*) vào 1 màn hình gọn, ẩn tab kỹ thuật rườm rà.
 - [ ] **Hiển thị Giá gốc gạch ngang & Badge `% giảm`** tự động trên thẻ sản phẩm `/shop` và trang chi tiết khi `compare_list_price > list_price`.
@@ -79,7 +81,7 @@
 #### 2.2. Trải nghiệm lọc mượt cho người mua
 - Cho phép **lọc kết hợp nhiều điều kiện cùng lúc** (VD: `Nhân vật: Bakugo` + `Loại: Cotton Doll` + `Ưu đãi: Đang giảm giá` + `Giá: 200k–400k`).
 - Hiển thị thanh **Chip bộ lọc đang chọn** ngay đầu danh sách sản phẩm kèm dấu `×` để bỏ từng điều kiện hoặc bấm *Xóa tất cả* trong 1 chạm.
-- Giao diện ngăn kéo trượt (**Offcanvas Drawer Filter**) tối ưu ngón tay trên điện thoại, kèm sắp xếp động (*Mới nhất · Giá thấp ➜ cao · Giá cao ➜ thấp*).
+- Giao diện ngăn kéo trượt (**Offcanvas Drawer Filter**) tối ưu ngón tay trên điện thoại (`touch target >= 44px`), dùng biểu tượng **Lucide** + chuyển động mượt **GSAP** đạt `0` lỗi `Impeccable`, kèm sắp xếp động (*Mới nhất · Giá thấp ➜ cao · Giá cao ➜ thấp*).
 
 #### 2.3. Checklist tiến độ Giai đoạn 2
 - [x] Khởi tạo khung Danh mục Website (`product.public.category`) và 7 Thuộc tính mẫu trong `wbh_core`.
@@ -110,7 +112,7 @@
 
 #### 3.2. Bố cục hiển thị & Cấu hình động
 - **Trên trang Chi tiết sản phẩm (Product Detail)** và **Giỏ hàng**: Hiển thị cụm **3 nút hành động rõ ràng** (*Chat tại Web · Nhắn Facebook · Nhắn Zalo*) ngay dưới nút Mua hàng.
-- **Nút nổi đa kênh (Floating 3-in-1 Contact Widget)**: Gọn gàng ở góc màn hình, bấm vào xòe ra 3 biểu tượng (Web Chat / Messenger / Zalo), tính toán vị trí chuẩn để không đè lên nút cuộn `#o_footer_scrolltop` hay Sticky Bottom Bar trên điện thoại.
+- **Nút nổi đa kênh (Floating 3-in-1 Contact Widget)**: Gọn gàng ở góc màn hình, dùng icon **Lucide** sắc nét và hiệu ứng xòe mượt **GSAP** (Web Chat / Messenger / Zalo), vùng chạm `>= 44px`, tính toán vị trí chuẩn để không đè lên nút cuộn `#o_footer_scrolltop` hay Sticky Bottom Bar trên điện thoại (đạt `Impeccable` & `Front-End Checklist`).
 - **Cấu hình không hardcode**: Bổ sung các trường cấu hình ngay trong *Website ➜ Cấu hình ➜ Thông tin liên hệ 3 kênh* (Link Facebook Messenger, Link/SĐT Zalo, Bật/Tắt từng kênh, Câu chào gợi ý).
 
 #### 3.3. Checklist tiến độ Giai đoạn 3
@@ -145,11 +147,11 @@
 - [ ] Thiết kế & xây dựng module `wbh_payment_vietqr` (EMVCo QR offline + SePay Free webhook + quy tắc COD/cọc).
 - [ ] Thiết kế & xây dựng module `wbh_delivery_vn` (Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn + API GHN).
 - [ ] Mở rộng GHTK / Viettel Post & tra cứu mã vận đơn ngay trên trang tài khoản khách hàng (Portal).
-- [ ] Kiểm thử thanh toán Sandbox & luồng tạo vận đơn khép kín.
+- [ ] Kiểm thử thanh toán Sandbox & luồng tạo vận đơn khép kín (giao diện chọn phương thức VietQR/COD và địa giới 3 cấp đạt chuẩn **Lucide**, vùng chạm `>= 44px` và `Impeccable` `0` lỗi).
 
 ---
 
 ## 3. Ghi Chú Vận Hành & Đồng Bộ
 
-- Mọi phát triển ở cả 4 giai đoạn bắt buộc tuân thủ **100% Odoo 19.0 Community (`LGPL-3`)** (không phụ thuộc Enterprise) và quy trình `Dev Local ➜ Git Commit & Push (Na_website.git) ➜ Pull & Upgrade trên Local Server (100.64.56.52)`.
+- **Mọi phát triển UI ở cả 4 giai đoạn** bắt buộc tuân thủ **100% Odoo 19.0 Community (`LGPL-3`)**, kích hoạt skill `360-frontend-polish` (**Lucide** + **GSAP** + **UI UX Pro Max** + **Front-End Checklist** + kiểm định `Impeccable` `0` lỗi) và quy trình `Dev Local ➜ Git Commit & Push (Na_website.git) ➜ Pull & Upgrade trên Local Server (100.64.56.52)`.
 - Sau mỗi hạng mục hoàn thành trong checklist ở trên, cập nhật lại `% tiến độ` và dấu `[x]` trực tiếp trong file này kèm [CHANGELOGS.md](file:///F:/BACKUP_LINUX/web_ban_hang/docs/CHANGELOGS.md).

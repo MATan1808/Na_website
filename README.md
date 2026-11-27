@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.7` — Hoàn thiện bộ nhận diện thương hiệu **Manh Dao Dao Anime Goods Shop**, sửa lỗi lặp 2 footer & nút cuộn đầu trang, tích hợp UI/UX & Motion (`GSAP`, `Lucide`) và chuẩn hóa lộ trình **4 Giai đoạn** ([docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)) chạy live trên Local Server (`http://100.64.56.52:1901`).  
+> **Trạng thái dự án**: `v0.3.8` — Tích hợp toàn diện skill `360-frontend-polish` (`GSAP 3.15.1`, `Lucide 1.82.0`, `Impeccable`, `Front-End Checklist`, `UI UX Pro Max`) vào cấu hình dự án AIaC, lộ trình **4 Giai đoạn** ([docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)) và nâng cấp live 3 module trên Local Server (`http://100.64.56.52:1901`).  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`

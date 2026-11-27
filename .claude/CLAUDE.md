@@ -37,9 +37,10 @@
    - Tôn trọng `allowed_company_ids`, `website_id` và `specific_user_account=True` trên mọi luồng dữ liệu đa cửa hàng; ưu tiên toán tử `any!` / `not any!`.
    - Mọi HTML đưa vào `message_post()` bắt buộc bọc bằng `markupsafe.Markup(...)`.
    - Mọi model mới bắt buộc có đầy đủ `security/ir.model.access.csv` và `ir.rule` (đặc biệt tách dữ liệu giữa Web 1 và Web 2). Webhook thanh toán/vận chuyển bắt buộc xác thực chữ ký/token ở trust boundary.
-3. **Website Theme Upgrade-Safe & Design System (`OWL 2.8.4` + `Bootstrap 5.3.3` / `SCSS`)**:
-   - **BẮT BUỘC đọc `DESIGN.md` tại thư mục gốc trước khi thực hiện bất kỳ thay đổi nào liên quan đến UI, QWeb, CSS/SCSS hay Theme**.
+3. **Website Theme Upgrade-Safe, Design System & `360-frontend-polish` (`OWL 2.8.4` + `Bootstrap 5.3.3` / `SCSS` + `GSAP` + `Lucide`)**:
+   - **BẮT BUỘC đọc `DESIGN.md` tại thư mục gốc và kích hoạt skill `360-frontend-polish` trước khi thực hiện bất kỳ thay đổi nào liên quan đến UI, QWeb, CSS/SCSS hay Theme**.
    - Tham chiếu Design Tokens (`css/variables.css`, `css/system.css`) và bản xem trước `html/preview.html` để tái sử dụng đúng bảng màu, kiểu chữ và components của từng cửa hàng (Web 1 Quà Tặng vs Web 2 Thời Trang).
+   - Dùng thống nhất **Lucide SVG** (`data-lucide`) và **GSAP + ScrollTrigger** self-hosted trong `addons/wbh_core/static/lib/` (đủ 3 chốt bảo vệ: cô lập `.wbh-store-*`, tắt khi bật Website Builder edit mode, tôn trọng `prefers-reduced-motion`); cấm inline `onclick=`, vùng chạm mobile `>= 44px`, tương phản WCAG AA `>= 4.5:1`, và chạy `F:\BACKUP_LINUX\aiac\360org\plugins\360-frontend-polish\scripts\run-impeccable-audit.ps1` kiểm định trước khi ship.
    - Mọi `website.page` bắt buộc bọc bởi `<div id="wrap" class="oe_structure oe_empty">`.
    - Mọi snippet kéo-thả bắt buộc có `o_colored_level` và `data-snippet`.
    - Tắt view core qua `data/presets.xml` (`active=False`); quản lý màu động qua `$o-color-1..5` trong `primary_variables.scss`; khai báo đúng bundles `web._assets_primary_variables`, `web.assets_frontend`, `website.assets_wysiwyg`, `web.assets_backend`.
