@@ -10,6 +10,20 @@ Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản c�
 
 ---
 
+## v0.3.2 (2026-11-27)
+
+### Mở Rộng Ứng Dụng E-Commerce & Chăm Sóc Khách Hàng Odoo 19.0
+- `[NEW]` **Cài đặt mở rộng 5 cụm module nghiệp vụ đắc lực**:
+  - `loyalty` & `website_sale_loyalty`: Quản lý chương trình khuyến mãi, tạo mã giảm giá voucher (`VOUCHER50K`, `FREESHIP`), thẻ quà tặng, tích điểm thành viên và áp dụng trực tiếp trong giỏ hàng web.
+  - `im_livechat` & `website_livechat`: Khung chat trực tuyến nổi góc màn hình hỗ trợ tư vấn tức thời khách chọn quà tặng và chọn size quần áo.
+  - `purchase`: Quản lý đơn mua hàng, theo dõi đơn nhập hàng và công nợ với xưởng sản xuất gấu bông, móc khóa và thời trang.
+  - `website_blog`: Chuyên mục Blog tin tức, cẩm nang phối đồ và gợi ý quà tặng chuẩn SEO.
+  - `mass_mailing`: Tiếp thị Email tự động, gửi email chăm sóc khách hàng và nhắc giỏ hàng bỏ quên.
+  - `crm`: Quản lý khách hàng tiềm năng và chuyển đổi cơ hội kinh doanh.
+- `[IMPROVE]` Khởi tạo sẵn 11 sản phẩm mẫu đa dạng có đầy đủ thuộc tính biến thể Màu sắc (Color Swatch) và Size trên cả 2 website.
+
+---
+
 ## v0.3.0 (2026-11-26)
 
 ### Hoàn Tất `/build` & Cổng `/code-review` Vòng 2 — Milestone 1 (Catalog-First)
