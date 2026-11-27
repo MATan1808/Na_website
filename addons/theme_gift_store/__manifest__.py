@@ -3,12 +3,18 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.2.2',
+    'version': '19.0.1.3.0',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.3.0 (2026-11-28)
+------------------------
+- [NEW] Giai đoạn 1 UI: Hiển thị giá gốc gạch ngang `compare_list_price` (chống trùng với core) kèm huy hiệu giảm giá `-XX%` trên thẻ sản phẩm `/shop` và trang chi tiết sản phẩm (PDP).
+- [NEW] Giai đoạn 2 UI: Tích hợp bộ lọc động 100% từ `wbh_filter_ctx` (Đang giảm giá, Khoảng giá, Nhãn & Chủ đề) cho cả Sidebar Desktop và Offcanvas Mobile; thêm thanh Active Filter Chips có nút `×` và `Xóa tất cả`, gắn tối đa 2 nhãn động lên thẻ `/shop`, nâng cấp nút `Bộ lọc` mobile đạt vùng chạm `>= 44px` kèm bộ đếm số lượng đang lọc.
+- [NEW] Giai đoạn 3 UI: Nâng cấp hộp tư vấn 3 kênh trên PDP và thêm thanh tư vấn trên `/shop/cart` (`Chat tại Web` kích hoạt Livechat + chép tên & link SP, `Nhắn Facebook`, `Nhắn Zalo`, `Chép tên & link SP`); bổ sung Widget Liên hệ nổi 3 trong 1 dùng Lucide + GSAP (có đủ 3 chốt bảo vệ) đặt phía trên nút cuộn đầu trang và thanh sticky mobile.
 
 v19.0.1.2.2 (2026-11-28)
 ------------------------

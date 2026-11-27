@@ -590,7 +590,239 @@
             font-size: 1rem;
             font-weight: 700;
             font-variant-numeric: tabular-nums;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.35rem;
         }
+    }
+
+    .wbh-gift-compare-price {
+        color: var(--wbh-gift-muted) !important;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .wbh-gift-discount-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--wbh-gift-primary);
+        color: #FFFFFF;
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1.1;
+        padding: 0.18rem 0.45rem;
+        border-radius: var(--wbh-gift-radius-badge);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+
+        &--pdp {
+            font-size: 0.8125rem;
+            padding: 0.24rem 0.55rem;
+        }
+    }
+
+    .wbh-gift-card-tags {
+        min-height: 0;
+    }
+
+    .wbh-gift-card-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background-color: var(--wbh-gift-raised);
+        color: var(--wbh-gift-ink);
+        border: 1px solid var(--wbh-gift-border);
+        border-radius: var(--wbh-gift-radius-badge);
+        font-size: 0.72rem;
+        font-weight: 600;
+        line-height: 1.2;
+        padding: 0.15rem 0.45rem;
+        max-width: 100%;
+    }
+
+    .wbh-tag-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--wbh-gift-primary);
+        flex-shrink: 0;
+        display: inline-block;
+    }
+
+    // -------------------------------------------------------------------------
+    // Bộ lọc động /shop, Chips đang áp dụng & Nút Bộ lọc mobile >= 44px
+    // -------------------------------------------------------------------------
+    .o_wsale_products_page {
+        // Ẩn nút Bộ lọc core tiếng Anh & khối tag thô chưa qua wbh_filter_ctx để tránh trùng lặp
+        button[data-bs-target="#o_wsale_offcanvas"]:not(.wbh-mobile-filter-btn),
+        #o_wsale_offcanvas_tags_header,
+        #o_wsale_offcanvas_tags,
+        .accordion-item:has(> #o_wsale_tags_option_inner),
+        #o_wsale_offcanvas .offcanvas-body > a[title="Clear Filters"] {
+            display: none !important;
+        }
+    }
+
+    .wbh-mobile-filter-btn {
+        min-height: 44px !important;
+        min-width: 44px;
+        padding: 0.5rem 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .wbh-mobile-filter-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 0.35rem;
+        border-radius: 999px;
+        background-color: var(--wbh-gift-primary);
+        color: #FFFFFF;
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .wbh-gift-filter-panel {
+        .wbh-gift-filter-heading {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--wbh-gift-ink);
+        }
+
+        .wbh-gift-sale-toggle,
+        .wbh-gift-price-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            min-height: 44px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--wbh-gift-border);
+            background-color: var(--wbh-gift-surface);
+            color: var(--wbh-gift-ink);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+
+            &:hover {
+                border-color: var(--wbh-gift-primary);
+                color: var(--wbh-gift-primary);
+            }
+
+            &.is-active {
+                background-color: #FDF2F5;
+                border-color: var(--wbh-gift-primary);
+                color: var(--wbh-gift-primary-hover);
+                font-weight: 600;
+            }
+        }
+
+        .wbh-gift-tag-filter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            min-height: 38px;
+            padding: 0.35rem 0.65rem;
+            border-radius: 8px;
+            border: 1px solid var(--wbh-gift-border);
+            background-color: var(--wbh-gift-surface);
+            color: var(--wbh-gift-ink);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+
+            &:hover {
+                border-color: var(--wbh-gift-primary);
+            }
+
+            &.is-active {
+                background-color: var(--wbh-gift-primary);
+                border-color: var(--wbh-gift-primary);
+                color: #FFFFFF;
+
+                .wbh-gift-filter-count {
+                    background-color: rgba(255, 255, 255, 0.22);
+                    color: #FFFFFF;
+                }
+            }
+        }
+
+        .wbh-gift-filter-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            padding: 0.1rem 0.4rem;
+            border-radius: 6px;
+            background-color: var(--wbh-gift-raised);
+            color: var(--wbh-gift-secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        @media (max-width: 991.98px) {
+            .wbh-gift-tag-filter {
+                min-height: 44px;
+            }
+        }
+    }
+
+    .wbh-gift-active-chips {
+        .wbh-gift-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            min-height: 36px;
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            background-color: var(--wbh-gift-surface);
+            border: 1px solid rgba(31, 27, 22, 0.18);
+            color: var(--wbh-gift-ink);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+
+            &:hover {
+                border-color: var(--wbh-gift-primary);
+                color: var(--wbh-gift-primary);
+            }
+
+            @media (max-width: 991.98px) {
+                min-height: 44px;
+            }
+        }
+
+        .wbh-gift-chip-clear {
+            display: inline-flex;
+            align-items: center;
+            min-height: 36px;
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            color: var(--wbh-gift-primary-hover);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-decoration: underline;
+
+            @media (max-width: 991.98px) {
+                min-height: 44px;
+            }
+        }
+    }
+
+    .wbh-gift-offcanvas-clear {
+        min-height: 44px !important;
     }
 
     .wbh-gift-card-highlight {
@@ -758,6 +990,146 @@
         background-color: var(--wbh-gift-surface);
         border: 1px solid var(--wbh-gift-border);
         border-radius: var(--wbh-gift-radius-card);
+        padding: 0.9rem 1rem;
+
+        .wbh-gift-support-hotline {
+            color: var(--wbh-gift-ink);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+
+            &:hover {
+                color: var(--wbh-gift-primary);
+            }
+        }
+
+        .wbh-gift-channel-btn {
+            min-height: 40px;
+            flex: 0 1 auto;
+
+            @media (max-width: 991.98px) {
+                min-height: 44px;
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Floating 3-in-1 Contact Widget & Toast (trên scrolltop & sticky mobile bar)
+    // -------------------------------------------------------------------------
+    .wbh-gift-floating-contact {
+        position: fixed;
+        right: 20px;
+        bottom: 88px;
+        z-index: 1035;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+
+        @media (max-width: 991.98px) {
+            right: 16px;
+            bottom: 88px;
+        }
+
+        .wbh-gift-floating-fab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-width: 48px;
+            min-height: 48px;
+            padding: 0.65rem 0.95rem;
+            border-radius: 999px;
+            background-color: var(--wbh-gift-primary);
+            border: 2px solid #FFFFFF;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: 0 6px 18px rgba(31, 27, 22, 0.18);
+            cursor: pointer;
+            transition: background-color 0.18s ease, transform 0.18s ease;
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--wbh-gift-primary-hover);
+            }
+
+            .wbh-gift-floating-fab__icon-close {
+                display: none;
+            }
+        }
+
+        &.is-open .wbh-gift-floating-fab {
+            .wbh-gift-floating-fab__icon-open {
+                display: none;
+            }
+
+            .wbh-gift-floating-fab__icon-close {
+                display: inline-block;
+            }
+        }
+
+        .wbh-gift-floating-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 196px;
+            padding: 0.5rem;
+            background-color: var(--wbh-gift-surface);
+            border: 1px solid var(--wbh-gift-border);
+            border-radius: var(--wbh-gift-radius-card);
+            box-shadow: 0 10px 28px rgba(31, 27, 22, 0.16);
+
+            &[hidden] {
+                display: none !important;
+            }
+        }
+
+        .wbh-gift-floating-item {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            width: 100%;
+            min-height: 44px;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background-color: var(--wbh-gift-bg);
+            color: var(--wbh-gift-ink);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+            &:hover,
+            &:focus-visible {
+                background-color: #FDF2F5;
+                border-color: rgba(201, 48, 88, 0.3);
+                color: var(--wbh-gift-primary-hover);
+            }
+        }
+    }
+
+    .wbh-gift-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 148px;
+        transform: translateX(-50%);
+        z-index: 1050;
+        max-width: calc(100vw - 32px);
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+        background-color: var(--wbh-gift-ink);
+        color: #FFFFFF;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(31, 27, 22, 0.22);
+
+        &[hidden] {
+            display: none !important;
+        }
     }
 
     .wbh-ext-slot:empty {
