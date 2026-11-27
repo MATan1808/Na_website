@@ -414,7 +414,7 @@ class TestWbhShopDynamicFilters(HttpCase):
 
             def _capture_render(template, qcontext):
                 captured.update(qcontext)
-                return req.make_response('')
+                return ''
 
             req.render = _capture_render
             WbhWebsiteSale().shop(**kwargs)
