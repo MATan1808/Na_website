@@ -99,6 +99,8 @@ F:\BACKUP_LINUX\web_ban_hang\
 
 ## 5. Danh Mục Tài Liệu Dự Án
 
+- **Thông Tin Website & Định Hướng Anime Goods**: [docs/THONG_TIN_WEBSITE.md](docs/THONG_TIN_WEBSITE.md)
+- **Hệ Thống Thiết Kế Giao Diện (Design System)**: [DESIGN.md](DESIGN.md)
 - **Ý tưởng & 5 Quyết định Chốt**: [docs/IDEA.md](docs/IDEA.md)
 - **Yêu cầu Chức năng & Phi chức năng (3 Milestone)**: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)
 - **Kiến trúc Kỹ thuật Thuần Odoo 19.0 Community**: [docs/ARCH.md](docs/ARCH.md)
