@@ -15,6 +15,7 @@ class TestWbhDeliveryVn(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.website = cls.env.ref('wbh_core.website_gift_store')
         cls.vnd = cls.env.ref('base.VND')
         cls.vnd.active = True
         cls.env.company.currency_id = cls.vnd
@@ -54,6 +55,7 @@ class TestWbhDeliveryVn(TransactionCase):
 
     def _create_order(self, qty=1):
         return self.env['sale.order'].create({
+            'website_id': self.website.id,
             'partner_id': self.partner.id,
             'partner_shipping_id': self.partner.id,
             'pricelist_id': self.pricelist_vnd.id,

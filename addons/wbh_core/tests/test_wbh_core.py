@@ -406,11 +406,19 @@ class TestWbhShopDynamicFilters(HttpCase):
 
     def _call_shop(self, website, query_params=None, **kwargs):
         args = MultiDict(query_params or [])
-        with MockRequest(self.env, website=website, path='/shop') as req:
+        captured = {}
+        public_env = self.env(user=website.user_id.id)
+        with MockRequest(public_env, website=website, path='/shop') as req:
             req.httprequest.args = args
             req.httprequest.query_string = b''
-            req.render = lambda template, qcontext: qcontext
-            return WbhWebsiteSale().shop(**kwargs)
+
+            def _capture_render(template, qcontext):
+                captured.update(qcontext)
+                return req.make_response('')
+
+            req.render = _capture_render
+            WbhWebsiteSale().shop(**kwargs)
+        return captured
 
     def test_11_dynamic_tags_and_price_ranges_auto_appear_and_auto_hide(self):
         """Tag & khoảng giá chỉ hiện khi có sản phẩm đang đăng bán trên website hiện tại."""
