@@ -3,7 +3,7 @@
 > **Dự án**: Hệ Sinh Thái 2 Website Bán Hàng (`web_ban_hang`) — Thuần **Odoo 19.0 Community (LGPL-3) Multi-Website** + **PostgreSQL 15**  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Chuẩn kế thừa**: AIaC Root `F:\BACKUP_LINUX\aiac` (qua symlink `C:\Users\ADMIN\.claude\360org -> F:\BACKUP_LINUX\aiac\360org`), plugin `360-odoo` và `360-local-builder-env`.  
-> **Trạng thái hiện tại (`v0.3.14`, 2026-11-28)**: Hoàn thiện Unslop 9 passes, Việt hóa 100% chuỗi eCommerce, tắt header mẫu `+1 555`, chuẩn hóa `select.form-select`, bọc toolbar mobile `/shop` và sửa selector `footer.o_footer` cho nút scrolltop (`wbh_core` `v19.0.1.1.3`, `theme_gift_store` `v19.0.1.2.2`, `theme_fashion_store` `v19.0.1.2.2`).
+> **Trạng thái hiện tại (`v0.4.0`, 2026-11-28)**: Hoàn thành trọn bộ Giai đoạn 1–4 (`wbh_core` `v19.0.1.2.0`, `theme_gift_store` `v19.0.1.3.0`, `theme_fashion_store` `v19.0.1.3.0`, `wbh_payment_vietqr` `v19.0.1.0.0`, `wbh_delivery_vn` `v19.0.1.0.0`): CRUD SP nhanh <60s & giá gạch `-XX%`, Bộ lọc động 100% không hardcode, Tư vấn 3 kênh, Thanh toán VietQR EMVCo + COD & Vận chuyển VN 3 cấp + GHN.
 
 ---
 
@@ -24,16 +24,16 @@ Tài liệu này quy định cơ cấu vai trò, phân bổ mô hình AI, vòng 
    - Đóng gói `docker-compose.yml`, `config/odoo.conf`, `.env.example` ngay tại root repo dùng `odoo:19.0` Community + `postgres:15-bookworm` (hỗ trợ tùy chọn `360ai/postgres:15-ai`), chạy tạm trên máy Windows hiện tại (data trên ổ `F:\`) và chuyển sang Local Server ở nhà bằng `git pull` + `docker compose up -d` + restore DB/filestore.
 
 ### 1.2. Thứ Tự Ưu Tiên 4 Giai Đoạn Triển Khai *(Đã Chốt Với Sếp — `docs/ROADMAP_TIEN_DO.md`)*
-1. **Giai đoạn 1 — Website & CRUD Sản phẩm *(Đang hoàn thiện `~85%`)***:
+1. **Giai đoạn 1 — Website & CRUD Sản phẩm *(Hoàn thành `100%`)***:
    - Hạ tầng Docker di động (`docker-compose.yml`, `config/odoo.conf`, `.env.example`), `wbh_core`, `theme_gift_store`, `theme_fashion_store`.
-   - Hoàn thiện tối ưu CRUD Thêm – Xem – Sửa – Xóa/Lưu trữ sản phẩm nhanh gọn (`< 60 giây/món`), giá gốc gạch ngang & album ảnh thực tế.
-2. **Giai đoạn 2 — Bộ lọc Động 100% *(Làm tiếp theo — CẤM HARDCODE)***:
-   - Toàn bộ tiêu chí lọc ngoài `/shop` (Khoảng giá `Min–Max`, Nhãn ưu đãi/giảm giá `product.tag`, Nhân vật & Bộ Anime `no_variant`, Phân loại `Doll`/`Goods Off`/Danh mục) **bắt buộc sinh tự động** từ dữ liệu người dùng gắn lúc thêm/sửa sản phẩm; không viết cứng tên nhân vật hay bộ lọc trong code.
-3. **Giai đoạn 3 — Tương tác & Tư vấn 3 Kênh *(Web Livechat · Facebook · Zalo)***:
-   - Tích hợp đồng bộ 3 kênh trả lời khách: Chat trực tiếp ngay trên Web (`website_livechat` tự gắn ngữ cảnh sản phẩm đang xem), Facebook Messenger (`m.me/...`) và Zalo (`zalo.me/...`) trên trang chi tiết sản phẩm + nút nổi đa kênh, cấu hình link động trong Backend.
-4. **Giai đoạn 4 — Thanh toán & Vận chuyển VN**:
+   - Tối ưu CRUD Thêm – Xem – Sửa – Xóa/Lưu trữ sản phẩm nhanh gọn (`< 60 giây/món`), view sửa nhanh `<list editable="bottom">`, giá gốc gạch ngang `-XX%` & album ảnh thực tế.
+2. **Giai đoạn 2 — Bộ lọc Động 100% *(Hoàn thành `100%` — CẤM HARDCODE)***:
+   - Toàn bộ tiêu chí lọc ngoài `/shop` (Đang giảm giá, Khoảng giá `wbh.price.range`, Nhãn `product.tag`, Thuộc tính `no_variant`, Danh mục) sinh tự động 100% từ `wbh_filter_ctx`; tiêu chí có `count == 0` tự ẩn hoàn toàn.
+3. **Giai đoạn 3 — Tương tác & Tư vấn 3 Kênh *(Hoàn thành `100%` — Web Livechat · Facebook · Zalo)***:
+   - Tích hợp đồng bộ 3 kênh trả lời khách: Chat trực tiếp ngay trên Web (`website_livechat`), Facebook Messenger (`m.me/...`) và Zalo (`zalo.me/...`) trên PDP, Giỏ hàng và Widget nổi 3 trong 1, cấu hình động trên `website`.
+4. **Giai đoạn 4 — Thanh toán & Vận chuyển VN *(Hoàn thành `100%`)***:
    - `wbh_payment_vietqr` (VietQR EMVCo offline + SePay Free webhook + COD/đặt cọc).
-   - `wbh_delivery_vn` (Địa giới VN 3 cấp + Ship đồng giá/Freeship/Gom đơn + GHN ➜ GHTK & Viettel Post).
+   - `wbh_delivery_vn` (Địa giới VN 3 cấp + Ship đồng giá/Freeship/Gom đơn 0đ + GHN ➜ GHTK & Viettel Post).
 
 ### 1.3. Thứ Tự Ưu Tiên Chỉ Dẫn (3 Cấp)
 1. **Cấp 1 (Cao nhất)**: `F:\BACKUP_LINUX\web_ban_hang\.claude\` (`CLAUDE.md`, `settings.local.json`) và `AGENTS.md` này.

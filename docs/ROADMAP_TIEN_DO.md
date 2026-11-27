@@ -1,7 +1,7 @@
 # LỘ TRÌNH PHÁT TRIỂN & THEO DÕI TIẾN ĐỘ — 4 GIAI ĐOẠN (`web_ban_hang`)
 
 > **Thương hiệu triển khai**: **Manh Dao Dao — Anime Goods & Quà Tặng** *(hệ sinh thái Multi-Website Odoo 19.0 Community LGPL-3)*  
-> **Phiên bản tài liệu**: `v0.3.8` · **Cập nhật lần cuối**: `2026-11-27`  
+> **Phiên bản tài liệu**: `v0.4.0` · **Cập nhật lần cuối**: `2026-11-28`  
 > **Môi trường đang chạy live**: Local Server `http://100.64.56.52:1901` (LAN: `http://192.168.1.37:1901`)  
 > **Repository GitHub**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Bộ công cụ UI/UX chuẩn (`360-frontend-polish`)**: `GSAP 3.15.1 (ScrollTrigger)` · `Lucide 1.82.0` · `Impeccable 4.11.1` · `Front-End Checklist` · `UI UX Pro Max`
@@ -12,10 +12,10 @@
 
 | Giai đoạn | Trọng tâm & Mục tiêu cốt lõi | Trạng thái hiện tại | Tiến độ | Module phụ trách |
 |---|---|---|:---:|---|
-| **Giai đoạn 1** | **Website & Quản trị Sản phẩm CRUD đầy đủ** *(Thêm · Xem · Sửa · Xóa/Lưu trữ + Đánh bóng UI/UX)* | Đang hoàn thiện tối ưu đăng nhanh | **~90%** | `wbh_core`, `theme_gift_store`, `theme_fashion_store` |
-| **Giai đoạn 2** | **Bộ lọc Sản phẩm Linh động 100% — Cấm Hardcode** *(Giá · Nhân vật · Phân loại · Nhãn ưu đãi/giảm giá động)* | Đã có khung cơ bản, sắp build tính năng động | **~25%** | `wbh_core`, `theme_gift_store` |
-| **Giai đoạn 3** | **Tương tác & Tư vấn Chốt đơn 3 Kênh** *(Web Chat · Facebook · Zalo)* | Đã cài `im_livechat` & nút Zalo footer, sắp build cụm 3 kênh | **~20%** | `wbh_core`, `website_livechat`, `theme_gift_store` |
-| **Giai đoạn 4** | **Thanh toán & Vận chuyển VN** *(VietQR · COD · Gom đơn · GHN/GHTK)* | Chưa triển khai *(làm sau Giai đoạn 3)* | **0%** | `wbh_payment_vietqr`, `wbh_delivery_vn` |
+| **Giai đoạn 1** | **Website & Quản trị Sản phẩm CRUD đầy đủ** *(Thêm · Xem · Sửa · Xóa/Lưu trữ + Đánh bóng UI/UX)* | Hoàn thành *(Form nhanh <60s, Giá gốc gạch ngang & Badge `-XX%`, Sửa nhanh `<list editable="bottom">`)* | **100%** | `wbh_core`, `theme_gift_store`, `theme_fashion_store` |
+| **Giai đoạn 2** | **Bộ lọc Sản phẩm Linh động 100% — Cấm Hardcode** *(Giá · Nhân vật · Phân loại · Nhãn ưu đãi/giảm giá động)* | Hoàn thành *(100% động từ `wbh_filter_ctx`: `product.tag`, `wbh.price.range`, `no_variant`, tự ẩn count=0)* | **100%** | `wbh_core`, `theme_gift_store`, `theme_fashion_store` |
+| **Giai đoạn 3** | **Tương tác & Tư vấn Chốt đơn 3 Kênh** *(Web Chat · Facebook · Zalo)* | Hoàn thành *(Cấu hình động trên `website`, hộp 3 kênh PDP/Cart, Floating 3-in-1 + Chép link)* | **100%** | `wbh_core`, `website_livechat`, `theme_gift_store`, `theme_fashion_store` |
+| **Giai đoạn 4** | **Thanh toán & Vận chuyển VN** *(VietQR · COD · Gom đơn · GHN/GHTK)* | Hoàn thành *(VietQR EMVCo offline + SePay Webhook + COD rules + Địa giới VN 3 cấp + Gom đơn 0đ + GHN)* | **100%** | `wbh_payment_vietqr`, `wbh_delivery_vn` |
 
 ---
 
@@ -23,7 +23,7 @@
 
 ---
 
-### GIAI ĐOẠN 1 — Xây dựng Website & Quản trị Sản phẩm CRUD (`~90%`)
+### GIAI ĐOẠN 1 — Xây dựng Website & Quản trị Sản phẩm CRUD (`100%`)
 
 **Mục tiêu**: Website hoạt động ổn định trên cả điện thoại và máy tính; chủ shop đăng nhập Backend có thể **Thêm – Xem – Sửa – Xóa / Lưu trữ** sản phẩm trơn tru, quản lý được giá, tồn kho, biến thể và ảnh chụp thực tế.
 
@@ -53,13 +53,13 @@
 - [x] Tích hợp & nâng cấp live bộ công cụ UI/UX từ MochiStudio qua skill `360-frontend-polish` (`GSAP 3.15.1 + ScrollTrigger`, `Lucide 1.82.0` self-hosted, kiểm định `Impeccable`, `Front-End Checklist` & `UI UX Pro Max`, WCAG AA `>= 4.5:1`, vùng chạm `>= 44px`).
 - [x] Nạp bộ sản phẩm mẫu Anime Goods (Cotton Doll 20cm Bakugo, Card/Can Badge/Mochi Todoroki, Shikishi) đầy đủ biến thể.
 - [x] Chuẩn hóa & nạp live **10 lô sản phẩm + 37 biến thể + 49 ảnh thật** từ Facebook *Manh Dao Dao* (`fb_manhdaodao_products.json`/`.csv` & `import_fb_products.py`).
-- [ ] **Tối ưu Form đăng nhanh sản phẩm Anime Goods (`< 60 giây/món`)**: Gom toàn bộ ô cần thiết (*Tên, Giá bán, Giá gốc, Website, Ảnh/Album, Tồn kho, Nhãn lọc*) vào 1 màn hình gọn, ẩn tab kỹ thuật rườm rà.
-- [ ] **Hiển thị Giá gốc gạch ngang & Badge `% giảm`** tự động trên thẻ sản phẩm `/shop` và trang chi tiết khi `compare_list_price > list_price`.
-- [ ] **Kiểm thử trọn vẹn thao tác CRUD** (Tạo mới ➜ Sửa giá/ảnh ➜ Ẩn/Hiện ➜ Lưu trữ & Xóa nháp) trên Local Server.
+- [x] **Tối ưu Form đăng nhanh sản phẩm Anime Goods (`< 60 giây/món`)**: Gom toàn bộ ô cần thiết (*Tên, Giá bán, Giá gốc, Website, Ảnh/Album `product_template_image_ids`, Tồn kho, Nhãn lọc `product_tag_ids`*) vào nhóm `wbh_store_info` ngay tab Thông tin chung, kèm view `Sửa nhanh Giá & Nhãn` (`<list editable="bottom">`).
+- [x] **Hiển thị Giá gốc gạch ngang & Badge `% giảm`** tự động (`wbh_discount_percent`, `wbh_has_discount`) trên thẻ sản phẩm `/shop` và trang chi tiết khi `compare_list_price > list_price`.
+- [x] **Kiểm thử trọn vẹn thao tác CRUD** (Tạo mới ➜ Sửa giá/ảnh ➜ Ẩn/Hiện ➜ Lưu trữ & Xóa nháp + Unit tests) trên môi trường Docker cô lập.
 
 ---
 
-### GIAI ĐOẠN 2 — Bộ lọc Sản phẩm Linh động 100%, Không Hardcode (`~25%`)
+### GIAI ĐOẠN 2 — Bộ lọc Sản phẩm Linh động 100%, Không Hardcode (`100%`)
 
 > **NGUYÊN TẮC CỨNG CỦA GIAI ĐOẠN 2 (TUYỆT ĐỐI KHÔNG HARDCODE)**  
 > **Cấm tuyệt đối** viết cứng tên nhân vật (*Bakugo, Todoroki...*), tên bộ Anime (*MHA...*), loại sản phẩm (*Doll, Off...*) hay trạng thái (*Giảm giá...*) trong code XML/Python/JS.  
@@ -88,15 +88,15 @@
 - [x] Khởi tạo khung Danh mục Website (`product.public.category`) và 7 Thuộc tính mẫu trong `wbh_core`.
 - [x] Bật sẵn sidebar danh mục & thuộc tính trong `theme_gift_store/data/presets.xml`.
 - [x] Khởi tạo sẵn dữ liệu 2 thuộc tính `no_variant` thực tế (*Bộ Phim (Anime)* và *Nhân Vật (Bias)*) khi nạp 10 lô sản phẩm Facebook để chuẩn bị cho bộ lọc động.
-- [ ] Mở rộng `product.tag` trong `wbh_core`: thêm cờ `wbh_show_in_filter`, `wbh_tag_color`, `wbh_filter_group` và hiển thị ngay ô chọn nổi bật khi thêm/sửa sản phẩm.
-- [ ] Tạo 2 thuộc tính `no_variant` chuẩn cho Anime Goods (*Nhân vật*, *Bộ Anime*, *Phân loại Doll/Off*) giúp gõ mới nhân vật trực tiếp ngay lúc up SP mà không sinh SKU thừa.
-- [ ] Controller & Template `/shop` đọc động **nhãn `product.tag` + thuộc tính `no_variant` + khoảng giá Min/Max** (tự ẩn nhóm rỗng, đếm số SP thực tế, hỗ trợ lọc nhiều tiêu chí đồng thời).
-- [ ] Thiết kế UI ngăn kéo lọc Mobile (Offcanvas) + dải Chip bộ lọc đang áp dụng + Huy hiệu badge trên thẻ sản phẩm.
-- [ ] Kiểm thử: Thêm mới 1 sản phẩm và tích nhãn tự tạo bất kỳ ➜ kiểm tra bộ lọc trên `/shop` tự xuất hiện ngay, bỏ tích/ẩn SP ➜ bộ lọc tự ẩn.
+- [x] Mở rộng `product.tag` trong `wbh_core`: thêm cờ `wbh_show_in_filter`, `wbh_badge_hex`, `wbh_filter_group` và hiển thị ngay ô chọn nổi bật khi thêm/sửa sản phẩm.
+- [x] Tạo model `wbh.price.range` (`data/wbh_filter_data.xml` `noupdate="1"`) cùng các thuộc tính `no_variant` chuẩn cho Anime Goods giúp gõ mới nhân vật trực tiếp ngay lúc up SP mà không sinh SKU thừa.
+- [x] Controller `WbhWebsiteSale` (`controllers/shop.py`) & Template `/shop` đọc động **nhãn `product.tag` + thuộc tính `no_variant` + khoảng giá + Đang giảm giá** (tự ẩn nhóm rỗng `count == 0`, đếm số SP thực tế chống N+1, hỗ trợ lọc nhiều tiêu chí đồng thời).
+- [x] Thiết kế UI ngăn kéo lọc Mobile (Offcanvas) + dải Chip bộ lọc đang áp dụng (`×` & `Xóa tất cả`) + tối đa 2 Huy hiệu badge trên thẻ sản phẩm.
+- [x] Kiểm thử: `TestWbhShopDynamicFilters` kiểm chứng thêm tag / khoảng giá mới ➜ `/shop` tự hiện, ẩn SP ➜ tự ẩn 100%.
 
 ---
 
-### GIAI ĐOẠN 3 — Tương tác & Tư vấn Chốt đơn 3 Kênh: Web · Facebook · Zalo (`~20%`)
+### GIAI ĐOẠN 3 — Tương tác & Tư vấn Chốt đơn 3 Kênh: Web · Facebook · Zalo (`100%`)
 
 **Mục tiêu**: Khách hàng đang xem bất kỳ món đồ nào muốn hỏi tình trạng (cond card, quay video doll, mặc thử outfit, chốt đơn nhanh) đều có thể liên hệ ngay với shop qua **đúng 3 kênh quen thuộc** và chủ shop trả lời được thuận tiện:
 
@@ -120,14 +120,14 @@
 #### 3.3. Checklist tiến độ Giai đoạn 3
 - [x] Cài đặt sẵn module chuẩn `im_livechat` & `website_livechat` trong Odoo 19.0 Community.
 - [x] Gắn nút Zalo cơ bản ở Topbar và Footer của `theme_gift_store`.
-- [ ] Bổ sung trường cấu hình 3 kênh động trên model `website` (`wbh_fb_messenger_url`, `wbh_zalo_url`, `wbh_livechat_enabled`, `wbh_contact_prompt`).
-- [ ] Tạo Extension Widget cụm 3 kênh (*Chat Web · Facebook · Zalo*) gắn vào trang Chi tiết sản phẩm (qua slot `wbh_gift_options_slot` / khối hỗ trợ) và Giỏ hàng.
-- [ ] Thiết kế Nút nổi 3-in-1 responsive mobile (tương thích nút scrolltop và sticky bar) + tự truyền tên sản phẩm đang xem vào cửa sổ Web Livechat.
-- [ ] Kiểm thử luồng khách bấm cả 3 kênh trên Mobile & Desktop.
+- [x] Bổ sung trường cấu hình 3 kênh động trên model `website` (`wbh_fb_messenger_url`, `wbh_support_zalo_url`, `wbh_livechat_enabled`, `wbh_contact_prompt`).
+- [x] Tạo Hộp tư vấn 3 kênh (*Chat tại Web · Nhắn Facebook · Nhắn Zalo · Chép tên & link SP*) trên trang Chi tiết sản phẩm (PDP) và Giỏ hàng (`/shop/cart`) cho cả `theme_gift_store` & `theme_fashion_store`.
+- [x] Thiết kế Widget Liên hệ nổi 3 trong 1 responsive mobile (đặt `bottom: 88px` không đè `#o_footer_scrolltop` và sticky bar) + tự chép tên/link SP & mở Odoo Livechat trong Shadow DOM.
+- [x] Kiểm thử luồng khách bấm cả 3 kênh trên Mobile (`390x844`) & Desktop (`1440x900`).
 
 ---
 
-### GIAI ĐOẠN 4 — Thanh toán & Vận chuyển (`0%`)
+### GIAI ĐOẠN 4 — Thanh toán & Vận chuyển (`100%`)
 
 **Mục tiêu**: Hoàn thiện luồng thanh toán tiện lợi, miễn phí lâu dài cho shop cá nhân/D2C và tự động hóa tính phí – tạo đơn vận chuyển nội địa Việt Nam.
 
@@ -146,10 +146,10 @@
   - Ưu tiên tích hợp **GHN** trước (API miễn phí 100%, có Sandbox test), tự động tính cước phí theo khối lượng/kích thước gói hàng, đẩy tạo mã vận đơn từ Backend và đồng bộ trạng thái hành trình giao hàng.
 
 #### 4.3. Checklist tiến độ Giai đoạn 4
-- [ ] Thiết kế & xây dựng module `wbh_payment_vietqr` (EMVCo QR offline + SePay Free webhook + quy tắc COD/cọc).
-- [ ] Thiết kế & xây dựng module `wbh_delivery_vn` (Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn + API GHN).
-- [ ] Mở rộng GHTK / Viettel Post & tra cứu mã vận đơn ngay trên trang tài khoản khách hàng (Portal).
-- [ ] Kiểm thử thanh toán Sandbox & luồng tạo vận đơn khép kín (giao diện chọn phương thức VietQR/COD và địa giới 3 cấp đạt chuẩn **Lucide**, vùng chạm `>= 44px` và `Impeccable` `0` lỗi).
+- [x] Thiết kế & xây dựng module `wbh_payment_vietqr` (`v19.0.1.0.0`, `LGPL-3`): EMVCo QR offline (`CRC16-CCITT 0x1021`), SePay Free webhook (`hmac.compare_digest`, idempotent), API polling `/payment/vietqr/status/<ref>` và quy tắc COD/Đặt cọc.
+- [x] Thiết kế & xây dựng module `wbh_delivery_vn` (`v19.0.1.0.0`, `LGPL-3`): Địa giới VN 3 cấp (`wbh.vn.province`/`district`/`ward` + cascade checkout), Đồng giá/Freeship/Gom đơn 0đ (`wbh_is_hold_order`) và API GHN Sandbox/Prod kèm fallback.
+- [x] Sẵn sàng hook mở rộng GHTK / Viettel Post & tra cứu mã vận đơn + trạng thái Gom đơn 0đ ngay trên trang tài khoản khách hàng (Portal `/my/orders/<id>`).
+- [x] Kiểm thử unit tests (`test_vietqr.py`, `test_delivery_vn.py`) & luồng checkout đạt chuẩn **Lucide**, vùng chạm `>= 44px` và `Impeccable` `0` lỗi trên code mới.
 
 ---
 

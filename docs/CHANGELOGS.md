@@ -3,10 +3,28 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.14` — vá dứt điểm selector `footer.o_footer` cho nút cuộn đầu trang & chống tràn ngang PDP mobile).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.4.0` — Hoàn thành Giai đoạn 1–4: Sửa nhanh & Giá gạch `-XX%`, Bộ lọc động 100%, Tư vấn 3 kênh, Thanh toán VietQR EMVCo + COD & Vận chuyển VN 3 cấp + GHN).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.4.0 (2026-11-28)
+
+### Hoàn Thiện Trọn Bộ 4 Giai Đoạn — Bộ Lọc Động 100%, Tư Vấn 3 Kênh, Thanh Toán VietQR & Vận Chuyển VN
+- `[NEW]` **Giai đoạn 1–3 Backend (`wbh_core` `v19.0.1.2.0`)**:
+  - Bổ sung `wbh_discount_percent` + `wbh_has_discount` trên `product.template`, gộp album ảnh `product_template_image_ids`, `product_tag_ids` và `compare_list_price` vào tab Thông tin chung, thêm view sửa nhanh `<list editable="bottom">` và bộ lọc `Đang giảm giá`.
+  - Mở rộng `product.tag` (`wbh_show_in_filter`, `wbh_filter_group`, `wbh_badge_hex`), thêm model `wbh.price.range` (`data/wbh_filter_data.xml` `noupdate="1"`) và controller `WbhWebsiteSale` (`controllers/shop.py`) lọc động kết hợp 100% (`tags`, `attrib`/`attribute_values`, `min_price`/`max_price`, `category`, `search`, `wbh_on_sale=1`), tự ẩn hoàn toàn mọi tiêu chí có `count == 0`.
+  - Mở rộng model `website` (`wbh_fb_messenger_url`, `wbh_livechat_enabled`, `wbh_contact_prompt`) phục vụ cấu hình động 3 kênh tư vấn.
+- `[NEW]` **Giai đoạn 1–3 Storefront (`theme_gift_store` & `theme_fashion_store` `v19.0.1.3.0`)**:
+  - Hiển thị giá gốc gạch ngang `compare_list_price` (chống trùng core) + huy hiệu `-XX%` trên thẻ `/shop` và PDP.
+  - Hiển thị bảng bộ lọc động từ `wbh_filter_ctx` trên Sidebar & Offcanvas Mobile (`>= 44px` + badge đếm), dải Active Filter Chips (`×` & `Xóa tất cả`) và tối đa 2 nhãn động trên thẻ sản phẩm.
+  - Thêm Hộp tư vấn 3 kênh trên PDP & `/shop/cart` (`Chat tại Web`, `Nhắn Facebook`, `Nhắn Zalo`, `Chép tên & link SP`) cùng Widget Liên hệ nổi 3 trong 1 (`bottom: 88px` không đè `#o_footer_scrolltop_wrapper` và sticky mobile bar).
+- `[NEW]` **Giai đoạn 4 Thanh toán (`wbh_payment_vietqr` `v19.0.1.0.0`, `LGPL-3`)**:
+  - Sinh mã QR VietQR chuẩn EMVCo / Napas 247 (`CRC16-CCITT 0x1021`) offline qua `ir.actions.report.barcode`, tích hợp Webhook SePay Free (`POST /payment/vietqr/webhook/sepay`, xác thực `hmac.compare_digest`, idempotent) & adapter PayOS/Casso, API polling trạng thái giao dịch `/payment/vietqr/status/<reference>`, thẻ QR chuẩn `DESIGN.md` và quy tắc bật/tắt COD & gợi ý đặt cọc.
+- `[NEW]` **Giai đoạn 4 Vận chuyển (`wbh_delivery_vn` `v19.0.1.0.0`, `LGPL-3`)**:
+  - Xây dựng địa giới hành chính Việt Nam 3 cấp (`wbh.vn.province`, `wbh.vn.district`, `wbh.vn.ward`) kèm API cascade trên checkout `/shop/address`, 3 phương thức vận chuyển (`Đồng giá 30.000đ — Freeship từ 300.000đ`, `Gom đơn / Giữ hàng tại shop — 0đ ship`, `Giao Hàng Nhanh (GHN)` Sandbox/Prod kèm fallback và hook GHTK/VTP) cùng theo dõi mã vận đơn & nhãn Gom đơn trên Portal `/my/orders/<id>`.
 
 ---
 

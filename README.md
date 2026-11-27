@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.14` — Hoàn thiện **Unslop 9 Passes** & vá triệt để các lỗi phát hiện qua kiểm định live (`wbh_core` `v19.0.1.1.3`, `theme_gift_store` `v19.0.1.2.2`, `theme_fashion_store` `v19.0.1.2.2`): Việt hóa 100% PDP, tắt `+1 555-555-5556` & `Contact Us` thừa, chuẩn hóa `select.form-select`, bọc toolbar `/shop` mobile không tràn ngang và sửa trọn vẹn nút cuộn đầu trang.  
+> **Trạng thái dự án**: `v0.4.0` — Hoàn thiện trọn bộ **Giai đoạn 1–4** (`wbh_core` `v19.0.1.2.0`, `theme_gift_store` `v19.0.1.3.0`, `theme_fashion_store` `v19.0.1.3.0`, `wbh_payment_vietqr` `v19.0.1.0.0`, `wbh_delivery_vn` `v19.0.1.0.0`): CRUD sản phẩm nhanh <60s & giá gạch `-XX%`, Bộ lọc động 100% không hardcode, Tư vấn 3 kênh (Web Livechat · Facebook · Zalo), Thanh toán VietQR EMVCo + SePay Webhook + COD rules, Địa giới VN 3 cấp + Gom đơn 0đ + GHN.  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`
@@ -55,10 +55,10 @@ Tất cả các custom modules đặt trong `F:\BACKUP_LINUX\web_ban_hang\addons
 
 | Giai đoạn | Mục tiêu & Giá trị bàn giao | Trạng thái | Modules phụ trách |
 |---|---|---|---|
-| **Giai đoạn 1 — Website & CRUD Sản phẩm** | Hạ tầng Docker di động + giao diện 2 storefront + **Thêm / Xem / Sửa / Xóa & Lưu trữ** sản phẩm nhanh gọn (`< 60 giây/món`), giá gốc gạch ngang, album ảnh & biến thể. | **~85%** *(Đang hoàn thiện)* | `wbh_core`<br>`theme_gift_store`<br>`theme_fashion_store` |
-| **Giai đoạn 2 — Bộ lọc Động 100% (Cấm Hardcode)** | Lọc theo **Khoảng giá (`Min–Max`)**, **Nhãn ưu đãi/giảm giá (`product.tag`)**, **Nhân vật & Bộ Anime (`no_variant`)**, **Phân loại Doll/Goods Off** — tự động sinh từ dữ liệu người dùng tích chọn lúc thêm/sửa SP. | **~25%** *(Sắp làm)* | `wbh_core`<br>`theme_gift_store` |
-| **Giai đoạn 3 — Tương tác & Chốt đơn 3 Kênh** | Cụm tư vấn & chốt đơn đồng bộ 3 kênh (**Chat Web Livechat** + **Facebook Messenger** + **Zalo**) gắn ngay trên trang sản phẩm & nút nổi đa kênh, cấu hình link động trong Backend. | **~20%** | `wbh_core`<br>`website_livechat`<br>`theme_gift_store` |
-| **Giai đoạn 4 — Thanh toán & Vận chuyển VN** | - **Thanh toán (`wbh_payment_vietqr`)**: VietQR EMVCo offline + Webhook SePay Free + COD/quy tắc đặt cọc.<br>- **Vận chuyển (`wbh_delivery_vn`)**: Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn + GHN ➜ GHTK & Viettel Post. | **0%** | `wbh_payment_vietqr`<br>`wbh_delivery_vn` |
+| **Giai đoạn 1 — Website & CRUD Sản phẩm** | Hạ tầng Docker di động + giao diện 2 storefront + **Thêm / Xem / Sửa / Xóa & Lưu trữ** sản phẩm nhanh gọn (`< 60 giây/món`), giá gốc gạch ngang `-XX%`, album ảnh & biến thể. | **100%** *(Hoàn thành)* | `wbh_core`<br>`theme_gift_store`<br>`theme_fashion_store` |
+| **Giai đoạn 2 — Bộ lọc Động 100% (Cấm Hardcode)** | Lọc động kết hợp theo **Khoảng giá (`wbh.price.range`)**, **Đang giảm giá**, **Nhãn (`product.tag`)**, **Thuộc tính `no_variant`**, tự ẩn hoàn toàn nhóm rỗng `count == 0`, Active Filter Chips & Mobile Offcanvas. | **100%** *(Hoàn thành)* | `wbh_core`<br>`theme_gift_store`<br>`theme_fashion_store` |
+| **Giai đoạn 3 — Tương tác & Chốt đơn 3 Kênh** | Cụm tư vấn & chốt đơn đồng bộ 3 kênh (**Chat Web Livechat** + **Facebook Messenger** + **Zalo** + **Chép tên & link SP**) gắn trên PDP, Giỏ hàng & Widget nổi 3 trong 1, cấu hình động trên `website`. | **100%** *(Hoàn thành)* | `wbh_core`<br>`website_livechat`<br>`theme_gift_store`<br>`theme_fashion_store` |
+| **Giai đoạn 4 — Thanh toán & Vận chuyển VN** | - **Thanh toán (`wbh_payment_vietqr`)**: VietQR EMVCo offline + Webhook SePay Free + COD/quy tắc đặt cọc.<br>- **Vận chuyển (`wbh_delivery_vn`)**: Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn 0đ + GHN ➜ GHTK & Viettel Post. | **100%** *(Hoàn thành)* | `wbh_payment_vietqr`<br>`wbh_delivery_vn` |
 
 ---
 
@@ -87,14 +87,14 @@ F:\BACKUP_LINUX\web_ban_hang\
 │   ├── DEPLOY_GUIDE.md              # [v1.0] Hướng dẫn chạy Docker, up sản phẩm & chuyển sang Local Server
 │   ├── CHANGELOGS.md                # [v0.3.7] Nhật ký thay đổi các phiên bản dự án
 │   └── AUDIT_ROADMAP.md             # [Tạo ở /review-/ship] Checklist kiểm duyệt & bàn giao
-├── addons\                          # 7 Custom Modules Odoo 19.0 Community (M1 đã build & qua /code-review)
-│   ├── wbh_core\                    # [Đã có — M1] Lõi Multi-Website tách tài khoản, danh mục/thuộc tính & form up SP
-│   ├── theme_gift_store\            # [Đã có — M1] Custom Theme Upgrade-Safe Web 1 (Quà tặng)
-│   ├── theme_fashion_store\         # [Đã có — M1] Custom Theme Upgrade-Safe Web 2 (Thời trang)
-│   ├── wbh_gift_store\              # [M2] Nghiệp vụ đặc thù Web 1 (Gói quà, Cá nhân hóa, So sánh size, Combo)
-│   ├── wbh_fashion_store\           # [M2] Nghiệp vụ đặc thù Web 2 (Gợi ý Size, Shop The Look, Video, Đổi size)
-│   ├── wbh_payment_vietqr\          # [M3] Thanh toán VietQR EMVCo offline + Webhook SePay Free + COD
-│   └── wbh_delivery_vn\             # [M3] Vận chuyển Ship nội bộ/Đồng giá + GHN ➜ GHTK / Viettel Post
+├── addons\                          # Custom Modules Odoo 19.0 Community (100% LGPL-3)
+│   ├── wbh_core\                    # [v19.0.1.2.0] Lõi Multi-Website, form SP nhanh, bộ lọc động 100%, cấu hình 3 kênh
+│   ├── theme_gift_store\            # [v19.0.1.3.0] Custom Theme Web 1 (Quà tặng) — giá gạch -XX%, filter UI, 3-in-1 contact
+│   ├── theme_fashion_store\         # [v19.0.1.3.0] Custom Theme Web 2 (Thời trang) — giá gạch -XX%, filter UI, 3-in-1 contact
+│   ├── wbh_payment_vietqr\          # [v19.0.1.0.0] Thanh toán VietQR EMVCo offline + Webhook SePay Free + COD rules
+│   ├── wbh_delivery_vn\             # [v19.0.1.0.0] Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn 0đ + GHN
+│   ├── wbh_gift_store\              # [M2 mở rộng] Nghiệp vụ đặc thù Web 1 (Gói quà, Cá nhân hóa, So sánh size, Combo)
+│   └── wbh_fashion_store\           # [M2 mở rộng] Nghiệp vụ đặc thù Web 2 (Gợi ý Size, Shop The Look, Video, Đổi size)
 └── data\                            # [Ignored trong Git] Dữ liệu runtime cục bộ (filestore/, sessions/)
 ```
 

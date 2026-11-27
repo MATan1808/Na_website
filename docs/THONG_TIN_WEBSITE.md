@@ -1,7 +1,7 @@
 # THÔNG TIN WEBSITE & ĐỊNH HƯỚNG BÁN HÀNG ANIME GOODS
 ## Dự Án: Hệ Sinh Thái 2 Website Bán Hàng — Odoo 19.0 Community (`web_ban_hang`)
 
-> **Ngày cập nhật**: 2026-11-27  
+> **Ngày cập nhật**: 2026-11-28 (`v0.4.0` — Hoàn thành Giai đoạn 1–4)  
 > **Nền tảng kỹ thuật**: 100% Odoo 19.0 Community (LGPL-3) + PostgreSQL 15 (Docker)  
 > **Cổng truy cập Local Server**: [http://100.64.56.52:1901](http://100.64.56.52:1901) *(LAN: `http://192.168.1.37:1901` · Local Docker: `http://localhost:1901` · Tiền tệ hiển thị chuẩn: **`VNĐ (₫)`**)*  
 > **Lộ trình & Tiến độ 4 giai đoạn**: Xem chi tiết tại [ROADMAP_TIEN_DO.md](file:///F:/BACKUP_LINUX/web_ban_hang/docs/ROADMAP_TIEN_DO.md)  
@@ -83,10 +83,11 @@ Hệ thống đã nạp sẵn 5 dòng sản phẩm chuẩn theo hình ảnh th�
 > **Lệnh đồng bộ lại dữ liệu từ file JSON khi sửa giá/mô tả**:  
 > `docker exec -i web-ban-hang-app odoo shell -c /etc/odoo/odoo.conf -d web_ban_hang_dev --no-http < /mnt/extra-addons/wbh_core/scripts/import_fb_products.py`
 
-### 2.4. Trải Nghiệm Khách Hàng (UX Độc Quyền Anime Goods)
-- **Shop By Bias / Oshi (Mua Theo Nhân Vật)**: Bộ lọc sẵn cho phép khách bấm vào **Bakugo** hoặc **Todoroki** để lọc toàn bộ sản phẩm của riêng nhân vật đó.
-- **Cross-Sell Thay Đồ Búp Bê**: Mua Body Doll 20cm sẽ tự động gợi ý thêm các set Outfit áo khoác / đồ cosplay mini để thay đồ cho búp bê.
-- **Bộ Lọc Theo Anime**: Sẵn sàng mở rộng thêm các bộ anime hot khác (*Jujutsu Kaisen, Haikyuu, Conan, Genshin Impact...*).
+### 2.4. Trải Nghiệm Khách Hàng & Vận Hành Trọn Bộ (Giai đoạn 1–4)
+- **Đăng & Sửa nhanh `< 60 giây/món`**: Toàn bộ thông tin đăng bán (`wbh_store_scope`, `public_categ_ids`, `product_tag_ids`, `compare_list_price`, `is_published`, album ảnh `product_template_image_ids`) gộp gọn trong tab Thông tin chung, kèm màn hình `Sửa nhanh Giá & Nhãn` (`<list editable="bottom">`) và tự động hiện giá gạch ngang + huy hiệu `-XX%`.
+- **Bộ lọc Động 100% Không Hardcode (`/shop`)**: Tự động hiển thị bộ lọc *Đang giảm giá*, *Khoảng giá (`wbh.price.range`)*, *Nhãn & Chủ đề (`product.tag`)* và *Thuộc tính `no_variant`* (Nhân vật, Bộ Anime, Phân loại) chỉ khi có sản phẩm khớp trên từng website; hỗ trợ lọc kết hợp nhiều điều kiện, dải Active Filter Chips và ngăn kéo lọc Mobile `>= 44px`.
+- **Tư vấn & Chốt đơn 3 Kênh (Web Livechat · Facebook · Zalo)**: Hộp 3 kênh trên PDP & Giỏ hàng cùng Widget nổi 3-in-1 (tự chép tên & link sản phẩm trước khi mở Livechat, cấu hình động trên `website`).
+- **Thanh toán VietQR & Vận chuyển VN**: Tự sinh QR VietQR EMVCo / Napas 247 offline + Webhook SePay Free + Quy tắc COD/Đặt cọc (`wbh_payment_vietqr`); chọn địa giới VN 3 cấp (Tỉnh/TP – Quận/Huyện – Phường/Xã), Ship đồng giá/Freeship, **Gom đơn 0đ** và tích hợp **GHN** (`wbh_delivery_vn`).
 
 ---
 
