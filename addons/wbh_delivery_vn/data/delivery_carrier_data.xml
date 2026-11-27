@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+        Sản phẩm dịch vụ vận chuyển nội bộ (sale_ok=False, is_published=False)
+        để không bao giờ xuất hiện trên trang /shop.
+    -->
+    <record id="product_delivery_wbh_standard" model="product.product">
+        <field name="name">Dịch vụ Giao hàng tiêu chuẩn WBH</field>
+        <field name="default_code">WBH_SHIP_STD</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries"/>
+        <field name="sale_ok" eval="False"/>
+        <field name="purchase_ok" eval="False"/>
+        <field name="is_published" eval="False"/>
+        <field name="list_price">30000.0</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_delivery_wbh_hold" model="product.product">
+        <field name="name">Dịch vụ Gom đơn / Giữ hàng tại shop WBH</field>
+        <field name="default_code">WBH_SHIP_HOLD</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries"/>
+        <field name="sale_ok" eval="False"/>
+        <field name="purchase_ok" eval="False"/>
+        <field name="is_published" eval="False"/>
+        <field name="list_price">0.0</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_delivery_wbh_ghn" model="product.product">
+        <field name="name">Dịch vụ Giao Hàng Nhanh (GHN)</field>
+        <field name="default_code">WBH_SHIP_GHN</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries"/>
+        <field name="sale_ok" eval="False"/>
+        <field name="purchase_ok" eval="False"/>
+        <field name="is_published" eval="False"/>
+        <field name="list_price">35000.0</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <!-- 1. Giao hàng tiêu chuẩn (Đồng giá 30.000đ — Freeship từ 300.000đ) -->
+    <record id="carrier_wbh_standard" model="delivery.carrier">
+        <field name="name">Giao hàng tiêu chuẩn (Đồng giá 30.000đ — Freeship từ 300.000đ)</field>
+        <field name="sequence">10</field>
+        <field name="delivery_type">wbh_local</field>
+        <field name="product_id" ref="product_delivery_wbh_standard"/>
+        <field name="wbh_flat_price">30000.0</field>
+        <field name="wbh_free_over_amount">300000.0</field>
+        <field name="wbh_is_hold_order" eval="False"/>
+        <field name="allow_cash_on_delivery" eval="True"/>
+        <field name="is_published" eval="True"/>
+        <field name="wbh_provider_note">Đồng giá 30.000đ toàn quốc. Miễn phí vận chuyển cho đơn từ 300.000đ.</field>
+    </record>
+
+    <!-- 2. Gom đơn / Giữ hàng tại shop (0đ ship) -->
+    <record id="carrier_wbh_hold_order" model="delivery.carrier">
+        <field name="name">Gom đơn / Giữ hàng tại shop (0đ ship)</field>
+        <field name="sequence">20</field>
+        <field name="delivery_type">wbh_local</field>
+        <field name="product_id" ref="product_delivery_wbh_hold"/>
+        <field name="wbh_flat_price">0.0</field>
+        <field name="wbh_free_over_amount">0.0</field>
+        <field name="wbh_is_hold_order" eval="True"/>
+        <field name="allow_cash_on_delivery" eval="True"/>
+        <field name="is_published" eval="True"/>
+        <field name="wbh_provider_note">Shop giữ hàng giúp bạn gộp nhiều đơn gửi cùng lúc hoặc ghé shop lấy trực tiếp (0đ ship).</field>
+    </record>
+
+    <!-- 3. Giao Hàng Nhanh — GHN (Sandbox, ẩn mặc định tới khi nhập Token) -->
+    <record id="carrier_wbh_ghn" model="delivery.carrier">
+        <field name="name">Giao Hàng Nhanh — GHN (Sandbox)</field>
+        <field name="sequence">30</field>
+        <field name="delivery_type">wbh_ghn</field>
+        <field name="product_id" ref="product_delivery_wbh_ghn"/>
+        <field name="wbh_flat_price">35000.0</field>
+        <field name="wbh_free_over_amount">0.0</field>
+        <field name="wbh_is_hold_order" eval="False"/>
+        <field name="wbh_ghn_sandbox" eval="True"/>
+        <field name="wbh_ghn_from_district_id">1442</field>
+        <field name="wbh_ghn_service_type_id">2</field>
+        <field name="allow_cash_on_delivery" eval="True"/>
+        <field name="is_published" eval="False"/>
+        <field name="wbh_provider_note">Tự động tính cước và tạo vận đơn Giao Hàng Nhanh (GHN).</field>
+    </record>
+</odoo>

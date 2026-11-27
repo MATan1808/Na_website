@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_wbh_delivery_vn" model="ir.ui.view">
+        <field name="name">sale.order.form.wbh.delivery.vn</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="delivery.view_order_form_with_carrier"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="after">
+                <div class="alert alert-info mb-2" role="status" invisible="not wbh_is_hold_order">
+                    <strong>Gom đơn / Giữ hàng tại shop (0đ ship):</strong>
+                    Đơn hàng được giữ tại cửa hàng để gộp chuyến gửi sau hoặc khách ghé lấy trực tiếp.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='shipping_weight']" position="after">
+                <field name="wbh_is_hold_order"/>
+                <field name="wbh_tracking_code"/>
+                <field name="wbh_tracking_url" widget="url"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_list_wbh_delivery_vn" model="ir.ui.view">
+        <field name="name">sale.order.list.wbh.delivery.vn</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="wbh_is_hold_order" string="Gom đơn" optional="show"/>
+                <field name="wbh_tracking_code" string="Mã vận đơn" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_wbh_delivery_vn" model="ir.ui.view">
+        <field name="name">sale.order.filter.wbh.delivery.vn</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                <filter string="Gom đơn / Giữ hàng tại shop"
+                        name="wbh_hold_orders"
+                        domain="[('wbh_is_hold_order', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_wbh_hold_orders" model="ir.actions.act_window">
+        <field name="name">Đơn hàng Gom đơn / Giữ tại shop</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="domain">[('wbh_is_hold_order', '=', True)]</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="context">{'search_default_wbh_hold_orders': 1}</field>
+    </record>
+</odoo>

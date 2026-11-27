@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==================== TỈNH / THÀNH PHỐ ==================== -->
+    <record id="view_wbh_vn_province_list" model="ir.ui.view">
+        <field name="name">wbh.vn.province.list</field>
+        <field name="model">wbh.vn.province</field>
+        <field name="arch" type="xml">
+            <list string="Tỉnh / Thành phố (VN)" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="ghn_province_id"/>
+                <field name="state_id" optional="show"/>
+                <field name="district_count" string="Số Quận/Huyện"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_wbh_vn_province_form" model="ir.ui.view">
+        <field name="name">wbh.vn.province.form</field>
+        <field name="model">wbh.vn.province</field>
+        <field name="arch" type="xml">
+            <form string="Tỉnh / Thành phố (VN)">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="ghn_province_id"/>
+                            <field name="state_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Quận / Huyện trực thuộc" name="districts">
+                            <field name="district_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="ghn_district_id"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_wbh_vn_province_search" model="ir.ui.view">
+        <field name="name">wbh.vn.province.search</field>
+        <field name="model">wbh.vn.province</field>
+        <field name="arch" type="xml">
+            <search string="Tìm Tỉnh / Thành phố">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="ghn_province_id"/>
+                <filter string="Đã lưu trữ" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_wbh_vn_province" model="ir.actions.act_window">
+        <field name="name">Tỉnh / Thành phố (VN)</field>
+        <field name="res_model">wbh.vn.province</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_wbh_vn_province_search"/>
+    </record>
+
+    <!-- ==================== QUẬN / HUYỆN ==================== -->
+    <record id="view_wbh_vn_district_list" model="ir.ui.view">
+        <field name="name">wbh.vn.district.list</field>
+        <field name="model">wbh.vn.district</field>
+        <field name="arch" type="xml">
+            <list string="Quận / Huyện (VN)" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="province_id"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="ghn_district_id"/>
+                <field name="ward_count" string="Số Phường/Xã"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_wbh_vn_district_form" model="ir.ui.view">
+        <field name="name">wbh.vn.district.form</field>
+        <field name="model">wbh.vn.district</field>
+        <field name="arch" type="xml">
+            <form string="Quận / Huyện (VN)">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="province_id"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="ghn_district_id"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Phường / Xã trực thuộc" name="wards">
+                            <field name="ward_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="ghn_ward_code"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_wbh_vn_district_search" model="ir.ui.view">
+        <field name="name">wbh.vn.district.search</field>
+        <field name="model">wbh.vn.district</field>
+        <field name="arch" type="xml">
+            <search string="Tìm Quận / Huyện">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="province_id"/>
+                <field name="ghn_district_id"/>
+                <group>
+                    <filter string="Tỉnh / Thành phố" name="group_by_province" context="{'group_by': 'province_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_wbh_vn_district" model="ir.actions.act_window">
+        <field name="name">Quận / Huyện (VN)</field>
+        <field name="res_model">wbh.vn.district</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_wbh_vn_district_search"/>
+        <field name="context">{'search_default_group_by_province': 1}</field>
+    </record>
+
+    <!-- ==================== PHƯỜNG / XÃ ==================== -->
+    <record id="view_wbh_vn_ward_list" model="ir.ui.view">
+        <field name="name">wbh.vn.ward.list</field>
+        <field name="model">wbh.vn.ward</field>
+        <field name="arch" type="xml">
+            <list string="Phường / Xã (VN)" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="province_id"/>
+                <field name="district_id"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="ghn_ward_code"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_wbh_vn_ward_form" model="ir.ui.view">
+        <field name="name">wbh.vn.ward.form</field>
+        <field name="model">wbh.vn.ward</field>
+        <field name="arch" type="xml">
+            <form string="Phường / Xã (VN)">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="province_id"/>
+                            <field name="district_id"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="ghn_ward_code"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_wbh_vn_ward_search" model="ir.ui.view">
+        <field name="name">wbh.vn.ward.search</field>
+        <field name="model">wbh.vn.ward</field>
+        <field name="arch" type="xml">
+            <search string="Tìm Phường / Xã">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="district_id"/>
+                <field name="province_id"/>
+                <field name="ghn_ward_code"/>
+                <group>
+                    <filter string="Quận / Huyện" name="group_by_district" context="{'group_by': 'district_id'}"/>
+                    <filter string="Tỉnh / Thành phố" name="group_by_province" context="{'group_by': 'province_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_wbh_vn_ward" model="ir.actions.act_window">
+        <field name="name">Phường / Xã (VN)</field>
+        <field name="res_model">wbh.vn.ward</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_wbh_vn_ward_search"/>
+        <field name="context">{'search_default_group_by_district': 1}</field>
+    </record>
+
+    <!-- ==================== RES.PARTNER FORM ==================== -->
+    <record id="view_partner_form_wbh_vn_address" model="ir.ui.view">
+        <field name="name">res.partner.form.wbh.vn.address</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/group/div[hasclass('o_address_format')]" position="after">
+                <field name="wbh_vn_province_id" options="{'no_create': True}"/>
+                <field name="wbh_vn_district_id"
+                       options="{'no_create': True}"
+                       readonly="not wbh_vn_province_id"/>
+                <field name="wbh_vn_ward_id"
+                       options="{'no_create': True}"
+                       readonly="not wbh_vn_district_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

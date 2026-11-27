@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_order_portal_tracking_wbh_vn"
+              name="WBH VN Delivery &amp; Hold Order Tracking on Portal"
+              inherit_id="sale.sale_order_portal_content"
+              priority="25">
+        <xpath expr="//div[@id='informations']" position="before">
+            <div t-if="sale_order.wbh_is_hold_order"
+                 class="alert alert-info d-flex align-items-center gap-2 mb-3 wbh-portal-hold-banner"
+                 role="status">
+                <span class="badge rounded-pill text-bg-info">Gom đơn 0đ</span>
+                <span>
+                    Đơn hàng này đang được <strong>giữ hàng tại shop</strong> để gộp đơn hoặc nhận trực tiếp (miễn phí vận chuyển).
+                </span>
+            </div>
+        </xpath>
+        <xpath expr="//tbody[@id='sale_info_table']" position="inside">
+            <tr t-if="sale_order.carrier_id">
+                <th class="ps-0 pb-0">Vận chuyển:</th>
+                <td class="w-100 pb-0 text-wrap">
+                    <span t-field="sale_order.carrier_id.name"/>
+                    <span t-if="sale_order.wbh_is_hold_order"
+                          class="badge rounded-pill text-bg-info ms-2">
+                        Gom đơn / Giữ tại shop
+                    </span>
+                </td>
+            </tr>
+            <tr t-if="sale_order.wbh_tracking_code or sale_order.wbh_tracking_url">
+                <th class="ps-0 pb-0">Mã vận đơn:</th>
+                <td class="w-100 pb-0 text-wrap">
+                    <a t-if="sale_order.wbh_tracking_url"
+                       t-att-href="sale_order.wbh_tracking_url"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="fw-semibold text-decoration-underline">
+                        <t t-out="sale_order.wbh_tracking_code or 'Tra cứu hành trình đơn hàng'"/>
+                    </a>
+                    <span t-else="" t-field="sale_order.wbh_tracking_code" class="fw-semibold"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>
