@@ -663,13 +663,18 @@
         #o_wsale_offcanvas .offcanvas-body > a[title="Clear Filters"] {
             display: none !important;
         }
+
+        .o_wsale_products_searchbar_form input::placeholder {
+            color: #5E554A;
+            opacity: 1;
+        }
     }
 
     .wbh-mobile-filter-btn {
         min-height: 44px !important;
         min-width: 44px;
         padding: 0.5rem 0.9rem !important;
-        display: inline-flex !important;
+        display: inline-flex;
         align-items: center;
         gap: 0.4rem;
     }
@@ -1224,6 +1229,10 @@
             color: var(--wbh-gift-primary);
             font-size: 1.05rem;
             font-variant-numeric: tabular-nums;
+        }
+
+        .wbh-gift-sticky-bar__btn {
+            min-height: 44px;
         }
     }
 

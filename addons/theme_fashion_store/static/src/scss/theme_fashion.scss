@@ -637,6 +637,11 @@
             display: none !important;
         }
 
+        .o_wsale_products_searchbar_form input::placeholder {
+            color: #4A4A4A;
+            opacity: 1;
+        }
+
         @media (max-width: 767.98px) {
             .products_header.btn-toolbar {
                 flex-wrap: wrap !important;
@@ -661,7 +666,7 @@
         min-height: 44px !important;
         min-width: 44px;
         padding: 0.5rem 0.9rem !important;
-        display: inline-flex !important;
+        display: inline-flex;
         align-items: center;
         gap: 0.4rem;
         text-transform: none;
