@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_provider_vietqr" model="payment.provider">
+        <field name="name">Chuyển khoản VietQR (Napas 24/7)</field>
+        <field name="code">vietqr</field>
+        <field name="sequence">10</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False"/>
+        <field name="image_128" type="base64" file="wbh_payment_vietqr/static/img/vietqr.png"/>
+        <field name="module_id" ref="base.module_wbh_payment_vietqr"/>
+        <field name="redirect_form_view_id" ref="wbh_payment_vietqr.redirect_form"/>
+        <field name="inline_form_view_id" ref="wbh_payment_vietqr.vietqr_inline_form"/>
+        <field name="wbh_vietqr_gateway">sepay</field>
+        <field name="wbh_vietqr_prefix">WBH</field>
+        <field name="payment_method_ids"
+               eval="[Command.set([ref('wbh_payment_vietqr.payment_method_vietqr')])]"/>
+        <field name="pending_msg" type="html">
+            <p>Vui lòng quét mã VietQR hoặc chuyển khoản đúng số tiền và nội dung để hệ thống tự động xác nhận đơn hàng trong vài giây.</p>
+        </field>
+        <field name="done_msg" type="html">
+            <p>Thanh toán chuyển khoản VietQR đã được xác nhận thành công. Cảm ơn bạn đã mua sắm!</p>
+        </field>
+    </record>
+
+    <record id="payment_provider_cod" model="payment.provider">
+        <field name="name">Thanh toán khi nhận hàng (COD)</field>
+        <field name="code">wbh_cod</field>
+        <field name="sequence">20</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False"/>
+        <field name="image_128" type="base64" file="wbh_payment_vietqr/static/img/cod.png"/>
+        <field name="module_id" ref="base.module_wbh_payment_vietqr"/>
+        <field name="redirect_form_view_id" ref="wbh_payment_vietqr.redirect_form"/>
+        <field name="inline_form_view_id" ref="wbh_payment_vietqr.cod_inline_form"/>
+        <field name="payment_method_ids"
+               eval="[Command.set([ref('wbh_payment_vietqr.payment_method_cod')])]"/>
+        <field name="pending_msg" type="html">
+            <p>Đơn hàng của bạn đã được ghi nhận hình thức Thanh toán khi nhận hàng (COD). Vui lòng chuẩn bị tiền mặt khi shipper giao hàng.</p>
+        </field>
+    </record>
+</odoo>

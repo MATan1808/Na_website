@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sản phẩm: cờ cho phép COD (tắt cho Pre-order) -->
+    <record id="wbh_product_template_cod_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.cod.inherit.wbh_payment_vietqr</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="wbh_core.wbh_product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='wbh_store_info_left']" position="inside">
+                <field name="wbh_allow_cod" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Website: cấu hình hạn mức COD tối đa & tỷ lệ đặt cọc -->
+    <record id="wbh_website_cod_form_view" model="ir.ui.view">
+        <field name="name">website.form.cod.inherit.wbh_payment_vietqr</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="wbh_core.wbh_view_website_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='wbh_brand_config']" position="after">
+                <group name="wbh_cod_rules" string="Quy tắc Thanh toán COD &amp; Đặt cọc">
+                    <group>
+                        <field name="wbh_cod_max_amount"/>
+                    </group>
+                    <group>
+                        <field name="wbh_cod_deposit_percent"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Đơn hàng: hiển thị trạng thái điều kiện COD -->
+    <record id="wbh_sale_order_cod_form_view" model="ir.ui.view">
+        <field name="name">sale.order.form.cod.inherit.wbh_payment_vietqr</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="wbh_allow_cod" readonly="1"/>
+                <field name="wbh_cod_block_reason" readonly="1" invisible="wbh_allow_cod"/>
+                <field name="wbh_cod_deposit_amount" readonly="1" invisible="wbh_allow_cod or wbh_cod_deposit_amount &lt;= 0"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

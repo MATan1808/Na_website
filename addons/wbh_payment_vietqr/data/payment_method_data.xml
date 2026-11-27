@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_method_vietqr" model="payment.method">
+        <field name="name">Chuyển khoản VietQR (Napas 24/7)</field>
+        <field name="code">vietqr</field>
+        <field name="sequence">10</field>
+        <field name="active">False</field>
+        <field name="image" type="base64" file="wbh_payment_vietqr/static/img/vietqr.png"/>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">False</field>
+        <field name="support_manual_capture">none</field>
+        <field name="support_refund">none</field>
+    </record>
+
+    <record id="payment_method_cod" model="payment.method">
+        <field name="name">Thanh toán khi nhận hàng (COD)</field>
+        <field name="code">wbh_cod</field>
+        <field name="sequence">20</field>
+        <field name="active">False</field>
+        <field name="image" type="base64" file="wbh_payment_vietqr/static/img/cod.png"/>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">False</field>
+        <field name="support_manual_capture">none</field>
+        <field name="support_refund">none</field>
+    </record>
+</odoo>

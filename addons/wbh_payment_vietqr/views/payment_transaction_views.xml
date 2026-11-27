@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_transaction_form_vietqr" model="ir.ui.view">
+        <field name="name">payment.transaction.form.inherit.wbh_vietqr</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='transaction_details']" position="after">
+                <group string="Thông tin VietQR" invisible="provider_code != 'vietqr'">
+                    <field name="wbh_vietqr_reference"/>
+                    <field name="wbh_gateway_tx_id"/>
+                    <field name="wbh_vietqr_payload"/>
+                    <field name="wbh_vietqr_qr_base64" widget="image" class="oe_avatar"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
