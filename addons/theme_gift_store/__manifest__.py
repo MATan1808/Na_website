@@ -3,12 +3,18 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.2.0',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.2.0 (2026-11-28)
+------------------------
+- [IMPROVE] Áp dụng 9 passes của heydamir/unslop (CC-BY-4.0) dựa trên kiểm định live: gỡ bỏ bẫy GSAP opacity:0 khi tải/cuộn nhanh, thay toàn bộ khối icon pastel "AI slop" bằng ảnh chụp sản phẩm thật (Cotton Doll 20cm, Card Bo Góc, Shikishi) trên nền Warm Paper (#F7F4EE).
+- [FIX] Ẩn đoạn mô tả dài (.oe_subdescription) gây phình thẻ sản phẩm /shop (720-845px), giữ chiều cao card đồng đều, bọc nền trắng cho nút Wishlist và mũi tên slider ảnh PDP.
+- [FIX] Sửa triệt để lỗi <select class="form-select"> bị lặp 2 mũi tên (double-caret) & cắt chữ; chuẩn hóa mọi nút bấm inline-flex căn giữa dọc, cố định topbar 1 dòng trên mobile 390px và nới ô tìm kiếm /shop.
 
 v19.0.1.1.0 (2026-11-27)
 ------------------------

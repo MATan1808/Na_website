@@ -3,7 +3,7 @@
 > **Dự án**: Hệ Sinh Thái 2 Website Bán Hàng (`web_ban_hang`) — Thuần **Odoo 19.0 Community (LGPL-3) Multi-Website** + **PostgreSQL 15**  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Chuẩn kế thừa**: AIaC Root `F:\BACKUP_LINUX\aiac` (qua symlink `C:\Users\ADMIN\.claude\360org -> F:\BACKUP_LINUX\aiac\360org`), plugin `360-odoo` và `360-local-builder-env`.  
-> **Trạng thái hiện tại (`v0.3.6`, 2026-11-27)**: Tích hợp `GSAP 3.15.1` + `Lucide 1.82.0` self-hosted và đánh bóng 2 Storefronts theo chuẩn `Impeccable` / `Front-End Checklist` / `UI UX Pro Max` (`wbh_core` `v19.0.1.1.0`, `theme_gift_store` `v19.0.1.1.0`, `theme_fashion_store` `v19.0.1.1.0`).
+> **Trạng thái hiện tại (`v0.3.12`, 2026-11-28)**: Áp dụng `heydamir/unslop` 9 passes khử "mùi AI", gỡ bẫy GSAP `opacity: 0`, chuẩn hóa ảnh thật trang chủ, ẩn mô tả dài phá lưới `/shop` và vá lỗi `select.form-select` (`wbh_core` `v19.0.1.1.2`, `theme_gift_store` `v19.0.1.2.0`, `theme_fashion_store` `v19.0.1.2.0`).
 
 ---
 

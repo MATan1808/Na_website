@@ -2,14 +2,16 @@
 <odoo>
     <template id="s_gift_occasion_bar" name="Thanh Chọn Nhanh Quà Theo Danh Mục &amp; Dịp">
         <section
-            class="s_gift_occasion_bar o_colored_level o_cc o_cc1 pt48 pb48"
+            class="s_gift_occasion_bar o_colored_level pt40 pb40"
             data-snippet="s_gift_occasion_bar"
             data-name="Thanh Chọn Nhanh Quà Tặng"
         >
             <div class="container">
-                <div class="text-center mb-4">
-                    <h2 class="h3 fw-bold mb-2">Chọn nhanh món quà đúng ý</h2>
-                    <p class="text-muted mb-0">Khám phá theo dòng sản phẩm hoặc dịp tặng quà đặc biệt</p>
+                <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
+                    <div>
+                        <h2 class="h4 fw-semibold mb-1">Danh mục sản phẩm chính</h2>
+                        <p class="wbh-gift-subtext mb-0">Chọn nhanh dòng goods hoặc nhân vật bạn đang tìm</p>
+                    </div>
                 </div>
                 <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-6">
                     <div class="col">
@@ -17,7 +19,7 @@
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="smile" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Doll Bông 20cm</span>
+                            <span class="wbh-gift-occasion-card__label">Doll Bông 20cm</span>
                         </a>
                     </div>
                     <div class="col">
@@ -25,7 +27,7 @@
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="layers" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Card Bo Góc</span>
+                            <span class="wbh-gift-occasion-card__label">Card Bo Góc</span>
                         </a>
                     </div>
                     <div class="col">
@@ -33,7 +35,7 @@
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="badge-check" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Huy Hiệu Pin</span>
+                            <span class="wbh-gift-occasion-card__label">Huy Hiệu Pin</span>
                         </a>
                     </div>
                     <div class="col">
@@ -41,7 +43,7 @@
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="heart" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Mochi Ú Mini</span>
+                            <span class="wbh-gift-occasion-card__label">Mochi Ú Mini</span>
                         </a>
                     </div>
                     <div class="col">
@@ -49,15 +51,15 @@
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="package" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Blind Box</span>
+                            <span class="wbh-gift-occasion-card__label">Blind Box</span>
                         </a>
                     </div>
                     <div class="col">
                         <a href="/shop/category/anime-goods-merch-21" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"/>
+                                <i data-lucide="grid-2x2" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label fw-semibold">Tất Cả Merch</span>
+                            <span class="wbh-gift-occasion-card__label">Tất Cả Merch</span>
                         </a>
                     </div>
                 </div>

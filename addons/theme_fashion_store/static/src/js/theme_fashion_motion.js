@@ -3,7 +3,7 @@
 
     /**
      * Theme Web 2 — Fashion & Lookbook Motion + Lucide Icons (Odoo 19.0 Community)
-     * 3 chốt bảo vệ: Multi-website scope (.wbh-store-fashion), Website Builder Edit Mode, prefers-reduced-motion.
+     * Nguyên tắc Unslop: KHÔNG bao giờ ẩn nội dung (opacity: 0) khi tải hoặc cuộn nhanh.
      */
     function isWebsiteBuilderEditMode() {
         var body = document.body;
@@ -71,64 +71,24 @@
         observer.observe(mainCta);
     }
 
-    function initFashionMotion(scopeEl) {
+    function initSubtleEditorialMotion(scopeEl) {
         if (!window.gsap) {
             return;
         }
-        var gsap = window.gsap;
-        var ScrollTrigger = window.ScrollTrigger;
-        if (ScrollTrigger && typeof gsap.registerPlugin === 'function') {
-            gsap.registerPlugin(ScrollTrigger);
-        }
-
-        // 1. Editorial Hero entrance (power3.out mượt mà, không nảy)
-        var heroSection = scopeEl.querySelector('.s_fashion_lookbook_hero');
-        if (heroSection) {
-            var heroTargets = heroSection.querySelectorAll(
-                '.wbh-fashion-eyebrow, .wbh-fashion-hero-title, .wbh-fashion-hero-lead, .wbh-fashion-hero-cta, .wbh-fashion-hero-cta-secondary, .wbh-fashion-hero-media'
-            );
-            if (heroTargets.length) {
-                gsap.from(heroTargets, {
-                    y: 24,
-                    opacity: 0,
-                    duration: 0.75,
-                    stagger: 0.08,
+        // Chỉ trượt nhẹ trục Y (12px -> 0) trên media hero, không đưa opacity về 0
+        var heroMedia = scopeEl.querySelectorAll('.s_fashion_lookbook_hero .wbh-fashion-hero-media');
+        if (heroMedia.length) {
+            window.gsap.fromTo(
+                heroMedia,
+                { y: 12 },
+                {
+                    y: 0,
+                    duration: 0.45,
                     ease: 'power3.out',
-                    clearProps: 'transform,opacity',
-                });
-            }
+                    clearProps: 'transform',
+                }
+            );
         }
-
-        // 2. ScrollTrigger batch reveal cho Category Strip, Editorial Lookbook & /shop
-        if (!ScrollTrigger) {
-            return;
-        }
-        var revealGroups = [
-            '.wbh-fashion-cat-card',
-            '.wbh-fashion-editorial-card',
-            '.wbh-fashion-product-card',
-        ];
-        revealGroups.forEach(function (selector) {
-            var nodes = scopeEl.querySelectorAll(selector);
-            if (!nodes.length) {
-                return;
-            }
-            gsap.set(nodes, { opacity: 0, y: 22 });
-            ScrollTrigger.batch(nodes, {
-                start: 'top 90%',
-                once: true,
-                onEnter: function (batch) {
-                    gsap.to(batch, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.65,
-                        stagger: 0.07,
-                        ease: 'power3.out',
-                        clearProps: 'transform,opacity',
-                    });
-                },
-            });
-        });
     }
 
     function bootstrapFashionStore() {
@@ -146,7 +106,7 @@
         if (reduceMotion) {
             return;
         }
-        initFashionMotion(scopeEl);
+        initSubtleEditorialMotion(scopeEl);
     }
 
     if (document.readyState === 'loading') {

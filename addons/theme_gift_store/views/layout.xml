@@ -39,30 +39,30 @@
                 role="region"
                 aria-label="Thông tin cửa hàng quà tặng"
             >
-                <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-2">
-                    <div class="wbh-gift-topbar__tagline d-flex align-items-center gap-2">
+                <div class="container d-flex flex-nowrap align-items-center justify-content-between gap-2 py-2">
+                    <div class="wbh-gift-topbar__tagline d-none d-sm-flex align-items-center gap-2 text-truncate">
                         <i data-lucide="gift" class="wbh-lucide-icon" aria-hidden="true"/>
                         <span t-if="website.wbh_brand_tagline" t-field="website.wbh_brand_tagline"/>
-                        <span t-else="">Gửi trọn cảm xúc trong từng món quà nhỏ</span>
+                        <span t-else="">Chuyên Cotton Doll 20cm &amp; Anime Goods</span>
                     </div>
-                    <div class="wbh-gift-topbar__contacts d-flex align-items-center gap-3">
+                    <div class="wbh-gift-topbar__contacts d-flex flex-nowrap align-items-center justify-content-between justify-content-sm-end gap-2 gap-sm-3 w-100 w-sm-auto">
                         <a
                             t-if="website.wbh_support_hotline"
                             t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
-                            class="wbh-gift-topbar__link"
+                            class="wbh-gift-topbar__link text-nowrap d-inline-flex align-items-center gap-1"
                         >
-                            <i data-lucide="phone" class="wbh-lucide-icon me-1" aria-hidden="true"/>
-                            <span>Hotline: <t t-out="website.wbh_support_hotline"/></span>
+                            <i data-lucide="phone" class="wbh-lucide-icon" aria-hidden="true"/>
+                            <span t-out="website.wbh_support_hotline"/>
                         </a>
                         <a
                             t-if="website.wbh_support_zalo_url"
                             t-att-href="website.wbh_support_zalo_url"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="wbh-gift-topbar__zalo"
+                            class="wbh-gift-topbar__zalo text-nowrap d-inline-flex align-items-center gap-1"
                         >
-                            <i data-lucide="message-circle" class="wbh-lucide-icon me-1" aria-hidden="true"/>
-                            <span>Chat Zalo CSKH</span>
+                            <i data-lucide="message-circle" class="wbh-lucide-icon" aria-hidden="true"/>
+                            <span>Zalo CSKH</span>
                         </a>
                     </div>
                 </div>

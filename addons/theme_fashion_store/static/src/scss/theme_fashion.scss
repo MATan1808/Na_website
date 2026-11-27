@@ -59,12 +59,18 @@
     }
 
     // -------------------------------------------------------------------------
-    // Nút bấm Editorial tối giản, góc sắc nét
+    // Nút bấm Editorial tối giản, góc sắc nét (căn giữa dọc bằng inline-flex)
     // -------------------------------------------------------------------------
     .btn-primary,
     .wbh-fashion-btn-solid,
     .wbh-fashion-hero-cta,
     .wbh-fashion-sticky-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        line-height: 1.25;
+        min-height: 40px;
         background-color: var(--wbh-fashion-ink);
         border: 1px solid var(--wbh-fashion-ink);
         color: var(--wbh-fashion-paper);
@@ -73,7 +79,7 @@
         letter-spacing: 0.04em;
         text-transform: uppercase;
         font-size: 0.8125rem;
-        padding: 0.7rem 1.4rem;
+        padding: 0.65rem 1.35rem;
         transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
         &:hover,
@@ -86,6 +92,12 @@
 
     .wbh-fashion-btn-outline,
     .wbh-fashion-hero-cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        line-height: 1.25;
+        min-height: 40px;
         background-color: transparent;
         border: 1px solid var(--wbh-fashion-ink);
         color: var(--wbh-fashion-ink);
@@ -101,6 +113,31 @@
         &:focus-visible {
             background-color: var(--wbh-fashion-ink);
             color: var(--wbh-fashion-paper);
+        }
+    }
+
+    select.form-select,
+    .o_wsale_products_page select.form-select,
+    .o_wsale_product_page select.form-select {
+        height: 40px !important;
+        min-height: 40px !important;
+        padding: 0.45rem 2.25rem 0.45rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        line-height: 1.4 !important;
+        border-radius: 2px !important;
+        border: 1px solid rgba(17, 17, 17, 0.2) !important;
+        background-color: var(--wbh-fashion-paper) !important;
+        color: var(--wbh-fashion-ink) !important;
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+
+        &::after,
+        &::before {
+            display: none !important;
+            content: none !important;
         }
     }
 
@@ -286,6 +323,33 @@
         --o-wsale-card-thumb-fill-mode: cover;
         --o-wsale-card-border-radius: 0px;
         --o-wsale-card-thumb-border-radius: 0px;
+        display: flex;
+        flex-direction: column;
+
+        .oe_subdescription_wrapper,
+        .oe_subdescription {
+            display: none !important;
+        }
+
+        .o_add_wishlist {
+            width: 34px;
+            height: 34px;
+            border-radius: 50% !important;
+            background-color: rgba(255, 255, 255, 0.92) !important;
+            border: 1px solid rgba(17, 17, 17, 0.14) !important;
+            color: var(--wbh-fashion-ink) !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+        }
+
+        .product_price {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--wbh-fashion-ink);
+            font-variant-numeric: tabular-nums;
+        }
 
         .oe_product_image,
         .wbh-fashion-portrait-frame {

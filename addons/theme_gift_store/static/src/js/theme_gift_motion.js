@@ -3,7 +3,7 @@
 
     /**
      * Theme Web 1 — Gift & Anime Goods Motion + Lucide Icons (Odoo 19.0 Community)
-     * 3 chốt bảo vệ: Multi-website scope (.wbh-store-gift), Website Builder Edit Mode, prefers-reduced-motion.
+     * Nguyên tắc Unslop: KHÔNG bao giờ ẩn nội dung (opacity: 0) khi tải hoặc cuộn nhanh.
      */
     function isWebsiteBuilderEditMode() {
         var body = document.body;
@@ -22,12 +22,12 @@
             window.lucide.createIcons({
                 root: root || document,
                 attrs: {
-                    'stroke-width': '1.9',
+                    'stroke-width': '1.65',
                     'aria-hidden': 'true',
                 },
             });
         } catch (_err) {
-            // Không làm gián đoạn render nếu một node thiếu attribute
+            // Bỏ qua an toàn nếu một node không hợp lệ
         }
     }
 
@@ -70,64 +70,25 @@
         observer.observe(mainCta);
     }
 
-    function initGiftMotion(scopeEl) {
+    function initSubtleHeroMotion(scopeEl) {
         if (!window.gsap) {
             return;
         }
-        var gsap = window.gsap;
-        var ScrollTrigger = window.ScrollTrigger;
-        if (ScrollTrigger && typeof gsap.registerPlugin === 'function') {
-            gsap.registerPlugin(ScrollTrigger);
-        }
-
-        // 1. Hero entrance (nhẹ nhàng, ấm áp)
-        var heroSection = scopeEl.querySelector('.s_gift_hero');
-        if (heroSection) {
-            var heroTargets = heroSection.querySelectorAll(
-                '.wbh-gift-eyebrow, .wbh-gift-hero__title, .wbh-gift-hero__lead, .wbh-gift-hero__trust, .wbh-gift-hero__tile'
-            );
-            if (heroTargets.length) {
-                gsap.from(heroTargets, {
-                    y: 22,
-                    opacity: 0,
-                    duration: 0.65,
-                    stagger: 0.08,
+        // Chỉ trượt nhẹ trục Y (10px -> 0), KHÔNG đưa opacity về 0 để không bao giờ làm mờ nội dung
+        var galleryItems = scopeEl.querySelectorAll('.s_gift_hero .wbh-gift-hero__gallery-item');
+        if (galleryItems.length) {
+            window.gsap.fromTo(
+                galleryItems,
+                { y: 10 },
+                {
+                    y: 0,
+                    duration: 0.42,
+                    stagger: 0.06,
                     ease: 'power2.out',
-                    clearProps: 'transform,opacity',
-                });
-            }
+                    clearProps: 'transform',
+                }
+            );
         }
-
-        // 2. ScrollTrigger batch reveal cho danh mục, card nổi bật & lưới /shop
-        if (!ScrollTrigger) {
-            return;
-        }
-        var revealGroups = [
-            '.wbh-gift-occasion-card',
-            '.wbh-gift-featured-card',
-            '.oe_product_cart',
-        ];
-        revealGroups.forEach(function (selector) {
-            var nodes = scopeEl.querySelectorAll(selector);
-            if (!nodes.length) {
-                return;
-            }
-            gsap.set(nodes, { opacity: 0, y: 20 });
-            ScrollTrigger.batch(nodes, {
-                start: 'top 90%',
-                once: true,
-                onEnter: function (batch) {
-                    gsap.to(batch, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.55,
-                        stagger: 0.06,
-                        ease: 'power2.out',
-                        clearProps: 'transform,opacity',
-                    });
-                },
-            });
-        });
     }
 
     function bootstrapGiftStore() {
@@ -145,7 +106,7 @@
         if (reduceMotion) {
             return;
         }
-        initGiftMotion(scopeEl);
+        initSubtleHeroMotion(scopeEl);
     }
 
     if (document.readyState === 'loading') {

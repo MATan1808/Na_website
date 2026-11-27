@@ -23,17 +23,17 @@
                 <div class="wbh-gift-card-stock mt-1">
                     <t t-if="product.is_storable and product.sudo().qty_available &lt;= 0">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--out">
-                            <i data-lucide="clock" class="wbh-lucide-icon me-1" aria-hidden="true"/>Tạm hết hàng
+                            <i data-lucide="clock" class="wbh-lucide-icon" aria-hidden="true"/><span>Hết hàng</span>
                         </span>
                     </t>
                     <t t-elif="product.wbh_is_low_stock">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--low">
-                            <i data-lucide="zap" class="wbh-lucide-icon me-1" aria-hidden="true"/>Sắp hết hàng
+                            <i data-lucide="zap" class="wbh-lucide-icon" aria-hidden="true"/><span>Sắp hết</span>
                         </span>
                     </t>
                     <t t-else="">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--in">
-                            <i data-lucide="check-circle-2" class="wbh-lucide-icon me-1" aria-hidden="true"/>Sẵn hàng giao ngay
+                            <i data-lucide="check-circle-2" class="wbh-lucide-icon" aria-hidden="true"/><span>Sẵn hàng</span>
                         </span>
                     </t>
                 </div>
@@ -134,7 +134,7 @@
                 >
                     <span class="small fw-semibold d-inline-flex align-items-center">
                         <i data-lucide="headphones" class="wbh-lucide-icon me-2" aria-hidden="true"/>
-                        Cần tư vấn chọn size / gói quà gấp?
+                        Cần xem ảnh thật hoặc tư vấn chọn hàng?
                     </span>
                     <div class="d-flex flex-wrap gap-2">
                         <a

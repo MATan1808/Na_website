@@ -3,10 +3,23 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.11` — chuyển đơn vị tiền tệ mặc định sang `VNĐ (₫)`, dọn sạch sản phẩm test rác `T1` và đưa 15 sản phẩm thật Anime Goods lên đầu Trang 1 `/shop`).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.12` — tích hợp `heydamir/unslop` vào AIaC và khử toàn bộ "mùi AI" + lỗi UI/UX thực tế trên trang chủ, `/shop` và chi tiết sản phẩm).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.12 (2026-11-28)
+
+### Unslop 9 Passes — Khử "Mùi AI" & Sửa Triệt Để Lỗi UI/UX Trên Storefront Live (`theme_gift_store` & `theme_fashion_store` `v19.0.1.2.0`)
+- `[NEW]` **Tích hợp chính thức skill `heydamir/unslop` (`CC-BY-4.0`)** vào plugin AIaC `360-frontend-polish` (`v1.1.0`) tại `F:\BACKUP_LINUX\aiac\360org\plugins\360-frontend-polish\prompts\references\unslop\`.
+- `[FIX]` **Gỡ bỏ bẫy GSAP `opacity: 0` trên toàn trang chủ và `/shop`**: Thay thế cơ chế ẩn thẻ trước khi cuộn (`ScrollTrigger.batch`) bằng hiển thị tức thì `opacity: 1` (chỉ trượt nhẹ `y: 10px -> 0` trên gallery hero), tránh mất/mờ sản phẩm khi tải hoặc cuộn nhanh.
+- `[IMPROVE]` **Thay 100% khung pastel icon "AI slop" bằng ảnh sản phẩm thật**: Hero & Lưới nổi bật của Web 1 dùng trực tiếp ảnh chụp thật (`bakugo_doll_fullset.jpg`, `todoroki_goods_collection.jpg`, `bakugo_doll_body.jpg`, `bakugo_poster.jpg`), sửa lỗi chính tả `"bông bông"` và căn chỉnh câu chữ đúng ngành Anime Goods trên nền Warm Paper (`#F7F4EE`).
+- `[FIX]` **Khắc phục triệt để layout `/shop` & PDP**:
+  - Ẩn đoạn `.oe_subdescription` dài 8–12 dòng trên thẻ `/shop` giúp card đều tăm tắp trên cả desktop và mobile 2 cột.
+  - Vá lỗi `<select class="form-select">` bị lặp 2 mũi tên (`double-caret`) và cắt dọc chữ ở bộ lọc sidebar + trang chi tiết.
+  - Chuẩn hóa căn giữa dọc (`inline-flex`) cho mọi nút bấm, bọc nền trắng mờ cho nút Wishlist & mũi tên slider PDP, cố định topbar 1 hàng trên mobile `390px` và nới rộng ô tìm kiếm `/shop`.
 
 ---
 

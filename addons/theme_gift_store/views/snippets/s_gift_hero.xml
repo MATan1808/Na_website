@@ -2,71 +2,75 @@
 <odoo>
     <template id="s_gift_hero" name="Hero Cửa Hàng Quà Tặng">
         <section
-            class="s_gift_hero o_colored_level o_cc o_cc3 pt80 pb80"
+            class="s_gift_hero o_colored_level pt48 pb48"
             data-snippet="s_gift_hero"
             data-name="Hero Quà Tặng"
         >
             <div class="container">
                 <div class="row align-items-center g-4 g-lg-5">
                     <div class="col-lg-6">
-                        <span class="wbh-gift-eyebrow d-inline-flex align-items-center gap-2 mb-3">
-                            <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"/>
-                            <span>Bộ Sưu Tập Quà Tặng Mới Nhất</span>
-                        </span>
-                        <h1 class="wbh-gift-hero__title display-4 fw-bold mb-3">
-                            Trao gửi niềm vui qua từng món quà nhỏ xinh
-                        </h1>
-                        <p class="wbh-gift-hero__lead lead mb-4">
-                            Từ gấu bông bông PP siêu mềm, móc khóa thiết kế dễ thương đến những hộp Blind Box đầy bất ngờ — tất cả đều sẵn sàng gói đẹp và giao tận tay người thương.
+                        <p class="wbh-gift-kicker mb-2">
+                            Manh Dao Dao · Anime Goods &amp; Cotton Doll 20cm
                         </p>
-                        <div class="d-flex flex-wrap gap-3">
-                            <a href="/shop/category/anime-goods-merch-21" class="btn btn-lg wbh-gift-btn-primary d-inline-flex align-items-center gap-2">
-                                <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"/>
-                                <span>Anime Doll &amp; Goods Mới</span>
+                        <h1 class="wbh-gift-hero__title fw-semibold mb-3">
+                            Cotton Doll 20cm và phụ kiện Anime tuyển chọn, sẵn hàng giao ngay
+                        </h1>
+                        <p class="wbh-gift-hero__lead mb-4">
+                            Chuyên búp bê bông Cotton Doll 20cm kèm outfit, card bo góc, huy hiệu Can Badge và móc khóa nhân vật My Hero Academia — kiểm tra kỹ từng món và đóng hộp chống sốc cẩn thận.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="/shop/category/anime-goods-merch-21" class="btn btn-lg wbh-gift-btn-primary">
+                                <span>Xem bộ sưu tập</span>
+                                <i data-lucide="arrow-right" class="wbh-lucide-icon" aria-hidden="true"/>
                             </a>
-                            <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="btn btn-lg wbh-gift-btn-secondary d-inline-flex align-items-center gap-2">
-                                <i data-lucide="heart" class="wbh-lucide-icon" aria-hidden="true"/>
-                                <span>Búp Bê Cotton Doll 20cm</span>
+                            <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="btn btn-lg wbh-gift-btn-secondary">
+                                <span>Cotton Doll 20cm</span>
                             </a>
                         </div>
                         <div class="wbh-gift-hero__trust d-flex flex-wrap gap-4 mt-4 pt-2">
                             <div class="d-flex align-items-center gap-2">
                                 <i data-lucide="shield-check" class="wbh-lucide-icon wbh-gift-icon-accent" aria-hidden="true"/>
-                                <span>Chất liệu an toàn, êm mịn</span>
+                                <span>Ảnh chụp sản phẩm thật</span>
                             </div>
                             <div class="d-flex align-items-center gap-2">
-                                <i data-lucide="truck" class="wbh-lucide-icon wbh-gift-icon-accent" aria-hidden="true"/>
-                                <span>Đóng gói chống sốc cẩn thận</span>
+                                <i data-lucide="package-check" class="wbh-lucide-icon wbh-gift-icon-accent" aria-hidden="true"/>
+                                <span>Đóng hộp chống sốc kỹ</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="wbh-gift-hero__visual p-4 p-md-5">
+                        <div class="wbh-gift-hero__showcase">
                             <div class="row g-3">
-                                <div class="col-6">
-                                    <div class="wbh-gift-hero__tile wbh-gift-hero__tile--coral p-4 h-100">
-                                        <span class="wbh-gift-hero__badge">Bán chạy</span>
-                                        <h3 class="h5 fw-bold mt-3 mb-1">Gấu Bông Ôm Mềm</h3>
-                                        <p class="small mb-0">Đủ kích thước từ 15cm đến 1m2</p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="wbh-gift-hero__tile wbh-gift-hero__tile--honey p-4 h-100">
-                                        <span class="wbh-gift-hero__badge">Mới về</span>
-                                        <h3 class="h5 fw-bold mt-3 mb-1">Blind Box Sưu Tầm</h3>
-                                        <p class="small mb-0">Hộp lẻ bất ngờ &amp; Nguyên Set Full Case</p>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="wbh-gift-hero__tile wbh-gift-hero__tile--cream p-4 d-flex align-items-center justify-content-between gap-3">
-                                        <div>
-                                            <h3 class="h5 fw-bold mb-1">Móc Khóa &amp; Combo Theo Dịp</h3>
-                                            <p class="small mb-0">Sinh nhật, Valentine, Tốt nghiệp, 8/3 &amp; 20/10</p>
+                                <div class="col-7">
+                                    <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="wbh-gift-hero__gallery-item d-block text-decoration-none h-100">
+                                        <div class="wbh-gift-hero__photo-frame wbh-gift-hero__photo-frame--tall">
+                                            <img src="/wbh_core/static/src/img/anime_goods/bakugo_doll_fullset.jpg" alt="Búp bê Cotton Doll 20cm Bakugo Katsuki kèm Outfit" loading="eager"/>
                                         </div>
-                                        <a href="/shop" class="btn btn-sm wbh-gift-btn-primary text-nowrap">
-                                            Xem ngay
-                                        </a>
-                                    </div>
+                                        <div class="wbh-gift-hero__caption mt-2">
+                                            <span class="wbh-gift-hero__caption-title d-block">Cotton Doll 20cm &amp; Outfit</span>
+                                            <span class="wbh-gift-hero__caption-sub">Body bông thêu chi tiết · Set đồ rời</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-5 d-flex flex-column gap-3">
+                                    <a href="/shop/category/anime-goods-merch-card-bo-goc-photocards-23" class="wbh-gift-hero__gallery-item d-block text-decoration-none">
+                                        <div class="wbh-gift-hero__photo-frame">
+                                            <img src="/wbh_core/static/src/img/anime_goods/todoroki_goods_collection.jpg" alt="Bộ sưu tập Card Bo Góc và Huy hiệu Todoroki Shoto" loading="eager"/>
+                                        </div>
+                                        <div class="wbh-gift-hero__caption mt-2">
+                                            <span class="wbh-gift-hero__caption-title d-block">Card &amp; Can Badge</span>
+                                            <span class="wbh-gift-hero__caption-sub">Hologram &amp; ghim cài 58mm</span>
+                                        </div>
+                                    </a>
+                                    <a href="/shop/category/anime-goods-merch-21" class="wbh-gift-hero__gallery-item d-block text-decoration-none">
+                                        <div class="wbh-gift-hero__photo-frame">
+                                            <img src="/wbh_core/static/src/img/anime_goods/bakugo_poster.jpg" alt="Tranh ký Shikishi và Poster Bakugo" loading="eager"/>
+                                        </div>
+                                        <div class="wbh-gift-hero__caption mt-2">
+                                            <span class="wbh-gift-hero__caption-title d-block">Shikishi &amp; Goods</span>
+                                            <span class="wbh-gift-hero__caption-sub">Ép kim vàng sắc nét</span>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>

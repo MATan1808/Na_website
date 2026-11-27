@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.11` — Chuẩn hóa hiển thị tiền tệ **`VNĐ (₫)`**, đưa trọn bộ **15 sản phẩm thật Anime Goods** (*10 lô Facebook Manh Dao Dao `MDD-FB-001`..`MDD-FB-010` + 5 sản phẩm MHA chủ lực, 49 ảnh thật*) lên đầu Trang 1 `/shop`, tích hợp sẵn **Cloudflare Tunnel (`cloudflared`)**, `360-frontend-polish` (`GSAP`, `Lucide`, `Impeccable`) và lộ trình **4 Giai đoạn** ([docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)) chạy live trên Local Server (`http://100.64.56.52:1901`).  
+> **Trạng thái dự án**: `v0.3.12` — Cài đặt chính thức `heydamir/unslop` (`CC-BY-4.0`) vào AIaC và thực thi 9 passes khử "mùi AI" + vá lỗi UI/UX thực tế trên `/shop` & PDP (`wbh_core` `v19.0.1.1.2`, `theme_gift_store` `v19.0.1.2.0`, `theme_fashion_store` `v19.0.1.2.0`), chuẩn hóa hiển thị `VNĐ (₫)` và **15 sản phẩm thật Anime Goods** lên đầu Trang 1 `/shop`.  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`
