@@ -417,7 +417,7 @@ class TestWbhShopDynamicFilters(HttpCase):
                 return ''
 
             req.render = _capture_render
-            WbhWebsiteSale().shop(**kwargs)
+            WbhWebsiteSale.shop.original_endpoint(WbhWebsiteSale(), **kwargs)
         return captured
 
     def test_11_dynamic_tags_and_price_ranges_auto_appear_and_auto_hide(self):
