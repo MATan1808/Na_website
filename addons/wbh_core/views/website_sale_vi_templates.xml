@@ -10,7 +10,7 @@
         name="WBH — Việt hóa Breadcrumb Tất cả sản phẩm"
         priority="25"
     >
-        <xpath expr="//span[@placeholder='All products']" position="replace">
+        <xpath expr="//span" position="replace">
             <span t-if="website and website.wbh_store_type in ('gift', 'fashion')" placeholder="Tất cả sản phẩm">Tất cả sản phẩm</span>
             <span t-else="" placeholder="All products">All products</span>
         </xpath>
