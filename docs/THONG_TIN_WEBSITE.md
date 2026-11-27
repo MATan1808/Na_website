@@ -61,6 +61,28 @@ Hệ thống đã nạp sẵn 5 dòng sản phẩm chuẩn theo hình ảnh th�
    - Link web: `/shop/tranh-ky-shikishi-vien-vang-bakugo-katsuki-awakening-explosion-edition-44`
    - Mức giá: **65.000 đ** (Bìa cứng ép kim vàng, in cảnh bộc phá).
 
+#### Bộ 10 Lô Sản Phẩm & 49 Ảnh Thật Từ Facebook `Manh Dao Dao` (`MDD-FB-001` ➜ `MDD-FB-010`)
+- **Nguồn dữ liệu JSON**: [fb_manhdaodao_products.json](file:///F:/BACKUP_LINUX/web_ban_hang/addons/wbh_core/data/fb_manhdaodao_products.json) (37 biến thể)
+- **Nguồn bảng CSV (mở Excel)**: [fb_manhdaodao_products.csv](file:///F:/BACKUP_LINUX/web_ban_hang/addons/wbh_core/data/fb_manhdaodao_products.csv)
+- **Kho ảnh thật (`49` ảnh)**: `addons/wbh_core/static/src/img/fb_manhdaodao/`
+- **Script nạp chuẩn Idempotent**: `addons/wbh_core/scripts/import_fb_products.py`
+
+| Mã SKU | Tên sản phẩm trên Web | Giá từ | Biến thể / Ảnh |
+|---|---|---:|---:|
+| `MDD-FB-001` | Combo Goods Mới Về My Hero Academia (Card, Huy Hiệu, Sticker & Plushie) | 20.000 đ | 6 biến thể · 4 ảnh |
+| `MDD-FB-002` | Deal Full Bakugo Katsuki — Standee Acrylic, Card, Photocard, Móc Khóa & Nui Bông | 15.000 đ | 5 biến thể · 5 ảnh |
+| `MDD-FB-003` | Sale Card Bo Góc & Clear Card My Hero Academia Đồng Giá 15K | 15.000 đ | 3 biến thể · 5 ảnh |
+| `MDD-FB-004` | Goods Anime Pass Sẵn Giao Ngay — Huy Hiệu Can Badge, Card & Phụ Kiện | 25.000 đ | 3 biến thể · 5 ảnh |
+| `MDD-FB-005` | Bộ Deal Mới Share Goods Anime — Vé Ticket, Memo & Card Sưu Tầm | 25.000 đ | 3 biến thể · 5 ảnh |
+| `MDD-FB-006` | Card Polaroid Instax, Sticker & Huy Hiệu MHA Có Sẵn (Deku / Bakugo / Toga) | 15.000 đ | 4 biến thể · 5 ảnh |
+| `MDD-FB-007` | Deal Share Tổng Hợp Goods & Card Anime Đợt Tháng 11 (Hỗ Trợ Keep Hàng) | 30.000 đ | 3 biến thể · 5 ảnh |
+| `MDD-FB-008` | Bộ Sưu Tập Tổng Hợp MHA Đa Nhân Vật — Snapmide, Clear Card, Badge & Standee | 15.000 đ | 4 biến thể · 5 ảnh |
+| `MDD-FB-009` | Kho Clear Card & Goods MHA Hàng Có Sẵn (Bakugo / Kaminari / Kyoka Jiro) | 20.000 đ | 3 biến thể · 5 ảnh |
+| `MDD-FB-010` | Set Pass All Char Anime Goods & Card Sưu Tầm (Ưu Đãi Lấy Trọn Nhân Vật) | 25.000 đ | 3 biến thể · 5 ảnh |
+
+> **Lệnh đồng bộ lại dữ liệu từ file JSON khi sửa giá/mô tả**:  
+> `docker exec -i web-ban-hang-app odoo shell -c /etc/odoo/odoo.conf -d web_ban_hang_dev --no-http < /mnt/extra-addons/wbh_core/scripts/import_fb_products.py`
+
 ### 2.4. Trải Nghiệm Khách Hàng (UX Độc Quyền Anime Goods)
 - **Shop By Bias / Oshi (Mua Theo Nhân Vật)**: Bộ lọc sẵn cho phép khách bấm vào **Bakugo** hoặc **Todoroki** để lọc toàn bộ sản phẩm của riêng nhân vật đó.
 - **Cross-Sell Thay Đồ Búp Bê**: Mua Body Doll 20cm sẽ tự động gợi ý thêm các set Outfit áo khoác / đồ cosplay mini để thay đồ cho búp bê.
@@ -88,3 +110,64 @@ Hệ thống đã nạp sẵn 5 dòng sản phẩm chuẩn theo hình ảnh th�
 4. **Trang Quản Trị Backend Odoo (Admin)**:
    👉 [http://localhost:1901/web/login](http://localhost:1901/web/login)
    - Quản lý sản phẩm, đơn hàng, khách hàng, tồn kho và bảng giá.
+
+---
+
+## 5. HƯỚNG DẪN PUBLIC WEBSITE RA INTERNET & GẮN DOMAIN MIỄN PHÍ (MÁY Ở NHÀ)
+
+Địa chỉ hiện tại `http://100.64.56.52:1901` là IP nội bộ **Tailscale / CGNAT** (chưa có HTTPS và chưa có tên miền). Để bạn bè dùng 4G/Wifi bên ngoài truy cập mượt qua tên miền `https://manhdaodao...` (bỏ cổng `:1901`, không cần mở port modem/router ở nhà), anh có thể dùng **Cách 1 (Cloudflare Tunnel — chuẩn lâu dài)** hoặc **Cách 2 (Tailscale Funnel — chạy thử nhanh trong 1 phút)**.
+
+### Cách 1 — Gắn Domain miễn phí `manhdaodao.*` + Cloudflare Tunnel (Khuyên dùng)
+
+#### Gợi ý chọn đuôi tên miền miễn phí (tương thích Cloudflare DNS)
+| Tên miền gợi ý | Chi phí | Ghi chú |
+|---|---|---|
+| **`manhdaodao.id.vn`** | **Miễn phí 2 năm đầu** | Chương trình VNNIC cho công dân VN 18–23 tuổi (đăng ký tại `tenten.vn`, `nhanhoa.com`, `pavietnam.vn`). Đẹp và uy tín nhất để gửi bạn bè. |
+| **`manhdaodao.dpdns.org`** | **Miễn phí** | Đăng ký tại `https://dash.domain.digitalplat.org`, hỗ trợ trỏ Nameserver về Cloudflare Free. |
+| **`manhdaodao.pp.ua`** | **Miễn phí** | Đăng ký cộng đồng, cho trỏ Nameserver về Cloudflare Free. |
+| **`manhdaodao.shop` / `.store`** | ~25.000đ – 50.000đ/năm đầu | Tùy chọn mua rẻ (Porkbun/Namecheap/Cloudflare) nếu muốn đuôi quốc tế chuyên nghiệp không cần chờ duyệt. |
+
+> **Lưu ý:** Không dùng `duckdns.org` cho Cloudflare Tunnel vì DuckDNS không cho đổi Nameserver sang Cloudflare.
+
+#### 5 bước triển khai chi tiết
+1. **Bước 1 — Đăng ký tên miền & đưa lên Cloudflare Free (`\$0`)**:
+   - Đăng ký 1 tên miền `manhdaodao.<đuôi>` ở bảng trên.
+   - Đăng nhập `https://dash.cloudflare.com` ➜ **Add a domain** ➜ nhập `manhdaodao.<đuôi>` ➜ chọn gói **Free (`\$0`)**.
+   - Lấy 2 dòng **Nameserver** do Cloudflare cấp (`*.ns.cloudflare.com`), dán thay thế vào trang quản lý tên miền vừa đăng ký và đợi Cloudflare báo **Active**.
+2. **Bước 2 — Tạo Cloudflare Tunnel & lấy Token**:
+   - Trong Cloudflare, mở **Zero Trust** (gói Free) ➜ **Networks** ➜ **Tunnels** ➜ **Create a tunnel**.
+   - Chọn **Cloudflared** ➜ đặt tên `manhdaodao-home` ➜ copy chuỗi **`CLOUDFLARE_TUNNEL_TOKEN`** (`eyJhIjo...`) và **tuyệt đối không commit lên Git**.
+3. **Bước 3 — Khai báo Public Hostname trong Tunnel**:
+   - **Web 1 (Manh Dao Dao)**: Domain `manhdaodao.<đuôi>` (để trống Subdomain) ➜ Type: `HTTP` ➜ URL: `odoo:8069`.
+   - **Web 2 (Thời trang — tùy chọn)**: Subdomain `fashion`, Domain `manhdaodao.<đuôi>` ➜ Type: `HTTP` ➜ URL: `odoo:8069`.
+   - *(Lưu ý khi lên Giai đoạn 3 Livechat)*: thêm rule cho đường dẫn `/websocket` trỏ về `odoo:8072`.
+4. **Bước 4 — Bật `cloudflared` trong Docker trên máy ở nhà**:
+   ```bash
+   git pull origin main
+   ```
+   Mở tệp `.env` trên máy server ở nhà (tệp này đã có trong `.gitignore`), bỏ dấu `#` ở dòng `COMPOSE_PROFILES=tunnel` và dán token vào:
+   ```env
+   COMPOSE_PROFILES=tunnel
+   CLOUDFLARED_IMAGE=cloudflare/cloudflared:latest
+   CLOUDFLARE_TUNNEL_TOKEN=<dan_token_cloudflare_vao_day>
+   ```
+   Khởi chạy container Tunnel và kiểm tra log kết nối:
+   ```bash
+   docker compose --profile tunnel up -d
+   docker compose logs -f cloudflared
+   ```
+5. **Bước 5 — Cấu hình Domain chuẩn trong Odoo Backend**:
+   - Đăng nhập Backend Odoo ➜ **Website ➜ Cấu hình ➜ Website**, chọn từng website và điền **Tên miền (Domain)** là `https://manhdaodao.<đuôi>` (không kèm `:1901`).
+   - Vào **Cài đặt ➜ Kỹ thuật ➜ Tham số hệ thống**: đặt `web.base.url` = `https://manhdaodao.<đuôi>` và thêm/đặt `web.base.url.freeze` = `True` (tránh bị Odoo tự ghi đè lại IP `100.64.56.52:1901` mỗi khi admin đăng nhập bằng IP nội bộ).
+   - *(Ghi chú: Tệp `config/odoo.conf` đã bật sẵn `proxy_mode = True` nên Odoo tự nhận diện HTTPS chuẩn từ Cloudflare Tunnel.)*
+
+### Cách 2 — Bật nhanh trong 1 phút chưa cần đăng ký Domain (Tailscale Funnel)
+
+Nếu muốn gửi ngay đường dẫn có HTTPS cho bạn bè test trước khi kịp đăng ký domain:
+1. Vào `https://login.tailscale.com/admin/machines`, đổi tên máy server thành `manhdaodao`.
+2. Vào tab **DNS** (`https://login.tailscale.com/admin/dns`), bật **MagicDNS** và **HTTPS Certificates**.
+3. Chạy 1 lệnh trên máy server ở nhà:
+   ```bash
+   tailscale funnel --bg 1901
+   ```
+4. Chia sẻ đường dẫn trả về dạng `https://manhdaodao.<tailnet>.ts.net` cho bạn bè truy cập bình thường bằng 4G/Wifi mà không cần cài Tailscale.

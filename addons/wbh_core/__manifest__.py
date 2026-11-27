@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.1.1',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.1.1 (2026-11-27)
+------------------------
+- [NEW] Bổ sung bộ dữ liệu thật 10 lô sản phẩm (37 biến thể) & 49 ảnh từ Facebook Manh Dao Dao (`data/fb_manhdaodao_products.json`/`.csv`, `static/src/img/fb_manhdaodao/`) cùng script import idempotent `scripts/import_fb_products.py`.
 
 v19.0.1.1.0 (2026-11-27)
 ------------------------

@@ -52,6 +52,7 @@
 - [x] Fix tận gốc quyền đọc tồn kho trang `/shop` cho khách vãng lai (`compute_sudo=True` trên `wbh_is_low_stock` & `product.sudo().qty_available`).
 - [x] Tích hợp & nâng cấp live bộ công cụ UI/UX từ MochiStudio qua skill `360-frontend-polish` (`GSAP 3.15.1 + ScrollTrigger`, `Lucide 1.82.0` self-hosted, kiểm định `Impeccable`, `Front-End Checklist` & `UI UX Pro Max`, WCAG AA `>= 4.5:1`, vùng chạm `>= 44px`).
 - [x] Nạp bộ sản phẩm mẫu Anime Goods (Cotton Doll 20cm Bakugo, Card/Can Badge/Mochi Todoroki, Shikishi) đầy đủ biến thể.
+- [x] Chuẩn hóa & nạp live **10 lô sản phẩm + 37 biến thể + 49 ảnh thật** từ Facebook *Manh Dao Dao* (`fb_manhdaodao_products.json`/`.csv` & `import_fb_products.py`).
 - [ ] **Tối ưu Form đăng nhanh sản phẩm Anime Goods (`< 60 giây/món`)**: Gom toàn bộ ô cần thiết (*Tên, Giá bán, Giá gốc, Website, Ảnh/Album, Tồn kho, Nhãn lọc*) vào 1 màn hình gọn, ẩn tab kỹ thuật rườm rà.
 - [ ] **Hiển thị Giá gốc gạch ngang & Badge `% giảm`** tự động trên thẻ sản phẩm `/shop` và trang chi tiết khi `compare_list_price > list_price`.
 - [ ] **Kiểm thử trọn vẹn thao tác CRUD** (Tạo mới ➜ Sửa giá/ảnh ➜ Ẩn/Hiện ➜ Lưu trữ & Xóa nháp) trên Local Server.
@@ -86,6 +87,7 @@
 #### 2.3. Checklist tiến độ Giai đoạn 2
 - [x] Khởi tạo khung Danh mục Website (`product.public.category`) và 7 Thuộc tính mẫu trong `wbh_core`.
 - [x] Bật sẵn sidebar danh mục & thuộc tính trong `theme_gift_store/data/presets.xml`.
+- [x] Khởi tạo sẵn dữ liệu 2 thuộc tính `no_variant` thực tế (*Bộ Phim (Anime)* và *Nhân Vật (Bias)*) khi nạp 10 lô sản phẩm Facebook để chuẩn bị cho bộ lọc động.
 - [ ] Mở rộng `product.tag` trong `wbh_core`: thêm cờ `wbh_show_in_filter`, `wbh_tag_color`, `wbh_filter_group` và hiển thị ngay ô chọn nổi bật khi thêm/sửa sản phẩm.
 - [ ] Tạo 2 thuộc tính `no_variant` chuẩn cho Anime Goods (*Nhân vật*, *Bộ Anime*, *Phân loại Doll/Off*) giúp gõ mới nhân vật trực tiếp ngay lúc up SP mà không sinh SKU thừa.
 - [ ] Controller & Template `/shop` đọc động **nhãn `product.tag` + thuộc tính `no_variant` + khoảng giá Min/Max** (tự ẩn nhóm rỗng, đếm số SP thực tế, hỗ trợ lọc nhiều tiêu chí đồng thời).

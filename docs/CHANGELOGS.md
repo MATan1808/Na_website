@@ -3,10 +3,29 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.8` — đăng ký skill `360-frontend-polish` vào AIaC + cấu hình dự án và nâng cấp live `GSAP`/`Lucide` lên Local Server).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.10` — tích hợp sẵn `cloudflared` profile `tunnel` và hướng dẫn public domain miễn phí `manhdaodao.*` từ máy ở nhà).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.10 (2026-11-27)
+
+### Hỗ Trợ Public Website Máy Ở Nhà Qua Cloudflare Tunnel & Domain Miễn Phí
+- `[NEW]` **Bổ sung dịch vụ `cloudflared` (Docker Compose `profiles: ["tunnel"]`)** vào `docker-compose.yml` và các biến mẫu (`COMPOSE_PROFILES`, `CLOUDFLARED_IMAGE`, `CLOUDFLARE_TUNNEL_TOKEN`) vào `.env.example` để public website ra Internet có HTTPS xanh miễn phí mà không cần mở port modem/router.
+- `[NEW]` **Bổ sung Mục 5 trong `docs/THONG_TIN_WEBSITE.md`**: Hướng dẫn đăng ký domain miễn phí `manhdaodao.*`, cấu hình Cloudflare Tunnel (kèm `web.base.url.freeze`) và phương án bật nhanh Tailscale Funnel.
+
+---
+
+## v0.3.9 (2026-11-27)
+
+### Đồng Bộ Bộ 10 Sản Phẩm & 49 Ảnh Thật Facebook `Manh Dao Dao` (`MDD-FB-001` ➜ `MDD-FB-010`)
+- `[NEW]` **Bộ dữ liệu & hình ảnh sản phẩm thật** trong `wbh_core` (`v19.0.1.1.1`):
+  - `addons/wbh_core/data/fb_manhdaodao_products.json` & `fb_manhdaodao_products.csv`: 10 lô sản phẩm Anime Goods (*My Hero Academia*), tổng **37 biến thể**, kèm giá tham khảo, điểm nổi bật, lưu ý unbox và thuộc tính `no_variant` (*Bộ Phim (Anime)*, *Nhân Vật (Bias)*).
+  - `addons/wbh_core/static/src/img/fb_manhdaodao/*.jpg`: **49 ảnh thật** (`3,28 MB`) cho ảnh đại diện và gallery chi tiết từng sản phẩm.
+  - `addons/wbh_core/scripts/import_fb_products.py`: Script nạp idempotent chuẩn Odoo 19.0 Community (hỗ trợ cả `odoo shell` và chạy trực tiếp `python3`).
+- `[IMPROVE]` Cập nhật bảng sản phẩm và tiến độ thực tế trong `docs/THONG_TIN_WEBSITE.md`, `docs/ROADMAP_TIEN_DO.md` và `README.md`, đồng thời nạp live toàn bộ 10 sản phẩm lên Local Server `http://100.64.56.52:1901`.
 
 ---
 
