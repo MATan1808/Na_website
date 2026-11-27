@@ -21,6 +21,7 @@ Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản c�
   - Hiển thị giá gốc gạch ngang `compare_list_price` (chống trùng core) + huy hiệu `-XX%` trên thẻ `/shop` và PDP.
   - Hiển thị bảng bộ lọc động từ `wbh_filter_ctx` trên Sidebar & Offcanvas Mobile (`>= 44px` + badge đếm), dải Active Filter Chips (`×` & `Xóa tất cả`) và tối đa 2 nhãn động trên thẻ sản phẩm.
   - Thêm Hộp tư vấn 3 kênh trên PDP & `/shop/cart` (`Chat tại Web`, `Nhắn Facebook`, `Nhắn Zalo`, `Chép tên & link SP`) cùng Widget Liên hệ nổi 3 trong 1 (`bottom: 88px` không đè `#o_footer_scrolltop_wrapper` và sticky mobile bar).
+- `[IMPROVE]` **Tinh chỉnh Micro-UI sau kiểm định live (`theme_gift_store` & `theme_fashion_store`)**: Xuống dòng tự nhiên nhãn khoảng giá ở sidebar desktop (hết cắt `...`), bọc dòng thoáng cụm giá bán + giá gạch + `-XX%` trên lưới 2 cột mobile `390px`, ẩn nút `Bộ lọc` mobile trên desktop `>= 992px`, nâng nút sticky mobile lên `44px` và tăng tương phản placeholder tìm kiếm `/shop`.
 - `[NEW]` **Giai đoạn 4 Thanh toán (`wbh_payment_vietqr` `v19.0.1.0.0`, `LGPL-3`)**:
   - Sinh mã QR VietQR chuẩn EMVCo / Napas 247 (`CRC16-CCITT 0x1021`) offline qua `ir.actions.report.barcode`, tích hợp Webhook SePay Free (`POST /payment/vietqr/webhook/sepay`, xác thực `hmac.compare_digest`, idempotent) & adapter PayOS/Casso, API polling trạng thái giao dịch `/payment/vietqr/status/<reference>`, thẻ QR chuẩn `DESIGN.md` và quy tắc bật/tắt COD & gợi ý đặt cọc.
 - `[NEW]` **Giai đoạn 4 Vận chuyển (`wbh_delivery_vn` `v19.0.1.0.0`, `LGPL-3`)**:
