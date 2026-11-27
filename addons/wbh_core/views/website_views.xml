@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wbh_view_website_form" model="ir.ui.view">
+        <field name="name">website.form.inherit.wbh_core</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='domain']" position="after">
+                <group name="wbh_brand_config" string="Cấu hình Cửa hàng WBH">
+                    <group>
+                        <field name="wbh_store_type"/>
+                        <field name="specific_user_account"/>
+                        <field name="wbh_brand_tagline" placeholder="VD: Gửi trọn cảm xúc trong từng món quà nhỏ"/>
+                    </group>
+                    <group>
+                        <field name="wbh_support_hotline" placeholder="VD: 0900 000 001"/>
+                        <field name="wbh_support_zalo_url" widget="url" placeholder="https://zalo.me/..."/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="wbh_view_website_list" model="ir.ui.view">
+        <field name="name">website.list.inherit.wbh_core</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='domain']" position="after">
+                <field name="wbh_store_type" widget="badge"
+                       decoration-info="wbh_store_type == 'gift'"
+                       decoration-primary="wbh_store_type == 'fashion'"
+                       optional="show"/>
+                <field name="specific_user_account" optional="show"/>
+                <field name="wbh_support_hotline" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

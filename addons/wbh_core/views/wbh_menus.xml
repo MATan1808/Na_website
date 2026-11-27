@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==================== ACTIONS ==================== -->
+    <record id="action_wbh_gift_products" model="ir.actions.act_window">
+        <field name="name">Sản phẩm Web 1 — Quà tặng</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="domain">[('wbh_store_scope', 'in', ('gift', 'both'))]</field>
+        <field name="search_view_id" ref="website_sale.product_template_search_view_website"/>
+        <field name="context">{
+            'default_wbh_store_scope': 'gift',
+            'default_is_storable': True,
+            'list_view_ref': 'website_sale.product_template_view_tree_website_sale',
+            'kanban_view_ref': 'website_sale.product_template_view_kanban_website_sale',
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Thêm sản phẩm mới cho Web 1 — Quà tặng
+            </p>
+            <p>
+                Sản phẩm tạo từ đây sẽ tự động gán vào Cửa Hàng Quà Tặng (Gấu bông, Móc khóa, Blind Box) và bật theo dõi tồn kho.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_fashion_products" model="ir.actions.act_window">
+        <field name="name">Sản phẩm Web 2 — Thời trang</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="domain">[('wbh_store_scope', 'in', ('fashion', 'both'))]</field>
+        <field name="search_view_id" ref="website_sale.product_template_search_view_website"/>
+        <field name="context">{
+            'default_wbh_store_scope': 'fashion',
+            'default_is_storable': True,
+            'list_view_ref': 'website_sale.product_template_view_tree_website_sale',
+            'kanban_view_ref': 'website_sale.product_template_view_kanban_website_sale',
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Thêm sản phẩm mới cho Web 2 — Thời trang
+            </p>
+            <p>
+                Sản phẩm tạo từ đây sẽ tự động gán vào Cửa Hàng Thời Trang (Áo, Quần, Váy &amp; Đầm, Lookbook) và bật theo dõi tồn kho.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_public_categories" model="ir.actions.act_window">
+        <field name="name">Danh mục Website</field>
+        <field name="res_model">product.public.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="wbh_core.wbh_product_public_category_search_view"/>
+        <field name="context">{'search_default_group_by_website_id': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo danh mục Website mới
+            </p>
+            <p>
+                Phân nhóm cây danh mục riêng cho Web 1 (Quà tặng) và Web 2 (Thời trang).
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_product_attributes" model="ir.actions.act_window">
+        <field name="name">Thuộc tính &amp; Biến thể</field>
+        <field name="res_model">product.attribute</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Quản lý bộ thuộc tính biến thể dùng chung cho 2 cửa hàng
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_website_orders" model="ir.actions.act_window">
+        <field name="name">Đơn hàng 2 Website</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="domain">[('website_id', '!=', False)]</field>
+        <field name="search_view_id" ref="website_sale.view_sales_order_filter_ecommerce"/>
+        <field name="context">{
+            'show_sale': True,
+            'search_default_wbh_group_by_website_id': 1,
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                Chưa có đơn hàng nào từ 2 Website
+            </p>
+        </field>
+    </record>
+
+    <record id="action_wbh_websites" model="ir.actions.act_window">
+        <field name="name">Cấu hình 2 Website</field>
+        <field name="res_model">website</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="website.view_website_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cấu hình thông tin thương hiệu, hotline và link Zalo cho từng Website
+            </p>
+        </field>
+    </record>
+
+    <!-- ==================== MENUS ==================== -->
+    <menuitem id="menu_wbh_root"
+              name="2 Cửa Hàng (WBH)"
+              sequence="15"
+              groups="wbh_core.group_wbh_catalog_user"/>
+
+    <menuitem id="menu_wbh_gift_products"
+              name="Sản phẩm Web 1 — Quà tặng"
+              parent="menu_wbh_root"
+              action="action_wbh_gift_products"
+              sequence="10"/>
+
+    <menuitem id="menu_wbh_fashion_products"
+              name="Sản phẩm Web 2 — Thời trang"
+              parent="menu_wbh_root"
+              action="action_wbh_fashion_products"
+              sequence="20"/>
+
+    <menuitem id="menu_wbh_public_categories"
+              name="Danh mục Website"
+              parent="menu_wbh_root"
+              action="action_wbh_public_categories"
+              sequence="30"/>
+
+    <menuitem id="menu_wbh_product_attributes"
+              name="Thuộc tính &amp; Biến thể"
+              parent="menu_wbh_root"
+              action="action_wbh_product_attributes"
+              sequence="40"/>
+
+    <menuitem id="menu_wbh_website_orders"
+              name="Đơn hàng 2 Website"
+              parent="menu_wbh_root"
+              action="action_wbh_website_orders"
+              sequence="50"/>
+
+    <menuitem id="menu_wbh_websites"
+              name="Cấu hình 2 Website"
+              parent="menu_wbh_root"
+              action="action_wbh_websites"
+              groups="wbh_core.group_wbh_manager"
+              sequence="60"/>
+</odoo>

@@ -1,0 +1,28 @@
+// =============================================================================
+// Theme Web 2 — Cửa Hàng Thời Trang (Editor / WYSIWYG Helpers — Odoo 19.0)
+// Nạp trong bundle website.assets_wysiwyg, cô lập trong .wbh-store-fashion
+// =============================================================================
+
+.wbh-store-fashion {
+    // Khung nhận diện rõ ràng khi kéo-thả Building Blocks trong Website Builder
+    section[data-snippet^="s_fashion_"] {
+        min-height: 120px;
+    }
+}
+
+// .editor_enable được Odoo gắn trên <body> (cha của #wrapwrap.wbh-store-fashion)
+.editor_enable {
+    .wbh-store-fashion {
+        // Hiển thị nhẹ viền gợi ý vùng ảnh Lookbook 3:4 khi đang chỉnh sửa
+        .wbh-fashion-portrait-placeholder,
+        .wbh-fashion-editorial-placeholder {
+            outline: 1px dashed rgba(17, 17, 17, 0.35);
+            outline-offset: -4px;
+        }
+
+        // Ẩn thanh sticky mobile trong chế độ Website Builder để không che công cụ chỉnh sửa
+        .wbh-fashion-mobile-sticky-bar {
+            display: none !important;
+        }
+    }
+}

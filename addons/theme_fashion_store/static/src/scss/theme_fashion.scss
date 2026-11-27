@@ -1,0 +1,503 @@
+// =============================================================================
+// Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook)
+// TOÀN BỘ RULE BẮT BUỘC BỌC TRONG .wbh-store-fashion ĐỂ CÔ LẬP TUYỆT ĐỐI VỚI WEB 1
+// =============================================================================
+
+.wbh-store-fashion {
+    --o-color-1: #{$wbh-fashion-color-1};
+    --o-color-2: #{$wbh-fashion-color-2};
+    --o-color-3: #{$wbh-fashion-color-3};
+    --o-color-4: #{$wbh-fashion-color-4};
+    --o-color-5: #{$wbh-fashion-color-5};
+
+    --wbh-fashion-ink: #{$wbh-fashion-color-1};
+    --wbh-fashion-sand: #{$wbh-fashion-color-2};
+    --wbh-fashion-stone: #{$wbh-fashion-color-3};
+    --wbh-fashion-paper: #{$wbh-fashion-color-4};
+    --wbh-fashion-text: #{$wbh-fashion-color-5};
+    --wbh-fashion-border: rgba(17, 17, 17, 0.12);
+
+    --bs-primary: #{$wbh-fashion-color-1};
+    --bs-primary-rgb: 17, 17, 17;
+    --bs-body-bg: #{$wbh-fashion-color-4};
+    --bs-body-color: #{$wbh-fashion-color-5};
+    --bs-body-font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    font-family: var(--bs-body-font-family);
+    color: var(--wbh-fashion-text);
+    background-color: var(--wbh-fashion-paper);
+
+    h1, h2, h3, h4, h5, h6,
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+        font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        letter-spacing: -0.02em;
+        color: var(--wbh-fashion-ink);
+    }
+
+    // -------------------------------------------------------------------------
+    // Nút bấm Editorial tối giản, góc sắc nét
+    // -------------------------------------------------------------------------
+    .btn-primary,
+    .wbh-fashion-btn-solid,
+    .wbh-fashion-hero-cta,
+    .wbh-fashion-sticky-cta {
+        background-color: var(--wbh-fashion-ink);
+        border: 1px solid var(--wbh-fashion-ink);
+        color: var(--wbh-fashion-paper);
+        border-radius: 2px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.8125rem;
+        padding: 0.7rem 1.4rem;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--wbh-fashion-text);
+            border-color: var(--wbh-fashion-text);
+            color: var(--wbh-fashion-paper);
+        }
+    }
+
+    .wbh-fashion-btn-outline,
+    .wbh-fashion-hero-cta-secondary {
+        background-color: transparent;
+        border: 1px solid var(--wbh-fashion-ink);
+        color: var(--wbh-fashion-ink);
+        border-radius: 2px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.8125rem;
+        padding: 0.65rem 1.35rem;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--wbh-fashion-ink);
+            color: var(--wbh-fashion-paper);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Topbar & Header tối giản Editorial
+    // -------------------------------------------------------------------------
+    .wbh-fashion-topbar {
+        background-color: var(--wbh-fashion-ink);
+        color: var(--wbh-fashion-paper);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+
+        .wbh-fashion-topbar-tagline {
+            color: rgba(255, 255, 255, 0.88);
+            font-weight: 500;
+        }
+
+        .wbh-fashion-topbar-link {
+            color: var(--wbh-fashion-paper);
+            font-weight: 500;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: var(--wbh-fashion-sand);
+            }
+        }
+    }
+
+    header#top .navbar {
+        background-color: var(--wbh-fashion-paper) !important;
+        border-bottom: 1px solid var(--wbh-fashion-border);
+        box-shadow: none !important;
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--wbh-fashion-ink);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Tiện ích tỷ lệ khung ảnh dọc 3:4 chuẩn Lookbook thời trang
+    // -------------------------------------------------------------------------
+    .wbh-ratio-3x4 {
+        aspect-ratio: 3 / 4;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .wbh-fashion-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        color: #7A695B;
+    }
+
+    // -------------------------------------------------------------------------
+    // Building Blocks (Hero, Category Strip, Editorial Grid)
+    // -------------------------------------------------------------------------
+    .wbh-fashion-hero {
+        background-color: var(--wbh-fashion-stone);
+        color: var(--wbh-fashion-text);
+
+        .wbh-fashion-hero-title {
+            color: var(--wbh-fashion-ink);
+            line-height: 1.15;
+        }
+
+        .wbh-fashion-hero-lead {
+            color: #4A4A4A;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        .wbh-fashion-portrait-placeholder {
+            background: linear-gradient(145deg, #EAE4DC 0%, #D9CEC2 100%);
+            border: 1px solid var(--wbh-fashion-border);
+            color: var(--wbh-fashion-ink);
+        }
+    }
+
+    .wbh-fashion-category-strip {
+        background-color: var(--wbh-fashion-paper);
+
+        .wbh-fashion-inline-link {
+            color: var(--wbh-fashion-ink);
+            border-bottom: 1px solid var(--wbh-fashion-ink);
+            padding-bottom: 2px;
+        }
+
+        .wbh-fashion-cat-card {
+            color: var(--wbh-fashion-ink);
+
+            .wbh-fashion-cat-frame {
+                background-color: var(--wbh-fashion-stone);
+                border: 1px solid var(--wbh-fashion-border);
+                transition: border-color 0.25s ease, transform 0.25s ease;
+            }
+
+            .wbh-fashion-cat-visual {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                background: linear-gradient(180deg, rgba(245, 245, 243, 0.9) 0%, rgba(200, 182, 166, 0.28) 100%);
+            }
+
+            .wbh-fashion-cat-code {
+                font-size: 0.7rem;
+                letter-spacing: 0.18em;
+                color: #7A695B;
+                margin-bottom: 0.5rem;
+            }
+
+            .wbh-fashion-cat-label {
+                font-size: 1.125rem;
+                color: var(--wbh-fashion-ink);
+            }
+
+            .wbh-fashion-cat-sub {
+                color: #5C5C5C;
+                margin-top: 0.25rem;
+            }
+
+            &:hover .wbh-fashion-cat-frame {
+                border-color: var(--wbh-fashion-ink);
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    .wbh-fashion-editorial-grid {
+        background-color: var(--wbh-fashion-stone);
+
+        .wbh-fashion-editorial-card {
+            a {
+                color: inherit;
+            }
+
+            .wbh-fashion-editorial-img {
+                background: linear-gradient(160deg, #FFFFFF 0%, #EAE3DB 100%);
+                border: 1px solid var(--wbh-fashion-border);
+                transition: border-color 0.2s ease;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .wbh-fashion-editorial-placeholder {
+                width: 100%;
+                height: 100%;
+                color: var(--wbh-fashion-ink);
+            }
+
+            .wbh-fashion-editorial-tag {
+                font-size: 0.7rem;
+                letter-spacing: 0.12em;
+                color: #7A695B;
+                font-weight: 600;
+            }
+
+            &:hover .wbh-fashion-editorial-img {
+                border-color: var(--wbh-fashion-ink);
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Trang Shop — Thẻ sản phẩm tỷ lệ dọc 3:4 (object-fit: cover) & Color Swatch
+    // -------------------------------------------------------------------------
+    .oe_product_cart,
+    .wbh-fashion-product-card {
+        --o-wsale-card-thumb-aspect-ratio: 3 / 4;
+        --o-wsale-card-thumb-fill-mode: cover;
+        --o-wsale-card-border-radius: 0px;
+        --o-wsale-card-thumb-border-radius: 0px;
+
+        .oe_product_image,
+        .wbh-fashion-portrait-frame {
+            background-color: var(--wbh-fashion-stone);
+            border-radius: 0;
+        }
+
+        .oe_product_image_link {
+            aspect-ratio: 3 / 4;
+            width: 100%;
+            overflow: hidden;
+
+            .oe_product_image_img,
+            .oe_product_image_img_secondary,
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover !important;
+                object-position: center top;
+            }
+        }
+
+        .o_wsale_products_item_title {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 0.25rem;
+
+            a {
+                color: var(--wbh-fashion-ink);
+            }
+        }
+
+        .product_price {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--wbh-fashion-ink);
+        }
+
+        .wbh-fashion-card-swatches {
+            min-height: 18px;
+
+            .wbh-fashion-swatch-dot {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                display: inline-block;
+                border: 1px solid rgba(17, 17, 17, 0.25);
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+            }
+        }
+
+        .o_wsale_attribute_previewer {
+            .css_attribute_color {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 1px solid rgba(17, 17, 17, 0.25);
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Trang Chi Tiết Sản Phẩm — Gallery dọc, Highlight, Swatch & Size Pills Mobile
+    // -------------------------------------------------------------------------
+    .o_wsale_product_page {
+        .o_wsale_product_images {
+            .o_product_detail_img_wrapper {
+                aspect-ratio: 3 / 4;
+                background-color: var(--wbh-fashion-stone);
+                overflow: hidden;
+
+                img.product_detail_img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center top;
+                }
+            }
+        }
+
+        .wbh-fashion-highlight-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.75rem;
+            background-color: var(--wbh-fashion-stone);
+            border-left: 3px solid var(--wbh-fashion-sand);
+            font-size: 0.875rem;
+            color: var(--wbh-fashion-text);
+        }
+
+        // Color Swatch rõ ràng trên trang chi tiết
+        .css_attribute_color {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(17, 17, 17, 0.28);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+            &.active {
+                box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--wbh-fashion-ink);
+                transform: scale(1.06);
+            }
+        }
+
+        // Nút chọn Size dạng pills lớn dễ chạm 1 tay trên điện thoại
+        .o_variant_pills {
+            min-width: 52px;
+            min-height: 44px;
+            padding: 0.5rem 0.9rem;
+            border-radius: 2px !important;
+            border: 1px solid rgba(17, 17, 17, 0.24) !important;
+            background-color: var(--wbh-fashion-paper);
+            color: var(--wbh-fashion-ink);
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+
+            &:hover {
+                border-color: var(--wbh-fashion-ink) !important;
+            }
+
+            &.active,
+            &.border-primary {
+                background-color: var(--wbh-fashion-ink) !important;
+                border-color: var(--wbh-fashion-ink) !important;
+                color: var(--wbh-fashion-paper) !important;
+            }
+        }
+
+        .wbh-fashion-care-accordion {
+            border-color: var(--wbh-fashion-border) !important;
+
+            .accordion-button {
+                font-size: 0.8125rem;
+                letter-spacing: 0.08em;
+                color: var(--wbh-fashion-ink);
+                box-shadow: none;
+            }
+
+            .wbh-fashion-care-body {
+                font-size: 0.9rem;
+                line-height: 1.65;
+                color: #4A4A4A;
+            }
+        }
+
+        // Thanh Sticky Bottom Add-to-Cart trên Mobile
+        .wbh-fashion-mobile-sticky-bar {
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid var(--wbh-fashion-border);
+            box-shadow: 0 -6px 20px rgba(17, 17, 17, 0.08);
+            z-index: 1030;
+
+            .wbh-fashion-sticky-price {
+                min-width: 0;
+                line-height: 1.25;
+            }
+
+            .wbh-fashion-sticky-amount {
+                font-size: 1rem;
+                color: var(--wbh-fashion-ink);
+            }
+
+            .wbh-fashion-sticky-cta {
+                min-height: 44px;
+                padding: 0.65rem 1.15rem;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            padding-bottom: 76px;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Bộ lọc Sidebar & Mobile Drawer trên trang /shop
+    // -------------------------------------------------------------------------
+    .o_wsale_products_page {
+        #products_grid_before {
+            border-right: 1px solid var(--wbh-fashion-border);
+        }
+
+        .o_wsale_offcanvas {
+            background-color: var(--wbh-fashion-paper);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Extension Slots (ẩn sạch khi rỗng ở M1, sẵn sàng cho M2/M3)
+    // -------------------------------------------------------------------------
+    .wbh-ext-slot:empty {
+        display: none;
+    }
+
+    // -------------------------------------------------------------------------
+    // Footer Editorial riêng Web 2
+    // -------------------------------------------------------------------------
+    .wbh-fashion-footer-band {
+        background-color: var(--wbh-fashion-stone);
+        border-top: 1px solid var(--wbh-fashion-border);
+        color: var(--wbh-fashion-text);
+
+        .wbh-fashion-footer-brand {
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            color: var(--wbh-fashion-ink);
+        }
+
+        .wbh-fashion-footer-tagline {
+            font-size: 0.9rem;
+            color: #4A4A4A;
+        }
+
+        .wbh-fashion-footer-heading {
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+            color: var(--wbh-fashion-ink);
+        }
+
+        .wbh-fashion-footer-links li {
+            margin-bottom: 0.45rem;
+
+            a {
+                color: #4A4A4A;
+                text-decoration: none;
+                font-size: 0.9rem;
+                transition: color 0.15s ease;
+
+                &:hover {
+                    color: var(--wbh-fashion-ink);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

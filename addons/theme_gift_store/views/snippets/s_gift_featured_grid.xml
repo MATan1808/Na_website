@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_gift_featured_grid" name="Lưới Quà Tặng Nổi Bật">
+        <section
+            class="s_gift_featured_grid o_colored_level o_cc o_cc3 pt64 pb64"
+            data-snippet="s_gift_featured_grid"
+            data-name="Lưới Quà Tặng Nổi Bật"
+        >
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+                    <div>
+                        <span class="wbh-gift-eyebrow d-inline-block mb-2">Gợi Ý Được Yêu Thích</span>
+                        <h2 class="h3 fw-bold mb-0">Quà tặng nổi bật tại cửa hàng</h2>
+                    </div>
+                    <a href="/shop" class="btn wbh-gift-btn-outline">
+                        Xem toàn bộ cửa hàng <i class="fa fa-angle-right ms-1" aria-hidden="true"/>
+                    </a>
+                </div>
+                <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-lg-4">
+                    <div class="col">
+                        <div class="wbh-gift-featured-card h-100 d-flex flex-column">
+                            <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--1 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-heart fa-3x" aria-hidden="true"/>
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <span class="wbh-gift-tag mb-2">Gấu bông</span>
+                                <h3 class="h6 fw-bold mb-1">Gấu Bông Bông PP Siêu Mềm</h3>
+                                <p class="small text-muted mb-3 flex-grow-1">Đa dạng kích thước 15cm – 1m2, màu pastel ngọt ngào, tặng kèm túi rút.</p>
+                                <a href="/shop?search=Gấu+bông" class="btn btn-sm wbh-gift-btn-primary w-100">Xem mẫu gấu bông</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wbh-gift-featured-card h-100 d-flex flex-column">
+                            <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-key fa-3x" aria-hidden="true"/>
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <span class="wbh-gift-tag mb-2">Móc khóa</span>
+                                <h3 class="h6 fw-bold mb-1">Móc Khóa Acrylic &amp; Hợp Kim</h3>
+                                <p class="small text-muted mb-3 flex-grow-1">Thiết kế nhỏ gọn, bền màu, dễ treo balo, túi xách hoặc làm quà đôi.</p>
+                                <a href="/shop?search=Móc+khóa" class="btn btn-sm wbh-gift-btn-primary w-100">Xem mẫu móc khóa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wbh-gift-featured-card h-100 d-flex flex-column">
+                            <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--3 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-cube fa-3x" aria-hidden="true"/>
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <span class="wbh-gift-tag mb-2">Blind Box</span>
+                                <h3 class="h6 fw-bold mb-1">Blind Box Sưu Tầm Chính Hãng</h3>
+                                <p class="small text-muted mb-3 flex-grow-1">Tùy chọn Hộp lẻ (1 Box) mở bất ngờ hoặc Nguyên Set (Full Case) sưu tầm.</p>
+                                <a href="/shop?search=Blind+Box" class="btn btn-sm wbh-gift-btn-primary w-100">Mở hộp Blind Box</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="wbh-gift-featured-card h-100 d-flex flex-column">
+                            <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--4 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-gift fa-3x" aria-hidden="true"/>
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <span class="wbh-gift-tag mb-2">Combo quà tặng</span>
+                                <h3 class="h6 fw-bold mb-1">Hộp Quà Combo Theo Dịp</h3>
+                                <p class="small text-muted mb-3 flex-grow-1">Phối sẵn hài hòa cho Sinh nhật, Valentine, Tốt nghiệp, 8/3 &amp; 20/10.</p>
+                                <a href="/shop?search=Combo" class="btn btn-sm wbh-gift-btn-primary w-100">Chọn combo quà</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

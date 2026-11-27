@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. Thẻ sản phẩm trên trang /shop — Tỷ lệ dọc 3:4, Color Swatch & Highlight (chỉ Web 2) -->
+    <template id="products_item_fashion" inherit_id="website_sale.products_item" name="WBH Fashion — Thẻ Sản Phẩm 3:4">
+        <xpath expr="//form[contains(@t-attf-class, 'oe_product_cart')]" position="attributes">
+            <attribute name="t-attf-class" add="#{'wbh-fashion-product-card' if website and website.wbh_store_type == 'fashion' else ''}" separator=" "/>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'oe_product_image')]" position="attributes">
+            <attribute name="t-attf-class" add="#{'wbh-fashion-portrait-frame' if website and website.wbh_store_type == 'fashion' else ''}" separator=" "/>
+        </xpath>
+        <xpath expr="//h2[hasclass('o_wsale_products_item_title')]" position="before">
+            <t t-if="website and website.wbh_store_type == 'fashion' and not product_ptavs_data">
+                <t t-set="wbh_color_lines" t-value="product.valid_product_template_attribute_line_ids.filtered(lambda l: l.attribute_id.display_type == 'color')"/>
+                <div t-if="wbh_color_lines" class="wbh-fashion-card-swatches d-flex align-items-center gap-1 mb-2" aria-label="Tùy chọn màu sắc">
+                    <t t-foreach="wbh_color_lines[0].product_template_value_ids._only_active()[:6]" t-as="color_ptav">
+                        <span class="wbh-fashion-swatch-dot"
+                              t-att-title="color_ptav.name"
+                              t-attf-style="background-color: #{color_ptav.html_color or '#111111'};"/>
+                    </t>
+                    <span t-if="len(wbh_color_lines[0].product_template_value_ids._only_active()) &gt; 6"
+                          class="wbh-fashion-swatch-more small text-muted">
+                        +<t t-out="len(wbh_color_lines[0].product_template_value_ids._only_active()) - 6"/>
+                    </span>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//h2[hasclass('o_wsale_products_item_title')]" position="after">
+            <p t-if="website and website.wbh_store_type == 'fashion' and product.wbh_short_highlight"
+               class="wbh-fashion-card-highlight text-muted small mb-1 text-truncate"
+               t-field="product.wbh_short_highlight"/>
+        </xpath>
+    </template>
+
+    <!-- 2. Tiêu đề trang chi tiết sản phẩm — Điểm nổi bật ngắn (wbh_short_highlight) -->
+    <template id="product_title_fashion" inherit_id="website_sale.product_title" name="WBH Fashion — Điểm Nổi Bật Sản Phẩm">
+        <xpath expr="//h1[@t-field='product.name']" position="after">
+            <div t-if="website and website.wbh_store_type == 'fashion' and product.wbh_short_highlight"
+                 class="wbh-fashion-highlight-badge mb-3">
+                <span class="wbh-fashion-highlight-text" t-field="product.wbh_short_highlight"/>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- 3. Trang chi tiết sản phẩm — 4 Extension Slots M2/M3, Accordion Bảo quản & Sticky Mobile Bar -->
+    <template id="product_detail_fashion" inherit_id="website_sale.product" name="WBH Fashion — Chi Tiết Sản Phẩm &amp; Extension Slots">
+        <!-- Extension Slot M2: Video người mẫu dọc 9:16 trong khu vực media gallery -->
+        <xpath expr="//div[contains(@t-attf-class, 'o_wsale_product_images')]" position="inside">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <div id="wbh_fashion_video_gallery_slot" class="wbh-ext-slot"/>
+            </t>
+        </xpath>
+
+        <!-- Extension Slot M3: Banner đồng hồ đếm ngược Flash Sale đặt ngay trên giá sản phẩm -->
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_price')]" position="before">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <div id="wbh_flash_sale_banner_slot" class="wbh-ext-slot"/>
+            </t>
+        </xpath>
+
+        <!-- Extension Slot M2: Nút mở OWL Gợi ý Size thông minh đặt cạnh khu vực chọn Size Quần Áo -->
+        <xpath expr="//div[contains(@t-attf-class, 'o_wsale_product_details_content_section_attributes')]" position="after">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <div id="wbh_fashion_size_advisor_slot" class="wbh-ext-slot mb-3"/>
+            </t>
+        </xpath>
+
+        <!-- Accordion Chất liệu & Hướng dẫn giặt ủi (product.wbh_care_note) -->
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_cta')]" position="after">
+            <div t-if="website and website.wbh_store_type == 'fashion' and product.wbh_care_note"
+                 class="wbh-fashion-care-accordion accordion accordion-flush border-top border-bottom my-4"
+                 id="wbh_fashion_care_accordion">
+                <div class="accordion-item bg-transparent border-0">
+                    <h2 class="accordion-header" id="wbh_fashion_care_heading">
+                        <button class="accordion-button collapsed bg-transparent px-0 py-3 fw-semibold text-uppercase"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#wbh_fashion_care_collapse"
+                                aria-expanded="false"
+                                aria-controls="wbh_fashion_care_collapse">
+                            Chất liệu &amp; Hướng dẫn giặt ủi
+                        </button>
+                    </h2>
+                    <div id="wbh_fashion_care_collapse"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="wbh_fashion_care_heading"
+                         data-bs-parent="#wbh_fashion_care_accordion">
+                        <div class="accordion-body px-0 pt-0 pb-3 wbh-fashion-care-body">
+                            <p class="mb-0" style="white-space: pre-line;" t-field="product.wbh_care_note"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Extension Slot M2 (Shop The Look) + Thanh Sticky Bottom Add-to-Cart trên Mobile -->
+        <xpath expr="//section[@id='product_detail']" position="after">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <div id="wbh_fashion_shop_the_look_slot" class="wbh-ext-slot container my-4"/>
+
+                <div t-if="is_add_to_cart_possible and not (combination_info and combination_info.get('prevent_zero_price_sale'))"
+                     class="wbh-fashion-mobile-sticky-bar d-lg-none fixed-bottom o_not_editable">
+                    <div class="container d-flex align-items-center justify-content-between gap-3 py-2">
+                        <div class="wbh-fashion-sticky-price">
+                            <span class="d-block small text-muted text-truncate" t-out="product.name"/>
+                            <strong class="wbh-fashion-sticky-amount"
+                                    t-out="combination_info.get('price', product.list_price) if combination_info else product.list_price"
+                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        </div>
+                        <a href="#add_to_cart"
+                           role="button"
+                           class="btn wbh-fashion-sticky-cta flex-shrink-0"
+                           onclick="var btn = document.getElementById('add_to_cart'); if (btn) { btn.click(); } return false;">
+                            <i class="fa fa-shopping-bag me-2" aria-hidden="true"/>
+                            Thêm vào giỏ
+                        </a>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

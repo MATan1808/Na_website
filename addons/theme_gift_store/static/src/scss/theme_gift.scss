@@ -1,0 +1,495 @@
+// -----------------------------------------------------------------------------
+// Theme Web 1 — Cửa Hàng Quà Tặng (Frontend Styles — Strictly Scoped)
+// MỌI selector đều bọc trong `.wbh-store-gift` để tuyệt đối không xung đột
+// với Web 2 (`theme_fashion_store`) trên cùng cơ sở dữ liệu Multi-Website.
+// -----------------------------------------------------------------------------
+
+.wbh-store-gift {
+    --wbh-gift-primary: #{$wbh-gift-color-1};
+    --wbh-gift-primary-hover: #E85576;
+    --wbh-gift-secondary: #{$wbh-gift-color-2};
+    --wbh-gift-secondary-hover: #F2A02E;
+    --wbh-gift-cream: #{$wbh-gift-color-3};
+    --wbh-gift-surface: #{$wbh-gift-color-4};
+    --wbh-gift-ink: #{$wbh-gift-color-5};
+    --wbh-gift-muted: #765E61;
+    --wbh-gift-border: #F4DFE4;
+    --wbh-gift-radius-card: 16px;
+    --wbh-gift-radius-pill: 999px;
+    --wbh-gift-shadow-sm: 0 6px 20px rgba(61, 44, 46, 0.06);
+    --wbh-gift-shadow-hover: 0 12px 28px rgba(255, 107, 139, 0.16);
+
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--wbh-gift-ink);
+    background-color: var(--wbh-gift-surface);
+
+    h1, h2, h3, h4, h5, h6,
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+        font-family: 'Quicksand', 'Be Vietnam Pro', sans-serif;
+        color: var(--wbh-gift-ink);
+    }
+
+    // -------------------------------------------------------------------------
+    // Buttons & Badges
+    // -------------------------------------------------------------------------
+    .wbh-gift-btn-primary,
+    .btn-primary {
+        background-color: var(--wbh-gift-primary);
+        border-color: var(--wbh-gift-primary);
+        color: #FFFFFF;
+        border-radius: var(--wbh-gift-radius-pill);
+        font-weight: 600;
+        transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+
+        &:hover,
+        &:focus {
+            background-color: var(--wbh-gift-primary-hover);
+            border-color: var(--wbh-gift-primary-hover);
+            color: #FFFFFF;
+            box-shadow: 0 8px 18px rgba(255, 107, 139, 0.28);
+        }
+    }
+
+    .wbh-gift-btn-secondary {
+        background-color: var(--wbh-gift-secondary);
+        border-color: var(--wbh-gift-secondary);
+        color: var(--wbh-gift-ink);
+        border-radius: var(--wbh-gift-radius-pill);
+        font-weight: 600;
+
+        &:hover,
+        &:focus {
+            background-color: var(--wbh-gift-secondary-hover);
+            border-color: var(--wbh-gift-secondary-hover);
+            color: var(--wbh-gift-ink);
+        }
+    }
+
+    .wbh-gift-btn-outline {
+        background-color: var(--wbh-gift-surface);
+        border: 1.5px solid var(--wbh-gift-primary);
+        color: var(--wbh-gift-primary);
+        border-radius: var(--wbh-gift-radius-pill);
+        font-weight: 600;
+
+        &:hover,
+        &:focus {
+            background-color: var(--wbh-gift-primary);
+            color: #FFFFFF;
+        }
+    }
+
+    .wbh-gift-eyebrow {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--wbh-gift-primary-hover);
+        background-color: rgba(255, 107, 139, 0.12);
+        padding: 0.35rem 0.85rem;
+        border-radius: var(--wbh-gift-radius-pill);
+    }
+
+    .wbh-gift-icon-accent {
+        color: var(--wbh-gift-primary);
+    }
+
+    // -------------------------------------------------------------------------
+    // Top Announcement Bar & Footer Support Band
+    // -------------------------------------------------------------------------
+    .wbh-gift-topbar {
+        background: linear-gradient(90deg, #FF6B8B 0%, #FF8E72 60%, #FFB347 100%);
+        color: #FFFFFF;
+        font-size: 0.875rem;
+
+        .wbh-gift-topbar__tagline {
+            font-weight: 600;
+        }
+
+        .wbh-gift-topbar__link {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 600;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .wbh-gift-topbar__zalo {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 0.2rem 0.75rem;
+            border-radius: var(--wbh-gift-radius-pill);
+            font-weight: 600;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.32);
+                color: #FFFFFF;
+            }
+        }
+    }
+
+    .wbh-gift-footer-band {
+        background-color: var(--wbh-gift-cream);
+        border-top: 1px solid var(--wbh-gift-border);
+
+        .wbh-gift-footer-band__title {
+            color: var(--wbh-gift-ink);
+            font-weight: 700;
+        }
+
+        .wbh-gift-footer-band__desc {
+            color: var(--wbh-gift-muted);
+            font-size: 0.9375rem;
+        }
+
+        .wbh-gift-footer-band__heading {
+            font-weight: 700;
+            color: var(--wbh-gift-ink);
+        }
+
+        .wbh-gift-footer-band__links a {
+            color: var(--wbh-gift-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            &:hover {
+                color: var(--wbh-gift-primary);
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Home Snippets (s_gift_hero, s_gift_occasion_bar, s_gift_featured_grid)
+    // -------------------------------------------------------------------------
+    .s_gift_hero {
+        background-color: var(--wbh-gift-cream);
+
+        .wbh-gift-hero__lead {
+            color: var(--wbh-gift-muted);
+        }
+
+        .wbh-gift-hero__visual {
+            background-color: var(--wbh-gift-surface);
+            border-radius: 24px;
+            border: 1px solid var(--wbh-gift-border);
+            box-shadow: var(--wbh-gift-shadow-sm);
+        }
+
+        .wbh-gift-hero__tile {
+            border-radius: var(--wbh-gift-radius-card);
+
+            &--coral {
+                background-color: #FFE8EE;
+            }
+
+            &--honey {
+                background-color: #FFF2DC;
+            }
+
+            &--cream {
+                background-color: var(--wbh-gift-cream);
+                border: 1px dashed var(--wbh-gift-primary);
+            }
+        }
+
+        .wbh-gift-hero__badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.65rem;
+            border-radius: var(--wbh-gift-radius-pill);
+            background-color: var(--wbh-gift-surface);
+            color: var(--wbh-gift-primary-hover);
+        }
+    }
+
+    .wbh-gift-occasion-card {
+        background-color: var(--wbh-gift-cream);
+        border: 1px solid var(--wbh-gift-border);
+        border-radius: var(--wbh-gift-radius-card);
+        color: var(--wbh-gift-ink);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            border-color: var(--wbh-gift-primary);
+            box-shadow: var(--wbh-gift-shadow-hover);
+            color: var(--wbh-gift-primary-hover);
+        }
+
+        .wbh-gift-occasion-card__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--wbh-gift-surface);
+            color: var(--wbh-gift-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: var(--wbh-gift-shadow-sm);
+        }
+    }
+
+    .wbh-gift-featured-card {
+        background-color: var(--wbh-gift-surface);
+        border: 1px solid var(--wbh-gift-border);
+        border-radius: var(--wbh-gift-radius-card);
+        overflow: hidden;
+        box-shadow: var(--wbh-gift-shadow-sm);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--wbh-gift-shadow-hover);
+        }
+
+        .wbh-gift-featured-card__media {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+
+            &--1 {
+                background: linear-gradient(135deg, #FFE4EC 0%, #FFF6F0 100%);
+                color: #FF6B8B;
+            }
+
+            &--2 {
+                background: linear-gradient(135deg, #FFF0D4 0%, #FFF8EC 100%);
+                color: #E08A1E;
+            }
+
+            &--3 {
+                background: linear-gradient(135deg, #F4E8FF 0%, #FFF6F0 100%);
+                color: #9A5CD0;
+            }
+
+            &--4 {
+                background: linear-gradient(135deg, #FFE8DF 0%, #FFF6F0 100%);
+                color: #E85D75;
+            }
+        }
+
+        .wbh-gift-tag {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--wbh-gift-radius-pill);
+            background-color: var(--wbh-gift-cream);
+            color: var(--wbh-gift-primary-hover);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Shop Grid Cards: tỷ lệ ảnh 1:1, bo góc mềm 16px, Color Swatch & Stock Badge
+    // -------------------------------------------------------------------------
+    .oe_product_cart {
+        background-color: var(--wbh-gift-surface);
+        border: 1px solid var(--wbh-gift-border);
+        border-radius: var(--wbh-gift-radius-card);
+        overflow: hidden;
+        box-shadow: var(--wbh-gift-shadow-sm);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--wbh-gift-shadow-hover);
+        }
+
+        .oe_product_image {
+            border-radius: var(--wbh-gift-radius-card) var(--wbh-gift-radius-card) 0 0;
+            background-color: var(--wbh-gift-cream);
+
+            .oe_product_image_link,
+            .oe_product_image_img_wrapper {
+                aspect-ratio: 1 / 1;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            img.oe_product_image_img,
+            img.oe_product_image_img_secondary {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .o_wsale_product_information {
+            padding: 0.85rem 1rem 1rem;
+        }
+
+        .o_wsale_products_item_title {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .product_price {
+            color: var(--wbh-gift-primary-hover);
+            font-size: 1.05rem;
+        }
+    }
+
+    .wbh-gift-card-highlight {
+        color: var(--wbh-gift-muted);
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .wbh-gift-stock-badge {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.18rem 0.55rem;
+        border-radius: var(--wbh-gift-radius-pill);
+
+        &--in {
+            background-color: #E9F8EF;
+            color: #1F7A46;
+        }
+
+        &--low {
+            background-color: #FFF3DC;
+            color: #A65E00;
+        }
+
+        &--out {
+            background-color: #F6ECEE;
+            color: #7D5B61;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Product Detail Page: Highlight Badge, Variants Pills/Color, Accordion, Sticky Bar
+    // -------------------------------------------------------------------------
+    .wbh-gift-highlight-badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: var(--wbh-gift-cream);
+        border: 1px solid var(--wbh-gift-border);
+        border-left: 4px solid var(--wbh-gift-primary);
+        color: var(--wbh-gift-ink);
+        padding: 0.55rem 0.9rem;
+        border-radius: 12px;
+        font-size: 0.9375rem;
+        font-weight: 600;
+    }
+
+    .o_wsale_product_page {
+        .o_wsale_product_images img {
+            border-radius: var(--wbh-gift-radius-card);
+        }
+
+        // Biến thể Pills thân thiện thao tác chạm 1 tay trên mobile
+        .o_variant_pills {
+            border-radius: var(--wbh-gift-radius-pill);
+            padding: 0.45rem 0.95rem;
+            border: 1.5px solid var(--wbh-gift-border);
+            font-weight: 600;
+            color: var(--wbh-gift-ink);
+            background-color: var(--wbh-gift-surface);
+
+            &.active,
+            &:has(input:checked) {
+                border-color: var(--wbh-gift-primary);
+                background-color: var(--wbh-gift-cream);
+                color: var(--wbh-gift-primary-hover);
+            }
+        }
+
+        // Chấm màu Color Swatch tròn rõ ràng
+        .css_attribute_color {
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 0 0 1.5px rgba(61, 44, 46, 0.25);
+
+            &.active {
+                box-shadow: 0 0 0 2.5px var(--wbh-gift-primary);
+            }
+        }
+    }
+
+    .wbh-gift-care-accordion {
+        .accordion-item {
+            border: 1px solid var(--wbh-gift-border);
+            border-radius: var(--wbh-gift-radius-card);
+            overflow: hidden;
+            background-color: var(--wbh-gift-surface);
+        }
+
+        .accordion-button {
+            background-color: var(--wbh-gift-cream);
+            color: var(--wbh-gift-ink);
+            box-shadow: none;
+
+            &:not(.collapsed) {
+                color: var(--wbh-gift-primary-hover);
+                background-color: #FFEFF3;
+            }
+        }
+
+        .wbh-gift-care-note {
+            white-space: pre-line;
+            color: var(--wbh-gift-muted);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+    }
+
+    .wbh-gift-support-box {
+        background-color: var(--wbh-gift-cream);
+        border: 1px solid var(--wbh-gift-border);
+        border-radius: var(--wbh-gift-radius-card);
+    }
+
+    .wbh-ext-slot:empty {
+        display: none;
+    }
+
+    // Sticky Bottom Bar trên Mobile
+    .wbh-gift-sticky-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1030;
+        background-color: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(8px);
+        border-top: 1px solid var(--wbh-gift-border);
+        box-shadow: 0 -6px 20px rgba(61, 44, 46, 0.08);
+        padding: 0.65rem 0;
+
+        .wbh-gift-sticky-bar__name {
+            color: var(--wbh-gift-muted);
+            font-weight: 500;
+        }
+
+        .wbh-gift-sticky-bar__price {
+            color: var(--wbh-gift-primary-hover);
+            font-size: 1.05rem;
+        }
+
+        .wbh-gift-sticky-bar__btn {
+            padding: 0.55rem 1.15rem;
+        }
+    }
+
+    // Chừa khoảng trống chân trang trên mobile để sticky bar không che nội dung
+    @media (max-width: 991.98px) {
+        .o_wsale_product_page {
+            padding-bottom: 76px;
+        }
+    }
+}

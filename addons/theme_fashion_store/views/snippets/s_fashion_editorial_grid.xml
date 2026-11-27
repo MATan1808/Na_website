@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_fashion_editorial_grid" name="Lưới Editorial Tỷ Lệ 3:4">
+        <section class="s_fashion_editorial_grid wbh-fashion-editorial-grid o_colored_level o_cc o_cc2 pt64 pb64"
+                 data-snippet="s_fashion_editorial_grid"
+                 data-name="Lưới Editorial Tỷ Lệ 3:4">
+            <div class="container">
+                <div class="row align-items-end mb-4">
+                    <div class="col-lg-8">
+                        <span class="wbh-fashion-eyebrow text-uppercase d-block mb-1">Editorial Picks</span>
+                        <h2 class="h3 fw-semibold mb-1">Gợi Ý Phối Đồ Nổi Bật</h2>
+                        <p class="text-muted mb-0">
+                            Khung hình dọc 3:4 tôn trọn phom dáng trang phục — nhấn trực tiếp để khám phá chi tiết sản phẩm.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                        <a href="/shop" class="btn wbh-fashion-btn-outline">
+                            Mở Cửa Hàng
+                        </a>
+                    </div>
+                </div>
+                <div class="row g-3 g-lg-4">
+                    <div class="col-6 col-lg-4">
+                        <article class="wbh-fashion-editorial-card h-100">
+                            <a href="/shop" class="d-block text-decoration-none">
+                                <div class="wbh-fashion-editorial-img wbh-ratio-3x4 mb-3">
+                                    <div class="wbh-fashion-editorial-placeholder d-flex flex-column align-items-center justify-content-center p-3 text-center">
+                                        <span class="small text-uppercase fw-semibold">Look 01</span>
+                                        <span class="small opacity-75">Ảnh mẫu dọc 3:4</span>
+                                    </div>
+                                </div>
+                                <div class="wbh-fashion-editorial-meta">
+                                    <span class="wbh-fashion-editorial-tag text-uppercase">Everyday Essential</span>
+                                    <h3 class="h6 fw-semibold mt-1 mb-1">Áo Sơ Mi Linen &amp; Quần Ống Rộng</h3>
+                                    <span class="small text-muted">Xem bộ sưu tập →</span>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="col-6 col-lg-4">
+                        <article class="wbh-fashion-editorial-card h-100">
+                            <a href="/shop" class="d-block text-decoration-none">
+                                <div class="wbh-fashion-editorial-img wbh-ratio-3x4 mb-3">
+                                    <div class="wbh-fashion-editorial-placeholder d-flex flex-column align-items-center justify-content-center p-3 text-center">
+                                        <span class="small text-uppercase fw-semibold">Look 02</span>
+                                        <span class="small opacity-75">Ảnh mẫu dọc 3:4</span>
+                                    </div>
+                                </div>
+                                <div class="wbh-fashion-editorial-meta">
+                                    <span class="wbh-fashion-editorial-tag text-uppercase">Minimal Office</span>
+                                    <h3 class="h6 fw-semibold mt-1 mb-1">Blazer Đứng Form &amp; Chân Váy Midi</h3>
+                                    <span class="small text-muted">Xem bộ sưu tập →</span>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <article class="wbh-fashion-editorial-card h-100">
+                            <a href="/shop" class="d-block text-decoration-none">
+                                <div class="wbh-fashion-editorial-img wbh-ratio-3x4 mb-3">
+                                    <div class="wbh-fashion-editorial-placeholder d-flex flex-column align-items-center justify-content-center p-3 text-center">
+                                        <span class="small text-uppercase fw-semibold">Look 03</span>
+                                        <span class="small opacity-75">Ảnh mẫu dọc 3:4</span>
+                                    </div>
+                                </div>
+                                <div class="wbh-fashion-editorial-meta">
+                                    <span class="wbh-fashion-editorial-tag text-uppercase">Weekend Relaxed</span>
+                                    <h3 class="h6 fw-semibold mt-1 mb-1">Áo Thun Cotton 250gsm &amp; Jeans Ống Suông</h3>
+                                    <span class="small text-muted">Xem bộ sưu tập →</span>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

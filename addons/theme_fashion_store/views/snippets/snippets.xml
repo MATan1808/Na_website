@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Đăng ký 3 Building Blocks thời trang vào Website Builder của Odoo 19.0 -->
+    <template id="snippets_fashion" inherit_id="website.snippets" name="WBH Fashion — Building Blocks">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="theme_fashion_store.s_fashion_lookbook_hero"
+               string="Lookbook Hero Thời Trang"
+               group="intro"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_cover.svg">
+                <keywords>fashion, lookbook, hero, thoi trang, banner, editorial, collection</keywords>
+            </t>
+            <t t-snippet="theme_fashion_store.s_fashion_category_strip"
+               string="Lưới Danh Mục Thời Trang"
+               group="catalog"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg">
+                <keywords>fashion, category, ao, quan, vay, set do, danh muc, thoi trang</keywords>
+            </t>
+            <t t-snippet="theme_fashion_store.s_fashion_editorial_grid"
+               string="Lưới Editorial Tỷ Lệ 3:4"
+               group="catalog"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_picture.svg">
+                <keywords>fashion, editorial, grid, 3:4, lookbook, outfit, thoi trang</keywords>
+            </t>
+        </xpath>
+    </template>
+</odoo>

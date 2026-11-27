@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_fashion_lookbook_hero" name="Lookbook Hero Thời Trang">
+        <section class="s_fashion_lookbook_hero wbh-fashion-hero o_colored_level o_cc o_cc5 pt96 pb96"
+                 data-snippet="s_fashion_lookbook_hero"
+                 data-name="Lookbook Hero Thời Trang">
+            <div class="container">
+                <div class="row align-items-center gy-4">
+                    <div class="col-lg-6">
+                        <span class="wbh-fashion-eyebrow d-inline-block text-uppercase mb-3">
+                            New Season Lookbook
+                        </span>
+                        <h1 class="wbh-fashion-hero-title display-4 fw-semibold mb-3">
+                            Tối Giản Hiện Đại.<br/>Chuẩn Form Từng Khoảnh Khắc.
+                        </h1>
+                        <p class="wbh-fashion-hero-lead lead mb-4">
+                            Chất liệu tự nhiên thoáng mát, đường cắt tinh giản dễ phối hằng ngày từ công sở đến dạo phố.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="/shop" class="btn btn-lg wbh-fashion-hero-cta">
+                                Xem Bộ Sưu Tập Mới
+                            </a>
+                            <a href="/shop?order=create_date+desc" class="btn btn-lg wbh-fashion-hero-cta-secondary">
+                                Hàng Mới Về
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="wbh-fashion-hero-media">
+                            <div class="wbh-fashion-portrait-placeholder ratio wbh-ratio-3x4">
+                                <div class="d-flex flex-column align-items-center justify-content-center text-center p-4">
+                                    <i class="fa fa-camera fa-2x mb-2 opacity-50" aria-hidden="true"/>
+                                    <span class="small text-uppercase fw-medium">Ảnh Lookbook 3:4</span>
+                                    <span class="small opacity-75">Nhấp để thay ảnh bộ sưu tập trên Website Builder</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

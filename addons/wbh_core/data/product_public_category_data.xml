@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ==================== NHÁNH DANH MỤC WEB 1 — QUÀ TẶNG ==================== -->
+    <record id="pub_cat_gift_plush" model="product.public.category">
+        <field name="name">Gấu bông</field>
+        <field name="sequence" eval="10"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_keychain" model="product.public.category">
+        <field name="name">Móc khóa</field>
+        <field name="sequence" eval="20"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_blindbox" model="product.public.category">
+        <field name="name">Blind Box</field>
+        <field name="sequence" eval="30"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_occasion" model="product.public.category">
+        <field name="name">Quà theo dịp</field>
+        <field name="sequence" eval="40"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_occasion_birthday" model="product.public.category">
+        <field name="name">Sinh nhật</field>
+        <field name="sequence" eval="10"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_gift_occasion"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_occasion_valentine" model="product.public.category">
+        <field name="name">Valentine</field>
+        <field name="sequence" eval="20"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_gift_occasion"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_occasion_graduation" model="product.public.category">
+        <field name="name">Tốt nghiệp</field>
+        <field name="sequence" eval="30"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_gift_occasion"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_occasion_womens_day" model="product.public.category">
+        <field name="name">8/3 &amp; 20/10</field>
+        <field name="sequence" eval="40"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_gift_occasion"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <record id="pub_cat_gift_combo" model="product.public.category">
+        <field name="name">Combo quà tặng</field>
+        <field name="sequence" eval="50"/>
+        <field name="website_id" ref="wbh_core.website_gift_store"/>
+    </record>
+
+    <!-- ==================== NHÁNH DANH MỤC WEB 2 — THỜI TRANG ==================== -->
+    <record id="pub_cat_fashion_tops" model="product.public.category">
+        <field name="name">Áo</field>
+        <field name="sequence" eval="10"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_tops_tshirt" model="product.public.category">
+        <field name="name">Áo thun</field>
+        <field name="sequence" eval="10"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_fashion_tops"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_tops_shirt" model="product.public.category">
+        <field name="name">Áo sơ mi</field>
+        <field name="sequence" eval="20"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_fashion_tops"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_tops_jacket" model="product.public.category">
+        <field name="name">Áo khoác</field>
+        <field name="sequence" eval="30"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_fashion_tops"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_bottoms" model="product.public.category">
+        <field name="name">Quần</field>
+        <field name="sequence" eval="20"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_bottoms_jeans" model="product.public.category">
+        <field name="name">Quần jeans</field>
+        <field name="sequence" eval="10"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_fashion_bottoms"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_bottoms_wide" model="product.public.category">
+        <field name="name">Quần ống rộng / Tây</field>
+        <field name="sequence" eval="20"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_fashion_bottoms"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_bottoms_shorts" model="product.public.category">
+        <field name="name">Quần short</field>
+        <field name="sequence" eval="30"/>
+        <field name="parent_id" ref="wbh_core.pub_cat_fashion_bottoms"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_dresses" model="product.public.category">
+        <field name="name">Váy &amp; Đầm</field>
+        <field name="sequence" eval="30"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_sets" model="product.public.category">
+        <field name="name">Set đồ / Lookbook</field>
+        <field name="sequence" eval="40"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+
+    <record id="pub_cat_fashion_accessories" model="product.public.category">
+        <field name="name">Phụ kiện thời trang</field>
+        <field name="sequence" eval="50"/>
+        <field name="website_id" ref="wbh_core.website_fashion_store"/>
+    </record>
+</odoo>

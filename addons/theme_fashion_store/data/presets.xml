@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Presets Upgrade-Safe Odoo 19.0 Community cho Web 2 Thời trang -->
+    <data noupdate="1">
+        <!-- Gán theme_fashion_store làm theme chính thức cho Web 2 (tự kích hoạt _theme_load riêng Web 2) -->
+        <record id="wbh_core.website_fashion_store" model="website">
+            <field name="theme_id" ref="base.module_theme_fashion_store"/>
+            <field name="shop_ppr" eval="4"/>
+            <field name="product_page_image_ratio">4_5</field>
+            <field name="product_page_image_ratio_mobile">4_5</field>
+        </record>
+
+        <!-- Bật bộ lọc danh mục & thuộc tính Shop chuẩn Odoo 19.0 Community (an toàn dùng chung cả 2 web) -->
+        <record id="website_sale.products_categories" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+        <record id="website_sale.products_attributes" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+        <record id="website_sale.filter_products_price" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+        <record id="website_sale_wishlist.add_to_wishlist" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+        <record id="website_sale_wishlist.product_add_to_wishlist" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

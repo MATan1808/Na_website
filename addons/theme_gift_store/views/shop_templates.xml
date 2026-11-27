@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Tùy biến Trang Shop & Trang Chi Tiết Sản Phẩm cho Web 1 — Quà Tặng (Odoo 19.0 Community).
+        Mọi phần tử QWeb chèn thêm đều khóa chặt trong t-if="website and website.wbh_store_type == 'gift'"
+        để tuyệt đối không ảnh hưởng tới Web 2 (theme_fashion_store) trên cùng cơ sở dữ liệu Multi-Website.
+    -->
+
+    <!-- 1. Thẻ sản phẩm /shop: thêm highlight ngắn & nhãn tình trạng tồn kho -->
+    <template
+        id="gift_products_item"
+        inherit_id="website_sale.products_item"
+        name="WBH Gift Store Product Card"
+        priority="20"
+    >
+        <xpath expr="//div[hasclass('o_wsale_product_information_text')]" position="inside">
+            <t t-if="website and website.wbh_store_type == 'gift'">
+                <p
+                    t-if="product.wbh_short_highlight"
+                    class="wbh-gift-card-highlight small mb-1"
+                    t-field="product.wbh_short_highlight"
+                />
+                <div class="wbh-gift-card-stock mt-1">
+                    <t t-if="product.is_storable and product.qty_available &lt;= 0">
+                        <span class="wbh-gift-stock-badge wbh-gift-stock-badge--out">
+                            <i class="fa fa-clock-o me-1" aria-hidden="true"/>Tạm hết hàng
+                        </span>
+                    </t>
+                    <t t-elif="product.wbh_is_low_stock">
+                        <span class="wbh-gift-stock-badge wbh-gift-stock-badge--low">
+                            <i class="fa fa-bolt me-1" aria-hidden="true"/>Sắp hết hàng
+                        </span>
+                    </t>
+                    <t t-else="">
+                        <span class="wbh-gift-stock-badge wbh-gift-stock-badge--in">
+                            <i class="fa fa-check-circle me-1" aria-hidden="true"/>Sẵn hàng giao ngay
+                        </span>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- 2. Tiêu đề trang chi tiết: badge wbh_short_highlight & Extension Slot so sánh kích thước -->
+    <template
+        id="gift_product_title"
+        inherit_id="website_sale.product_title"
+        name="WBH Gift Store Product Title &amp; Highlight"
+        priority="20"
+    >
+        <xpath expr="//h1" position="after">
+            <div
+                t-if="website and website.wbh_store_type == 'gift' and product.wbh_short_highlight"
+                class="wbh-gift-highlight-badge mb-3"
+            >
+                <i class="fa fa-star me-2" aria-hidden="true"/>
+                <span t-field="product.wbh_short_highlight"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@t-field='product.description_ecommerce']" position="after">
+            <!-- Extension Slot M2: Khối So sánh kích thước trực quan cạnh vật mẫu (wbh_gift_store) -->
+            <div
+                t-if="website and website.wbh_store_type == 'gift'"
+                id="wbh_gift_size_compare_slot"
+                class="wbh-ext-slot"
+            />
+        </xpath>
+    </template>
+
+    <!-- 3. Trang chi tiết sản phẩm: 2 Extension Slots còn lại, Accordion bảo quản & Sticky Mobile Bar -->
+    <template
+        id="gift_product_detail"
+        inherit_id="website_sale.product"
+        name="WBH Gift Store Product Detail"
+        priority="20"
+    >
+        <!-- Extension Slot M3: Banner đồng hồ đếm ngược Flash Sale đặt ngay trên giá sản phẩm -->
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_price')]" position="before">
+            <div
+                t-if="website and website.wbh_store_type == 'gift'"
+                id="wbh_flash_sale_banner_slot"
+                class="wbh-ext-slot"
+            />
+        </xpath>
+
+        <!-- Extension Slot M2: Widget Gói quà + Thiệp & Cá nhân hóa đặt ngay trên nút Thêm vào giỏ -->
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_cta')]" position="before">
+            <div
+                t-if="website and website.wbh_store_type == 'gift'"
+                id="wbh_gift_options_slot"
+                class="wbh-ext-slot"
+            />
+        </xpath>
+
+        <!-- Accordion Hướng dẫn bảo quản (wbh_care_note) & Liên hệ tư vấn nhanh Web 1 -->
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_cta')]" position="after">
+            <t t-if="website and website.wbh_store_type == 'gift'">
+                <div
+                    t-if="product.wbh_care_note"
+                    class="accordion wbh-gift-care-accordion mb-4"
+                    id="wbhGiftCareAccordion"
+                >
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="wbhGiftCareHeading">
+                            <button
+                                class="accordion-button collapsed fw-semibold"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#wbhGiftCareCollapse"
+                                aria-expanded="false"
+                                aria-controls="wbhGiftCareCollapse"
+                            >
+                                <i class="fa fa-heart-o me-2" aria-hidden="true"/>
+                                Hướng dẫn bảo quản &amp; Lưu ý quà tặng
+                            </button>
+                        </h2>
+                        <div
+                            id="wbhGiftCareCollapse"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="wbhGiftCareHeading"
+                            data-bs-parent="#wbhGiftCareAccordion"
+                        >
+                            <div class="accordion-body">
+                                <div class="wbh-gift-care-note" t-field="product.wbh_care_note"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    t-if="website.wbh_support_hotline or website.wbh_support_zalo_url"
+                    class="wbh-gift-support-box d-flex flex-wrap align-items-center justify-content-between gap-2 p-3 mb-4"
+                >
+                    <span class="small fw-semibold">
+                        <i class="fa fa-headphones me-1" aria-hidden="true"/>
+                        Cần tư vấn chọn size / gói quà gấp?
+                    </span>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a
+                            t-if="website.wbh_support_hotline"
+                            t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
+                            class="btn btn-sm wbh-gift-btn-outline"
+                        >
+                            <i class="fa fa-phone me-1" aria-hidden="true"/>
+                            <t t-out="website.wbh_support_hotline"/>
+                        </a>
+                        <a
+                            t-if="website.wbh_support_zalo_url"
+                            t-att-href="website.wbh_support_zalo_url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-sm wbh-gift-btn-secondary"
+                        >
+                            <i class="fa fa-comments me-1" aria-hidden="true"/>
+                            Chat Zalo
+                        </a>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- Thanh Sticky Bottom Bar trên Mobile: hiển thị giá + nút Thêm vào giỏ 1 chạm -->
+        <xpath expr="//section[@id='product_detail']" position="after">
+            <div
+                t-if="website and website.wbh_store_type == 'gift' and is_add_to_cart_possible and not combination_info.get('prevent_zero_price_sale')"
+                class="wbh-gift-sticky-bar d-lg-none"
+                role="region"
+                aria-label="Thanh mua nhanh trên di động"
+            >
+                <div class="container d-flex align-items-center justify-content-between gap-3">
+                    <div class="wbh-gift-sticky-bar__info min-w-0">
+                        <div class="wbh-gift-sticky-bar__name text-truncate small" t-out="product.name"/>
+                        <div
+                            class="wbh-gift-sticky-bar__price fw-bold"
+                            t-out="combination_info.get('price', product.list_price)"
+                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+                        />
+                    </div>
+                    <button
+                        type="button"
+                        class="btn wbh-gift-btn-primary wbh-gift-sticky-bar__btn flex-shrink-0"
+                        onclick="var btn = document.getElementById('add_to_cart'); if (btn) { btn.click(); }"
+                    >
+                        <i class="fa fa-shopping-cart me-1" aria-hidden="true"/>
+                        Thêm vào giỏ
+                    </button>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

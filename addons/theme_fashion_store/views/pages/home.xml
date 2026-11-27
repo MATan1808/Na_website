@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Nội dung Trang chủ riêng Web 2 Thời trang (kế thừa website.homepage theo scope Web 2) -->
+    <template id="homepage_fashion_content" inherit_id="website.homepage" name="WBH Fashion — Nội Dung Trang Chủ">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <t t-call="theme_fashion_store.s_fashion_lookbook_hero"/>
+                <t t-call="theme_fashion_store.s_fashion_category_strip"/>
+                <t t-call="theme_fashion_store.s_fashion_editorial_grid"/>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Trang Lookbook độc lập chuẩn Upgrade-Safe với khung #wrap.oe_structure.oe_empty -->
+    <template id="homepage_fashion" name="Trang Chủ Thời Trang — Lookbook">
+        <t t-call="website.layout" pageName.f="fashion_lookbook">
+            <t t-set="additional_title">Lookbook &amp; Bộ Sưu Tập</t>
+            <div id="wrap" class="oe_structure oe_empty">
+                <t t-call="theme_fashion_store.s_fashion_lookbook_hero"/>
+                <t t-call="theme_fashion_store.s_fashion_category_strip"/>
+                <t t-call="theme_fashion_store.s_fashion_editorial_grid"/>
+            </div>
+        </t>
+    </template>
+
+    <record id="page_fashion_lookbook" model="theme.website.page">
+        <field name="view_id" ref="homepage_fashion"/>
+        <field name="url">/lookbook</field>
+        <field name="is_published" eval="True"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+</odoo>

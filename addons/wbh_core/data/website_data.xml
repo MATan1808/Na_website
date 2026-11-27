@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+        Khởi tạo 2 Website độc lập cho hệ sinh thái WBH.
+        Không gán trường `domain` (để NULL) để không xung đột với ràng buộc unique(domain)
+        của `website.default_website`, đồng thời giữ nguyên `website.default_website` theo chuẩn Odoo 19.0.
+    -->
+    <record id="website_gift_store" model="website">
+        <field name="name">Cửa Hàng Quà Tặng — Móc Khóa, Gấu Bông &amp; Blind Box</field>
+        <field name="sequence" eval="10"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="user_id" ref="base.public_user"/>
+        <field name="wbh_store_type">gift</field>
+        <field name="specific_user_account" eval="True"/>
+        <field name="auth_signup_uninvited">b2c</field>
+        <field name="wbh_brand_tagline">Gửi trọn cảm xúc trong từng món quà nhỏ</field>
+        <field name="wbh_support_hotline">0900 000 001</field>
+        <field name="wbh_support_zalo_url">https://zalo.me/</field>
+        <field name="shop_default_sort">website_sequence asc</field>
+    </record>
+
+    <record id="website_fashion_store" model="website">
+        <field name="name">Cửa Hàng Thời Trang — Quần Áo &amp; Lookbook</field>
+        <field name="sequence" eval="20"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="user_id" ref="base.public_user"/>
+        <field name="wbh_store_type">fashion</field>
+        <field name="specific_user_account" eval="True"/>
+        <field name="auth_signup_uninvited">b2c</field>
+        <field name="wbh_brand_tagline">Tối giản hiện đại — Chuẩn form từng khoảnh khắc</field>
+        <field name="wbh_support_hotline">0900 000 002</field>
+        <field name="wbh_support_zalo_url">https://zalo.me/</field>
+        <field name="shop_default_sort">website_sequence asc</field>
+    </record>
+</odoo>

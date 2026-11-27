@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bố cục chính Web 2 Thời trang — Cô lập 100% theo website.wbh_store_type == 'fashion' -->
+    <template id="layout_fashion_scope" inherit_id="website.layout" name="WBH Fashion — Scope &amp; Editorial Layout" priority="25">
+        <!-- Gắn class cô lập .wbh-store-fashion lên #wrapwrap chỉ khi đang ở Web 2 Thời trang -->
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-attf-class" add="#{'wbh-store-fashion' if website and website.wbh_store_type == 'fashion' else ''}" separator=" "/>
+        </xpath>
+
+        <!-- Nạp bộ font hỗ trợ tiếng Việt Plus Jakarta Sans & Inter riêng cho Web 2 -->
+        <xpath expr="//head" position="inside">
+            <t t-if="website and website.wbh_store_type == 'fashion'">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"/>
+            </t>
+        </xpath>
+
+        <!-- Thanh thông báo tối giản Editorial phía trên Header riêng cho Web 2 -->
+        <xpath expr="//header[@id='top']" position="before">
+            <div t-if="not no_header and website and website.wbh_store_type == 'fashion'"
+                 class="wbh-fashion-topbar o_not_editable">
+                <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-2">
+                    <span class="wbh-fashion-topbar-tagline text-uppercase">
+                        <t t-out="website.wbh_brand_tagline or 'Tối giản hiện đại — Chuẩn form từng khoảnh khắc'"/>
+                    </span>
+                    <div class="d-flex align-items-center gap-3 wbh-fashion-topbar-contacts">
+                        <a t-if="website.wbh_support_hotline"
+                           t-attf-href="tel:#{website.wbh_support_hotline.replace(' ', '')}"
+                           class="wbh-fashion-topbar-link text-decoration-none">
+                            <i class="fa fa-phone me-1" aria-hidden="true"/>
+                            <span t-out="website.wbh_support_hotline"/>
+                        </a>
+                        <a t-if="website.wbh_support_zalo_url"
+                           t-att-href="website.wbh_support_zalo_url"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="wbh-fashion-topbar-link text-decoration-none">
+                            <i class="fa fa-comments-o me-1" aria-hidden="true"/>
+                            <span>Tư vấn Zalo</span>
+                        </a>
+                        <a href="/shop" class="wbh-fashion-topbar-link text-decoration-none d-none d-sm-inline">
+                            <span>Bộ sưu tập mới</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Dải Footer Editorial riêng cho Web 2 (đặt ngay trên dải bản quyền, không phá khối #footer kéo-thả) -->
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="before">
+            <section t-if="not no_footer and website and website.wbh_store_type == 'fashion'"
+                     class="wbh-fashion-footer-band o_colored_level o_not_editable">
+                <div class="container py-5">
+                    <div class="row gy-4 align-items-start">
+                        <div class="col-lg-5">
+                            <div class="wbh-fashion-footer-brand text-uppercase fw-semibold mb-2">
+                                <t t-out="website.name"/>
+                            </div>
+                            <p class="wbh-fashion-footer-tagline mb-3">
+                                <t t-out="website.wbh_brand_tagline or 'Tối giản hiện đại — Chuẩn form từng khoảnh khắc'"/>
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a t-if="website.wbh_support_hotline"
+                                   t-attf-href="tel:#{website.wbh_support_hotline.replace(' ', '')}"
+                                   class="btn btn-sm wbh-fashion-btn-outline">
+                                    <i class="fa fa-phone me-1" aria-hidden="true"/>
+                                    Hotline: <t t-out="website.wbh_support_hotline"/>
+                                </a>
+                                <a t-if="website.wbh_support_zalo_url"
+                                   t-att-href="website.wbh_support_zalo_url"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn btn-sm wbh-fashion-btn-solid">
+                                    <i class="fa fa-comments-o me-1" aria-hidden="true"/>
+                                    Chat Zalo CSKH
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <h6 class="wbh-fashion-footer-heading text-uppercase mb-3">Danh mục nổi bật</h6>
+                            <ul class="list-unstyled wbh-fashion-footer-links mb-0">
+                                <li><a href="/shop">Tất cả sản phẩm</a></li>
+                                <li><a href="/lookbook">Lookbook mới nhất</a></li>
+                                <li><a href="/shop?order=create_date+desc">Hàng mới về</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-lg-4">
+                            <h6 class="wbh-fashion-footer-heading text-uppercase mb-3">Hỗ trợ khách hàng</h6>
+                            <ul class="list-unstyled wbh-fashion-footer-links mb-0">
+                                <li><a href="/my/home">Tài khoản &amp; Đơn hàng</a></li>
+                                <li><a href="/shop/cart">Giỏ hàng của bạn</a></li>
+                                <li><a href="/contactus">Liên hệ &amp; Đổi size</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_gift_occasion_bar" name="Thanh Chọn Nhanh Quà Theo Danh Mục &amp; Dịp">
+        <section
+            class="s_gift_occasion_bar o_colored_level o_cc o_cc1 pt48 pb48"
+            data-snippet="s_gift_occasion_bar"
+            data-name="Thanh Chọn Nhanh Quà Tặng"
+        >
+            <div class="container">
+                <div class="text-center mb-4">
+                    <h2 class="h3 fw-bold mb-2">Chọn nhanh món quà đúng ý</h2>
+                    <p class="text-muted mb-0">Khám phá theo dòng sản phẩm hoặc dịp tặng quà đặc biệt</p>
+                </div>
+                <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-6">
+                    <div class="col">
+                        <a href="/shop?search=Gấu+bông" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-heart" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Gấu bông</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Móc+khóa" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-key" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Móc khóa</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Blind+Box" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-cube" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Blind Box</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Sinh+nhật" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-birthday-cake" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Sinh nhật</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Valentine" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-star" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Valentine</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Combo" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i class="fa fa-gift" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label fw-semibold">Combo quà tặng</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Trang chủ chuẩn Upgrade-Safe cho Web 1 — Cửa Hàng Quà Tặng.
+        1. Kế thừa website.homepage (khóa chặt bằng t-if="website and website.wbh_store_type == 'gift'")
+           để khi mở "/" trên Web 1 hiển thị ngay 3 Building Blocks chủ lực mà không ảnh hưởng Web 2.
+        2. Cung cấp thêm trang mẫu /gift-home với khung bắt buộc <div id="wrap" class="oe_structure oe_empty">.
+    -->
+    <template
+        id="gift_homepage_inject"
+        inherit_id="website.homepage"
+        name="Trang Chủ Web 1 — Cửa Hàng Quà Tặng"
+        priority="20"
+    >
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <t t-if="website and website.wbh_store_type == 'gift'">
+                <t t-call="theme_gift_store.s_gift_hero"/>
+                <t t-call="theme_gift_store.s_gift_occasion_bar"/>
+                <t t-call="theme_gift_store.s_gift_featured_grid"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="gift_homepage_view" name="Trang Chủ Mẫu — Cửa Hàng Quà Tặng">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Trang chủ quà tặng</t>
+            <div id="wrap" class="oe_structure oe_empty">
+                <t t-call="theme_gift_store.s_gift_hero"/>
+                <t t-call="theme_gift_store.s_gift_occasion_bar"/>
+                <t t-call="theme_gift_store.s_gift_featured_grid"/>
+            </div>
+        </t>
+    </template>
+
+    <record id="gift_homepage_page" model="theme.website.page">
+        <field name="url">/gift-home</field>
+        <field name="view_id" ref="theme_gift_store.gift_homepage_view"/>
+        <field name="is_published" eval="True"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+</odoo>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Kế thừa website.layout theo chuẩn Multi-Website Odoo 19.0:
+        - Nạp Google Fonts Be Vietnam Pro & Quicksand có điều kiện chỉ cho Web 1.
+        - Gắn class động .wbh-store-gift lên #wrapwrap chỉ khi website.wbh_store_type == 'gift'.
+        - Mọi khối thông báo đầu trang và dải hỗ trợ chân trang đều khóa chặt trong
+          t-if="website and website.wbh_store_type == 'gift'" và đặt ngoài vùng editable #footer
+          để tuyệt đối không rò rỉ sang Web 2 và không xung đột Website Builder.
+    -->
+    <template id="gift_layout_scope" inherit_id="website.layout" name="WBH Gift Store Layout Scope" priority="20">
+        <!-- Nạp font tiếng Việt Be Vietnam Pro & Quicksand chỉ trên Web 1 -->
+        <xpath expr="//head" position="inside">
+            <t t-if="website and website.wbh_store_type == 'gift'">
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap"
+                />
+            </t>
+        </xpath>
+
+        <!-- Gắn class nhận diện Web 1 lên #wrapwrap -->
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute
+                name="t-attf-class"
+                add="{{'wbh-store-gift' if website and website.wbh_store_type == 'gift' else ''}}"
+                separator=" "
+            />
+        </xpath>
+
+        <!-- Thanh thông báo thương hiệu & liên hệ nhanh riêng Web 1 phía trên Header -->
+        <xpath expr="//header[@id='top']" position="before">
+            <div
+                t-if="not no_header and website and website.wbh_store_type == 'gift'"
+                class="wbh-gift-topbar o_not_editable d-print-none"
+                role="region"
+                aria-label="Thông tin cửa hàng quà tặng"
+            >
+                <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-2">
+                    <div class="wbh-gift-topbar__tagline d-flex align-items-center gap-2">
+                        <i class="fa fa-gift" aria-hidden="true"/>
+                        <span t-if="website.wbh_brand_tagline" t-field="website.wbh_brand_tagline"/>
+                        <span t-else="">Gửi trọn cảm xúc trong từng món quà nhỏ</span>
+                    </div>
+                    <div class="wbh-gift-topbar__contacts d-flex align-items-center gap-3">
+                        <a
+                            t-if="website.wbh_support_hotline"
+                            t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
+                            class="wbh-gift-topbar__link"
+                        >
+                            <i class="fa fa-phone me-1" aria-hidden="true"/>
+                            <span>Hotline: <t t-out="website.wbh_support_hotline"/></span>
+                        </a>
+                        <a
+                            t-if="website.wbh_support_zalo_url"
+                            t-att-href="website.wbh_support_zalo_url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="wbh-gift-topbar__zalo"
+                        >
+                            <i class="fa fa-comments me-1" aria-hidden="true"/>
+                            <span>Chat Zalo CSKH</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Dải hỗ trợ & điều hướng thương hiệu riêng Web 1 đặt trước copyright (ngoài vùng editable #footer) -->
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="before">
+            <section
+                t-if="not no_footer and website and website.wbh_store_type == 'gift'"
+                class="wbh-gift-footer-band o_not_editable o_colored_level pt32 pb24"
+                data-snippet="s_gift_footer_band"
+                data-name="Chân Trang Quà Tặng"
+            >
+                <div class="container">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-lg-5">
+                            <h5 class="wbh-gift-footer-band__title mb-2" t-out="website.name"/>
+                            <p class="wbh-gift-footer-band__desc mb-0">
+                                <t t-if="website.wbh_brand_tagline" t-out="website.wbh_brand_tagline"/>
+                                <t t-else="">Chuyên gấu bông, móc khóa, Blind Box và combo quà tặng theo dịp — gói quà chỉn chu, giao nhanh toàn quốc.</t>
+                            </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <h6 class="wbh-gift-footer-band__heading mb-2">Khám phá nhanh</h6>
+                            <ul class="list-inline mb-0 wbh-gift-footer-band__links">
+                                <li class="list-inline-item"><a href="/shop">Tất cả quà tặng</a></li>
+                                <li class="list-inline-item"><a href="/shop?search=Gấu+bông">Gấu bông</a></li>
+                                <li class="list-inline-item"><a href="/shop?search=Móc+khóa">Móc khóa</a></li>
+                                <li class="list-inline-item"><a href="/shop?search=Blind+Box">Blind Box</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 text-lg-end">
+                            <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+                                <a
+                                    t-if="website.wbh_support_hotline"
+                                    t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
+                                    class="btn btn-sm wbh-gift-btn-outline"
+                                >
+                                    <i class="fa fa-phone me-1" aria-hidden="true"/>
+                                    <t t-out="website.wbh_support_hotline"/>
+                                </a>
+                                <a
+                                    t-if="website.wbh_support_zalo_url"
+                                    t-att-href="website.wbh_support_zalo_url"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn btn-sm wbh-gift-btn-primary"
+                                >
+                                    <i class="fa fa-comments me-1" aria-hidden="true"/>
+                                    Zalo tư vấn quà
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo>

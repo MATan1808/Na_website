@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ==================== 1. MÀU SẮC (COLOR SWATCH) ==================== -->
+    <record id="attr_color_swatch" model="product.attribute">
+        <field name="name">Màu sắc</field>
+        <field name="display_type">color</field>
+        <field name="create_variant">always</field>
+        <field name="sequence" eval="10"/>
+    </record>
+
+    <record id="attr_val_color_black" model="product.attribute.value">
+        <field name="name">Đen</field>
+        <field name="html_color">#1A1A1A</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_white" model="product.attribute.value">
+        <field name="name">Trắng</field>
+        <field name="html_color">#FFFFFF</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_beige" model="product.attribute.value">
+        <field name="name">Kem Be</field>
+        <field name="html_color">#F3E5D8</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_pastel_pink" model="product.attribute.value">
+        <field name="name">Hồng Pastel</field>
+        <field name="html_color">#F8BBD0</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_navy" model="product.attribute.value">
+        <field name="name">Xanh Navy</field>
+        <field name="html_color">#1F3A5F</field>
+        <field name="sequence" eval="50"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_gray" model="product.attribute.value">
+        <field name="name">Xám</field>
+        <field name="html_color">#8E949E</field>
+        <field name="sequence" eval="60"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_cocoa" model="product.attribute.value">
+        <field name="name">Nâu Cacao</field>
+        <field name="html_color">#6D4C41</field>
+        <field name="sequence" eval="70"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+    <record id="attr_val_color_burgundy" model="product.attribute.value">
+        <field name="name">Đỏ Đô</field>
+        <field name="html_color">#8B1E3F</field>
+        <field name="sequence" eval="80"/>
+        <field name="attribute_id" ref="wbh_core.attr_color_swatch"/>
+    </record>
+
+    <!-- ==================== 2. SIZE QUẦN ÁO ==================== -->
+    <record id="attr_fashion_size" model="product.attribute">
+        <field name="name">Size Quần Áo</field>
+        <field name="display_type">pills</field>
+        <field name="create_variant">always</field>
+        <field name="sequence" eval="20"/>
+    </record>
+
+    <record id="attr_val_fashion_size_xs" model="product.attribute.value">
+        <field name="name">XS</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+    <record id="attr_val_fashion_size_s" model="product.attribute.value">
+        <field name="name">S</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+    <record id="attr_val_fashion_size_m" model="product.attribute.value">
+        <field name="name">M</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+    <record id="attr_val_fashion_size_l" model="product.attribute.value">
+        <field name="name">L</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+    <record id="attr_val_fashion_size_xl" model="product.attribute.value">
+        <field name="name">XL</field>
+        <field name="sequence" eval="50"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+    <record id="attr_val_fashion_size_xxl" model="product.attribute.value">
+        <field name="name">XXL</field>
+        <field name="sequence" eval="60"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+    <record id="attr_val_fashion_size_freesize" model="product.attribute.value">
+        <field name="name">Freesize</field>
+        <field name="sequence" eval="70"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_size"/>
+    </record>
+
+    <!-- ==================== 3. KÍCH THƯỚC GẤU BÔNG (CM) ==================== -->
+    <record id="attr_gift_plush_size" model="product.attribute">
+        <field name="name">Kích thước Gấu Bông (cm)</field>
+        <field name="display_type">pills</field>
+        <field name="create_variant">always</field>
+        <field name="sequence" eval="30"/>
+    </record>
+
+    <record id="attr_val_plush_size_15cm" model="product.attribute.value">
+        <field name="name">15cm</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+    <record id="attr_val_plush_size_25cm" model="product.attribute.value">
+        <field name="name">25cm</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+    <record id="attr_val_plush_size_40cm" model="product.attribute.value">
+        <field name="name">40cm</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+    <record id="attr_val_plush_size_60cm" model="product.attribute.value">
+        <field name="name">60cm</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+    <record id="attr_val_plush_size_80cm" model="product.attribute.value">
+        <field name="name">80cm</field>
+        <field name="sequence" eval="50"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+    <record id="attr_val_plush_size_1m" model="product.attribute.value">
+        <field name="name">1m</field>
+        <field name="sequence" eval="60"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+    <record id="attr_val_plush_size_1m2" model="product.attribute.value">
+        <field name="name">1m2</field>
+        <field name="sequence" eval="70"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_plush_size"/>
+    </record>
+
+    <!-- ==================== 4. CHẤT LIỆU ==================== -->
+    <record id="attr_material" model="product.attribute">
+        <field name="name">Chất liệu</field>
+        <field name="display_type">pills</field>
+        <field name="create_variant">no_variant</field>
+        <field name="sequence" eval="40"/>
+    </record>
+
+    <record id="attr_val_material_cotton" model="product.attribute.value">
+        <field name="name">Cotton 100%</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+    <record id="attr_val_material_linen" model="product.attribute.value">
+        <field name="name">Linen</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+    <record id="attr_val_material_denim" model="product.attribute.value">
+        <field name="name">Denim</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+    <record id="attr_val_material_pp_cotton" model="product.attribute.value">
+        <field name="name">Bông PP siêu mềm</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+    <record id="attr_val_material_pvc_abs" model="product.attribute.value">
+        <field name="name">Nhựa PVC/ABS</field>
+        <field name="sequence" eval="50"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+    <record id="attr_val_material_acrylic" model="product.attribute.value">
+        <field name="name">Acrylic</field>
+        <field name="sequence" eval="60"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+    <record id="attr_val_material_alloy" model="product.attribute.value">
+        <field name="name">Hợp kim</field>
+        <field name="sequence" eval="70"/>
+        <field name="attribute_id" ref="wbh_core.attr_material"/>
+    </record>
+
+    <!-- ==================== 5. FORM DÁNG ==================== -->
+    <record id="attr_fashion_fit" model="product.attribute">
+        <field name="name">Form dáng</field>
+        <field name="display_type">pills</field>
+        <field name="create_variant">no_variant</field>
+        <field name="sequence" eval="50"/>
+    </record>
+
+    <record id="attr_val_fashion_fit_oversize" model="product.attribute.value">
+        <field name="name">Oversize</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_fit"/>
+    </record>
+    <record id="attr_val_fashion_fit_regular" model="product.attribute.value">
+        <field name="name">Regular</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_fit"/>
+    </record>
+    <record id="attr_val_fashion_fit_slim" model="product.attribute.value">
+        <field name="name">Slim Fit</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_fit"/>
+    </record>
+    <record id="attr_val_fashion_fit_relaxed" model="product.attribute.value">
+        <field name="name">Relaxed</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_fashion_fit"/>
+    </record>
+
+    <!-- ==================== 6. DỊP TẶNG QUÀ ==================== -->
+    <record id="attr_gift_occasion" model="product.attribute">
+        <field name="name">Dịp tặng quà</field>
+        <field name="display_type">pills</field>
+        <field name="create_variant">no_variant</field>
+        <field name="sequence" eval="60"/>
+    </record>
+
+    <record id="attr_val_occasion_birthday" model="product.attribute.value">
+        <field name="name">Sinh nhật</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_occasion"/>
+    </record>
+    <record id="attr_val_occasion_valentine" model="product.attribute.value">
+        <field name="name">Valentine</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_occasion"/>
+    </record>
+    <record id="attr_val_occasion_womens_day" model="product.attribute.value">
+        <field name="name">8/3 &amp; 20/10</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_occasion"/>
+    </record>
+    <record id="attr_val_occasion_graduation" model="product.attribute.value">
+        <field name="name">Tốt nghiệp</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_occasion"/>
+    </record>
+    <record id="attr_val_occasion_anniversary" model="product.attribute.value">
+        <field name="name">Kỷ niệm</field>
+        <field name="sequence" eval="50"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_occasion"/>
+    </record>
+    <record id="attr_val_occasion_christmas" model="product.attribute.value">
+        <field name="name">Giáng sinh</field>
+        <field name="sequence" eval="60"/>
+        <field name="attribute_id" ref="wbh_core.attr_gift_occasion"/>
+    </record>
+
+    <!-- ==================== 7. PHIÊN BẢN BLIND BOX ==================== -->
+    <record id="attr_blindbox_edition" model="product.attribute">
+        <field name="name">Phiên bản Blind Box</field>
+        <field name="display_type">radio</field>
+        <field name="create_variant">always</field>
+        <field name="sequence" eval="70"/>
+    </record>
+
+    <record id="attr_val_blindbox_single" model="product.attribute.value">
+        <field name="name">Hộp lẻ (1 Box)</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_blindbox_edition"/>
+    </record>
+    <record id="attr_val_blindbox_fullcase" model="product.attribute.value">
+        <field name="name">Nguyên Set (Full Case)</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_blindbox_edition"/>
+    </record>
+</odoo>

@@ -1,0 +1,47 @@
+// -----------------------------------------------------------------------------
+// Theme Web 1 — Cửa Hàng Quà Tặng (Primary Variables — Odoo 19.0 Community)
+// -----------------------------------------------------------------------------
+// An toàn Multi-Website: KHÔNG ghi đè cứng biến toàn cục hay $o-website-values-palettes
+// để tuyệt đối không làm ảnh hưởng Web 2 (theme_fashion_store).
+
+// Biến màu nội bộ riêng cho Web 1 (đúng SPEC Mục 4, đạt tương phản WCAG AA)
+$wbh-gift-color-1: #FF6B8B; // Hồng san hô chủ đạo — CTA & điểm nhấn
+$wbh-gift-color-2: #FFB347; // Vàng mật ong — nhãn ưu đãi / dịp lễ
+$wbh-gift-color-3: #FFF6F0; // Kem ấm — nền section dịu mắt
+$wbh-gift-color-4: #FFFFFF; // Trắng tinh khiết — nền thẻ sản phẩm
+$wbh-gift-color-5: #3D2C2E; // Nâu cacao đậm — chữ chính dễ đọc
+
+// Khai báo chuẩn $o-color-1..5 có !default để không ghi đè theme/website khác
+$o-color-1: $wbh-gift-color-1 !default;
+$o-color-2: $wbh-gift-color-2 !default;
+$o-color-3: $wbh-gift-color-3 !default;
+$o-color-4: $wbh-gift-color-4 !default;
+$o-color-5: $wbh-gift-color-5 !default;
+
+// Đăng ký thêm bảng màu riêng 'wbh-gift-1' vào danh sách palette Website Builder
+$o-color-palettes: map-merge($o-color-palettes, (
+    'wbh-gift-1': (
+        'o-color-1': $wbh-gift-color-1,
+        'o-color-2': $wbh-gift-color-2,
+        'o-color-3': $wbh-gift-color-3,
+        'o-color-4': $wbh-gift-color-4,
+        'o-color-5': $wbh-gift-color-5,
+        'menu': 4,
+        'footer': 3,
+        'copyright': 5,
+    ),
+));
+
+$o-selected-color-palettes-names: append($o-selected-color-palettes-names, 'wbh-gift-1');
+
+// Hợp nhất font tiếng Việt vào $o-theme-font-configs (KHÔNG ghi đè xóa font core/Web 2)
+$o-theme-font-configs: map-merge($o-theme-font-configs, (
+    'Be Vietnam Pro': (
+        'family': ('Be Vietnam Pro', sans-serif),
+        'url': 'Be+Vietnam+Pro:400,500,600,700',
+    ),
+    'Quicksand': (
+        'family': ('Quicksand', sans-serif),
+        'url': 'Quicksand:500,600,700',
+    ),
+));

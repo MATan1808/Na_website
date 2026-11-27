@@ -1,32 +1,43 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
+# ==============================================================================
+# .gitignore — Dự án web_ban_hang (Odoo 19.0 Community / Python 3.12 / Docker)
+# ==============================================================================
 
-# Testing
-coverage/
-
-# Production
-build/
-dist/
-.next/
-out/
-
-# Misc
-.DS_Store
-*.pem
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Local env files
-.env*.local
+# Biến môi trường & cấu hình nhạy cảm (KHÔNG ignore .env.example)
 .env
+.env.local
+.env.*.local
+!.env.example
 
-# IDE & Editor
-.idea/
+# Dữ liệu runtime Docker, Filestore, Sessions, Database & Logs
+data/filestore/
+data/sessions/
+data/pgdata/
+logs/
+
+# Bản sao lưu cơ sở dữ liệu & tệp backup tạm
+*.dump
+*.sql
+*.bak
+
+# Python cache & môi trường ảo
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# IDE, Editor & Hệ điều hành
 .vscode/
+.idea/
 *.swp
 *.swo
+.DS_Store
+Thumbs.db
+
+# Quy chuẩn AIaC 3.0: TUYỆT ĐỐI KHÔNG ignore .claude/ (commit kèm repo private sau khi quét sạch secret)
+!.claude/
+!.claude/**

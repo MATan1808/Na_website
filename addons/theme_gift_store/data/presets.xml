@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Cấu hình Preset chuẩn Upgrade-Safe Odoo 19.0 Community cho Web 1 (Quà tặng).
+        Bọc trong <data noupdate="1"> để tôn trọng mọi tùy chỉnh giao diện của Sếp sau khi cài.
+        Gán theme_id trực tiếp cho wbh_core.website_gift_store để Odoo 19 tự gọi _theme_load()
+        ngay khi cài đặt bằng CLI (-i wbh_core,theme_gift_store,theme_fashion_store).
+    -->
+    <data noupdate="1">
+        <!-- Gán Theme Web 1 và thông số hiển thị lưới Shop / tỷ lệ ảnh 1:1 cho website_gift_store -->
+        <record id="wbh_core.website_gift_store" model="website">
+            <field name="theme_id" ref="base.module_theme_gift_store"/>
+            <field name="shop_ppr" eval="4"/>
+            <field name="product_page_image_ratio">1_1</field>
+            <field name="product_page_image_ratio_mobile">1_1</field>
+        </record>
+
+        <!-- Bật bộ lọc thuộc tính & biến thể trên trang /shop -->
+        <record id="website_sale.products_attributes" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Bật cây danh mục sản phẩm bên trái trên trang /shop -->
+        <record id="website_sale.products_categories" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Cho phép thu gọn/mở rộng danh mục con (Quà theo dịp -> Sinh nhật, Valentine...) -->
+        <record id="website_sale.option_collapse_products_categories" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Bật Wishlist trên thẻ sản phẩm /shop và trang chi tiết sản phẩm -->
+        <record id="website_sale_wishlist.add_to_wishlist" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+        <record id="website_sale_wishlist.product_add_to_wishlist" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Bật nút cuộn về đầu trang ở footer -->
+        <record id="website.option_footer_scrolltop" model="ir.ui.view">
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Tắt các biến thể header/footer không dùng mà không ảnh hưởng header/footer chuẩn dùng chung -->
+        <record id="website.template_header_hamburger" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="website.footer_no_copyright" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>
