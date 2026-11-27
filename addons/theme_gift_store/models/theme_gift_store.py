@@ -16,5 +16,7 @@ class ThemeUtils(models.AbstractModel):
         self.enable_view('website_sale_wishlist.product_add_to_wishlist')
         self.enable_view('website.option_footer_scrolltop')
         self.disable_view('website.footer_custom')
+        self.disable_view('website.header_text_element')
+        self.disable_view('website.header_call_to_action')
         self.disable_view('website.template_header_hamburger')
         self.disable_view('website.footer_no_copyright')

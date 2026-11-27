@@ -14,7 +14,9 @@ class ThemeUtils(models.AbstractModel):
         self.enable_view('website_sale.filter_products_price')
         self.enable_view('website_sale_wishlist.add_to_wishlist')
         self.enable_view('website_sale_wishlist.product_add_to_wishlist')
-        # Tắt footer tiếng Anh mẫu mặc định để không bị lặp 2 footer
+        # Tắt footer tiếng Anh mẫu mặc định, số +1 555 và Contact Us thừa trên navbar
         self.disable_view('website.footer_custom')
+        self.disable_view('website.header_text_element')
+        self.disable_view('website.header_call_to_action')
         # Tắt hiển thị danh mục dạng thanh cuộn ngang trên đầu trang khi đã bật sidebar danh mục
         self.disable_view('website_sale.products_categories_top')

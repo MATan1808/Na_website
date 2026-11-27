@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Chuẩn hóa chuỗi giao diện Thương mại điện tử sang tiếng Việt cho 2 storefront WBH.
+        Khóa chặt trong website.wbh_store_type in ('gift', 'fashion') để đảm bảo an toàn Multi-Website.
+    -->
+    <template
+        id="wbh_all_products_link_name_vi"
+        inherit_id="website_sale.all_products_link_name"
+        name="WBH — Việt hóa Breadcrumb Tất cả sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//span[@placeholder='All products']" position="replace">
+            <span t-if="website and website.wbh_store_type in ('gift', 'fashion')" placeholder="Tất cả sản phẩm">Tất cả sản phẩm</span>
+            <span t-else="" placeholder="All products">All products</span>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_cta_wrapper_vi"
+        inherit_id="website_sale.cta_wrapper"
+        name="WBH — Việt hóa nút Thêm vào giỏ hàng"
+        priority="25"
+    >
+        <xpath expr="//a[@id='add_to_cart']" position="replace">
+            <a id="add_to_cart"
+               role="button"
+               href="#"
+               t-attf-class="btn btn-primary js_check_product a-submit flex-grow-1"
+               t-att-data-show-quantity="is_view_active('website_sale.product_quantity')"
+               data-animation-selector=".o_wsale_product_images">
+                <i class="fa fa-shopping-cart me-2" aria-hidden="true"/>
+                <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">Thêm vào giỏ hàng</t>
+                <t t-else="">Add to cart</t>
+            </a>
+        </xpath>
+    </template>
+
+    <template
+        id="wbh_product_add_to_compare_vi"
+        inherit_id="website_sale_comparison.product_add_to_compare"
+        name="WBH — Việt hóa nút So sánh sản phẩm"
+        priority="25"
+    >
+        <xpath expr="//button[@data-action='o_comparelist']" position="attributes">
+            <attribute name="t-att-aria-label">'So sánh sản phẩm' if website and website.wbh_store_type in ('gift', 'fashion') else 'Add to compare'</attribute>
+            <attribute name="t-att-title">'So sánh sản phẩm' if website and website.wbh_store_type in ('gift', 'fashion') else 'Add to compare'</attribute>
+        </xpath>
+        <xpath expr="//button[@data-action='o_comparelist']/span[2]" position="replace">
+            <span t-att-class="'d-inline ms-2' + (' d-lg-none' if website.product_page_image_width == '50_pc' and not (is_view_active('website_sale.cta_wrapper_boxed') or is_view_active('website_sale.cta_wrapper_large')) or is_view_active('website_sale_wishlist.product_add_to_wishlist') else '')">
+                <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">So sánh sản phẩm</t>
+                <t t-else="">Add to compare</t>
+            </span>
+        </xpath>
+    </template>
+</odoo>

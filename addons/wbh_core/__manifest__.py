@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.1.2',
+    'version': '19.0.1.1.3',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.1.3 (2026-11-28)
+------------------------
+- [FIX] Việt hóa triệt để các nhãn core còn lẫn tiếng Anh trên Breadcrumb & Trang chi tiết sản phẩm (`Tất cả sản phẩm`, `Thêm vào giỏ hàng`, `So sánh sản phẩm`) qua `views/website_sale_vi_templates.xml`.
 
 v19.0.1.1.2 (2026-11-27)
 ------------------------
@@ -59,6 +63,7 @@ v19.0.1.0.0 (2026-11-26)
         'views/website_views.xml',
         'views/product_template_views.xml',
         'views/wbh_menus.xml',
+        'views/website_sale_vi_templates.xml',
     ],
     'assets': {
         'web.assets_frontend': [

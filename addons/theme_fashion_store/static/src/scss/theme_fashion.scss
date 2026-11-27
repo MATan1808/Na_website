@@ -117,8 +117,12 @@
     }
 
     select.form-select,
+    select.form-select.css_attribute_select,
+    select.form-select.css_attribute_select:not([multiple]):where(:not([size]), [size="1"]),
     .o_wsale_products_page select.form-select,
     .o_wsale_product_page select.form-select {
+        width: 100% !important;
+        max-width: 100% !important;
         height: 40px !important;
         min-height: 40px !important;
         padding: 0.45rem 2.25rem 0.45rem 0.75rem !important;
@@ -133,6 +137,11 @@
         text-overflow: ellipsis;
         appearance: none !important;
         -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23111111' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") !important;
+        background-position: right 0.75rem center !important;
+        background-size: 14px 10px !important;
+        background-repeat: no-repeat !important;
 
         &::after,
         &::before {
@@ -557,6 +566,25 @@
 
         .o_wsale_offcanvas {
             background-color: var(--wbh-fashion-paper);
+        }
+
+        @media (max-width: 767.98px) {
+            .products_header.btn-toolbar {
+                flex-wrap: wrap !important;
+                gap: 0.5rem !important;
+
+                .o_wsale_products_header_search_form_container {
+                    flex: 1 1 100% !important;
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    min-width: 0 !important;
+                }
+
+                .o_wsale_products_searchbar_form {
+                    width: 100% !important;
+                    min-width: 0 !important;
+                }
+            }
         }
     }
 

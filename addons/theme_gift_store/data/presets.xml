@@ -53,8 +53,14 @@
     </data>
 
     <data>
-        <!-- Tắt khối footer tiếng Anh mẫu mặc định của Odoo để không bị lặp 2 footer -->
+        <!-- Tắt khối footer tiếng Anh mẫu mặc định, số điện thoại mẫu +1 555 và nút Contact Us thừa trên navbar -->
         <record id="website.footer_custom" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="website.header_text_element" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="website.header_call_to_action" model="ir.ui.view">
             <field name="active" eval="False"/>
         </record>
     </data>

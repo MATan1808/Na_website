@@ -3,12 +3,18 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.2.0',
+    'version': '19.0.1.2.1',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.2.1 (2026-11-28)
+------------------------
+- [FIX] Ghi đè triệt để SVG arrow mặc định của Odoo `select.form-select.css_attribute_select` và ép `max-width: 100%` tránh tràn mobile 416px.
+- [FIX] Bọc 2 hàng cho toolbar `/shop` trên mobile (`< 768px`) để ô tìm kiếm đủ rộng và không cắt nút `Bộ lọc`; hiện nút Wishlist trên mobile; mở chiều cao `#o_footer_scrolltop_wrapper` hết bị che nửa dưới.
+- [FIX] Tắt `website.header_text_element` (+1 555-555-5556) và `website.header_call_to_action` (nút Contact Us thừa) trong `presets.xml` và `theme.utils`.
 
 v19.0.1.2.0 (2026-11-28)
 ------------------------

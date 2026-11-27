@@ -185,6 +185,12 @@
                 color: #FFFFFF;
             }
         }
+
+        @media (max-width: 575.98px) {
+            .wbh-gift-topbar__tagline {
+                display: none !important;
+            }
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -232,10 +238,15 @@
 
     // -------------------------------------------------------------------------
     // Fix SELECT.form-select double-caret & clipping (Sidebar /shop & PDP)
+    // Ghi đè selector đặc hiệu cao (0,3,1) của Odoo product_configurator.scss
     // -------------------------------------------------------------------------
     select.form-select,
+    select.form-select.css_attribute_select,
+    select.form-select.css_attribute_select:not([multiple]):where(:not([size]), [size="1"]),
     .o_wsale_products_page select.form-select,
     .o_wsale_product_page select.form-select {
+        width: 100% !important;
+        max-width: 100% !important;
         height: 40px !important;
         min-height: 40px !important;
         max-height: none !important;
@@ -252,11 +263,11 @@
         appearance: none !important;
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%231F1B16' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") !important;
         background-position: right 0.75rem center !important;
         background-size: 14px 10px !important;
         background-repeat: no-repeat !important;
 
-        // Xóa pseudo icon thừa nếu Odoo/theme gắn thêm
         &::after,
         &::before {
             display: none !important;
@@ -444,10 +455,24 @@
     .o_wsale_products_page {
         background-color: var(--wbh-gift-bg);
 
-        // Thanh search trên mobile không bị bóp còn "Sea..."
-        .o_wsale_products_searchbar_form {
-            min-width: 160px;
-            flex: 1 1 180px;
+        // Mobile 390px: bọc 2 hàng để thanh tìm kiếm đủ rộng, không cắt nút Bộ lọc
+        @media (max-width: 767.98px) {
+            .products_header.btn-toolbar {
+                flex-wrap: wrap !important;
+                gap: 0.5rem !important;
+
+                .o_wsale_products_header_search_form_container {
+                    flex: 1 1 100% !important;
+                    max-width: 100% !important;
+                    width: 100% !important;
+                    min-width: 0 !important;
+                }
+
+                .o_wsale_products_searchbar_form {
+                    width: 100% !important;
+                    min-width: 0 !important;
+                }
+            }
         }
     }
 
@@ -496,7 +521,15 @@
             transform: scale(1.04);
         }
 
-        // Nút tim Wishlist nổi bật trên nền ảnh nhiều màu
+        // Nút tim Wishlist nổi bật trên nền ảnh nhiều màu (hiện cả mobile lẫn desktop)
+        .o_wsale_product_btn {
+            @media (max-width: 991.98px) {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+        }
+
         .o_add_wishlist {
             width: 34px;
             height: 34px;
@@ -504,10 +537,11 @@
             background-color: rgba(255, 255, 255, 0.92) !important;
             border: 1px solid rgba(31, 27, 22, 0.12) !important;
             color: var(--wbh-gift-ink) !important;
-            display: inline-flex;
+            display: inline-flex !important;
             align-items: center;
             justify-content: center;
             padding: 0 !important;
+            opacity: 1 !important;
             box-shadow: var(--wbh-gift-shadow-sm);
         }
 
@@ -766,7 +800,10 @@
         #o_footer_scrolltop_wrapper {
             position: relative;
             z-index: 10;
-            margin-top: 0;
+            height: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            padding: 0.75rem 0;
         }
     }
 

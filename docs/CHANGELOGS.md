@@ -3,10 +3,20 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.12` — tích hợp `heydamir/unslop` vào AIaC và khử toàn bộ "mùi AI" + lỗi UI/UX thực tế trên trang chủ, `/shop` và chi tiết sản phẩm).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.13` — vá dứt điểm toàn bộ lỗi UI/UX & chuỗi tiếng Anh sót lại sau kiểm định trình duyệt live trên Desktop & Mobile).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.13 (2026-11-28)
+
+### Hoàn Thiện Sau Kiểm Định Live — Sửa `select.form-select`, Toolbar Mobile `/shop`, Bỏ `+1 555` & Việt Hóa 100% PDP
+- `[FIX]` **Việt hóa triệt để các nhãn core trên Trang chi tiết & Breadcrumb** (`wbh_core` `v19.0.1.1.3`): Thêm `views/website_sale_vi_templates.xml` chuyển `All products` ➜ `Tất cả sản phẩm`, `Add to cart` ➜ `Thêm vào giỏ hàng`, `Add to compare` ➜ `So sánh sản phẩm`.
+- `[FIX]` **Gỡ bỏ `+1 555-555-5556` và nút `Contact Us` thừa** (`theme_gift_store` `v19.0.1.2.1`, `theme_fashion_store` `v19.0.1.2.1`): Tắt `website.header_text_element` và `website.header_call_to_action` trong `presets.xml` và `theme.utils`.
+- `[FIX]` **Sửa tận gốc `select.form-select.css_attribute_select` double-caret & tràn `416px` mobile**: Ghi đè selector đặc hiệu cao của Odoo `product_configurator.scss` bằng SVG chevron chuẩn duy nhất + `max-width: 100% !important`.
+- `[FIX]` **Tối ưu Mobile `390x844`**: Bọc toolbar `/shop` thành 2 hàng (thanh tìm kiếm đủ rộng, không cắt nút `Bộ lọc`), bật hiển thị nút Wishlist trên mobile, ẩn chắc `.wbh-gift-topbar__tagline` ở `< 576px` và mở chiều cao `#o_footer_scrolltop_wrapper` hết bị che nửa dưới.
 
 ---
 

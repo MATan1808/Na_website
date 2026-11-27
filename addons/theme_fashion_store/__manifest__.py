@@ -3,12 +3,16 @@
 
 {
     'name': 'Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook)',
-    'version': '19.0.1.2.0',
+    'version': '19.0.1.2.1',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện tối giản phong cách Editorial & Lookbook dành riêng cho Web 2 Thời trang (Odoo 19.0 Community)',
     'description': """
 Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook) — Changelog
 ==================================================================
+
+v19.0.1.2.1 (2026-11-28)
+------------------------
+- [FIX] Ghi đè SVG arrow của `select.form-select.css_attribute_select`, bọc toolbar `/shop` trên mobile (`< 768px`) và tắt `website.header_text_element` / `website.header_call_to_action`.
 
 v19.0.1.2.0 (2026-11-28)
 ------------------------
