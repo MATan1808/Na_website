@@ -407,11 +407,13 @@ class TestWbhShopDynamicFilters(HttpCase):
     def _call_shop(self, website, query_params=None, **kwargs):
         args = MultiDict(query_params or [])
         captured = {}
-        public_env = self.env(
-            user=website.user_id.id,
-            context={**self.env.context, 'website_id': website.id},
-        )
-        with MockRequest(public_env, website=website, path='/shop') as req:
+        public_env = self.env(user=website.user_id.id)
+        with MockRequest(
+            public_env,
+            website=website,
+            path='/shop',
+            context={'website_id': website.id},
+        ) as req:
             req.session['force_website_id'] = website.id
             req.httprequest.args = args
             req.httprequest.query_string = b''
