@@ -3,12 +3,18 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.0.2',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.0.2 (2026-11-27)
+------------------------
+- [FIX] Tắt khối footer tiếng Anh mẫu mặc định (website.footer_custom) để triệt tiêu lỗi lặp 2 footer.
+- [FIX] Đặt dải .wbh-gift-footer-band lên trước #footer và nâng z-index cho #o_footer_scrolltop_wrapper giúp nút cuộn tròn hiển thị trọn vẹn không bị che trên mobile.
+- [IMPROVE] Hiển thị dòng bản quyền động theo tên Website thay thế cho chuỗi mẫu "Company name".
 
 v19.0.1.0.1 (2026-11-27)
 ------------------------

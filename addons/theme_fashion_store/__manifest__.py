@@ -3,12 +3,16 @@
 
 {
     'name': 'Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook)',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện tối giản phong cách Editorial & Lookbook dành riêng cho Web 2 Thời trang (Odoo 19.0 Community)',
     'description': """
 Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook) — Changelog
 ==================================================================
+
+v19.0.1.0.1 (2026-11-27)
+------------------------
+- [FIX] Tắt footer tiếng Anh mẫu mặc định (website.footer_custom) và đưa .wbh-fashion-footer-band lên trước #footer để không lặp 2 footer và không che nút scrolltop.
 
 v19.0.1.0.0 (2026-11-26)
 ------------------------

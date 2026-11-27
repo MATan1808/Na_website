@@ -51,4 +51,11 @@
             <field name="active" eval="False"/>
         </record>
     </data>
+
+    <data>
+        <!-- Tắt khối footer tiếng Anh mẫu mặc định của Odoo để không bị lặp 2 footer -->
+        <record id="website.footer_custom" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+    </data>
 </odoo>

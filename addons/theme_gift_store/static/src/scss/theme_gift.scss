@@ -205,6 +205,17 @@
         }
     }
 
+    footer#bottom {
+        #o_footer_scrolltop_wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .o_footer_copyright > .container {
+            padding-top: 1.75rem !important;
+        }
+    }
+
     // -------------------------------------------------------------------------
     // Home Snippets (s_gift_hero, s_gift_occasion_bar, s_gift_featured_grid)
     // -------------------------------------------------------------------------

@@ -3,10 +3,19 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.4` — hoàn thiện bộ nhận diện thương hiệu Manh Dao Dao, chuẩn hóa Docker Named Volumes & fix ACL `/shop` để triển khai lên Local Server).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.5` — sửa lỗi lặp 2 footer, nút scrolltop bị che trên mobile và cập nhật dòng bản quyền theo tên cửa hàng).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.5 (2026-11-27)
+
+### Khắc Phục Lặp 2 Footer, Nút Cuộn Đầu Trang Bị Che & Chuẩn Hóa Bản Quyền
+- `[FIX]` **Triệt tiêu lỗi lặp 2 footer** (`theme_gift_store` `v19.0.1.0.2`, `theme_fashion_store` `v19.0.1.0.1`): Tắt `website.footer_custom` (`active=False` trong `presets.xml` và `disable_view` trong `theme.utils`) để không hiển thị khối footer tiếng Anh mẫu của Odoo phía trên footer thương hiệu.
+- `[FIX]` **Sửa nút cuộn tròn `#o_footer_scrolltop_wrapper` bị che khuất nửa dưới trên mobile**: Đưa `.wbh-gift-footer-band` và `.wbh-fashion-footer-band` lên trước `//div[@id='footer']` và nâng `z-index: 10` kèm khoảng đệm `padding-top: 1.75rem` cho `.o_footer_copyright > .container`.
+- `[IMPROVE]` Thay thế chuỗi bản quyền mẫu `Copyright © Company name` bằng `Bản quyền © <website.name>` tự động theo từng website.
 
 ---
 

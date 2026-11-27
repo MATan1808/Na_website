@@ -45,8 +45,8 @@
             </div>
         </xpath>
 
-        <!-- Dải Footer Editorial riêng cho Web 2 (đặt ngay trên dải bản quyền, không phá khối #footer kéo-thả) -->
-        <xpath expr="//div[hasclass('o_footer_copyright')]" position="before">
+        <!-- Dải Footer Editorial riêng cho Web 2 đặt trước #footer (trên nút scrolltop, không phá khối #footer) -->
+        <xpath expr="//div[@id='footer']" position="before">
             <section t-if="not no_footer and website and website.wbh_store_type == 'fashion'"
                      class="wbh-fashion-footer-band o_colored_level o_not_editable">
                 <div class="container py-5">

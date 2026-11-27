@@ -3,7 +3,7 @@
 > **Dự án**: Hệ Sinh Thái 2 Website Bán Hàng (`web_ban_hang`) — Thuần **Odoo 19.0 Community (LGPL-3) Multi-Website** + **PostgreSQL 15**  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Chuẩn kế thừa**: AIaC Root `F:\BACKUP_LINUX\aiac` (qua symlink `C:\Users\ADMIN\.claude\360org -> F:\BACKUP_LINUX\aiac\360org`), plugin `360-odoo` và `360-local-builder-env`.  
-> **Trạng thái hiện tại (`v0.3.4`, 2026-11-27)**: Hoàn thiện bộ logo thương hiệu Manh Dao Dao, chuẩn hóa Docker Named Volumes (`web_ban_hang_filestore`, `web_ban_hang_sessions`) và vá `compute_sudo` cho `/shop` (`wbh_core` `v19.0.1.0.1`, `theme_gift_store` `v19.0.1.0.1`, `theme_fashion_store` `v19.0.1.0.0`), sẵn sàng chạy chuẩn Zero-Bypass trên Local Server.
+> **Trạng thái hiện tại (`v0.3.5`, 2026-11-27)**: Hoàn thiện bộ logo thương hiệu Manh Dao Dao, sửa triệt để lỗi lặp 2 footer & nút scrolltop, chuẩn hóa Docker Named Volumes và vá `compute_sudo` cho `/shop` (`wbh_core` `v19.0.1.0.1`, `theme_gift_store` `v19.0.1.0.2`, `theme_fashion_store` `v19.0.1.0.1`).
 
 ---
 

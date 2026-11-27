@@ -66,11 +66,11 @@
             </div>
         </xpath>
 
-        <!-- Dải hỗ trợ & điều hướng thương hiệu riêng Web 1 đặt trước copyright (ngoài vùng editable #footer) -->
-        <xpath expr="//div[hasclass('o_footer_copyright')]" position="before">
+        <!-- Dải hỗ trợ & điều hướng thương hiệu riêng Web 1 đặt trước #footer (trên nút scrolltop) -->
+        <xpath expr="//div[@id='footer']" position="before">
             <section
                 t-if="not no_footer and website and website.wbh_store_type == 'gift'"
-                class="wbh-gift-footer-band o_not_editable o_colored_level pt32 pb24"
+                class="wbh-gift-footer-band o_not_editable o_colored_level pt32 pb40"
                 data-snippet="s_gift_footer_band"
                 data-name="Chân Trang Quà Tặng"
             >
@@ -117,6 +117,16 @@
                     </div>
                 </div>
             </section>
+        </xpath>
+
+        <!-- Thay thế dòng bản quyền cứng 'Company name' bằng tên Website/Công ty thực tế -->
+        <xpath expr="//footer//span[hasclass('o_footer_copyright_name')]" position="replace">
+            <span class="o_footer_copyright_name me-2 small">
+                <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">
+                    Bản quyền &amp;copy; <t t-out="website.name"/>
+                </t>
+                <t t-else="">Bản quyền &amp;copy; <span t-field="res_company.name"/></t>
+            </span>
         </xpath>
     </template>
 </odoo>
