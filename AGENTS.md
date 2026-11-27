@@ -3,7 +3,7 @@
 > **Dự án**: Hệ Sinh Thái 2 Website Bán Hàng (`web_ban_hang`) — Thuần **Odoo 19.0 Community (LGPL-3) Multi-Website** + **PostgreSQL 15**  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Chuẩn kế thừa**: AIaC Root `F:\BACKUP_LINUX\aiac` (qua symlink `C:\Users\ADMIN\.claude\360org -> F:\BACKUP_LINUX\aiac\360org`), plugin `360-odoo` và `360-local-builder-env`.  
-> **Trạng thái hiện tại (`v0.3.13`, 2026-11-28)**: Hoàn thiện Unslop 9 passes, Việt hóa 100% chuỗi eCommerce, tắt header mẫu `+1 555`, vá `select.form-select` double-caret, bọc toolbar mobile `/shop` và nút scrolltop (`wbh_core` `v19.0.1.1.3`, `theme_gift_store` `v19.0.1.2.1`, `theme_fashion_store` `v19.0.1.2.1`).
+> **Trạng thái hiện tại (`v0.3.14`, 2026-11-28)**: Hoàn thiện Unslop 9 passes, Việt hóa 100% chuỗi eCommerce, tắt header mẫu `+1 555`, chuẩn hóa `select.form-select`, bọc toolbar mobile `/shop` và sửa selector `footer.o_footer` cho nút scrolltop (`wbh_core` `v19.0.1.1.3`, `theme_gift_store` `v19.0.1.2.2`, `theme_fashion_store` `v19.0.1.2.2`).
 
 ---
 

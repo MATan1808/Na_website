@@ -3,10 +3,18 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.13` — vá dứt điểm toàn bộ lỗi UI/UX & chuỗi tiếng Anh sót lại sau kiểm định trình duyệt live trên Desktop & Mobile).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.14` — vá dứt điểm selector `footer.o_footer` cho nút cuộn đầu trang & chống tràn ngang PDP mobile).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.14 (2026-11-28)
+
+### Vá Selector `footer.o_footer` Nút Cuộn Đầu Trang & Chống Tràn Ngang PDP Mobile
+- `[FIX]` **Hiển thị trọn vẹn nút cuộn đầu trang `#o_footer_scrolltop_wrapper`** (`theme_gift_store` & `theme_fashion_store` `v19.0.1.2.2`): Đổi selector từ `#footer.o_footer` sang `footer.o_footer, #bottom.o_footer` khớp ID thật của Odoo 19 để `height: auto !important; min-height: 3.5rem` có hiệu lực.
+- `[FIX]` **Chống tràn ngang PDP mobile**: Bổ sung `overflow-x: clip` trên `.wbh-store-gift` / `.wbh-store-fashion` và `table-layout: fixed` trên `#product_full_spec table`.
 
 ---
 

@@ -3,12 +3,16 @@
 
 {
     'name': 'Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook)',
-    'version': '19.0.1.2.1',
+    'version': '19.0.1.2.2',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện tối giản phong cách Editorial & Lookbook dành riêng cho Web 2 Thời trang (Odoo 19.0 Community)',
     'description': """
 Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook) — Changelog
 ==================================================================
+
+v19.0.1.2.2 (2026-11-28)
+------------------------
+- [FIX] Sửa đúng selector `footer.o_footer, #bottom.o_footer` cho nút cuộn đầu trang và thêm `overflow-x: clip` chống tràn ngang mobile.
 
 v19.0.1.2.1 (2026-11-28)
 ------------------------

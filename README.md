@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.13` — Hoàn thiện **Unslop 9 Passes** & vá triệt để các lỗi phát hiện qua kiểm định live (`wbh_core` `v19.0.1.1.3`, `theme_gift_store` `v19.0.1.2.1`, `theme_fashion_store` `v19.0.1.2.1`): Việt hóa 100% PDP, tắt `+1 555-555-5556` & `Contact Us` thừa, sửa `select.form-select` double-caret, bọc toolbar `/shop` mobile không tràn ngang và mở chiều cao nút cuộn đầu trang.  
+> **Trạng thái dự án**: `v0.3.14` — Hoàn thiện **Unslop 9 Passes** & vá triệt để các lỗi phát hiện qua kiểm định live (`wbh_core` `v19.0.1.1.3`, `theme_gift_store` `v19.0.1.2.2`, `theme_fashion_store` `v19.0.1.2.2`): Việt hóa 100% PDP, tắt `+1 555-555-5556` & `Contact Us` thừa, chuẩn hóa `select.form-select`, bọc toolbar `/shop` mobile không tràn ngang và sửa trọn vẹn nút cuộn đầu trang.  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`

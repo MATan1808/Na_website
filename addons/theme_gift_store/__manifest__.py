@@ -3,12 +3,16 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.2.1',
+    'version': '19.0.1.2.2',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.2.2 (2026-11-28)
+------------------------
+- [FIX] Sửa đúng selector `footer.o_footer, #bottom.o_footer` (thay cho `#footer.o_footer`) để nút cuộn đầu trang `#o_footer_scrolltop_wrapper` hiển thị tròn đầy không bị cắt nửa dưới; thêm `overflow-x: clip` và `table-layout: fixed` chống tràn ngang PDP mobile.
 
 v19.0.1.2.1 (2026-11-28)
 ------------------------
