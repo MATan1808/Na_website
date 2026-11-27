@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.9` — Đã nạp bộ dữ liệu thật **10 lô sản phẩm (37 biến thể, 49 ảnh)** từ Facebook *Manh Dao Dao*, tích hợp `360-frontend-polish` (`GSAP`, `Lucide`, `Impeccable`) và chuẩn hóa lộ trình **4 Giai đoạn** ([docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)) chạy live trên Local Server (`http://100.64.56.52:1901`).  
+> **Trạng thái dự án**: `v0.3.10` — Tích hợp sẵn **Cloudflare Tunnel (`cloudflared`)** public domain miễn phí (`manhdaodao.*`), đã nạp bộ dữ liệu thật **10 lô sản phẩm (37 biến thể, 49 ảnh)** từ Facebook *Manh Dao Dao*, tích hợp `360-frontend-polish` (`GSAP`, `Lucide`, `Impeccable`) và chuẩn hóa lộ trình **4 Giai đoạn** ([docs/ROADMAP_TIEN_DO.md](docs/ROADMAP_TIEN_DO.md)) chạy live trên Local Server (`http://100.64.56.52:1901`).  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`

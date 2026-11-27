@@ -56,6 +56,21 @@ services:
     networks:
       - web_ban_hang_net
 
+  cloudflared:
+    image: ${CLOUDFLARED_IMAGE:-cloudflare/cloudflared:latest}
+    container_name: ${CLIENT_NAME:-web-ban-hang}-tunnel
+    profiles:
+      - tunnel
+    depends_on:
+      odoo:
+        condition: service_healthy
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    networks:
+      - web_ban_hang_net
+
 volumes:
   web_ban_hang_pgdata:
     name: "${CLIENT_NAME:-web-ban-hang}_pgdata"
