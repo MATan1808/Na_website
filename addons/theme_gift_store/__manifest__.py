@@ -3,12 +3,17 @@
 
 {
     'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.0.2',
+    'version': '19.0.1.1.0',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
 Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
 ===========================================
+
+v19.0.1.1.0 (2026-11-27)
+------------------------
+- [IMPROVE] Tích hợp Lucide Icons & GSAP + ScrollTrigger (theme_gift_motion.js) với 3 chốt bảo vệ (scope .wbh-store-gift, Website Builder edit mode, prefers-reduced-motion).
+- [IMPROVE] Đánh bóng UI/UX theo chuẩn Impeccable & Front-End Checklist: tăng tương phản topbar/CTA đạt WCAG AA (>= 4.5:1), thay side-tab bằng full border, bỏ inline onclick, bổ sung preconnect font, theme-color, focus-visible và IntersectionObserver cho sticky bar mobile.
 
 v19.0.1.0.2 (2026-11-27)
 ------------------------
@@ -53,6 +58,7 @@ v19.0.1.0.0 (2026-11-26)
         ],
         'web.assets_frontend': [
             'theme_gift_store/static/src/scss/theme_gift.scss',
+            'theme_gift_store/static/src/js/theme_gift_motion.js',
         ],
         'website.assets_wysiwyg': [
             'theme_gift_store/static/src/scss/theme_gift_editor.scss',

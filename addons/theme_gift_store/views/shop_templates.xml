@@ -23,17 +23,17 @@
                 <div class="wbh-gift-card-stock mt-1">
                     <t t-if="product.is_storable and product.sudo().qty_available &lt;= 0">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--out">
-                            <i class="fa fa-clock-o me-1" aria-hidden="true"/>Tạm hết hàng
+                            <i data-lucide="clock" class="wbh-lucide-icon me-1" aria-hidden="true"/>Tạm hết hàng
                         </span>
                     </t>
                     <t t-elif="product.wbh_is_low_stock">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--low">
-                            <i class="fa fa-bolt me-1" aria-hidden="true"/>Sắp hết hàng
+                            <i data-lucide="zap" class="wbh-lucide-icon me-1" aria-hidden="true"/>Sắp hết hàng
                         </span>
                     </t>
                     <t t-else="">
                         <span class="wbh-gift-stock-badge wbh-gift-stock-badge--in">
-                            <i class="fa fa-check-circle me-1" aria-hidden="true"/>Sẵn hàng giao ngay
+                            <i data-lucide="check-circle-2" class="wbh-lucide-icon me-1" aria-hidden="true"/>Sẵn hàng giao ngay
                         </span>
                     </t>
                 </div>
@@ -53,7 +53,7 @@
                 t-if="website and website.wbh_store_type == 'gift' and product.wbh_short_highlight"
                 class="wbh-gift-highlight-badge mb-3"
             >
-                <i class="fa fa-star me-2" aria-hidden="true"/>
+                <i data-lucide="sparkles" class="wbh-lucide-icon me-2" aria-hidden="true"/>
                 <span t-field="product.wbh_short_highlight"/>
             </div>
         </xpath>
@@ -111,7 +111,7 @@
                                 aria-expanded="false"
                                 aria-controls="wbhGiftCareCollapse"
                             >
-                                <i class="fa fa-heart-o me-2" aria-hidden="true"/>
+                                <i data-lucide="heart" class="wbh-lucide-icon me-2" aria-hidden="true"/>
                                 Hướng dẫn bảo quản &amp; Lưu ý quà tặng
                             </button>
                         </h2>
@@ -132,8 +132,8 @@
                     t-if="website.wbh_support_hotline or website.wbh_support_zalo_url"
                     class="wbh-gift-support-box d-flex flex-wrap align-items-center justify-content-between gap-2 p-3 mb-4"
                 >
-                    <span class="small fw-semibold">
-                        <i class="fa fa-headphones me-1" aria-hidden="true"/>
+                    <span class="small fw-semibold d-inline-flex align-items-center">
+                        <i data-lucide="headphones" class="wbh-lucide-icon me-2" aria-hidden="true"/>
                         Cần tư vấn chọn size / gói quà gấp?
                     </span>
                     <div class="d-flex flex-wrap gap-2">
@@ -142,7 +142,7 @@
                             t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
                             class="btn btn-sm wbh-gift-btn-outline"
                         >
-                            <i class="fa fa-phone me-1" aria-hidden="true"/>
+                            <i data-lucide="phone" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                             <t t-out="website.wbh_support_hotline"/>
                         </a>
                         <a
@@ -152,7 +152,7 @@
                             rel="noopener noreferrer"
                             class="btn btn-sm wbh-gift-btn-secondary"
                         >
-                            <i class="fa fa-comments me-1" aria-hidden="true"/>
+                            <i data-lucide="message-circle" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                             Chat Zalo
                         </a>
                     </div>
@@ -180,9 +180,9 @@
                     <button
                         type="button"
                         class="btn wbh-gift-btn-primary wbh-gift-sticky-bar__btn flex-shrink-0"
-                        onclick="var btn = document.getElementById('add_to_cart'); if (btn) { btn.click(); }"
+                        data-wbh-trigger-cart="true"
                     >
-                        <i class="fa fa-shopping-cart me-1" aria-hidden="true"/>
+                        <i data-lucide="shopping-cart" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                         Thêm vào giỏ
                     </button>
                 </div>

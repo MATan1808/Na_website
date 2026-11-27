@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.1.0',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.1.0 (2026-11-27)
+------------------------
+- [NEW] Đóng gói self-hosted GSAP v3.15.1 (kèm ScrollTrigger) và Lucide Icons v1.82.0 vào static/lib/ và đăng ký trong web.assets_frontend dùng chung cho cả 2 storefront (Web 1 & Web 2).
 
 v19.0.1.0.1 (2026-11-27)
 ------------------------
@@ -47,6 +51,13 @@ v19.0.1.0.0 (2026-11-26)
         'views/product_template_views.xml',
         'views/wbh_menus.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'wbh_core/static/lib/gsap/gsap.min.js',
+            'wbh_core/static/lib/gsap/ScrollTrigger.min.js',
+            'wbh_core/static/lib/lucide/lucide.min.js',
+        ],
+    },
     'installable': True,
     'application': True,
     'auto_install': False,

@@ -3,10 +3,23 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.5` — sửa lỗi lặp 2 footer, nút scrolltop bị che trên mobile và cập nhật dòng bản quyền theo tên cửa hàng).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.3.6` — tích hợp bộ công cụ UI/UX & Animation từ kho MochiStudio: `GSAP 3.15.1`, `Lucide 1.82.0`, chuẩn audit `Impeccable` + `Front-End Checklist` + `UI UX Pro Max`).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.3.6 (2026-11-27)
+
+### Nâng Cấp UI/UX, Motion & Hệ Thống Icon Chuẩn MochiStudio (`GSAP` + `Lucide` + `Impeccable` + `Front-End Checklist`)
+- `[NEW]` **Đóng gói plugin AIaC `360-frontend-polish`** tại `F:\BACKUP_LINUX\aiac\360org\plugins\360-frontend-polish\` (kèm junction `~/.claude/skills/360-frontend-polish`), hợp nhất quy chuẩn của `impeccable`, `Front-End-Checklist`, `ui-ux-pro-max-skill`, `GSAP` và `Lucide`.
+- `[NEW]` **Self-hosted `GSAP v3.15.1` (kèm `ScrollTrigger`) & `Lucide v1.82.0`** trong `addons/wbh_core/static/lib/` (`wbh_core` `v19.0.1.1.0`), nạp qua `web.assets_frontend` không phụ thuộc CDN bên ngoài.
+- `[IMPROVE]` **Nâng cấp `theme_gift_store` (`v19.0.1.1.0`) & `theme_fashion_store` (`v19.0.1.1.0`)**:
+  - Bổ sung `theme_gift_motion.js` và `theme_fashion_motion.js` với 3 chốt bảo vệ: cô lập Multi-Website, an toàn khi chỉnh sửa trong Website Builder, và tuân thủ `prefers-reduced-motion`.
+  - Nâng cấp toàn bộ icon storefront sang **Lucide SVG** đồng bộ theo cá tính thương hiệu (`stroke-width: 1.9` cho Web 1, `1.5` cho Web 2).
+  - Khắc phục các lỗi do `npx impeccable detect` phát hiện: nâng tương phản topbar/CTA đạt WCAG AA (`>= 4.5:1`), gỡ bỏ `side-tab`, thay inline `onclick=` / `style=` bằng `data-wbh-trigger-cart` + `IntersectionObserver`, bổ sung `:focus-visible`, `preconnect` Google Fonts, `<meta name="theme-color">` và hover scale `1.04` chuẩn `DESIGN.md`.
+- `[IMPROVE]` **Cập nhật `html/preview.html`, `css/system.css` và `DESIGN.md`**: Nhúng trực tiếp Lucide + GSAP chạy offline ngay khi mở file xem trước.
 
 ---
 

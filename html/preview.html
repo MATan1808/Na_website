@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FF6B8B">
   <title>Bản Xem Trước Hệ Thống Thiết Kế — 2 Website Bán Hàng (Design System Preview)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/system.css">
   <style>
@@ -13,33 +14,98 @@
       margin: 0;
       padding: 2rem;
       background: #FAFAFA;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #333;
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #222222;
     }
     .header-bar {
       max-width: 1200px;
-      margin: 0 auto 3rem auto;
+      margin: 0 auto 2.5rem auto;
       padding-bottom: 1.5rem;
       border-bottom: 2px solid #EAEAEA;
       display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
       justify-content: space-between;
       align-items: center;
     }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .demo-replay-btn {
+      background: #111111;
+      color: #FFFFFF;
+      border: 1px solid #111111;
+      border-radius: 999px;
+      padding: 0.55rem 1.1rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .demo-replay-btn:focus-visible {
+      outline: 2px solid #D83B64;
+      outline-offset: 2px;
+    }
+    .status-pill {
+      background: #E8F5E9;
+      color: #1B5E20;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
     .grid-2 {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
       max-width: 1200px;
       margin: 0 auto;
     }
     .showcase-panel {
-      padding: 2.5rem;
+      padding: 2.25rem;
       border-radius: 24px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .showcase-panel.wbh-gift-scope,
+    .showcase-panel.wbh-fashion-scope {
+      box-shadow: none;
+    }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      gap: 0.75rem;
+    }
+    .store-tag-gift {
+      background: #FCE4EC;
+      color: #9C1F43;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .store-tag-fashion {
+      background: #EAEAE7;
+      color: #111111;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
     .color-row {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       margin-bottom: 2rem;
     }
     .color-chip {
@@ -51,144 +117,197 @@
       justify-content: flex-end;
       padding: 8px;
       font-size: 11px;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
     .section-title {
-      font-size: 1.25rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
+      font-size: 1.15rem;
+      margin-top: 1.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.45rem;
       border-bottom: 1px dashed rgba(0,0,0,0.15);
     }
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.85rem;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
     .card-preview {
-      max-width: 300px;
+      max-width: 310px;
       margin-top: 1rem;
+    }
+    .card-flat-media {
+      background: #FFF1F5;
+      border-radius: 12px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: #C22F57;
+    }
+    .card-flat-fashion-media {
+      background: #EAEAE7;
+      border-radius: 4px;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+      color: #222222;
+    }
+    .card-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
 
-  <div class="header-bar">
+  <header class="header-bar">
     <div>
-      <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800;">HỆ THỐNG THIẾT KẾ ĐA WEBSITE (DESIGN SYSTEM)</h1>
-      <p style="margin: 5px 0 0 0; color: #666; font-size: 0.95rem;">Đặc tả Visual Style: Cửa Hàng Quà Tặng (Warm & Playful) vs Cửa Hàng Thời Trang (Editorial & Clean)</p>
+      <h1 style="margin: 0; font-size: 1.75rem; font-weight: 800;">HỆ THỐNG THIẾT KẾ ĐA WEBSITE (DESIGN SYSTEM)</h1>
+      <p style="margin: 6px 0 0 0; color: #555555; font-size: 0.95rem;">
+        Đặc tả Visual Style, Lucide Icons &amp; GSAP Motion — Cửa Hàng Quà Tặng vs Cửa Hàng Thời Trang
+      </p>
     </div>
-    <div style="background: #E8F5E9; color: #2E7D32; padding: 6px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
-      ✓ Odoo 19.0 Community Ready
+    <div class="header-actions">
+      <button type="button" id="wbhReplayMotionBtn" class="demo-replay-btn">
+        <i data-lucide="play" class="wbh-lucide-icon" aria-hidden="true"></i>
+        <span>Phát lại hiệu ứng GSAP</span>
+      </button>
+      <span class="status-pill">
+        <i data-lucide="check-circle-2" class="wbh-lucide-icon" aria-hidden="true"></i>
+        <span>Odoo 19.0 + GSAP + Lucide</span>
+      </span>
     </div>
-  </div>
+  </header>
 
-  <div class="grid-2">
+  <main class="grid-2">
 
     <!-- CỘT 1: CỬA HÀNG QUÀ TẶNG -->
-    <div class="showcase-panel wbh-gift-scope">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
-        <h2 class="wbh-gift-heading" style="margin: 0; font-size: 1.5rem;">STORE 1: QUÀ TẶNG</h2>
-        <span style="background: #FFE4D6; color: #FF6B8B; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">Gấu Bông &amp; Blind Box</span>
+    <section class="showcase-panel wbh-gift-scope wbh-preview-panel">
+      <div class="panel-head">
+        <h2 class="wbh-gift-heading" style="margin: 0; font-size: 1.4rem;">STORE 1: QUÀ TẶNG</h2>
+        <span class="store-tag-gift">Gấu Bông &amp; Blind Box</span>
       </div>
 
-      <!-- Colors -->
-      <div class="section-title wbh-gift-heading">Bảng Màu Chủ Đạo (Palette)</div>
+      <h3 class="section-title wbh-gift-heading">Bảng Màu Chủ Đạo (WCAG AA)</h3>
       <div class="color-row">
-        <div class="color-chip" style="background: #FF6B8B; color: #fff;">#FF6B8B<span>Primary</span></div>
-        <div class="color-chip" style="background: #FFB347; color: #fff;">#FFB347<span>Vàng Mật</span></div>
-        <div class="color-chip" style="background: #FFF6F0; color: #3D2C2E; border: 1px solid #FFE4D6;">#FFF6F0<span>Nền Ấm</span></div>
-        <div class="color-chip" style="background: #3D2C2E; color: #fff;">#3D2C2E<span>Cacao Text</span></div>
+        <div class="color-chip" style="background: #C22F57; color: #FFFFFF;">#C22F57<span>CTA Đậm</span></div>
+        <div class="color-chip" style="background: #FFB347; color: #3D2C2E;">#FFB347<span>Vàng Mật</span></div>
+        <div class="color-chip" style="background: #FFF6F0; color: #3D2C2E; border: 1px solid #E9BDC8;">#FFF6F0<span>Nền Ấm</span></div>
+        <div class="color-chip" style="background: #3D2C2E; color: #FFFFFF;">#3D2C2E<span>Cacao Text</span></div>
       </div>
 
-      <!-- Typography -->
-      <div class="section-title wbh-gift-heading">Kiểu Chữ (Typography)</div>
-      <p class="wbh-gift-heading" style="font-size: 1.3rem; margin: 0 0 8px 0;">Heading: Quicksand Rounded 700</p>
-      <p style="font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem 0;">Body: Be Vietnam Pro 400/500/600 — Đậm nét cảm xúc ngọt ngào, gần gũi, phù hợp giới trẻ và các dịp kỷ niệm.</p>
+      <h3 class="section-title wbh-gift-heading">Kiểu Chữ (Typography)</h3>
+      <p class="wbh-gift-heading" style="font-size: 1.25rem; margin: 0 0 8px 0;">Heading: Quicksand Rounded 700</p>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.25rem 0;">Body: Be Vietnam Pro 400/500/600 — Đậm nét cảm xúc ngọt ngào, gần gũi, phù hợp giới trẻ và các dịp kỷ niệm.</p>
 
-      <!-- Buttons -->
-      <div class="section-title wbh-gift-heading">Nút Bấm &amp; Tương Tác (Buttons)</div>
+      <h3 class="section-title wbh-gift-heading">Nút Bấm &amp; Icon Lucide</h3>
       <div class="btn-group">
         <a href="#gift" class="wbh-gift-btn-primary">
-          <span>🎁</span> Chọn Quà Ngay
+          <i data-lucide="gift" class="wbh-lucide-icon" aria-hidden="true"></i>
+          <span>Chọn Quà Ngay</span>
         </a>
         <a href="#gift" class="wbh-gift-btn-secondary">
-          <span>🔍</span> Tìm Blind Box
+          <i data-lucide="package" class="wbh-lucide-icon" aria-hidden="true"></i>
+          <span>Tìm Blind Box</span>
         </a>
       </div>
 
-      <!-- Card Preview -->
-      <div class="section-title wbh-gift-heading">Thẻ Sản Phẩm Quà Tặng (Card 1:1)</div>
+      <h3 class="section-title wbh-gift-heading">Thẻ Sản Phẩm Quà Tặng (Card 1:1)</h3>
       <div class="card-preview">
-        <div class="wbh-gift-card">
-          <span class="wbh-gift-card__badge">Bán Chạy 🔥</span>
-          <div class="wbh-gift-card__img-wrap">
-            <span style="font-size: 3.5rem;">🧸</span>
+        <article class="wbh-gift-card wbh-anim-card">
+          <span class="wbh-gift-card__badge">Bán Chạy</span>
+          <div class="card-flat-media">
+            <i data-lucide="heart" class="wbh-lucide-icon wbh-lucide-icon--xl" aria-hidden="true"></i>
           </div>
-          <h4 class="wbh-gift-heading" style="margin: 0 0 6px 0; font-size: 1rem;">Gấu Bông Capybara Rùa</h4>
-          <p style="margin: 0 0 12px 0; font-size: 0.85rem; color: var(--wbh-gift-color-text-muted);">Mềm mịn, nhồi bông PP 100%</p>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: 700; color: var(--wbh-gift-color-primary); font-size: 1.1rem;">185.000 đ</span>
-            <button class="wbh-gift-btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">Thêm</button>
+          <h4 class="wbh-gift-heading" style="margin: 0 0 6px 0; font-size: 1rem;">Búp Bê Cotton Doll 20cm Bakugo</h4>
+          <p style="margin: 0 0 12px 0; font-size: 0.85rem; color: #6B5759;">Mềm mịn, nhồi bông PP 100% kèm Outfit Sporty</p>
+          <div class="card-price-row">
+            <span style="font-weight: 700; color: #C22F57; font-size: 1.1rem;">380.000 đ</span>
+            <button type="button" class="wbh-gift-btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">
+              <i data-lucide="shopping-cart" class="wbh-lucide-icon" aria-hidden="true"></i>
+              <span>Thêm</span>
+            </button>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
-
+    </section>
 
     <!-- CỘT 2: CỬA HÀNG THỜI TRANG -->
-    <div class="showcase-panel wbh-fashion-scope">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
-        <h2 class="wbh-fashion-heading" style="margin: 0; font-size: 1.5rem;">STORE 2: THỜI TRANG</h2>
-        <span style="background: #EAEAE7; color: #111; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Lookbook &amp; Apparel</span>
+    <section class="showcase-panel wbh-fashion-scope wbh-preview-panel">
+      <div class="panel-head">
+        <h2 class="wbh-fashion-heading" style="margin: 0; font-size: 1.4rem;">STORE 2: THỜI TRANG</h2>
+        <span class="store-tag-fashion">Lookbook &amp; Apparel</span>
       </div>
 
-      <!-- Colors -->
-      <div class="section-title wbh-fashion-heading">Bảng Màu Chủ Đạo (Palette)</div>
+      <h3 class="section-title wbh-fashion-heading">Bảng Màu Chủ Đạo (WCAG AA)</h3>
       <div class="color-row">
-        <div class="color-chip" style="background: #111111; color: #fff;">#111111<span>Đen Than</span></div>
-        <div class="color-chip" style="background: #C8B6A6; color: #fff;">#C8B6A6<span>Be Cát</span></div>
-        <div class="color-chip" style="background: #F5F5F3; color: #222; border: 1px solid #E5E5E2;">#F5F5F3<span>Xám Đá</span></div>
-        <div class="color-chip" style="background: #222222; color: #fff;">#222222<span>Text Đậm</span></div>
+        <div class="color-chip" style="background: #111111; color: #FFFFFF;">#111111<span>Đen Than</span></div>
+        <div class="color-chip" style="background: #C8B6A6; color: #111111;">#C8B6A6<span>Be Cát</span></div>
+        <div class="color-chip" style="background: #F5F5F3; color: #222222; border: 1px solid #DFDFDC;">#F5F5F3<span>Xám Đá</span></div>
+        <div class="color-chip" style="background: #222222; color: #FFFFFF;">#222222<span>Text Đậm</span></div>
       </div>
 
-      <!-- Typography -->
-      <div class="section-title wbh-fashion-heading">Kiểu Chữ (Typography)</div>
-      <p class="wbh-fashion-heading" style="font-size: 1.3rem; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.05em;">Heading: Plus Jakarta Sans 800</p>
-      <p style="font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem 0;">Body: Inter 400/500 — Phong cách tạp chí thời trang quốc tế, tối giản, sắc sảo, tôn chất liệu vải.</p>
+      <h3 class="section-title wbh-fashion-heading">Kiểu Chữ (Typography)</h3>
+      <p class="wbh-fashion-heading" style="font-size: 1.25rem; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.04em;">Heading: Plus Jakarta Sans 800</p>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.25rem 0;">Body: Inter 400/500 — Phong cách tạp chí thời trang quốc tế, tối giản, sắc sảo, tôn chất liệu vải.</p>
 
-      <!-- Buttons -->
-      <div class="section-title wbh-fashion-heading">Nút Bấm &amp; Tương Tác (Buttons)</div>
+      <h3 class="section-title wbh-fashion-heading">Nút Bấm &amp; Icon Lucide</h3>
       <div class="btn-group">
-        <a href="#fashion" class="wbh-fashion-btn-primary">
-          Khám Phá BST Mới
+        <a href="#fashion" class="wbh-fashion-btn-primary" style="gap: 0.5rem;">
+          <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"></i>
+          <span>Khám Phá BST Mới</span>
         </a>
-        <a href="#fashion" class="wbh-fashion-btn-outline">
-          Xem Lookbook
+        <a href="#fashion" class="wbh-fashion-btn-outline" style="gap: 0.5rem;">
+          <span>Xem Lookbook</span>
+          <i data-lucide="arrow-right" class="wbh-lucide-icon" aria-hidden="true"></i>
         </a>
       </div>
 
-      <!-- Card Preview -->
-      <div class="section-title wbh-fashion-heading">Thẻ Sản Phẩm Thời Trang (Card 3:4)</div>
+      <h3 class="section-title wbh-fashion-heading">Thẻ Sản Phẩm Thời Trang (Card 3:4)</h3>
       <div class="card-preview">
-        <div class="wbh-fashion-card">
-          <div class="wbh-fashion-card__img-wrap" style="display: flex; align-items: center; justify-content: center;">
-            <span style="font-size: 3.5rem;">🧥</span>
+        <article class="wbh-fashion-card wbh-anim-card">
+          <div class="card-flat-fashion-media">
+            <i data-lucide="shirt" class="wbh-lucide-icon wbh-lucide-icon--xl" aria-hidden="true"></i>
           </div>
-          <div class="wbh-fashion-card__tag">SUMMER 2026 EDITION</div>
-          <h4 class="wbh-fashion-heading" style="margin: 4px 0 6px 0; font-size: 0.95rem;">Áo Thun Cotton Oversize</h4>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-            <span style="font-weight: 700; color: #111; font-size: 1.05rem;">280.000 đ</span>
-            <span style="font-size: 0.8rem; color: #777;">S / M / L / XL</span>
+          <div class="wbh-fashion-card__tag">EDITORIAL LOOKBOOK</div>
+          <h4 class="wbh-fashion-heading" style="margin: 4px 0 6px 0; font-size: 0.95rem;">Áo Thun Cotton 250gsm Oversize</h4>
+          <div class="card-price-row">
+            <span style="font-weight: 700; color: #111111; font-size: 1.05rem;">280.000 đ</span>
+            <span style="font-size: 0.8rem; color: #555555;">S / M / L / XL</span>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
 
-  </div>
+  </main>
 
+  <script src="../addons/wbh_core/static/lib/lucide/lucide.min.js"></script>
+  <script src="../addons/wbh_core/static/lib/gsap/gsap.min.js"></script>
+  <script src="../addons/wbh_core/static/lib/gsap/ScrollTrigger.min.js"></script>
+  <script>
+    (function () {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons({ attrs: { 'stroke-width': '1.8', 'aria-hidden': 'true' } });
+      }
+      function playDemoMotion() {
+        if (!window.gsap) return;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) return;
+        window.gsap.fromTo('.wbh-preview-panel', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, stagger: 0.12, ease: 'power3.out', clearProps: 'transform,opacity' });
+        window.gsap.fromTo('.wbh-anim-card', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2, stagger: 0.12, ease: 'power2.out', clearProps: 'transform,opacity' });
+      }
+      playDemoMotion();
+      var btn = document.getElementById('wbhReplayMotionBtn');
+      if (btn) btn.addEventListener('click', playDemoMotion);
+    })();
+  </script>
 </body>
 </html>

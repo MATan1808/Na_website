@@ -12,15 +12,16 @@
                         <span class="wbh-gift-eyebrow d-inline-block mb-2">Gợi Ý Được Yêu Thích</span>
                         <h2 class="h3 fw-bold mb-0">Quà tặng nổi bật tại cửa hàng</h2>
                     </div>
-                    <a href="/shop" class="btn wbh-gift-btn-outline">
-                        Xem toàn bộ cửa hàng <i class="fa fa-angle-right ms-1" aria-hidden="true"/>
+                    <a href="/shop" class="btn wbh-gift-btn-outline d-inline-flex align-items-center gap-1">
+                        <span>Xem toàn bộ cửa hàng</span>
+                        <i data-lucide="arrow-right" class="wbh-lucide-icon" aria-hidden="true"/>
                     </a>
                 </div>
                 <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-lg-4">
                     <div class="col">
                         <div class="wbh-gift-featured-card h-100 d-flex flex-column">
                             <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--1 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-heart fa-3x" aria-hidden="true"/>
+                                <i data-lucide="heart" class="wbh-lucide-icon wbh-lucide-icon--lg" aria-hidden="true"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
                                 <span class="wbh-gift-tag mb-2">Gấu bông</span>
@@ -33,7 +34,7 @@
                     <div class="col">
                         <div class="wbh-gift-featured-card h-100 d-flex flex-column">
                             <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--2 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-key fa-3x" aria-hidden="true"/>
+                                <i data-lucide="key-round" class="wbh-lucide-icon wbh-lucide-icon--lg" aria-hidden="true"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
                                 <span class="wbh-gift-tag mb-2">Móc khóa</span>
@@ -46,7 +47,7 @@
                     <div class="col">
                         <div class="wbh-gift-featured-card h-100 d-flex flex-column">
                             <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--3 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-cube fa-3x" aria-hidden="true"/>
+                                <i data-lucide="package" class="wbh-lucide-icon wbh-lucide-icon--lg" aria-hidden="true"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
                                 <span class="wbh-gift-tag mb-2">Blind Box</span>
@@ -59,7 +60,7 @@
                     <div class="col">
                         <div class="wbh-gift-featured-card h-100 d-flex flex-column">
                             <div class="wbh-gift-featured-card__media wbh-gift-featured-card__media--4 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-gift fa-3x" aria-hidden="true"/>
+                                <i data-lucide="gift" class="wbh-lucide-icon wbh-lucide-icon--lg" aria-hidden="true"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
                                 <span class="wbh-gift-tag mb-2">Combo quà tặng</span>

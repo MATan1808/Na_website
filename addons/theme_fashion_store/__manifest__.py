@@ -3,12 +3,17 @@
 
 {
     'name': 'Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook)',
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.1.0',
     'category': 'Theme/eCommerce',
     'summary': 'Giao diện tối giản phong cách Editorial & Lookbook dành riêng cho Web 2 Thời trang (Odoo 19.0 Community)',
     'description': """
 Theme Web 2 — Cửa Hàng Thời Trang (Quần Áo & Lookbook) — Changelog
 ==================================================================
+
+v19.0.1.1.0 (2026-11-27)
+------------------------
+- [IMPROVE] Tích hợp Lucide Icons & GSAP + ScrollTrigger (theme_fashion_motion.js) phong cách Editorial mượt mà với 3 chốt bảo vệ (scope .wbh-store-fashion, Website Builder edit mode, prefers-reduced-motion).
+- [IMPROVE] Đánh bóng UI/UX theo chuẩn Impeccable & Front-End Checklist: hiệu ứng phóng ảnh hover scale(1.04) cho Lookbook & /shop 3:4, bỏ inline onclick và inline style, bổ sung preconnect font, theme-color, focus-visible và IntersectionObserver cho sticky bar mobile.
 
 v19.0.1.0.1 (2026-11-27)
 ------------------------
@@ -46,6 +51,7 @@ v19.0.1.0.0 (2026-11-26)
         ],
         'web.assets_frontend': [
             'theme_fashion_store/static/src/scss/theme_fashion.scss',
+            'theme_fashion_store/static/src/js/theme_fashion_motion.js',
         ],
         'website.assets_wysiwyg': [
             'theme_fashion_store/static/src/scss/theme_fashion_editor.scss',

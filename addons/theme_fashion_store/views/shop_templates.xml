@@ -85,7 +85,7 @@
                          aria-labelledby="wbh_fashion_care_heading"
                          data-bs-parent="#wbh_fashion_care_accordion">
                         <div class="accordion-body px-0 pt-0 pb-3 wbh-fashion-care-body">
-                            <p class="mb-0" style="white-space: pre-line;" t-field="product.wbh_care_note"/>
+                            <p class="mb-0" t-field="product.wbh_care_note"/>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,9 @@
                 <div id="wbh_fashion_shop_the_look_slot" class="wbh-ext-slot container my-4"/>
 
                 <div t-if="is_add_to_cart_possible and not (combination_info and combination_info.get('prevent_zero_price_sale'))"
-                     class="wbh-fashion-mobile-sticky-bar d-lg-none fixed-bottom o_not_editable">
+                     class="wbh-fashion-mobile-sticky-bar d-lg-none fixed-bottom o_not_editable"
+                     role="region"
+                     aria-label="Thanh mua nhanh trên di động">
                     <div class="container d-flex align-items-center justify-content-between gap-3 py-2">
                         <div class="wbh-fashion-sticky-price">
                             <span class="d-block small text-muted text-truncate" t-out="product.name"/>
@@ -106,13 +108,12 @@
                                     t-out="combination_info.get('price', product.list_price) if combination_info else product.list_price"
                                     t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                         </div>
-                        <a href="#add_to_cart"
-                           role="button"
-                           class="btn wbh-fashion-sticky-cta flex-shrink-0"
-                           onclick="var btn = document.getElementById('add_to_cart'); if (btn) { btn.click(); } return false;">
-                            <i class="fa fa-shopping-bag me-2" aria-hidden="true"/>
-                            Thêm vào giỏ
-                        </a>
+                        <button type="button"
+                                class="btn wbh-fashion-sticky-cta flex-shrink-0"
+                                data-wbh-trigger-cart="true">
+                            <i data-lucide="shopping-bag" class="wbh-lucide-icon me-2" aria-hidden="true"/>
+                            <span>Thêm vào giỏ</span>
+                        </button>
                     </div>
                 </div>
             </t>

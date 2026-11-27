@@ -12,6 +12,9 @@
         <!-- Nạp font tiếng Việt Be Vietnam Pro & Quicksand chỉ trên Web 1 -->
         <xpath expr="//head" position="inside">
             <t t-if="website and website.wbh_store_type == 'gift'">
+                <link rel="preconnect" href="https://fonts.googleapis.com"/>
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+                <meta name="theme-color" content="#FF6B8B"/>
                 <link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap"
@@ -38,7 +41,7 @@
             >
                 <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-2">
                     <div class="wbh-gift-topbar__tagline d-flex align-items-center gap-2">
-                        <i class="fa fa-gift" aria-hidden="true"/>
+                        <i data-lucide="gift" class="wbh-lucide-icon" aria-hidden="true"/>
                         <span t-if="website.wbh_brand_tagline" t-field="website.wbh_brand_tagline"/>
                         <span t-else="">Gửi trọn cảm xúc trong từng món quà nhỏ</span>
                     </div>
@@ -48,7 +51,7 @@
                             t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
                             class="wbh-gift-topbar__link"
                         >
-                            <i class="fa fa-phone me-1" aria-hidden="true"/>
+                            <i data-lucide="phone" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                             <span>Hotline: <t t-out="website.wbh_support_hotline"/></span>
                         </a>
                         <a
@@ -58,7 +61,7 @@
                             rel="noopener noreferrer"
                             class="wbh-gift-topbar__zalo"
                         >
-                            <i class="fa fa-comments me-1" aria-hidden="true"/>
+                            <i data-lucide="message-circle" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                             <span>Chat Zalo CSKH</span>
                         </a>
                     </div>
@@ -99,7 +102,7 @@
                                     t-attf-href="tel:{{website.wbh_support_hotline.replace(' ', '')}}"
                                     class="btn btn-sm wbh-gift-btn-outline"
                                 >
-                                    <i class="fa fa-phone me-1" aria-hidden="true"/>
+                                    <i data-lucide="phone" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                                     <t t-out="website.wbh_support_hotline"/>
                                 </a>
                                 <a
@@ -109,7 +112,7 @@
                                     rel="noopener noreferrer"
                                     class="btn btn-sm wbh-gift-btn-primary"
                                 >
-                                    <i class="fa fa-comments me-1" aria-hidden="true"/>
+                                    <i data-lucide="message-circle" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                                     Zalo tư vấn quà
                                 </a>
                             </div>

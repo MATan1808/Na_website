@@ -10,8 +10,9 @@
                         <span class="wbh-fashion-eyebrow text-uppercase d-block mb-1">Danh mục chủ lực</span>
                         <h2 class="h3 fw-semibold mb-0">Khám Phá Tủ Đồ Tối Giản</h2>
                     </div>
-                    <a href="/shop" class="wbh-fashion-inline-link text-uppercase small fw-semibold text-decoration-none">
-                        Xem toàn bộ <i class="fa fa-long-arrow-right ms-1" aria-hidden="true"/>
+                    <a href="/shop" class="wbh-fashion-inline-link text-uppercase small fw-semibold text-decoration-none d-inline-flex align-items-center gap-1">
+                        <span>Xem toàn bộ</span>
+                        <i data-lucide="arrow-right" class="wbh-lucide-icon" aria-hidden="true"/>
                     </a>
                 </div>
                 <div class="row g-3 g-lg-4">

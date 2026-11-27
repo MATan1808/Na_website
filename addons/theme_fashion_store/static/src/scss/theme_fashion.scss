@@ -35,6 +35,30 @@
     }
 
     // -------------------------------------------------------------------------
+    // Lucide Icons & Accessibility Focus Ring
+    // -------------------------------------------------------------------------
+    .wbh-lucide-icon {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        vertical-align: -0.15em;
+        flex-shrink: 0;
+    }
+
+    .wbh-lucide-icon--lg {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    .btn:focus-visible,
+    .o_variant_pills:focus-visible {
+        outline: 2px solid var(--wbh-fashion-ink);
+        outline-offset: 2px;
+    }
+
+    // -------------------------------------------------------------------------
     // Nút bấm Editorial tối giản, góc sắc nét
     // -------------------------------------------------------------------------
     .btn-primary,
@@ -226,7 +250,12 @@
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
                 }
+            }
+
+            &:hover .wbh-fashion-editorial-img img {
+                transform: scale(1.04);
             }
 
             .wbh-fashion-editorial-placeholder {
@@ -276,7 +305,12 @@
                 height: 100%;
                 object-fit: cover !important;
                 object-position: center top;
+                transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
             }
+        }
+
+        &:hover .oe_product_image_link img {
+            transform: scale(1.04);
         }
 
         .o_wsale_products_item_title {
@@ -404,6 +438,10 @@
                 font-size: 0.9rem;
                 line-height: 1.65;
                 color: #4A4A4A;
+
+                p {
+                    white-space: pre-line;
+                }
             }
         }
 
@@ -414,6 +452,13 @@
             border-top: 1px solid var(--wbh-fashion-border);
             box-shadow: 0 -6px 20px rgba(17, 17, 17, 0.08);
             z-index: 1030;
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+
+            &.wbh-sticky-hidden {
+                transform: translateY(110%);
+                opacity: 0;
+                pointer-events: none;
+            }
 
             .wbh-fashion-sticky-price {
                 min-width: 0;
@@ -498,6 +543,15 @@
                     text-decoration: underline;
                 }
             }
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
         }
     }
 }

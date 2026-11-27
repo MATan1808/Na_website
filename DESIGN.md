@@ -62,7 +62,22 @@
 
 ---
 
-## 5. Quy Trình Kiểm Tra & Tích Hợp (Checklist Before Changing UI)
+## 5. Hệ Thống Icon, Chuyển Động & Kiểm Định Chất Lượng (UI Polish Standards)
+
+- **Hệ thống Icon (`Lucide v1.82.0`, self-hosted)**: Đóng gói tại `addons/wbh_core/static/lib/lucide/lucide.min.js` (`web.assets_frontend`).
+  - Web 1 (Quà tặng): `stroke-width: 1.9` nét tròn thân thiện.
+  - Web 2 (Thời trang): `stroke-width: 1.5` nét mảnh tinh tế chuẩn Editorial.
+- **Hệ thống Chuyển động (`GSAP v3.15.1 + ScrollTrigger`, self-hosted)**: Đóng gói tại `addons/wbh_core/static/lib/gsap/`, thực thi qua `theme_gift_motion.js` và `theme_fashion_motion.js` với 3 chốt bảo vệ bắt buộc:
+  1. Cô lập tuyệt đối trong `#wrapwrap.wbh-store-gift` và `#wrapwrap.wbh-store-fashion`.
+  2. Tắt hiệu ứng ẩn/reveal khi Odoo Website Builder đang bật chế độ chỉnh sửa (`editor_enable`, `o_editable`, `o_website_preview`).
+  3. Tôn trọng `@media (prefers-reduced-motion: reduce)` và tự giải phóng `clearProps: 'transform,opacity'` sau khi reveal để không xung đột CSS `:hover`.
+- **Chuẩn Audit Giao Diện (`360-frontend-polish`: Impeccable + Front-End Checklist + UI UX Pro Max)**:
+  - Tương phản WCAG AA `>= 4.5:1` cho chữ thường (`#C93B5F` / `#C22F57` trên nền trắng hoặc chữ tối trên nền Be cát `#C8B6A6` / Vàng mật `#FFB347`).
+  - Không dùng inline `onclick=` hay `style=`, luôn có `:focus-visible`, `preconnect` Google Fonts, `<meta name="theme-color">` và vùng chạm mobile `>= 44px`.
+
+---
+
+## 6. Quy Trình Kiểm Tra & Tích Hợp (Checklist Before Changing UI)
 
 Trước khi thực hiện bất kỳ thay đổi nào liên quan đến giao diện người dùng:
 1. [ ] Đọc kỹ `DESIGN.md` để nắm đúng bảng màu và phong cách của từng website.

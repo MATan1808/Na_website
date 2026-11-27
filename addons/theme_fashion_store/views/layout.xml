@@ -10,6 +10,9 @@
         <!-- Nạp bộ font hỗ trợ tiếng Việt Plus Jakarta Sans & Inter riêng cho Web 2 -->
         <xpath expr="//head" position="inside">
             <t t-if="website and website.wbh_store_type == 'fashion'">
+                <link rel="preconnect" href="https://fonts.googleapis.com"/>
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+                <meta name="theme-color" content="#111111"/>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"/>
             </t>
         </xpath>
@@ -25,16 +28,16 @@
                     <div class="d-flex align-items-center gap-3 wbh-fashion-topbar-contacts">
                         <a t-if="website.wbh_support_hotline"
                            t-attf-href="tel:#{website.wbh_support_hotline.replace(' ', '')}"
-                           class="wbh-fashion-topbar-link text-decoration-none">
-                            <i class="fa fa-phone me-1" aria-hidden="true"/>
+                           class="wbh-fashion-topbar-link text-decoration-none d-inline-flex align-items-center">
+                            <i data-lucide="phone" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                             <span t-out="website.wbh_support_hotline"/>
                         </a>
                         <a t-if="website.wbh_support_zalo_url"
                            t-att-href="website.wbh_support_zalo_url"
                            target="_blank"
                            rel="noopener noreferrer"
-                           class="wbh-fashion-topbar-link text-decoration-none">
-                            <i class="fa fa-comments-o me-1" aria-hidden="true"/>
+                           class="wbh-fashion-topbar-link text-decoration-none d-inline-flex align-items-center">
+                            <i data-lucide="message-circle" class="wbh-lucide-icon me-1" aria-hidden="true"/>
                             <span>Tư vấn Zalo</span>
                         </a>
                         <a href="/shop" class="wbh-fashion-topbar-link text-decoration-none d-none d-sm-inline">
@@ -61,17 +64,17 @@
                             <div class="d-flex flex-wrap gap-2">
                                 <a t-if="website.wbh_support_hotline"
                                    t-attf-href="tel:#{website.wbh_support_hotline.replace(' ', '')}"
-                                   class="btn btn-sm wbh-fashion-btn-outline">
-                                    <i class="fa fa-phone me-1" aria-hidden="true"/>
-                                    Hotline: <t t-out="website.wbh_support_hotline"/>
+                                   class="btn btn-sm wbh-fashion-btn-outline d-inline-flex align-items-center">
+                                    <i data-lucide="phone" class="wbh-lucide-icon me-1" aria-hidden="true"/>
+                                    <span>Hotline: <t t-out="website.wbh_support_hotline"/></span>
                                 </a>
                                 <a t-if="website.wbh_support_zalo_url"
                                    t-att-href="website.wbh_support_zalo_url"
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   class="btn btn-sm wbh-fashion-btn-solid">
-                                    <i class="fa fa-comments-o me-1" aria-hidden="true"/>
-                                    Chat Zalo CSKH
+                                   class="btn btn-sm wbh-fashion-btn-solid d-inline-flex align-items-center">
+                                    <i data-lucide="message-circle" class="wbh-lucide-icon me-1" aria-hidden="true"/>
+                                    <span>Chat Zalo CSKH</span>
                                 </a>
                             </div>
                         </div>

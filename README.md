@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.3.5` — Hoàn thiện bộ nhận diện thương hiệu **Manh Dao Dao Anime Goods Shop**, sửa lỗi lặp 2 footer & nút cuộn đầu trang trên mobile, vá quyền đọc tồn kho `/shop` và triển khai sạch trên Local Server (`wbh_core` `v19.0.1.0.1`, `theme_gift_store` `v19.0.1.0.2`, `theme_fashion_store` `v19.0.1.0.1`).  
+> **Trạng thái dự án**: `v0.3.6` — Tích hợp bộ công cụ UI/UX & Animation chuẩn MochiStudio (`GSAP 3.15.1`, `Lucide 1.82.0`, audit `Impeccable` + `Front-End Checklist` + `UI UX Pro Max`) vào 2 Storefronts thuần Odoo 19.0 Community (`wbh_core` `v19.0.1.1.0`, `theme_gift_store` `v19.0.1.1.0`, `theme_fashion_store` `v19.0.1.1.0`).  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`

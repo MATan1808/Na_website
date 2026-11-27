@@ -10,7 +10,7 @@
                 <div class="row align-items-center g-4 g-lg-5">
                     <div class="col-lg-6">
                         <span class="wbh-gift-eyebrow d-inline-flex align-items-center gap-2 mb-3">
-                            <i class="fa fa-star" aria-hidden="true"/>
+                            <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"/>
                             <span>Bộ Sưu Tập Quà Tặng Mới Nhất</span>
                         </span>
                         <h1 class="wbh-gift-hero__title display-4 fw-bold mb-3">
@@ -20,22 +20,22 @@
                             Từ gấu bông bông PP siêu mềm, móc khóa thiết kế dễ thương đến những hộp Blind Box đầy bất ngờ — tất cả đều sẵn sàng gói đẹp và giao tận tay người thương.
                         </p>
                         <div class="d-flex flex-wrap gap-3">
-                            <a href="/shop/category/anime-goods-merch-21" class="btn btn-lg wbh-gift-btn-primary">
-                                <i class="fa fa-star me-2" aria-hidden="true"/>
-                                Anime Doll &amp; Goods Mới
+                            <a href="/shop/category/anime-goods-merch-21" class="btn btn-lg wbh-gift-btn-primary d-inline-flex align-items-center gap-2">
+                                <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"/>
+                                <span>Anime Doll &amp; Goods Mới</span>
                             </a>
-                            <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="btn btn-lg wbh-gift-btn-secondary">
-                                <i class="fa fa-heart me-2" aria-hidden="true"/>
-                                Búp Bê Cotton Doll 20cm
+                            <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="btn btn-lg wbh-gift-btn-secondary d-inline-flex align-items-center gap-2">
+                                <i data-lucide="heart" class="wbh-lucide-icon" aria-hidden="true"/>
+                                <span>Búp Bê Cotton Doll 20cm</span>
                             </a>
                         </div>
                         <div class="wbh-gift-hero__trust d-flex flex-wrap gap-4 mt-4 pt-2">
                             <div class="d-flex align-items-center gap-2">
-                                <i class="fa fa-heart wbh-gift-icon-accent" aria-hidden="true"/>
+                                <i data-lucide="shield-check" class="wbh-lucide-icon wbh-gift-icon-accent" aria-hidden="true"/>
                                 <span>Chất liệu an toàn, êm mịn</span>
                             </div>
                             <div class="d-flex align-items-center gap-2">
-                                <i class="fa fa-truck wbh-gift-icon-accent" aria-hidden="true"/>
+                                <i data-lucide="truck" class="wbh-lucide-icon wbh-gift-icon-accent" aria-hidden="true"/>
                                 <span>Đóng gói chống sốc cẩn thận</span>
                             </div>
                         </div>
