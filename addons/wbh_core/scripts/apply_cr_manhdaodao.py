@@ -54,12 +54,11 @@ def _sync_websites(env):
             'wbh_brand_tagline': 'Tiền trao tay, quýt về ngay',
             'wbh_support_hotline': False,
             'wbh_support_zalo_url': False,
+            'wbh_support_facebook_url': 'https://www.facebook.com/an.na.116565?locale=vi_VN',
             'wbh_contact_prompt': 'Cần vid check hoặc tư vấn chọn hàng?',
             'wbh_packaging_fee_enabled': True,
             'wbh_packaging_fee': 5000.0,
         }
-        if not gift_website.wbh_support_facebook_url:
-            gift_vals['wbh_support_facebook_url'] = 'https://www.facebook.com/manh.dao.dao.2024'
         gift_website.write(gift_vals)
         print(f"[WEBSITE] Updated Web 1 ID={gift_website.id}: {gift_website.name}")
 

@@ -22,7 +22,7 @@
         <field name="wbh_brand_tagline">Tiền trao tay, quýt về ngay</field>
         <field name="wbh_support_hotline" eval="False"/>
         <field name="wbh_support_zalo_url" eval="False"/>
-        <field name="wbh_support_facebook_url">https://www.facebook.com/manh.dao.dao.2024</field>
+        <field name="wbh_support_facebook_url">https://www.facebook.com/an.na.116565?locale=vi_VN</field>
         <field name="wbh_contact_prompt">Cần vid check hoặc tư vấn chọn hàng?</field>
         <field name="wbh_packaging_fee_enabled" eval="True"/>
         <field name="wbh_packaging_fee" eval="5000.0"/>

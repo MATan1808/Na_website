@@ -51,8 +51,8 @@
 
 ## 4. 7 Câu Hỏi Cần Sếp Chốt Lại Với Khách Trước Khi Code
 
-1. **Link Facebook chính thức của shop** là gì? *(Để gắn vào nút `Facebook CSKH` trên Topbar, `Nhắn Facebook` ở nút Tư vấn, PDP, Giỏ hàng và Footer.)*
-2. **Ảnh mã QR ngân hàng của chủ shop** (và thông tin STK / Chủ TK / Ngân hàng nếu muốn hiển thị kèm dưới ảnh QR cho khách dễ copy).
+1. **Link Facebook chính thức của shop**: **[Đã chốt]** `https://www.facebook.com/an.na.116565?locale=vi_VN` *(đã gắn vào `website_data.xml`, `apply_cr_manhdaodao.py` và `html/preview.html` cho Topbar `Facebook CSKH`, nút Tư vấn, PDP, Giỏ hàng và Footer).*
+2. **Ảnh mã QR ngân hàng của chủ shop** *(Đang chờ Sếp gửi ảnh QR để gắn vào `wbh_custom_qr_image`; tạm thời dùng VietQR fallback hoặc cấu hình trong Backend).*
 3. **Chốt tone màu chủ đạo**: Khách muốn web theo hướng **Nền sáng sạch sẽ** (trắng/xanh nhạt, nhấn **Xanh dương đậm + Topbar đen** khớp bản logo nền trắng) hay **Nền tối hoàn toàn** (đen + xanh dương neon khớp bản logo nền đen)?
 4. **Xác nhận cách tính `Phí gói 5.000đ`**: Thu cố định **`5.000đ / mỗi đơn hàng`** hay `5.000đ / mỗi món`?
 5. **Xác nhận biểu phí Viettel Post (`12.000đ – 20.000đ`)**: Kho của shop đặt ở tỉnh/thành nào (ví dụ TP.HCM hay Hà Nội) và quy tắc chia giá ship theo khu vực cụ thể ra sao (ví dụ: nội tỉnh `12.000đ`, cùng miền `15.000đ`, liên miền `20.000đ`)?
