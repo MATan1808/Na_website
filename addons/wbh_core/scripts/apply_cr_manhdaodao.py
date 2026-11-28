@@ -7,10 +7,12 @@ Hỗ trợ chạy theo 2 cách:
 2. Trực tiếp bằng python3 bên trong container Odoo:
    docker exec web-ban-hang-app python3 /mnt/extra-addons/wbh_core/scripts/apply_cr_manhdaodao.py
 """
+import base64
 import os
 
 from odoo import Command, SUPERUSER_ID, api
 from odoo.modules.registry import Registry
+from odoo.tools.misc import file_path
 
 GOODS_TYPE_VALUES = [
     'CARD',
@@ -266,6 +268,39 @@ def _sync_payment_providers(env):
         print(f"[PAYMENT] Enabled VietQR provider ID={vietqr_provider.id}")
 
 
+def _sync_website_branding_and_assets(env, gift_website):
+    """Đồng bộ logo/favicon mới vào DB, bật view chính sách PDP và xóa cache asset cũ."""
+    if gift_website:
+        vals = {}
+        for field_name, rel_path in (
+            ('logo', 'theme_gift_store/static/src/img/logo.png'),
+            ('favicon', 'theme_gift_store/static/src/img/favicon.ico'),
+        ):
+            try:
+                abs_path = file_path(rel_path)
+                with open(abs_path, 'rb') as fp:
+                    vals[field_name] = base64.b64encode(fp.read())
+            except FileNotFoundError:
+                print(f"[BRANDING] Skip missing file: {rel_path}")
+        if vals:
+            gift_website.write(vals)
+            print(f"[BRANDING] Synced logo/favicon into website ID={gift_website.id}")
+
+        # Bảo đảm bật view chính sách dưới nút Mua trên PDP Web 1
+        terms_view = env['website'].with_context(website_id=gift_website.id).viewref(
+            'website_sale.product_terms_and_conditions', raise_if_not_found=False
+        )
+        if terms_view and not terms_view.active:
+            terms_view.sudo().write({'active': True})
+            print(f"[VIEW] Enabled product_terms_and_conditions ID={terms_view.id}")
+
+    old_assets = env['ir.attachment'].sudo().search([('url', '=like', '/web/assets/%')])
+    if old_assets:
+        count = len(old_assets)
+        old_assets.unlink()
+        print(f"[ASSETS] Cleared {count} compiled /web/assets/* bundles")
+
+
 def apply_cr_manhdaodao(env):
     """Thực thi toàn bộ cập nhật cấu hình & dữ liệu CR Manh Dao Dao theo chuẩn idempotent."""
     _ensure_vnd_currency(env)
@@ -274,6 +309,7 @@ def apply_cr_manhdaodao(env):
     _sync_packaging_product_and_carts(env, gift_website)
     _sync_delivery_carriers(env)
     _sync_payment_providers(env)
+    _sync_website_branding_and_assets(env, gift_website)
 
 
 if 'env' in globals():
