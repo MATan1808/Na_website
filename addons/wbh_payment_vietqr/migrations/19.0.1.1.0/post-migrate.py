@@ -25,13 +25,21 @@ def migrate(cr, version):
          )
     """)
     cr.execute("""
-        INSERT INTO payment_provider_payment_method_rel (payment_provider_id, payment_method_id)
-        SELECT pp.res_id, pm.res_id
-          FROM ir_model_data pp, ir_model_data pm
-         WHERE pp.module = 'wbh_payment_vietqr' AND pp.model = 'payment.provider' AND pp.name = 'payment_provider_vietqr'
-           AND pm.module = 'wbh_payment_vietqr' AND pm.model = 'payment.method' AND pm.name = 'payment_method_vietqr'
-        ON CONFLICT DO NOTHING
+        SELECT table_name FROM information_schema.tables
+         WHERE table_name IN ('payment_method_payment_provider_rel', 'payment_provider_payment_method_rel')
+         LIMIT 1
     """)
+    row = cr.fetchone()
+    if row:
+        rel_tbl = row[0]
+        cr.execute(f"""
+            INSERT INTO {rel_tbl} (payment_provider_id, payment_method_id)
+            SELECT pp.res_id, pm.res_id
+              FROM ir_model_data pp, ir_model_data pm
+             WHERE pp.module = 'wbh_payment_vietqr' AND pp.model = 'payment.provider' AND pp.name = 'payment_provider_vietqr'
+               AND pm.module = 'wbh_payment_vietqr' AND pm.model = 'payment.method' AND pm.name = 'payment_method_vietqr'
+            ON CONFLICT DO NOTHING
+        """)
     cr.execute("""
         UPDATE payment_provider
            SET state = 'disabled',
