@@ -112,17 +112,37 @@
     padding: 0.5rem 1rem;
 }
 
-/* Cô lập phong cách cho Web 1 (Quà tặng) */
+/* Cô lập phong cách cho Web 1 (Manh Dao Dao — Xanh dương & Đen) */
 #wrapwrap.wbh-store-gift {
-    .wbh-vietqr-card {
-        border-radius: 20px;
-        border-color: #F3D9DE;
-        box-shadow: 0 8px 24px rgba(255, 107, 139, 0.12);
+    .wbh-vietqr-card,
+    .wbh-vietqr-inline-card {
+        border-radius: 14px;
+        border-color: #DCE4F0;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        background-color: #FFFFFF;
 
         &__header {
-            background-color: #FFF6F0;
-            color: #3D2C2E;
+            background-color: #0F172A;
+            color: #FFFFFF;
         }
+
+        &__title {
+            color: #FFFFFF;
+        }
+    }
+
+    .wbh-vietqr-info-row {
+        background-color: #F4F7FB;
+        border-color: #DCE4F0;
+
+        &--highlight {
+            background-color: #EFF6FF;
+            border-color: #93C5FD;
+        }
+    }
+
+    .wbh-vietqr-amount {
+        color: #1D4ED8;
     }
 
     .wbh-vietqr-copy-btn,
@@ -132,10 +152,32 @@
 
     .wbh-vietqr-copy-btn.btn-primary,
     .wbh-vietqr-action-btn.btn-primary {
-        background-color: #C93058;
-        border-color: #C93058;
+        background-color: #1D4ED8;
+        border-color: #1D4ED8;
         color: #FFFFFF;
+
+        &:hover {
+            background-color: #1E40AF;
+            border-color: #1E40AF;
+        }
     }
+}
+
+.wbh-vietqr-proof-box {
+    background-color: #F8FAFC;
+    border-color: #DCE4F0;
+}
+
+.wbh-vietqr-proof-input {
+    min-height: 44px;
+    max-width: 340px;
+}
+
+.wbh-vietqr-proof-img {
+    max-width: 240px;
+    max-height: 240px;
+    object-fit: contain;
+    display: block;
 }
 
 /* Cô lập phong cách cho Web 2 (Thời trang) */

@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Giao Hàng Việt Nam & Địa Chỉ 3 Cấp',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'category': 'Website/Delivery',
-    'summary': 'Địa giới hành chính Việt Nam 3 cấp, Ship đồng giá / Freeship / Gom đơn 0đ và Giao Hàng Nhanh (GHN) thuần Odoo 19.0 Community.',
+    'summary': 'Form /shop/address tối giản cho Web 1, địa giới hành chính VN 3 cấp và ĐVVC VIETTEL POST 12.000đ–20.000đ thuần Odoo 19.0 Community.',
     'description': """
 WBH Giao Hàng Việt Nam & Địa Chỉ 3 Cấp — Changelog
 ==================================================
+
+v19.0.1.1.0 (2026-11-28)
+------------------------
+- [IMPROVE] Tối giản form `/shop/address` trên Web 1 (`wbh_store_type == 'gift'`) theo `CR-08`: đổi nhãn `Tên fb`, `Link fb` (lưu `res.partner.wbh_fb_link` và tự sinh email kỹ thuật nội bộ sạch khi nhập URL Facebook), `Thông tin ship (Tên, sđt, địa chỉ cũ không ghi tắt)` (lưu `wbh_shipping_info_note`, trích SĐT & đồng bộ `street`), ẩn trường thừa và tự gán ngầm `base.vn` trong khi giữ nguyên bộ chọn địa giới VN 3 cấp; đồng thời hiển thị `wbh_fb_link` và `wbh_shipping_info_note` trên form `res.partner` & `sale.order`.
+- [NEW] Bổ sung `wbh_vtp` (**ĐVVC VIETTEL POST**) tính cước động 12.000đ–20.000đ theo tỉnh/vùng miền (`wbh_region` trên `wbh.vn.province` và cấu hình bảng giá trên `delivery.carrier`), tắt xuất bản 2 phương thức cũ (Đồng giá 30k / Gom đơn 0đ) theo `CR-09`.
 
 v19.0.1.0.0 (2026-11-28)
 ------------------------

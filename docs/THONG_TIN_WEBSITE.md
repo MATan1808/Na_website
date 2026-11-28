@@ -1,7 +1,7 @@
 # THÔNG TIN WEBSITE & ĐỊNH HƯỚNG BÁN HÀNG ANIME GOODS
 ## Dự Án: Hệ Sinh Thái 2 Website Bán Hàng — Odoo 19.0 Community (`web_ban_hang`)
 
-> **Ngày cập nhật**: 2026-11-28 (`v0.4.0` — Hoàn thành Giai đoạn 1–4)  
+> **Ngày cập nhật**: 2026-11-28 (`v0.4.1` — Hoàn thành Giai đoạn 1–4 & Tùy biến CR-01..CR-10 cho Manh Dao Dao)  
 > **Nền tảng kỹ thuật**: 100% Odoo 19.0 Community (LGPL-3) + PostgreSQL 15 (Docker)  
 > **Cổng truy cập Local Server**: [http://100.64.56.52:1901](http://100.64.56.52:1901) *(LAN: `http://192.168.1.37:1901` · Local Docker: `http://localhost:1901` · Tiền tệ hiển thị chuẩn: **`VNĐ (₫)`**)*  
 > **Lộ trình & Tiến độ 4 giai đoạn**: Xem chi tiết tại [ROADMAP_TIEN_DO.md](file:///F:/BACKUP_LINUX/web_ban_hang/docs/ROADMAP_TIEN_DO.md)  
@@ -15,7 +15,7 @@ Dự án vận hành trên kiến trúc **Multi-Website thuần Odoo 19.0 Commun
 
 | Thông số | Cửa Hàng 1 (Web 1) — Quà Tặng & Anime Goods | Cửa Hàng 2 (Web 2) — Thời Trang & Lookbook |
 |---|---|---|
-| **Tên hiển thị** | **Manh Dao Dao — Anime Goods & Quà Tặng** | **Cửa Hàng Thời Trang — Quần Áo & Lookbook** |
+| **Tên hiển thị** | **Manh Dao Dao - Boku no Hero Academia Anime Goods Shop** | **Cửa Hàng Thời Trang — Quần Áo & Lookbook** |
 | **Định vị ngành hàng** | Búp bê bông Doll 20cm, Outfit búp bê, Card bo góc, Huy hiệu Can Badge, Mochi ú, Blind Box theo phim *My Hero Academia* và các Anime hot. | Thời trang Unisex, Quần áo oversize, Streetwear, Lookbook editorial, đồ đôi & outfit búp bê. |
 | **Khách hàng mục tiêu** | Fan anime/manga (Otaku), Gen Z, giới trẻ đam mê sưu tầm goods và búp bê thần tượng (Bias/Oshi). | Giới trẻ yêu thích phong cách thời trang tối giản, năng động, streetwear và ảnh mẫu lookbook. |
 | **Theme nền tảng** | Custom `theme_gift_store` (kế thừa từ repo `odoo/design-themes`: `theme_kiddo` + `theme_buzzy`). | Custom `theme_fashion_store` (kế thừa `theme_loftspace` + `theme_clean`). |
@@ -33,12 +33,13 @@ Dự án vận hành trên kiến trúc **Multi-Website thuần Odoo 19.0 Commun
   1. **`theme_kiddo`**: Cấu trúc thẻ sản phẩm bo tròn mềm mại, tối ưu chuyên biệt cho Búp Bê Bông (Dolls/Plushies), phụ kiện móc khóa và Blind Box.
   2. **`theme_buzzy`**: Bố cục các khối Banner cắt vát góc cạnh (Angular Clips), hiệu ứng bộc phá năng lượng Pop-Art và typography đậm chất truyện tranh Shonen Jump.
 
-### 2.2. Nhận Diện Thương Hiệu & Bảng Màu Siêu Năng Lực (Quirk Palette)
-Giao diện được thiết kế theo đúng bản sắc các nhân vật trong phim *My Hero Academia*:
-- **Cam Bộc Phá & Vàng Nitro (`#FF5722` & `#FFD600`)**: Đại diện cho **Bakugo Katsuki (Kacchan)** — Dùng cho nút CTA "Mua Ngay", nhãn Bán chạy, viền card bùng nổ.
-- **Đỏ Rực & Xanh Băng (`#E53935` & `#00E5FF`)**: Đại diện cho Kosei Nửa Băng Nửa Lửa của **Todoroki Shoto** — Dùng cho badge giảm giá, hiệu ứng hover card phân loại.
-- **Xanh Ngọc Hero (`#00C853`)**: Đại diện cho năng lượng One For All của **Midoriya Izuku (Deku)**.
-- **Slogan Chủ Đạo**: *"PLUS ULTRA! — Trao Gửi Đam Mê Qua Từng Món Quà & Búp Bê Bông Nhân Vật"*.
+### 2.2. Nhận Diện Thương Hiệu, Bảng Màu & Kênh Liên Hệ (`v0.4.1`)
+Giao diện Web 1 (`Manh Dao Dao - Boku no Hero Academia Anime Goods Shop`) sử dụng bộ nhận diện mới đồng bộ logo mèo đen mắt xanh dương + lựu đạn xanh dương:
+- **Bảng màu Xanh dương – Đen** (`DESIGN.md` & `.wbh-store-gift`): Topbar/accent đậm **`#0B1220` / `#0F172A`**, màu nhấn chính **`#1D4ED8`** (hover `#1E40AF`), nền sáng **`#F4F7FB`**, thẻ bề mặt **`#FFFFFF`**, viền mảnh **`#DCE4F0`**.
+- **Slogan Chủ Đạo**: **`🍊 Tiền trao tay, quýt về ngay`**.
+- **Kênh liên hệ duy nhất**: **Chat trực tiếp trên Web (`website_livechat`)** và **Facebook (`wbh_support_facebook_url`)** — đã loại bỏ hoàn toàn Số điện thoại và Zalo trên Web 1.
+- **Quy định bán hàng (PDP) & Đóng gói**: Hiển thị 4 quy định của shop (*Hàng mddf, df nặng sẽ note · Đi đơn vào chủ nhật hàng tuần · Quay video khi unbox, chỉ giải quyết khi có video · Đvvc: Viettel Post*) và cộng cố định **Phí gói `5.000 ₫/đơn`** (thay dòng Thuế).
+- **Thanh toán & Vận chuyển Web 1**: Chỉ áp dụng **ĐVVC VIETTEL POST** (`12.000đ – 20.000đ` tùy tỉnh thành/vùng miền) và **Chuyển khoản trước qua VietQR** (hiển thị QR chủ shop / EMVCo + tính năng **Upload bill chuyển khoản** ngay trên `/shop/payment` & trang xác nhận, tắt hoàn toàn COD).
 
 ### 2.3. Danh Mục Mặt Hàng Thực Tế Đã Nạp
 Hệ thống đã nạp sẵn 5 dòng sản phẩm chuẩn theo hình ảnh thực tế của Sếp:
@@ -83,11 +84,11 @@ Hệ thống đã nạp sẵn 5 dòng sản phẩm chuẩn theo hình ảnh th�
 > **Lệnh đồng bộ lại dữ liệu từ file JSON khi sửa giá/mô tả**:  
 > `docker exec -i web-ban-hang-app odoo shell -c /etc/odoo/odoo.conf -d web_ban_hang_dev --no-http < /mnt/extra-addons/wbh_core/scripts/import_fb_products.py`
 
-### 2.4. Trải Nghiệm Khách Hàng & Vận Hành Trọn Bộ (Giai đoạn 1–4)
+### 2.4. Trải Nghiệm Khách Hàng & Vận Hành Trọn Bộ (Giai đoạn 1–4 & `CR-01`..`CR-10`)
 - **Đăng & Sửa nhanh `< 60 giây/món`**: Toàn bộ thông tin đăng bán (`wbh_store_scope`, `public_categ_ids`, `product_tag_ids`, `compare_list_price`, `is_published`, album ảnh `product_template_image_ids`) gộp gọn trong tab Thông tin chung, kèm màn hình `Sửa nhanh Giá & Nhãn` (`<list editable="bottom">`) và tự động hiện giá gạch ngang + huy hiệu `-XX%`.
-- **Bộ lọc Động 100% Không Hardcode (`/shop`)**: Tự động hiển thị bộ lọc *Đang giảm giá*, *Khoảng giá (`wbh.price.range`)*, *Nhãn & Chủ đề (`product.tag`)* và *Thuộc tính `no_variant`* (Nhân vật, Bộ Anime, Phân loại) chỉ khi có sản phẩm khớp trên từng website; hỗ trợ lọc kết hợp nhiều điều kiện, dải Active Filter Chips và ngăn kéo lọc Mobile `>= 44px`.
-- **Tư vấn & Chốt đơn 3 Kênh (Web Livechat · Facebook · Zalo)**: Hộp 3 kênh trên PDP & Giỏ hàng cùng Widget nổi 3-in-1 (tự chép tên & link sản phẩm trước khi mở Livechat, cấu hình động trên `website`).
-- **Thanh toán VietQR & Vận chuyển VN**: Tự sinh QR VietQR EMVCo / Napas 247 offline + Webhook SePay Free + Quy tắc COD/Đặt cọc (`wbh_payment_vietqr`); chọn địa giới VN 3 cấp (Tỉnh/TP – Quận/Huyện – Phường/Xã), Ship đồng giá/Freeship, **Gom đơn 0đ** và tích hợp **GHN** (`wbh_delivery_vn`).
+- **Bộ lọc Động 100% Không Hardcode (`/shop`)**: Tự động hiển thị bộ lọc *Đang giảm giá*, *Khoảng giá (`wbh.price.range`, hiển thị số nguyên VNĐ không `,00`)*, *Nhãn & Chủ đề (`product.tag`)* và thuộc tính **`Loại goods`** (`CARD`, `POSTCARD (PC)`, `STANDEE`, `KEY`, `FIGURE`, `BADGE`, `CLEAR FILE`, `DOLL`, `KHÁC`; ẩn `Mẫu Thẻ Sưu Tầm`) chỉ khi có sản phẩm khớp; hỗ trợ lọc kết hợp, Active Filter Chips và ngăn kéo lọc Mobile `>= 44px`.
+- **Tư vấn & Chốt đơn Web 1 (Chat Web · Facebook · Chép link SP)**: Hộp tư vấn `Cần vid check hoặc tư vấn chọn hàng?` trên PDP & Giỏ hàng cùng Widget nổi không Zalo/SĐT (riêng Web 2 vẫn giữ đủ 3 kênh cấu hình động).
+- **Đặt hàng tối giản, Phí gói 5.000đ, ĐVVC Viettel Post & VietQR + Upload bill CK**: Form `/shop/address` Web 1 rút gọn còn 3 ô (`Tên fb`, `Link fb`, `Thông tin ship`) + 3 cấp địa giới VN; Giỏ hàng cộng **Phí gói `5.000đ/đơn`** thay Thuế; Vận chuyển duy nhất **`ĐVVC VIETTEL POST`** (`12.000đ – 20.000đ`); Thanh toán **chỉ CK trước** (hiển thị QR chủ shop / EMVCo + **Upload ảnh chụp màn hình CK** đính kèm đơn hàng). Đồng bộ DB đang chạy qua `addons/wbh_core/scripts/apply_cr_manhdaodao.py`.
 
 ---
 

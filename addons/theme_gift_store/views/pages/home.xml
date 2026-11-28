@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--
-        Trang chủ chuẩn Upgrade-Safe cho Web 1 — Cửa Hàng Quà Tặng.
+        Trang chủ chuẩn Upgrade-Safe cho Web 1 — Manh Dao Dao - Boku no Hero Academia Anime Goods Shop.
         1. Kế thừa website.homepage (khóa chặt bằng t-if="website and website.wbh_store_type == 'gift'")
            để khi mở "/" trên Web 1 hiển thị ngay 3 Building Blocks chủ lực mà không ảnh hưởng Web 2.
         2. Cung cấp thêm trang mẫu /gift-home với khung bắt buộc <div id="wrap" class="oe_structure oe_empty">.
@@ -9,7 +9,7 @@
     <template
         id="gift_homepage_inject"
         inherit_id="website.homepage"
-        name="Trang Chủ Web 1 — Cửa Hàng Quà Tặng"
+        name="Trang Chủ Web 1 — Manh Dao Dao Anime Goods Shop"
         priority="20"
     >
         <xpath expr="//div[@id='wrap']" position="inside">
@@ -21,9 +21,9 @@
         </xpath>
     </template>
 
-    <template id="gift_homepage_view" name="Trang Chủ Mẫu — Cửa Hàng Quà Tặng">
+    <template id="gift_homepage_view" name="Trang Chủ Mẫu — Manh Dao Dao Anime Goods Shop">
         <t t-call="website.layout">
-            <t t-set="additional_title">Trang chủ quà tặng</t>
+            <t t-set="additional_title">Manh Dao Dao - Boku no Hero Academia Anime Goods Shop</t>
             <div id="wrap" class="oe_structure oe_empty">
                 <t t-call="theme_gift_store.s_gift_hero"/>
                 <t t-call="theme_gift_store.s_gift_occasion_bar"/>

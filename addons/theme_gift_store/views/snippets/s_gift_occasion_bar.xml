@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="s_gift_occasion_bar" name="Thanh Chọn Nhanh Quà Theo Danh Mục &amp; Dịp">
+    <template id="s_gift_occasion_bar" name="Thanh Chọn Nhanh Goods Boku no Hero">
         <section
             class="s_gift_occasion_bar o_colored_level pt40 pb40"
             data-snippet="s_gift_occasion_bar"
-            data-name="Thanh Chọn Nhanh Quà Tặng"
+            data-name="Thanh Chọn Nhanh Goods"
         >
             <div class="container">
                 <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
                     <div>
-                        <h2 class="h4 fw-semibold mb-1">Danh mục sản phẩm chính</h2>
-                        <p class="wbh-gift-subtext mb-0">Chọn nhanh dòng goods hoặc nhân vật bạn đang tìm</p>
+                        <h2 class="h4 fw-semibold mb-1">Nhóm goods Boku no Hero</h2>
+                        <p class="wbh-gift-subtext mb-0">Chọn nhanh loại goods bạn đang tìm trong bộ sưu tập</p>
                     </div>
                 </div>
                 <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-6">
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
-                            <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i data-lucide="smile" class="wbh-lucide-icon" aria-hidden="true"/>
-                            </span>
-                            <span class="wbh-gift-occasion-card__label">Doll Bông 20cm</span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="/shop/category/anime-goods-merch-card-bo-goc-photocards-23" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop?search=Card" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="layers" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label">Card Bo Góc</span>
+                            <span class="wbh-gift-occasion-card__label">Card &amp; Postcard</span>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-huy-hieu-can-badges-pin-balo-24" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop?search=Doll" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i data-lucide="smile" class="wbh-lucide-icon" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label">Doll</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Standee" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                            <span class="wbh-gift-occasion-card__icon mb-2">
+                                <i data-lucide="sparkles" class="wbh-lucide-icon" aria-hidden="true"/>
+                            </span>
+                            <span class="wbh-gift-occasion-card__label">Standee &amp; Figure</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/shop?search=Badge" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="badge-check" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label">Huy Hiệu Pin</span>
+                            <span class="wbh-gift-occasion-card__label">Badge</span>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-mochi-bong-tron-tui-mu-25" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop?search=Key" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i data-lucide="heart" class="wbh-lucide-icon" aria-hidden="true"/>
+                                <i data-lucide="key-round" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label">Mochi Ú Mini</span>
+                            <span class="wbh-gift-occasion-card__label">Key &amp; Clear File</span>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop?search=Blind+Box" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
-                            <span class="wbh-gift-occasion-card__icon mb-2">
-                                <i data-lucide="package" class="wbh-lucide-icon" aria-hidden="true"/>
-                            </span>
-                            <span class="wbh-gift-occasion-card__label">Blind Box</span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="/shop/category/anime-goods-merch-21" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
+                        <a href="/shop" class="wbh-gift-occasion-card d-flex flex-column align-items-center text-center p-3 h-100 text-decoration-none">
                             <span class="wbh-gift-occasion-card__icon mb-2">
                                 <i data-lucide="grid-2x2" class="wbh-lucide-icon" aria-hidden="true"/>
                             </span>
-                            <span class="wbh-gift-occasion-card__label">Tất Cả Merch</span>
+                            <span class="wbh-gift-occasion-card__label">Tất cả goods</span>
                         </a>
                     </div>
                 </div>

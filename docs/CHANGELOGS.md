@@ -3,10 +3,31 @@
 Tài liệu ghi nhận đầy đủ lịch sử thay đổi các phiên bản của dự án theo chuẩn **AIaC 3.0 (`360-odoo`)**.
 
 > **Quy ước phiên bản**:
-> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.4.0` — Hoàn thành Giai đoạn 1–4: Sửa nhanh & Giá gạch `-XX%`, Bộ lọc động 100%, Tư vấn 3 kênh, Thanh toán VietQR EMVCo + COD & Vận chuyển VN 3 cấp + GHN).
+> - Phiên bản tổng thể dự án/tài liệu: `v<major>.<minor>.<patch>` (hiện tại `v0.4.1` — Triển khai trọn bộ 10 yêu cầu chỉnh sửa `CR-01`..`CR-10` của khách hàng *Manh Dao Dao* cho Web 1 trên nền tảng Giai đoạn 1–4).
 > - Phiên bản từng custom Odoo module trong `addons/`: `v19.0.<major>.<minor>.<patch>` (đồng bộ cả trong `docs/CHANGELOGS.md` và trường `description` của từng `__manifest__.py`).
 >
 > **Quy ước Tag**: `[NEW]` Tính năng/tài liệu mới · `[FIX]` Sửa lỗi · `[IMPROVE]` Cải tiến · `[SECURITY]` Bảo mật · `[REFACTOR]` Tái cấu trúc · `[MIGRATE]` Nâng cấp/chuyển đổi.
+
+---
+
+## v0.4.1 (2026-11-28)
+
+### Triển Khai Trọn Bộ Yêu Cầu Khách Hàng Manh Dao Dao (`CR-01` ➜ `CR-10` cho Web 1)
+- `[IMPROVE]` **Lõi dữ liệu, Thuộc tính & Phí gói (`wbh_core` `v19.0.1.3.0`)**:
+  - Cập nhật `website_gift_store` sang tên **`Manh Dao Dao - Boku no Hero Academia Anime Goods Shop`**, slogan **`Tiền trao tay, quýt về ngay`**, xóa `wbh_support_hotline` & `wbh_support_zalo_url`, bổ sung `wbh_support_facebook_url` (`related='wbh_fb_messenger_url', readonly=False`), cập nhật `wbh_contact_prompt = 'Cần vid check hoặc tư vấn chọn hàng?'`.
+  - Bổ sung thuộc tính **`Loại goods`** (`create_variant='no_variant'`, 9 giá trị chuẩn: `CARD`, `POSTCARD (PC)`, `STANDEE`, `KEY`, `FIGURE`, `BADGE`, `CLEAR FILE`, `DOLL`, `KHÁC`), ẩn **`Mẫu Thẻ Sưu Tầm`** khỏi bộ lọc sidebar `/shop` (`controllers/shop.py` & `website_sale_vi_templates.xml`) và bỏ `,00` thập phân trên bộ lọc khoảng giá VNĐ (`rounding=1.0`, `wbh_filter_products_price_integer`, `static/src/js/wbh_price_format.js`).
+  - Bổ sung `wbh_packaging_fee` (`5.000đ`) và `wbh_packaging_fee_enabled` trên `website`, sản phẩm dịch vụ nội bộ `wbh_product_packaging_fee` (`taxes_id` trống), tự đồng bộ đúng 1 dòng **`Phí gói`** `5.000đ/đơn` trên `sale.order` Web 1 khi giỏ có hàng (`models/sale_order.py`), ẩn dòng `Thuế` cũ và hiển thị rõ `Thành tiền + Phí gói + Giao hàng = Tổng` trên `/shop/cart`, `/shop/checkout`, `/shop/payment` và Backend `sale.order`.
+  - Bổ sung script idempotent **`addons/wbh_core/scripts/apply_cr_manhdaodao.py`** đồng bộ DB đang chạy (website, thuộc tính, phí gói, tắt COD/carrier cũ, bật ĐVVC Viettel Post & VietQR).
+- `[IMPROVE]` **Nhận diện Logo mới, Bảng màu Xanh dương – Đen & UI Web 1 (`theme_gift_store` `v19.0.1.4.0`, `DESIGN.md`, `css/*`, `html/preview.html`)**:
+  - Tích hợp 2 logo mới từ khách (`brand_logo_dark.jpg`, `brand_logo_light.jpg`), tách nền sạch tạo `logo_emblem_transparent.png` (512×512 RGBA), `favicon.ico` (32×32, 64×64) và `logo.png` (1323×240 RGBA kết hợp biểu tượng mèo đen + lựu đạn xanh dương bên trái và chữ `MANH DAO DAO · ANIME GOODS SHOP` bên phải).
+  - Chuyển hệ màu `.wbh-store-gift` (`primary_variables.scss`, `theme_gift.scss`, `theme_gift_editor.scss`) sang **Xanh dương – Đen** (`#0B1220`/`#0F172A`, `#1D4ED8`, nền `#F4F7FB`, viền `#DCE4F0`), áp dụng chuẩn `360-frontend-polish` & 9 passes `unslop` (audit `run-impeccable-audit.ps1` & `impeccable detect` đạt `EXIT=0`).
+  - Đồng bộ Topbar (`🍊 Tiền trao tay, quýt về ngay`, `Facebook CSKH`), Hero Boku no Hero (chỉ giữ CTA `Xem bộ sưu tập →` & trust badge `Gói an toàn, chống sốc kỹ`), Floating Widget & Footer (xóa sạch SĐT `0900 000 001` và Zalo), PDP (thay bằng 4 dòng quy định shop, xóa hộp gập bảo quản, tiêu đề tư vấn `Cần vid check hoặc tư vấn chọn hàng?`).
+- `[NEW]` **Form `/shop/address` tối giản 3 ô + 3 cấp VN & Vận chuyển Viettel Post (`wbh_delivery_vn` `v19.0.1.1.0`)**:
+  - Tối giản form địa chỉ Web 1 còn **3 ô thông tin** (`Tên fb`, `Link fb` tự sinh email kỹ thuật `@fb.wbh.local`, `Thông tin ship (Tên, sđt, địa chỉ cũ không ghi tắt)`) + giữ nguyên **3 cấp địa giới VN** (`Tỉnh/TP`, `Quận/Huyện`, `Phường/Xã`), tự gán ngầm `base.vn` và hiển thị `wbh_fb_link` & `wbh_shipping_info_note` trên form `res.partner` & `sale.order` (giữ nguyên Web 2).
+  - Tắt xuất bản 2 phương thức vận chuyển cũ (`Đồng giá 30k`, `Gom đơn 0đ`) và bật duy nhất **`ĐVVC VIETTEL POST`** (`12.000đ – 20.000đ` tùy tỉnh thành/vùng miền: nội tỉnh 12k, cùng miền 15k, liên miền 20k) kèm `migrations/19.0.1.1.0/post-migrate.py`.
+- `[NEW]` **Chỉ Chuyển khoản trước, QR chủ shop & Upload bill CK (`wbh_payment_vietqr` `v19.0.1.1.0`)**:
+  - Bật mặc định `payment_provider_vietqr` (`state='enabled'`, `is_published=True`) & `payment_method_vietqr` (`active=True`), tắt hoàn toàn COD trên Web 1 ở cả dữ liệu và kiểm tra tương thích.
+  - Bổ sung `wbh_custom_qr_image` (ảnh QR riêng của chủ shop, fallback về QR động EMVCo) và tính năng **Upload ảnh chụp màn hình chuyển khoản (`POST /payment/vietqr/upload_proof`)** ngay trên `/shop/payment` & trang xác nhận (kiểm tra session/`access_token` chống IDOR, magic bytes PNG/JPEG/WEBP `<= 5MB`, lưu `ir.attachment` gắn `sale.order` & ghi chatter bằng `markupsafe.Markup` + `escape`).
 
 ---
 

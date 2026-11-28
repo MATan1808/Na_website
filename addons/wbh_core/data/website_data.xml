@@ -8,19 +8,24 @@
     <record id="base.VND" model="res.currency">
         <field name="active" eval="True"/>
         <field name="position">after</field>
+        <field name="rounding" eval="1.0"/>
     </record>
 
     <record id="website_gift_store" model="website">
-        <field name="name">Cửa Hàng Quà Tặng — Móc Khóa, Gấu Bông &amp; Blind Box</field>
+        <field name="name">Manh Dao Dao - Boku no Hero Academia Anime Goods Shop</field>
         <field name="sequence" eval="10"/>
         <field name="company_id" ref="base.main_company"/>
         <field name="user_id" ref="base.public_user"/>
         <field name="wbh_store_type">gift</field>
         <field name="specific_user_account" eval="True"/>
         <field name="auth_signup_uninvited">b2c</field>
-        <field name="wbh_brand_tagline">Gửi trọn cảm xúc trong từng món quà nhỏ</field>
-        <field name="wbh_support_hotline">0900 000 001</field>
-        <field name="wbh_support_zalo_url">https://zalo.me/</field>
+        <field name="wbh_brand_tagline">Tiền trao tay, quýt về ngay</field>
+        <field name="wbh_support_hotline" eval="False"/>
+        <field name="wbh_support_zalo_url" eval="False"/>
+        <field name="wbh_support_facebook_url">https://www.facebook.com/manh.dao.dao.2024</field>
+        <field name="wbh_contact_prompt">Cần vid check hoặc tư vấn chọn hàng?</field>
+        <field name="wbh_packaging_fee_enabled" eval="True"/>
+        <field name="wbh_packaging_fee" eval="5000.0"/>
         <field name="shop_default_sort">website_sequence asc</field>
     </record>
 
@@ -35,6 +40,8 @@
         <field name="wbh_brand_tagline">Tối giản hiện đại — Chuẩn form từng khoảnh khắc</field>
         <field name="wbh_support_hotline">0900 000 002</field>
         <field name="wbh_support_zalo_url">https://zalo.me/</field>
+        <field name="wbh_packaging_fee_enabled" eval="False"/>
+        <field name="wbh_packaging_fee" eval="0.0"/>
         <field name="shop_default_sort">website_sequence asc</field>
     </record>
 </odoo>

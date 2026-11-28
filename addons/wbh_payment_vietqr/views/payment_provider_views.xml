@@ -6,9 +6,19 @@
         <field name="inherit_id" ref="payment.payment_provider_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='provider_credentials']" position="inside">
+                <group string="Ảnh mã QR của chủ shop (Ưu tiên hiển thị)" invisible="code != 'vietqr'">
+                    <field name="wbh_custom_qr_filename" invisible="1"/>
+                    <field name="wbh_custom_qr_image"
+                           widget="image"
+                           filename="wbh_custom_qr_filename"
+                           options="{'size': [240, 240]}"/>
+                    <div colspan="2" class="text-muted small">
+                        Nếu tải ảnh QR riêng lên đây, hệ thống hiển thị trực tiếp ảnh QR này tại <code>/shop/payment</code>; nếu để trống sẽ tự sinh QR động theo tài khoản ngân hàng bên dưới.
+                    </div>
+                </group>
                 <group string="Tài khoản nhận VietQR (Napas 24/7)" invisible="code != 'vietqr'">
-                    <field name="wbh_vietqr_bank_bin" required="code == 'vietqr' and state != 'disabled'"/>
-                    <field name="wbh_vietqr_account_no" required="code == 'vietqr' and state != 'disabled'" placeholder="VD: 0123456789"/>
+                    <field name="wbh_vietqr_bank_bin" required="code == 'vietqr' and state != 'disabled' and not wbh_custom_qr_image"/>
+                    <field name="wbh_vietqr_account_no" required="code == 'vietqr' and state != 'disabled' and not wbh_custom_qr_image" placeholder="VD: 0123456789"/>
                     <field name="wbh_vietqr_account_name" placeholder="VD: CONG TY TNHH 360 CORP"/>
                     <field name="wbh_vietqr_prefix" placeholder="WBH"/>
                 </group>

@@ -22,8 +22,18 @@
             <xpath expr="//notebook" position="inside">
                 <page name="wbh_vn_config"
                       string="Cấu hình Giao hàng VN"
-                      invisible="delivery_type not in ('wbh_local', 'wbh_ghn')">
+                      invisible="delivery_type not in ('wbh_local', 'wbh_ghn', 'wbh_vtp')">
                     <group>
+                        <group string="ĐVVC VIETTEL POST (12.000đ - 20.000đ theo tỉnh)"
+                               invisible="delivery_type != 'wbh_vtp'">
+                            <field name="wbh_vtp_origin_province_id" options="{'no_create': True}"/>
+                            <field name="wbh_vtp_inner_price" widget="monetary"/>
+                            <field name="wbh_vtp_same_region_price" widget="monetary"/>
+                            <field name="wbh_vtp_inter_region_price" widget="monetary"/>
+                            <field name="wbh_vtp_min_price" widget="monetary"/>
+                            <field name="wbh_vtp_max_price" widget="monetary"/>
+                            <field name="wbh_provider_note"/>
+                        </group>
                         <group string="Vận chuyển Nội bộ / Đồng giá / Gom đơn"
                                invisible="delivery_type != 'wbh_local'">
                             <field name="wbh_is_hold_order"/>

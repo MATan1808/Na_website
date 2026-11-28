@@ -9,6 +9,7 @@
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="code"/>
+                <field name="wbh_region" optional="show"/>
                 <field name="ghn_province_id"/>
                 <field name="state_id" optional="show"/>
                 <field name="district_count" string="Số Quận/Huyện"/>
@@ -27,6 +28,7 @@
                         <group>
                             <field name="name"/>
                             <field name="code"/>
+                            <field name="wbh_region"/>
                             <field name="sequence"/>
                             <field name="active"/>
                         </group>
@@ -231,6 +233,8 @@
                 <field name="wbh_vn_ward_id"
                        options="{'no_create': True}"
                        readonly="not wbh_vn_district_id"/>
+                <field name="wbh_fb_link" widget="url" placeholder="https://facebook.com/..."/>
+                <field name="wbh_shipping_info_note"/>
             </xpath>
         </field>
     </record>

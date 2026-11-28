@@ -2,10 +2,11 @@
     'use strict';
 
     /**
-     * Theme Web 1 — Gift & Anime Goods Motion, Livechat & Dynamic Filter Helpers (Odoo 19.0 Community)
+     * Theme Web 1 — Manh Dao Dao Anime Goods Shop: Motion, Livechat & Price Formatting Helpers (Odoo 19.0 Community)
      * Nguyên tắc Unslop: KHÔNG bao giờ ẩn nội dung (opacity: 0) khi tải hoặc cuộn nhanh.
      */
     var HEX_COLOR_RE = /^#[0-9a-fA-F]{3,8}$/;
+    var TRAILING_DECIMALS_RE = /([.,]00)(?=\s*₫|\s*đ|\s*$)/g;
     var toastTimer = null;
 
     function isWebsiteBuilderEditMode() {
@@ -47,6 +48,47 @@
             if (HEX_COLOR_RE.test(color)) {
                 dot.style.backgroundColor = color;
             }
+        });
+    }
+
+    function stripPriceTrailingDecimals(el) {
+        if (!el || !el.textContent) {
+            return;
+        }
+        var current = el.textContent;
+        var cleaned = current.replace(TRAILING_DECIMALS_RE, '');
+        if (cleaned !== current) {
+            el.textContent = cleaned;
+        }
+    }
+
+    function bindPriceRangeFormatting(scopeEl) {
+        var selector = '#o_wsale_price_range_option .multirange-min, #o_wsale_price_range_option .multirange-max, .wbh-price-label';
+        function cleanAll() {
+            scopeEl.querySelectorAll(selector).forEach(stripPriceTrailingDecimals);
+        }
+        cleanAll();
+
+        if (typeof window.MutationObserver !== 'function') {
+            return;
+        }
+        var priceContainers = scopeEl.querySelectorAll('#o_wsale_price_range_option');
+        if (!priceContainers.length) {
+            return;
+        }
+        priceContainers.forEach(function (container) {
+            if (container.dataset.wbhPriceObserved === '1') {
+                return;
+            }
+            container.dataset.wbhPriceObserved = '1';
+            var observer = new window.MutationObserver(function () {
+                container.querySelectorAll('.multirange-min, .multirange-max').forEach(stripPriceTrailingDecimals);
+            });
+            observer.observe(container, {
+                childList: true,
+                subtree: true,
+                characterData: true,
+            });
         });
     }
 
@@ -128,7 +170,7 @@
                     showToast(scopeEl, 'Đã chép tên & link SP — Đang mở chat tư vấn');
                 } else {
                     openFloatingContactMenu(scopeEl, true);
-                    showToast(scopeEl, 'Đã chép tên & link SP — Chọn Facebook/Zalo để nhắn ngay');
+                    showToast(scopeEl, 'Đã chép tên & link SP — Chọn Facebook để nhắn ngay');
                 }
             }, 350);
         });
@@ -262,7 +304,6 @@
         if (!window.gsap) {
             return;
         }
-        // Chỉ trượt nhẹ trục Y (10px -> 0), KHÔNG đưa opacity về 0 để không bao giờ làm mờ nội dung
         var galleryItems = scopeEl.querySelectorAll('.s_gift_hero .wbh-gift-hero__gallery-item');
         if (galleryItems.length) {
             window.gsap.fromTo(
@@ -286,6 +327,7 @@
         }
         renderLucideIcons(scopeEl);
         applyTagDotColors(scopeEl);
+        bindPriceRangeFormatting(scopeEl);
         bindContactAndCopyActions(scopeEl);
         bindStickyCartBar(scopeEl);
 

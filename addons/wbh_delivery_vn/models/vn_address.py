@@ -12,6 +12,17 @@ class WbhVnProvince(models.Model):
     code = fields.Char(string='Mã tỉnh', required=True)
     sequence = fields.Integer(string='Thứ tự', default=10)
     active = fields.Boolean(default=True)
+    wbh_region = fields.Selection(
+        selection=[
+            ('north', 'Miền Bắc'),
+            ('central', 'Miền Trung'),
+            ('south', 'Miền Nam'),
+        ],
+        string='Khu vực (Vùng miền)',
+        default='south',
+        required=True,
+        help='Phân vùng địa lý phục vụ tính cước nội tỉnh / cùng miền / liên miền cho ĐVVC Viettel Post.',
+    )
     ghn_province_id = fields.Integer(
         string='Mã Tỉnh GHN',
         help='Mã ProvinceID đối chiếu với API Giao Hàng Nhanh (GHN).',
@@ -142,17 +153,29 @@ class ResPartner(models.Model):
         domain="[('district_id', '=', wbh_vn_district_id)]",
         ondelete='set null',
     )
+    wbh_fb_link = fields.Char(
+        string='Link Facebook',
+        copy=False,
+        help='Đường dẫn tài khoản Facebook khách hàng nhập tại trang đặt hàng.',
+    )
+    wbh_shipping_info_note = fields.Text(
+        string='Thông tin ship (Tên, SĐT, địa chỉ cũ)',
+        copy=False,
+        help='Thông tin nhận hàng chi tiết khách hàng nhập tại form tối giản Web 1.',
+    )
 
     _wbh_vn_address_idx = models.Index('(wbh_vn_province_id, wbh_vn_district_id, wbh_vn_ward_id)')
 
     @api.model
     def _get_frontend_writable_fields(self):
-        """Cho phép khách hàng chọn và lưu 3 cấp địa giới VN trên form checkout/portal."""
+        """Cho phép khách hàng chọn và lưu 3 cấp địa giới VN cùng Link FB & Thông tin ship trên form checkout/portal."""
         writable_fields = super()._get_frontend_writable_fields()
         return writable_fields | {
             'wbh_vn_province_id',
             'wbh_vn_district_id',
             'wbh_vn_ward_id',
+            'wbh_fb_link',
+            'wbh_shipping_info_note',
         }
 
     @api.onchange('wbh_vn_province_id')

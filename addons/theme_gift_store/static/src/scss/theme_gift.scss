@@ -1,32 +1,35 @@
 // -----------------------------------------------------------------------------
-// Theme Web 1 — Manh Dao Dao Anime Goods & Quà Tặng (Unslop 9-Pass Edition)
-// MỌI selector đều bọc chặt trong `.wbh-store-gift` để cô lập Multi-Website.
+// Theme Web 1 — Manh Dao Dao - Boku no Hero Academia Anime Goods Shop
+// (Unslop 9-Pass Blue-Black Edition — Cô lập chặt trong `.wbh-store-gift`)
 // -----------------------------------------------------------------------------
 
 .wbh-store-gift {
-    // Unslop Warm Paper Surface Ramp (trầm tĩnh, sạch mắt, nhường điểm sáng cho ảnh Anime)
-    --wbh-gift-bg: #F7F4EE;
+    // Blue-Black Surface Ramp (tĩnh lặng, tương phản cao, đồng bộ logo mèo đen & lựu đạn xanh)
+    --wbh-gift-bg: #F4F7FB;
     --wbh-gift-surface: #FFFFFF;
-    --wbh-gift-raised: #EFE9DF;
-    --wbh-gift-ink: #1F1B16;
-    --wbh-gift-secondary: #5E554A;
-    --wbh-gift-muted: #7B7266;
-    --wbh-gift-border: rgba(31, 27, 22, 0.10);
+    --wbh-gift-raised: #E9EFF7;
+    --wbh-gift-ink: #0B1220;
+    --wbh-gift-secondary: #334155;
+    --wbh-gift-muted: #52627A;
+    --wbh-gift-border: #DCE4F0;
+    --wbh-gift-border-strong: #C2D0E3;
 
-    // 1 Accent duy nhất đạt WCAG AA (>= 4.5:1 với chữ trắng)
-    --wbh-gift-primary: #C93058;
-    --wbh-gift-primary-hover: #A82246;
-    --wbh-gift-secondary-bg: #EFE9DF;
+    // 1 Accent Xanh dương chủ đạo đạt WCAG AA (>= 4.5:1 với chữ trắng)
+    --wbh-gift-primary: #1D4ED8;
+    --wbh-gift-primary-hover: #1E40AF;
+    --wbh-gift-primary-soft: #EFF6FF;
+    --wbh-gift-topbar-bg: #0B1220;
+    --wbh-gift-topbar-surface: #0F172A;
 
-    // Radius phân cấp theo kích thước (không lạm dụng pill tròn tràn lan)
+    // Radius phân cấp theo kích thước (4px grid)
     --wbh-gift-radius-badge: 6px;
     --wbh-gift-radius-btn: 10px;
     --wbh-gift-radius-card: 12px;
     --wbh-gift-radius-panel: 16px;
 
     // Độ sâu trung tính, không glow màu
-    --wbh-gift-shadow-sm: 0 1px 2px rgba(31, 27, 22, 0.05);
-    --wbh-gift-shadow-hover: 0 8px 20px rgba(31, 27, 22, 0.08);
+    --wbh-gift-shadow-sm: 0 1px 2px rgba(11, 18, 32, 0.05);
+    --wbh-gift-shadow-hover: 0 8px 20px rgba(11, 18, 32, 0.08);
 
     font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--wbh-gift-ink);
@@ -66,7 +69,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Buttons (inline-flex chuẩn căn giữa dọc, hết lỗi chữ lệch lên trên)
+    // Buttons (inline-flex chuẩn căn giữa dọc)
     // -------------------------------------------------------------------------
     .wbh-gift-btn-primary,
     .wbh-gift-btn-secondary,
@@ -74,24 +77,24 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.45rem;
+        gap: 0.5rem;
         line-height: 1.25;
         border-radius: var(--wbh-gift-radius-btn);
         font-weight: 600;
         min-height: 40px;
-        padding: 0.55rem 1.15rem;
+        padding: 0.5rem 1.125rem;
         text-decoration: none;
-        transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+        transition: background-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), color 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 
         &.btn-lg {
             min-height: 46px;
-            padding: 0.65rem 1.35rem;
+            padding: 0.625rem 1.375rem;
             font-size: 0.95rem;
         }
 
         &.btn-sm {
             min-height: 36px;
-            padding: 0.4rem 0.9rem;
+            padding: 0.375rem 0.875rem;
             font-size: 0.85rem;
         }
     }
@@ -113,27 +116,27 @@
 
     .wbh-gift-btn-secondary {
         background-color: var(--wbh-gift-surface);
-        border: 1px solid rgba(31, 27, 22, 0.16);
+        border: 1px solid var(--wbh-gift-border-strong);
         color: var(--wbh-gift-ink);
 
         &:hover,
         &:focus-visible {
             background-color: var(--wbh-gift-raised);
-            border-color: rgba(31, 27, 22, 0.28);
+            border-color: var(--wbh-gift-ink);
             color: var(--wbh-gift-ink);
         }
     }
 
     .wbh-gift-btn-outline {
         background-color: var(--wbh-gift-surface);
-        border: 1px solid rgba(31, 27, 22, 0.18);
+        border: 1px solid var(--wbh-gift-border-strong);
         color: var(--wbh-gift-ink);
 
         &:hover,
         &:focus-visible {
             border-color: var(--wbh-gift-primary);
             color: var(--wbh-gift-primary);
-            background-color: var(--wbh-gift-surface);
+            background-color: var(--wbh-gift-primary-soft);
         }
     }
 
@@ -149,47 +152,40 @@
     }
 
     // -------------------------------------------------------------------------
-    // Top Announcement Bar (gọn 1 dòng trên cả mobile 390px)
+    // Top Announcement Bar (#0B1220 Đen xanh đậm, 1 dòng gọn trên desktop & mobile)
     // -------------------------------------------------------------------------
     .wbh-gift-topbar {
-        background-color: #1F1B16;
-        color: #EFE9DE;
+        background-color: var(--wbh-gift-topbar-bg);
+        color: #E2E8F0;
         font-size: 0.8125rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 
         .wbh-gift-topbar__tagline {
             font-weight: 500;
-            color: #EFE9DE;
+            color: #F1F5F9;
+            min-width: 0;
         }
 
-        .wbh-gift-topbar__link {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-weight: 500;
-            font-variant-numeric: tabular-nums;
-
-            &:hover {
-                text-decoration: underline;
-            }
+        .wbh-gift-topbar__citrus {
+            color: #FB923C;
+            width: 16px;
+            height: 16px;
         }
 
-        .wbh-gift-topbar__zalo {
-            background-color: rgba(255, 255, 255, 0.12);
+        .wbh-gift-topbar__fb {
+            background-color: var(--wbh-gift-primary);
             color: #FFFFFF;
             text-decoration: none;
-            padding: 0.25rem 0.65rem;
+            padding: 0.25rem 0.75rem;
             border-radius: var(--wbh-gift-radius-badge);
             font-weight: 600;
+            min-height: 28px;
+            transition: background-color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.22);
+            &:hover,
+            &:focus-visible {
+                background-color: var(--wbh-gift-primary-hover);
                 color: #FFFFFF;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .wbh-gift-topbar__tagline {
-                display: none !important;
             }
         }
     }
@@ -204,15 +200,15 @@
         border-bottom: 1px solid var(--wbh-gift-border);
 
         .navbar-brand.logo {
-            padding-top: 0.2rem;
-            padding-bottom: 0.2rem;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
 
             img {
                 height: 54px !important;
                 max-height: 54px !important;
                 width: auto !important;
                 object-fit: contain;
-                transition: height 0.2s ease, max-height 0.2s ease;
+                transition: height 0.2s cubic-bezier(0.22, 1, 0.36, 1), max-height 0.2s cubic-bezier(0.22, 1, 0.36, 1);
             }
         }
 
@@ -239,7 +235,6 @@
 
     // -------------------------------------------------------------------------
     // Fix SELECT.form-select double-caret & clipping (Sidebar /shop & PDP)
-    // Ghi đè selector đặc hiệu cao (0,3,1) của Odoo product_configurator.scss
     // -------------------------------------------------------------------------
     select.form-select,
     select.form-select.css_attribute_select,
@@ -251,11 +246,11 @@
         height: 40px !important;
         min-height: 40px !important;
         max-height: none !important;
-        padding: 0.45rem 2.25rem 0.45rem 0.75rem !important;
+        padding: 0.5rem 2.25rem 0.5rem 0.75rem !important;
         font-size: 0.875rem !important;
         line-height: 1.4 !important;
         border-radius: 8px !important;
-        border: 1px solid rgba(31, 27, 22, 0.16) !important;
+        border: 1px solid var(--wbh-gift-border-strong) !important;
         background-color: var(--wbh-gift-surface) !important;
         color: var(--wbh-gift-ink) !important;
         white-space: nowrap !important;
@@ -264,7 +259,7 @@
         appearance: none !important;
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%231F1B16' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%230B1220' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") !important;
         background-position: right 0.75rem center !important;
         background-size: 14px 10px !important;
         background-repeat: no-repeat !important;
@@ -284,8 +279,8 @@
         border-bottom: 1px solid var(--wbh-gift-border);
 
         .wbh-gift-hero__title {
-            font-size: clamp(1.75rem, 3.2vw, 2.65rem);
-            line-height: 1.15;
+            font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+            line-height: 1.18;
             font-weight: 600;
         }
 
@@ -317,7 +312,7 @@
 
             &--tall {
                 aspect-ratio: 4 / 5;
-                height: calc(100% - 46px);
+                height: calc(100% - 48px);
                 min-height: 220px;
             }
 
@@ -367,7 +362,7 @@
         border: 1px solid var(--wbh-gift-border);
         border-radius: var(--wbh-gift-radius-card);
         color: var(--wbh-gift-ink);
-        transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+        transition: border-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 
         &:hover {
             border-color: var(--wbh-gift-primary);
@@ -391,7 +386,8 @@
 
         &:hover .wbh-gift-occasion-card__icon {
             color: var(--wbh-gift-primary);
-            border-color: rgba(201, 48, 88, 0.25);
+            border-color: rgba(29, 78, 216, 0.28);
+            background-color: var(--wbh-gift-primary-soft);
         }
 
         .wbh-gift-occasion-card__label {
@@ -411,10 +407,10 @@
         overflow: hidden;
         color: var(--wbh-gift-ink);
         box-shadow: var(--wbh-gift-shadow-sm);
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        transition: border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 
         &:hover {
-            border-color: rgba(31, 27, 22, 0.22);
+            border-color: var(--wbh-gift-border-strong);
             box-shadow: var(--wbh-gift-shadow-hover);
             color: var(--wbh-gift-ink);
         }
@@ -443,7 +439,7 @@
             align-self: flex-start;
             font-size: 0.75rem;
             font-weight: 600;
-            padding: 0.18rem 0.55rem;
+            padding: 0.25rem 0.5rem;
             border-radius: var(--wbh-gift-radius-badge);
             background-color: var(--wbh-gift-raised);
             color: var(--wbh-gift-secondary);
@@ -451,12 +447,11 @@
     }
 
     // -------------------------------------------------------------------------
-    // Shop Page & Product Cards (Triệt tiêu mô tả dài 700px, đồng đều tuyệt đối)
+    // Shop Page & Product Cards
     // -------------------------------------------------------------------------
     .o_wsale_products_page {
         background-color: var(--wbh-gift-bg);
 
-        // Mobile 390px: bọc 2 hàng để thanh tìm kiếm đủ rộng, không cắt nút Bộ lọc
         @media (max-width: 767.98px) {
             .products_header.btn-toolbar {
                 flex-wrap: wrap !important;
@@ -485,14 +480,13 @@
         box-shadow: var(--wbh-gift-shadow-sm);
         display: flex;
         flex-direction: column;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        transition: border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 
         &:hover {
-            border-color: rgba(31, 27, 22, 0.22);
+            border-color: var(--wbh-gift-border-strong);
             box-shadow: var(--wbh-gift-shadow-hover);
         }
 
-        // Ẩn đoạn mô tả dài thô (raw FB/caption 8-12 dòng) trên thẻ lưới /shop
         .oe_subdescription_wrapper,
         .oe_subdescription {
             display: none !important;
@@ -522,7 +516,6 @@
             transform: scale(1.04);
         }
 
-        // Nút tim Wishlist nổi bật trên nền ảnh nhiều màu (hiện cả mobile lẫn desktop)
         .o_wsale_product_btn {
             @media (max-width: 991.98px) {
                 opacity: 1 !important;
@@ -532,11 +525,11 @@
         }
 
         .o_add_wishlist {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50% !important;
-            background-color: rgba(255, 255, 255, 0.92) !important;
-            border: 1px solid rgba(31, 27, 22, 0.12) !important;
+            background-color: rgba(255, 255, 255, 0.94) !important;
+            border: 1px solid var(--wbh-gift-border-strong) !important;
             color: var(--wbh-gift-ink) !important;
             display: inline-flex !important;
             align-items: center;
@@ -547,7 +540,7 @@
         }
 
         .o_wsale_product_information {
-            padding: 0.75rem 0.85rem 0.85rem;
+            padding: 0.75rem 0.875rem 0.875rem;
             display: flex;
             flex-direction: column;
             flex: 1 1 auto;
@@ -581,11 +574,11 @@
 
         .o_wsale_product_sub {
             margin-top: auto;
-            padding-top: 0.35rem;
+            padding-top: 0.375rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 0.35rem 0.5rem;
+            gap: 0.375rem 0.5rem;
         }
 
         .product_price {
@@ -596,7 +589,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: baseline;
-            gap: 0.25rem 0.4rem;
+            gap: 0.25rem 0.5rem;
             min-width: 0;
             flex: 1 1 auto;
 
@@ -611,7 +604,7 @@
 
         @media (max-width: 575.98px) {
             .o_wsale_product_information {
-                padding: 0.6rem 0.65rem 0.7rem;
+                padding: 0.625rem 0.75rem 0.75rem;
             }
         }
     }
@@ -626,19 +619,19 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--wbh-gift-primary);
+        background-color: var(--wbh-gift-topbar-bg);
         color: #FFFFFF;
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         font-weight: 700;
         line-height: 1.1;
-        padding: 0.18rem 0.45rem;
+        padding: 0.25rem 0.5rem;
         border-radius: var(--wbh-gift-radius-badge);
         font-variant-numeric: tabular-nums;
         white-space: nowrap;
 
         &--pdp {
             font-size: 0.8125rem;
-            padding: 0.24rem 0.55rem;
+            padding: 0.25rem 0.5rem;
         }
     }
 
@@ -649,7 +642,7 @@
     .wbh-gift-card-tag {
         display: inline-flex;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.25rem;
         background-color: var(--wbh-gift-raised);
         color: var(--wbh-gift-ink);
         border: 1px solid var(--wbh-gift-border);
@@ -657,7 +650,7 @@
         font-size: 0.72rem;
         font-weight: 600;
         line-height: 1.2;
-        padding: 0.15rem 0.45rem;
+        padding: 0.25rem 0.5rem;
         max-width: 100%;
     }
 
@@ -674,7 +667,6 @@
     // Bộ lọc động /shop, Chips đang áp dụng & Nút Bộ lọc mobile >= 44px
     // -------------------------------------------------------------------------
     .o_wsale_products_page {
-        // Ẩn nút Bộ lọc core tiếng Anh & khối tag thô chưa qua wbh_filter_ctx để tránh trùng lặp
         button[data-bs-target="#o_wsale_offcanvas"]:not(.wbh-mobile-filter-btn),
         #o_wsale_offcanvas_tags_header,
         #o_wsale_offcanvas_tags,
@@ -684,7 +676,7 @@
         }
 
         .o_wsale_products_searchbar_form input::placeholder {
-            color: #5E554A;
+            color: var(--wbh-gift-muted);
             opacity: 1;
         }
     }
@@ -692,10 +684,10 @@
     .wbh-mobile-filter-btn {
         min-height: 44px !important;
         min-width: 44px;
-        padding: 0.5rem 0.9rem !important;
+        padding: 0.5rem 0.875rem !important;
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.375rem;
     }
 
     .wbh-mobile-filter-badge {
@@ -704,7 +696,7 @@
         justify-content: center;
         min-width: 20px;
         height: 20px;
-        padding: 0 0.35rem;
+        padding: 0 0.375rem;
         border-radius: 999px;
         background-color: var(--wbh-gift-primary);
         color: #FFFFFF;
@@ -739,7 +731,7 @@
             white-space: normal;
             text-align: left;
             line-height: 1.3;
-            transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+            transition: border-color 0.16s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.16s cubic-bezier(0.22, 1, 0.36, 1), color 0.16s cubic-bezier(0.22, 1, 0.36, 1);
 
             .wbh-price-label {
                 flex: 1 1 auto;
@@ -754,7 +746,7 @@
             }
 
             &.is-active {
-                background-color: #FDF2F5;
+                background-color: var(--wbh-gift-primary-soft);
                 border-color: var(--wbh-gift-primary);
                 color: var(--wbh-gift-primary-hover);
                 font-weight: 600;
@@ -764,9 +756,9 @@
         .wbh-gift-tag-filter {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            min-height: 38px;
-            padding: 0.35rem 0.65rem;
+            gap: 0.375rem;
+            min-height: 40px;
+            padding: 0.375rem 0.625rem;
             border-radius: 8px;
             border: 1px solid var(--wbh-gift-border);
             background-color: var(--wbh-gift-surface);
@@ -774,7 +766,7 @@
             text-decoration: none;
             font-size: 0.8125rem;
             font-weight: 500;
-            transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+            transition: border-color 0.16s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.16s cubic-bezier(0.22, 1, 0.36, 1), color 0.16s cubic-bezier(0.22, 1, 0.36, 1);
 
             &:hover {
                 border-color: var(--wbh-gift-primary);
@@ -797,8 +789,8 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            min-width: 22px;
-            padding: 0.1rem 0.4rem;
+            min-width: 24px;
+            padding: 0.125rem 0.375rem;
             border-radius: 6px;
             background-color: var(--wbh-gift-raised);
             color: var(--wbh-gift-secondary);
@@ -818,12 +810,12 @@
         .wbh-gift-chip {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
+            gap: 0.375rem;
             min-height: 36px;
-            padding: 0.3rem 0.7rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 8px;
             background-color: var(--wbh-gift-surface);
-            border: 1px solid rgba(31, 27, 22, 0.18);
+            border: 1px solid var(--wbh-gift-border-strong);
             color: var(--wbh-gift-ink);
             text-decoration: none;
             font-size: 0.8125rem;
@@ -843,7 +835,7 @@
             display: inline-flex;
             align-items: center;
             min-height: 36px;
-            padding: 0.3rem 0.7rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 8px;
             color: var(--wbh-gift-primary-hover);
             font-size: 0.8125rem;
@@ -873,11 +865,11 @@
     .wbh-gift-stock-badge {
         display: inline-flex;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.25rem;
         white-space: nowrap;
         font-size: 0.75rem;
         font-weight: 600;
-        padding: 0.18rem 0.5rem;
+        padding: 0.25rem 0.5rem;
         border-radius: var(--wbh-gift-radius-badge);
 
         &--in {
@@ -891,13 +883,13 @@
         }
 
         &--out {
-            background-color: #F3F0EC;
-            color: #5E554A;
+            background-color: var(--wbh-gift-raised);
+            color: var(--wbh-gift-secondary);
         }
     }
 
     // -------------------------------------------------------------------------
-    // Product Detail Page (PDP): Phân cấp rõ, Slider contrast & Sticky Mobile Bar
+    // Product Detail Page (PDP): Quy định 4 dòng, Slider & Sticky Mobile Bar
     // -------------------------------------------------------------------------
     .wbh-gift-highlight-badge {
         display: inline-flex;
@@ -905,10 +897,31 @@
         background-color: var(--wbh-gift-raised);
         border: 1px solid var(--wbh-gift-border);
         color: var(--wbh-gift-ink);
-        padding: 0.45rem 0.85rem;
+        padding: 0.5rem 0.875rem;
         border-radius: 8px;
         font-size: 0.875rem;
         font-weight: 600;
+    }
+
+    .wbh-gift-pdp-policies {
+        background-color: var(--wbh-gift-surface);
+        border: 1px solid var(--wbh-gift-border);
+        border-radius: var(--wbh-gift-radius-card);
+        padding: 0.75rem 1rem;
+        color: var(--wbh-gift-secondary);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        li {
+            line-height: 1.45;
+        }
+
+        .wbh-lucide-icon {
+            color: var(--wbh-gift-primary);
+            width: 16px;
+            height: 16px;
+        }
     }
 
     .o_wsale_product_page {
@@ -952,8 +965,8 @@
                 width: 36px;
                 height: 36px;
                 border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.92);
-                border: 1px solid rgba(31, 27, 22, 0.16);
+                background-color: rgba(255, 255, 255, 0.94);
+                border: 1px solid var(--wbh-gift-border-strong);
                 color: var(--wbh-gift-ink);
                 display: inline-flex;
                 align-items: center;
@@ -967,18 +980,18 @@
             display: inline-flex;
             align-items: center;
             border-radius: 8px;
-            padding: 0.45rem 0.9rem;
-            border: 1px solid rgba(31, 27, 22, 0.18);
+            padding: 0.5rem 0.875rem;
+            border: 1px solid var(--wbh-gift-border-strong);
             font-weight: 600;
             font-size: 0.875rem;
             color: var(--wbh-gift-ink);
             background-color: var(--wbh-gift-surface);
-            transition: border-color 0.18s ease, background-color 0.18s ease;
+            transition: border-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 
             &.active,
             &:has(input:checked) {
                 border-color: var(--wbh-gift-primary);
-                background-color: #FDF2F5;
+                background-color: var(--wbh-gift-primary-soft);
                 color: var(--wbh-gift-primary);
             }
         }
@@ -986,7 +999,7 @@
         .css_attribute_color {
             border-radius: 50%;
             border: 2px solid #FFFFFF;
-            box-shadow: 0 0 0 1px rgba(31, 27, 22, 0.25);
+            box-shadow: 0 0 0 1px rgba(11, 18, 32, 0.25);
 
             &.active {
                 box-shadow: 0 0 0 2px var(--wbh-gift-primary);
@@ -994,48 +1007,11 @@
         }
     }
 
-    .wbh-gift-care-accordion {
-        .accordion-item {
-            border: 1px solid var(--wbh-gift-border);
-            border-radius: var(--wbh-gift-radius-card);
-            overflow: hidden;
-            background-color: var(--wbh-gift-surface);
-        }
-
-        .accordion-button {
-            background-color: var(--wbh-gift-surface);
-            color: var(--wbh-gift-ink);
-            box-shadow: none;
-
-            &:not(.collapsed) {
-                color: var(--wbh-gift-primary);
-                background-color: var(--wbh-gift-raised);
-            }
-        }
-
-        .wbh-gift-care-note {
-            white-space: pre-line;
-            color: var(--wbh-gift-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-        }
-    }
-
     .wbh-gift-support-box {
         background-color: var(--wbh-gift-surface);
         border: 1px solid var(--wbh-gift-border);
         border-radius: var(--wbh-gift-radius-card);
-        padding: 0.9rem 1rem;
-
-        .wbh-gift-support-hotline {
-            color: var(--wbh-gift-ink);
-            font-weight: 600;
-            font-variant-numeric: tabular-nums;
-
-            &:hover {
-                color: var(--wbh-gift-primary);
-            }
-        }
+        padding: 1rem;
 
         .wbh-gift-channel-btn {
             min-height: 40px;
@@ -1048,7 +1024,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Floating 3-in-1 Contact Widget & Toast (trên scrolltop & sticky mobile bar)
+    // Floating 2-in-1 Contact Widget & Toast (Chat Web + Facebook)
     // -------------------------------------------------------------------------
     .wbh-gift-floating-contact {
         position: fixed;
@@ -1069,23 +1045,23 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.45rem;
+            gap: 0.5rem;
             min-width: 48px;
             min-height: 48px;
-            padding: 0.65rem 0.95rem;
+            padding: 0.625rem 1rem;
             border-radius: 999px;
-            background-color: var(--wbh-gift-primary);
+            background-color: var(--wbh-gift-topbar-bg);
             border: 2px solid #FFFFFF;
             color: #FFFFFF;
             font-weight: 600;
             font-size: 0.875rem;
-            box-shadow: 0 6px 18px rgba(31, 27, 22, 0.18);
+            box-shadow: 0 6px 18px rgba(11, 18, 32, 0.20);
             cursor: pointer;
-            transition: background-color 0.18s ease, transform 0.18s ease;
+            transition: background-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 
             &:hover,
             &:focus-visible {
-                background-color: var(--wbh-gift-primary-hover);
+                background-color: var(--wbh-gift-primary);
             }
 
             .wbh-gift-floating-fab__icon-close {
@@ -1106,13 +1082,13 @@
         .wbh-gift-floating-menu {
             display: flex;
             flex-direction: column;
-            gap: 0.35rem;
+            gap: 0.375rem;
             min-width: 196px;
             padding: 0.5rem;
             background-color: var(--wbh-gift-surface);
             border: 1px solid var(--wbh-gift-border);
             border-radius: var(--wbh-gift-radius-card);
-            box-shadow: 0 10px 28px rgba(31, 27, 22, 0.16);
+            box-shadow: 0 10px 28px rgba(11, 18, 32, 0.16);
 
             &[hidden] {
                 display: none !important;
@@ -1122,7 +1098,7 @@
         .wbh-gift-floating-item {
             display: flex;
             align-items: center;
-            gap: 0.55rem;
+            gap: 0.5rem;
             width: 100%;
             min-height: 44px;
             padding: 0.5rem 0.75rem;
@@ -1135,12 +1111,12 @@
             font-weight: 600;
             text-align: left;
             cursor: pointer;
-            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+            transition: background-color 0.15s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.15s cubic-bezier(0.22, 1, 0.36, 1), color 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 
             &:hover,
             &:focus-visible {
-                background-color: #FDF2F5;
-                border-color: rgba(201, 48, 88, 0.3);
+                background-color: var(--wbh-gift-primary-soft);
+                border-color: rgba(29, 78, 216, 0.28);
                 color: var(--wbh-gift-primary-hover);
             }
         }
@@ -1153,14 +1129,14 @@
         transform: translateX(-50%);
         z-index: 1050;
         max-width: calc(100vw - 32px);
-        padding: 0.6rem 1rem;
+        padding: 0.625rem 1rem;
         border-radius: 10px;
-        background-color: var(--wbh-gift-ink);
+        background-color: var(--wbh-gift-topbar-bg);
         color: #FFFFFF;
         font-size: 0.85rem;
         font-weight: 500;
         text-align: center;
-        box-shadow: 0 8px 24px rgba(31, 27, 22, 0.22);
+        box-shadow: 0 8px 24px rgba(11, 18, 32, 0.22);
 
         &[hidden] {
             display: none !important;
@@ -1172,7 +1148,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // Footer Support Band & Copyright (Giữ fix scrolltop & bỏ trùng lặp)
+    // Footer Support Band & Copyright
     // -------------------------------------------------------------------------
     .wbh-gift-footer-band {
         background-color: var(--wbh-gift-surface);
@@ -1209,9 +1185,13 @@
     #bottom.o_footer {
         position: relative;
         z-index: 1;
+        background-color: var(--wbh-gift-topbar-bg);
+        color: #E2E8F0;
 
         .o_footer_copyright {
             position: relative;
+            background-color: var(--wbh-gift-topbar-bg);
+            color: #CBD5E1;
 
             > .container {
                 padding-top: 1.25rem;
@@ -1240,9 +1220,9 @@
         background-color: rgba(255, 255, 255, 0.96);
         backdrop-filter: blur(8px);
         border-top: 1px solid var(--wbh-gift-border);
-        box-shadow: 0 -4px 16px rgba(31, 27, 22, 0.08);
-        padding: 0.65rem 0;
-        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+        box-shadow: 0 -4px 16px rgba(11, 18, 32, 0.08);
+        padding: 0.625rem 0;
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 
         &.wbh-sticky-hidden {
             transform: translateY(110%);

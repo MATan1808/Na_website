@@ -5,6 +5,7 @@
         <field name="name">TP. Hồ Chí Minh</field>
         <field name="code">HCM</field>
         <field name="sequence">1</field>
+        <field name="wbh_region">south</field>
         <field name="ghn_province_id">202</field>
     </record>
 
@@ -115,6 +116,7 @@
         <field name="name">Hà Nội</field>
         <field name="code">HN</field>
         <field name="sequence">2</field>
+        <field name="wbh_region">north</field>
         <field name="ghn_province_id">201</field>
     </record>
 
@@ -189,6 +191,7 @@
         <field name="name">Đà Nẵng</field>
         <field name="code">DN</field>
         <field name="sequence">3</field>
+        <field name="wbh_region">central</field>
         <field name="ghn_province_id">203</field>
     </record>
 
@@ -241,6 +244,7 @@
         <field name="name">Hải Phòng</field>
         <field name="code">HP</field>
         <field name="sequence">4</field>
+        <field name="wbh_region">north</field>
         <field name="ghn_province_id">224</field>
     </record>
 
@@ -293,6 +297,7 @@
         <field name="name">Cần Thơ</field>
         <field name="code">CT</field>
         <field name="sequence">5</field>
+        <field name="wbh_region">south</field>
         <field name="ghn_province_id">220</field>
     </record>
 

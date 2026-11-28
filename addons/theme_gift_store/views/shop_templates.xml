@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--
-        Tùy biến Trang Shop, Chi Tiết Sản Phẩm & Giỏ Hàng cho Web 1 — Quà Tặng (Odoo 19.0 Community).
+        Tùy biến Trang Shop, Chi Tiết Sản Phẩm & Giỏ Hàng cho Web 1 — Manh Dao Dao (Odoo 19.0 Community).
         Mọi phần tử QWeb chèn thêm đều khóa chặt trong t-if="website and website.wbh_store_type == 'gift'"
         và đọc ngữ cảnh controller qua .get() phòng thủ để tuyệt đối không lỗi nếu thiếu khóa.
     -->
@@ -37,7 +37,7 @@
 
             <!-- Khoảng giá động theo website -->
             <div t-if="wbh_visible_prices" class="wbh-gift-filter-group mb-3">
-                <h6 class="wbh-gift-filter-heading mb-2">Khoảng giá</h6>
+                <h2 class="h6 wbh-gift-filter-heading mb-2">Khoảng giá</h2>
                 <div class="d-flex flex-column gap-1">
                     <a
                         t-foreach="wbh_visible_prices"
@@ -54,7 +54,7 @@
 
             <!-- Nhãn & Chủ đề động từ product.tag -->
             <div t-if="wbh_visible_tags" class="wbh-gift-filter-group">
-                <h6 class="wbh-gift-filter-heading mb-2">Nhãn &amp; Chủ đề</h6>
+                <h2 class="h6 wbh-gift-filter-heading mb-2">Nhãn &amp; Chủ đề</h2>
                 <div class="d-flex flex-wrap gap-2">
                     <a
                         t-foreach="wbh_visible_tags"
@@ -77,31 +77,19 @@
         </div>
     </template>
 
-    <!-- 0B. Sub-template: Hộp Tư vấn 3 kênh (Chat tại Web · Facebook · Zalo · Chép link) -->
-    <template id="gift_contact_channels_box" name="WBH Gift — Hộp Tư Vấn 3 Kênh">
+    <!-- 0B. Sub-template: Hộp Tư vấn (Chat tại Web · Facebook · Chép link) -->
+    <template id="gift_contact_channels_box" name="WBH Gift — Hộp Tư Vấn Shop">
         <t t-set="wbh_can_livechat" t-value="bool(website.wbh_livechat_enabled)"/>
-        <t t-set="wbh_fb_url" t-value="website.wbh_fb_messenger_url"/>
-        <t t-set="wbh_zalo_url" t-value="website.wbh_support_zalo_url"/>
-        <t t-set="wbh_hotline" t-value="website.wbh_support_hotline"/>
-        <t t-set="wbh_has_channels" t-value="wbh_can_livechat or wbh_fb_url or wbh_zalo_url or wbh_hotline"/>
+        <t t-set="wbh_fb_url" t-value="website.wbh_support_facebook_url"/>
         <div
-            t-if="wbh_has_channels"
             t-attf-class="wbh-gift-support-box {{'wbh-gift-support-box--cart mt-4' if wbh_contact_mode == 'cart' else 'mb-4'}}"
         >
             <div class="d-flex flex-column gap-2">
                 <div class="wbh-gift-support-box__header d-flex align-items-center justify-content-between gap-2 flex-wrap">
                     <span class="small fw-semibold d-inline-flex align-items-center gap-2">
                         <i data-lucide="headphones" class="wbh-lucide-icon wbh-gift-icon-accent" aria-hidden="true"/>
-                        <span t-out="website.wbh_contact_prompt or ('Cần xem ảnh thật hoặc tư vấn chọn hàng?' if wbh_contact_mode != 'cart' else 'Cần tư vấn gói quà, kiểm tra đơn hoặc phí ship?')"/>
+                        <span t-out="website.wbh_contact_prompt or 'Cần vid check hoặc tư vấn chọn hàng?'"/>
                     </span>
-                    <a
-                        t-if="wbh_hotline"
-                        t-attf-href="tel:{{wbh_hotline.replace(' ', '')}}"
-                        class="wbh-gift-support-hotline small text-decoration-none d-inline-flex align-items-center gap-1"
-                    >
-                        <i data-lucide="phone" class="wbh-lucide-icon" aria-hidden="true"/>
-                        <span t-out="wbh_hotline"/>
-                    </a>
                 </div>
                 <div class="wbh-gift-support-box__actions d-flex flex-wrap gap-2">
                     <button
@@ -124,16 +112,6 @@
                         <i data-lucide="send" class="wbh-lucide-icon" aria-hidden="true"/>
                         <span>Nhắn Facebook</span>
                     </a>
-                    <a
-                        t-if="wbh_zalo_url"
-                        t-att-href="wbh_zalo_url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn btn-sm wbh-gift-btn-outline wbh-gift-channel-btn"
-                    >
-                        <i data-lucide="message-circle" class="wbh-lucide-icon" aria-hidden="true"/>
-                        <span>Nhắn Zalo</span>
-                    </a>
                     <button
                         type="button"
                         class="btn btn-sm wbh-gift-btn-secondary wbh-gift-channel-btn"
@@ -146,6 +124,33 @@
                 </div>
             </div>
         </div>
+    </template>
+
+    <!-- 0C. Sidebar /shop: Chuẩn hóa nhãn 'Loại goods' & ẩn 'Mẫu Thẻ Sưu Tầm' nếu còn tồn tại -->
+    <template
+        id="gift_attribute_filters_clean"
+        inherit_id="website_sale.product_attribute_filters_form"
+        name="WBH Gift Store Attribute Filter Labels"
+        priority="30"
+    >
+        <xpath expr="//t[@t-foreach='attributes']/div" position="attributes">
+            <attribute
+                name="t-attf-class"
+                add="{{'d-none' if (website and website.wbh_store_type == 'gift' and a.name and 'mẫu thẻ sưu tầm' in a.name.lower()) else ''}}"
+                separator=" "
+            />
+        </xpath>
+        <xpath expr="//t[@t-foreach='attributes']/div//b[@t-out='a.name']" position="replace">
+            <b t-if="website and website.wbh_store_type == 'gift' and a.name and a.name.strip().lower() == 'gói phân loại'">Loại goods</b>
+            <b t-else="" t-out="a.name"/>
+        </xpath>
+        <xpath expr="//t[@t-foreach='attributes']/div//b[@t-field='a.name']" position="replace">
+            <b
+                t-if="website and website.wbh_store_type == 'gift' and a.name and a.name.strip().lower() == 'gói phân loại'"
+                class="d-none d-lg-block"
+            >Loại goods</b>
+            <b t-else="" class="d-none d-lg-block" t-field="a.name"/>
+        </xpath>
     </template>
 
     <!-- 1. Thẻ sản phẩm /shop: Tag động (tối đa 2), Highlight, Tồn kho & Giá gạch + Badge -XX% -->
@@ -385,7 +390,44 @@
         </xpath>
     </template>
 
-    <!-- 4. Trang chi tiết sản phẩm: Extension Slots, Accordion bảo quản, Hộp 3 kênh & Sticky Mobile Bar -->
+    <!-- 3C. PDP Chính sách bán hàng 4 dòng riêng của Manh Dao Dao (thay block Terms mặc định) -->
+    <template
+        id="gift_product_terms_and_conditions"
+        inherit_id="website_sale.product_terms_and_conditions"
+        name="WBH Gift Store Product Policy 4 Lines"
+        priority="25"
+    >
+        <xpath expr="//small" position="replace">
+            <ul
+                t-if="website and website.wbh_store_type == 'gift'"
+                class="wbh-gift-pdp-policies list-unstyled mb-0 small"
+            >
+                <li class="d-flex align-items-start gap-2">
+                    <i data-lucide="file-text" class="wbh-lucide-icon mt-1" aria-hidden="true"/>
+                    <span>Hàng mddf, df nặng sẽ note</span>
+                </li>
+                <li class="d-flex align-items-start gap-2">
+                    <i data-lucide="calendar" class="wbh-lucide-icon mt-1" aria-hidden="true"/>
+                    <span>Đi đơn vào chủ nhật hàng tuần</span>
+                </li>
+                <li class="d-flex align-items-start gap-2">
+                    <i data-lucide="video" class="wbh-lucide-icon mt-1" aria-hidden="true"/>
+                    <span>Quay video khi unbox, chỉ giải quyết khi có video</span>
+                </li>
+                <li class="d-flex align-items-start gap-2">
+                    <i data-lucide="truck" class="wbh-lucide-icon mt-1" aria-hidden="true"/>
+                    <span>Đvvc: Viettel Post</span>
+                </li>
+            </ul>
+            <small t-else="" class="text-muted mb-0">
+                <a href="/terms" class="o_translate_inline text-muted"><u>Terms and Conditions</u></a><br/>
+                30-day money-back guarantee<br/>
+                Shipping: 2-3 Business Days
+            </small>
+        </xpath>
+    </template>
+
+    <!-- 4. Trang chi tiết sản phẩm: Extension Slots, Hộp Tư vấn & Sticky Mobile Bar (đã xóa khối gập lưu ý quà tặng) -->
     <template
         id="gift_product_detail"
         inherit_id="website_sale.product"
@@ -410,41 +452,9 @@
             />
         </xpath>
 
-        <!-- Accordion Hướng dẫn bảo quản (wbh_care_note) & Hộp Tư vấn 3 Kênh Web 1 -->
+        <!-- Hộp Tư vấn Web 1 đặt ngay dưới CTA -->
         <xpath expr="//div[hasclass('o_wsale_product_details_content_section_cta')]" position="after">
             <t t-if="website and website.wbh_store_type == 'gift'">
-                <div
-                    t-if="product.wbh_care_note"
-                    class="accordion wbh-gift-care-accordion mb-4"
-                    id="wbhGiftCareAccordion"
-                >
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="wbhGiftCareHeading">
-                            <button
-                                class="accordion-button collapsed fw-semibold"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#wbhGiftCareCollapse"
-                                aria-expanded="false"
-                                aria-controls="wbhGiftCareCollapse"
-                            >
-                                <i data-lucide="heart" class="wbh-lucide-icon me-2" aria-hidden="true"/>
-                                Hướng dẫn bảo quản &amp; Lưu ý quà tặng
-                            </button>
-                        </h2>
-                        <div
-                            id="wbhGiftCareCollapse"
-                            class="accordion-collapse collapse"
-                            aria-labelledby="wbhGiftCareHeading"
-                            data-bs-parent="#wbhGiftCareAccordion"
-                        >
-                            <div class="accordion-body">
-                                <div class="wbh-gift-care-note" t-field="product.wbh_care_note"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <t t-call="theme_gift_store.gift_contact_channels_box">
                     <t t-set="wbh_contact_item_title" t-value="product.name"/>
                     <t t-set="wbh_contact_mode" t-value="'pdp'"/>
@@ -474,15 +484,15 @@
                         class="btn wbh-gift-btn-primary wbh-gift-sticky-bar__btn flex-shrink-0"
                         data-wbh-trigger-cart="true"
                     >
-                        <i data-lucide="shopping-cart" class="wbh-lucide-icon me-1" aria-hidden="true"/>
-                        Thêm vào giỏ
+                        <i data-lucide="shopping-cart" class="wbh-lucide-icon" aria-hidden="true"/>
+                        <span>Thêm vào giỏ</span>
                     </button>
                 </div>
             </div>
         </xpath>
     </template>
 
-    <!-- 5. Giỏ hàng (/shop/cart): Thanh Tư vấn 3 Kênh trước khi đặt -->
+    <!-- 5. Giỏ hàng (/shop/cart): Thanh Tư vấn trước khi đặt -->
     <template
         id="gift_cart_consultation"
         inherit_id="website_sale.cart"

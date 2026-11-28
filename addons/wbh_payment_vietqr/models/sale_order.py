@@ -21,6 +21,28 @@ class SaleOrder(models.Model):
         compute='_compute_wbh_cod_eligibility',
         compute_sudo=True,
     )
+    wbh_payment_proof_attachment_id = fields.Many2one(
+        'ir.attachment',
+        string='Tệp ảnh bill chuyển khoản',
+        copy=False,
+        ondelete='set null',
+        help='Tệp đính kèm ảnh chụp màn hình chuyển khoản khách hàng đã tải lên.',
+    )
+    wbh_payment_proof_image = fields.Binary(
+        related='wbh_payment_proof_attachment_id.datas',
+        string='Ảnh bill chuyển khoản',
+        readonly=True,
+    )
+    wbh_payment_proof_filename = fields.Char(
+        related='wbh_payment_proof_attachment_id.name',
+        string='Tên tệp bill CK',
+        readonly=True,
+    )
+    wbh_payment_proof_uploaded_at = fields.Datetime(
+        string='Thời gian gửi bill CK',
+        copy=False,
+        readonly=True,
+    )
 
     @api.depends(
         'amount_total',
@@ -47,6 +69,11 @@ class SaleOrder(models.Model):
         :return: tuple (eligible: bool, reason: str)
         """
         self.ensure_one()
+        if self.website_id and self.website_id.wbh_store_type == 'gift':
+            return False, _(
+                "Cửa hàng chỉ áp dụng Chuyển khoản trước rồi ship (không hỗ trợ thanh toán COD)."
+            )
+
         restricted_lines = self.order_line.filtered(
             lambda l: not l.display_type
             and l.product_id

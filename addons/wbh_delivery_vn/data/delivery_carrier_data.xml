@@ -40,7 +40,38 @@
         <field name="invoice_policy">order</field>
     </record>
 
-    <!-- 1. Giao hàng tiêu chuẩn (Đồng giá 30.000đ — Freeship từ 300.000đ) -->
+    <record id="product_delivery_wbh_vtp" model="product.product">
+        <field name="name">ĐVVC VIETTEL POST</field>
+        <field name="default_code">WBH_SHIP_VTP</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries"/>
+        <field name="sale_ok" eval="False"/>
+        <field name="purchase_ok" eval="False"/>
+        <field name="is_published" eval="False"/>
+        <field name="list_price">15000.0</field>
+        <field name="taxes_id" eval="[Command.clear()]"/>
+        <field name="invoice_policy">order</field>
+        <field name="description_sale">Từ 12.000đ–20.000đ tùy tỉnh thành</field>
+    </record>
+
+    <!-- 0. ĐVVC VIETTEL POST (Phương thức vận chuyển mặc định duy nhất — 12.000đ đến 20.000đ) -->
+    <record id="carrier_wbh_viettel_post" model="delivery.carrier">
+        <field name="name">ĐVVC VIETTEL POST</field>
+        <field name="sequence">5</field>
+        <field name="delivery_type">wbh_vtp</field>
+        <field name="product_id" ref="product_delivery_wbh_vtp"/>
+        <field name="wbh_vtp_origin_province_id" ref="vn_province_hcm"/>
+        <field name="wbh_vtp_inner_price">12000.0</field>
+        <field name="wbh_vtp_same_region_price">15000.0</field>
+        <field name="wbh_vtp_inter_region_price">20000.0</field>
+        <field name="wbh_vtp_min_price">12000.0</field>
+        <field name="wbh_vtp_max_price">20000.0</field>
+        <field name="allow_cash_on_delivery" eval="False"/>
+        <field name="is_published" eval="True"/>
+        <field name="wbh_provider_note">Từ 12.000đ–20.000đ tùy tỉnh thành</field>
+    </record>
+
+    <!-- 1. Giao hàng tiêu chuẩn (Tạm tắt theo CR-09) -->
     <record id="carrier_wbh_standard" model="delivery.carrier">
         <field name="name">Giao hàng tiêu chuẩn (Đồng giá 30.000đ — Freeship từ 300.000đ)</field>
         <field name="sequence">10</field>
@@ -50,11 +81,11 @@
         <field name="wbh_free_over_amount">300000.0</field>
         <field name="wbh_is_hold_order" eval="False"/>
         <field name="allow_cash_on_delivery" eval="True"/>
-        <field name="is_published" eval="True"/>
+        <field name="is_published" eval="False"/>
         <field name="wbh_provider_note">Đồng giá 30.000đ toàn quốc. Miễn phí vận chuyển cho đơn từ 300.000đ.</field>
     </record>
 
-    <!-- 2. Gom đơn / Giữ hàng tại shop (0đ ship) -->
+    <!-- 2. Gom đơn / Giữ hàng tại shop (Tạm tắt theo CR-09) -->
     <record id="carrier_wbh_hold_order" model="delivery.carrier">
         <field name="name">Gom đơn / Giữ hàng tại shop (0đ ship)</field>
         <field name="sequence">20</field>
@@ -64,7 +95,7 @@
         <field name="wbh_free_over_amount">0.0</field>
         <field name="wbh_is_hold_order" eval="True"/>
         <field name="allow_cash_on_delivery" eval="True"/>
-        <field name="is_published" eval="True"/>
+        <field name="is_published" eval="False"/>
         <field name="wbh_provider_note">Shop giữ hàng giúp bạn gộp nhiều đơn gửi cùng lúc hoặc ghé shop lấy trực tiếp (0đ ship).</field>
     </record>
 

@@ -1,10 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Bổ sung bộ chọn địa giới hành chính Việt Nam 3 cấp trên form /shop/address -->
+    <!-- Tối giản form /shop/address cho Web 1 (gift) và giữ bộ chọn địa giới VN 3 cấp cho cả 2 Web -->
     <template id="checkout_vn_address_form_fields"
               name="WBH VN 3-Level Address Fields"
               inherit_id="website_sale.address_form_fields"
               priority="25">
+        <xpath expr="//div[@id='div_name']" position="before">
+            <t t-set="is_gift_store" t-value="bool(website and website.wbh_store_type == 'gift')"/>
+            <t t-set="wbh_vn_country" t-value="request.env.ref('base.vn', raise_if_not_found=False)"/>
+        </xpath>
+
+        <!-- Tên của bạn -> Tên fb (bắt buộc trên Web 1) -->
+        <xpath expr="//label[@for='o_name']" position="attributes">
+            <attribute name="t-if">not is_gift_store</attribute>
+        </xpath>
+        <xpath expr="//label[@for='o_name']" position="before">
+            <label t-if="is_gift_store" class="col-form-label" for="o_name">Tên fb</label>
+        </xpath>
+
+        <!-- Email -> Link fb (bắt buộc trên Web 1, type=text để không bị HTML5 chặn URL Facebook) -->
+        <xpath expr="//div[@id='div_email']" position="attributes">
+            <attribute name="t-attf-class">col-lg-{{'12' if is_gift_store else '6'}} mb-2</attribute>
+        </xpath>
+        <xpath expr="//label[@for='o_email']" position="attributes">
+            <attribute name="t-if">not is_gift_store</attribute>
+        </xpath>
+        <xpath expr="//label[@for='o_email']" position="before">
+            <label t-if="is_gift_store" class="col-form-label" for="o_email">Link fb</label>
+        </xpath>
+        <xpath expr="//input[@id='o_email']" position="attributes">
+            <attribute name="t-if">not is_gift_store</attribute>
+        </xpath>
+        <xpath expr="//input[@id='o_email']" position="before">
+            <input t-if="is_gift_store"
+                   id="o_email"
+                   type="text"
+                   name="email"
+                   required="required"
+                   placeholder="https://facebook.com/..."
+                   t-att-value="partner_sudo.wbh_fb_link or ('' if (partner_sudo.email or '').endswith('@fb.wbh.local') else (partner_sudo.email or ''))"
+                   class="form-control"/>
+        </xpath>
+
+        <!-- Điện thoại -> Thông tin ship (Tên, sđt, địa chỉ cũ không ghi tắt) -->
+        <xpath expr="//div[@id='div_phone']" position="attributes">
+            <attribute name="t-attf-class">col-lg-{{'12' if is_gift_store else '6'}} mb-2</attribute>
+        </xpath>
+        <xpath expr="//label[@for='o_phone']" position="attributes">
+            <attribute name="t-if">not is_gift_store</attribute>
+        </xpath>
+        <xpath expr="//label[@for='o_phone']" position="before">
+            <label t-if="is_gift_store" class="col-form-label" for="o_phone">
+                Thông tin ship (Tên, sđt, địa chỉ cũ không ghi tắt)
+            </label>
+        </xpath>
+        <xpath expr="//input[@id='o_phone']" position="attributes">
+            <attribute name="t-if">not is_gift_store</attribute>
+        </xpath>
+        <xpath expr="//input[@id='o_phone']" position="before">
+            <input t-if="is_gift_store"
+                   id="o_phone"
+                   type="text"
+                   name="phone"
+                   required="required"
+                   placeholder="VD: Nguyễn Văn A, 0901234567, 12 Lê Lợi, Phường Bến Nghé..."
+                   t-att-value="partner_sudo.wbh_shipping_info_note or partner_sudo.phone or ''"
+                   class="form-control"/>
+        </xpath>
+
+        <!-- Ẩn hoàn toàn các trường thừa trên Web 1 (giữ DOM để JS Odoo không lỗi null) -->
+        <xpath expr="//div[@id='company_name_div']" position="attributes">
+            <attribute name="t-attf-class">col-lg-6 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//div[@id='div_vat']" position="attributes">
+            <attribute name="t-attf-class">col-lg-6 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//div[@id='div_street']" position="attributes">
+            <attribute name="t-attf-class">col-lg-12 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//div[@id='div_street2']" position="attributes">
+            <attribute name="t-attf-class">col-lg-12 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//div[@id='div_city']" position="attributes">
+            <attribute name="t-attf-class">col-md-8 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='zip_before_city']/div[@id='div_zip']" position="attributes">
+            <attribute name="t-attf-class">col-md-4 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='not zip_before_city']/div[@id='div_zip']" position="attributes">
+            <attribute name="t-attf-class">col-md-4 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//div[@id='div_country']" position="attributes">
+            <attribute name="t-attf-class">col-lg-6 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+        <xpath expr="//select[@id='o_country_id']/option[@t-foreach='countries']" position="attributes">
+            <attribute name="t-att-selected">c.id == ((country.id if country else partner_sudo.country_id.id) or (wbh_vn_country.id if is_gift_store and wbh_vn_country else False))</attribute>
+        </xpath>
+        <xpath expr="//div[@id='div_state']" position="attributes">
+            <attribute name="t-attf-class">col-lg-6 mb-2 {{'d-none' if is_gift_store else ''}}</attribute>
+        </xpath>
+
+        <!-- Giữ nguyên 3 ô chọn địa giới VN 3 cấp: Tỉnh/TP, Quận/Huyện, Phường/Xã -->
         <xpath expr="//div[@id='div_state']" position="after">
             <t t-set="wbh_provinces"
                t-value="request.env['wbh.vn.province'].sudo().search([('active', '=', True)], order='sequence, name, id')"/>
@@ -22,12 +118,12 @@
             <div class="w-100 wbh-vn-address-field"/>
             <div id="div_wbh_vn_province" class="col-12 col-md-4 mb-2 wbh-vn-address-field">
                 <label class="col-form-label label-optional" for="o_wbh_vn_province_id">
-                    Tỉnh / Thành phố (VN)
+                    Tỉnh/TP
                 </label>
                 <select id="o_wbh_vn_province_id"
                         name="wbh_vn_province_id"
                         class="form-select wbh-vn-select">
-                    <option value="">Chọn Tỉnh / Thành phố...</option>
+                    <option value="">Chọn Tỉnh/TP...</option>
                     <t t-foreach="wbh_provinces" t-as="prov">
                         <option t-att-value="prov.id"
                                 t-att-selected="prov.id == wbh_selected_province_id"
@@ -37,13 +133,13 @@
             </div>
             <div id="div_wbh_vn_district" class="col-12 col-md-4 mb-2 wbh-vn-address-field">
                 <label class="col-form-label label-optional" for="o_wbh_vn_district_id">
-                    Quận / Huyện
+                    Quận/Huyện
                 </label>
                 <select id="o_wbh_vn_district_id"
                         name="wbh_vn_district_id"
                         class="form-select wbh-vn-select"
                         t-att-disabled="'disabled' if not wbh_selected_province_id else None">
-                    <option value="">Chọn Quận / Huyện...</option>
+                    <option value="">Chọn Quận/Huyện...</option>
                     <t t-foreach="wbh_districts" t-as="dist">
                         <option t-att-value="dist.id"
                                 t-att-selected="dist.id == wbh_selected_district_id"
@@ -53,13 +149,13 @@
             </div>
             <div id="div_wbh_vn_ward" class="col-12 col-md-4 mb-2 wbh-vn-address-field">
                 <label class="col-form-label label-optional" for="o_wbh_vn_ward_id">
-                    Phường / Xã
+                    Phường/Xã
                 </label>
                 <select id="o_wbh_vn_ward_id"
                         name="wbh_vn_ward_id"
                         class="form-select wbh-vn-select"
                         t-att-disabled="'disabled' if not wbh_selected_district_id else None">
-                    <option value="">Chọn Phường / Xã...</option>
+                    <option value="">Chọn Phường/Xã...</option>
                     <t t-foreach="wbh_wards" t-as="ward">
                         <option t-att-value="ward.id"
                                 t-att-selected="ward.id == wbh_selected_ward_id"
@@ -67,6 +163,13 @@
                     </t>
                 </select>
             </div>
+        </xpath>
+
+        <xpath expr="//input[@name='required_fields']" position="attributes">
+            <attribute name="t-att-value">'name,email,phone' if is_gift_store else 'name,email'</attribute>
+        </xpath>
+        <xpath expr="//input[@name='required_fields']" position="after">
+            <input type="hidden" name="wbh_gift_simplified" t-att-value="'1' if is_gift_store else '0'"/>
         </xpath>
     </template>
 
@@ -82,7 +185,7 @@
             </span>
         </xpath>
         <xpath expr="//div[@t-field='dm.website_description']" position="after">
-            <div t-if="dm.wbh_provider_note"
+            <div t-if="dm.wbh_provider_note and dm.wbh_provider_note != dm.website_description"
                  t-field="dm.wbh_provider_note"
                  class="text-muted small mt-1"/>
         </xpath>

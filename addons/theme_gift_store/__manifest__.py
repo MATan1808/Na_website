@@ -2,13 +2,20 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Theme Web 1 — Cửa Hàng Quà Tặng (Móc Khóa, Gấu Bông & Blind Box)',
-    'version': '19.0.1.3.0',
+    'name': 'Theme Web 1 — Manh Dao Dao (Boku no Hero Academia Anime Goods Shop)',
+    'version': '19.0.1.4.0',
     'category': 'Theme/eCommerce',
-    'summary': 'Giao diện cửa hàng quà tặng, móc khóa, gấu bông và Blind Box chuẩn Upgrade-Safe Odoo 19.0 Community',
+    'summary': 'Giao diện Manh Dao Dao - Boku no Hero Academia Anime Goods Shop chuẩn Upgrade-Safe Odoo 19.0 Community',
     'description': """
-Theme Web 1 — Cửa Hàng Quà Tặng — Changelog
-===========================================
+Theme Web 1 — Manh Dao Dao — Changelog
+======================================
+
+v19.0.1.4.0 (2026-11-28)
+------------------------
+- [NEW] Cập nhật bộ nhận diện mới (CR-01): logo mèo đen mắt xanh dương + lựu đạn xanh dương (`brand_logo_dark.jpg`, `brand_logo_light.jpg`, `logo_emblem_transparent.png`, `favicon.ico` 32x32/64x64 và `logo.png` ngang giữ chữ MANH DAO DAO · ANIME GOODS SHOP).
+- [IMPROVE] Chuyển toàn bộ bảng màu Web 1 trong `.wbh-store-gift` và `primary_variables.scss` sang hệ Xanh dương – Đen đồng bộ logo (`#0B1220` / `#0F172A`, nền `#F4F7FB`, surface `#FFFFFF`, viền `#DCE4F0`, primary `#1D4ED8` / hover `#1E40AF`, đạt WCAG AA >= 4.5:1) theo chuẩn `360-frontend-polish` & 9 passes `unslop`.
+- [IMPROVE] Cập nhật Topbar, Hero, Footer, Sidebar `/shop`, PDP và Giỏ hàng theo CR-01..CR-07: slogan `Tiền trao tay, quýt về ngay` với icon Lucide `citrus`, xóa hoàn toàn SĐT `0900 000 001` và kênh Zalo, trỏ duy nhất Facebook CSKH qua `website.wbh_support_facebook_url` + Chat tại Web; đổi nội dung Hero & Khám phá nhanh sang goods Boku no Hero; chuẩn hóa nhãn lọc `Loại goods`, ẩn `Mẫu Thẻ Sưu Tầm` và bỏ `,00` thập phân trên thanh khoảng giá.
+- [IMPROVE] Thay khối chính sách mặc định trên PDP bằng 4 quy định của shop (mddf/df nặng sẽ note, đi đơn Chủ Nhật, quay video unbox, ĐVVC Viettel Post), xóa khối gập `Hướng dẫn bảo quản & Lưu ý quà tặng` và đổi tiêu đề khối tư vấn sang `Cần vid check hoặc tư vấn chọn hàng?`.
 
 v19.0.1.3.0 (2026-11-28)
 ------------------------

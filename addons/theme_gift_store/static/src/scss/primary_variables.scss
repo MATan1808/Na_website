@@ -1,15 +1,15 @@
 // -----------------------------------------------------------------------------
-// Theme Web 1 — Cửa Hàng Quà Tặng (Primary Variables — Odoo 19.0 Community)
+// Theme Web 1 — Manh Dao Dao Anime Goods Shop (Primary Variables — Odoo 19.0 Community)
 // -----------------------------------------------------------------------------
 // An toàn Multi-Website: KHÔNG ghi đè cứng biến toàn cục hay $o-website-values-palettes
 // để tuyệt đối không làm ảnh hưởng Web 2 (theme_fashion_store).
 
-// Biến màu nội bộ riêng cho Web 1 (đúng SPEC Mục 4, đạt tương phản WCAG AA)
-$wbh-gift-color-1: #FF6B8B; // Hồng san hô chủ đạo — CTA & điểm nhấn
-$wbh-gift-color-2: #FFB347; // Vàng mật ong — nhãn ưu đãi / dịp lễ
-$wbh-gift-color-3: #FFF6F0; // Kem ấm — nền section dịu mắt
-$wbh-gift-color-4: #FFFFFF; // Trắng tinh khiết — nền thẻ sản phẩm
-$wbh-gift-color-5: #3D2C2E; // Nâu cacao đậm — chữ chính dễ đọc
+// Biến màu nội bộ riêng cho Web 1 (đồng bộ logo Mèo Đen & Lựu Đạn Xanh — WCAG AA >= 4.5:1)
+$wbh-gift-color-1: #1D4ED8; // Xanh dương chủ đạo — CTA & điểm nhấn thương hiệu
+$wbh-gift-color-2: #0F172A; // Đen xanh navy — thanh thông báo & điểm nhấn đậm
+$wbh-gift-color-3: #F4F7FB; // Nền sáng ánh xanh dịu — nền trang & section
+$wbh-gift-color-4: #FFFFFF; // Trắng tinh khiết — nền thẻ sản phẩm & header
+$wbh-gift-color-5: #0B1220; // Đen mực đậm — chữ chính đạt tương phản cao
 
 // Khai báo chuẩn $o-color-1..5 có !default để không ghi đè theme/website khác
 $o-color-1: $wbh-gift-color-1 !default;

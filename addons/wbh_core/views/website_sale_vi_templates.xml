@@ -118,7 +118,94 @@
         priority="25"
     >
         <xpath expr="//t[@t-foreach='attributes']/div" position="attributes">
-            <attribute name="t-if">(a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids)) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else (a.value_ids and len(a.value_ids) &gt; 1)</attribute>
+            <attribute name="t-if">(a.value_ids.filtered(lambda v: v.id in wbh_available_attr_value_ids) and not (website.wbh_store_type == 'gift' and (a.name or '').strip().lower() == 'mẫu thẻ sưu tầm')) if (website and website.wbh_store_type in ('gift', 'fashion') and wbh_available_attr_value_ids is not None) else (a.value_ids and len(a.value_ids) &gt; 1)</attribute>
+        </xpath>
+    </template>
+
+    <!-- Bỏ 2 số thập phân ',00' trên thanh kéo khoảng giá khi tiền tệ không dùng số lẻ (VNĐ) -->
+    <template
+        id="wbh_filter_products_price_integer"
+        inherit_id="website_sale.filter_products_price"
+        name="WBH — Định dạng khoảng giá số nguyên VNĐ không ,00"
+        priority="25"
+    >
+        <xpath expr="(//input[@type='range'])[1]" position="attributes">
+            <attribute name="t-att-step">'1' if (website and website.currency_id and website.currency_id.decimal_places == 0) else website.currency_id.rounding</attribute>
+            <attribute name="t-att-min">str(int(round(available_min_price or 0))) if (website and website.currency_id and website.currency_id.decimal_places == 0) else ('%f' % (available_min_price))</attribute>
+            <attribute name="t-att-max">str(int(round(available_max_price or 0))) if (website and website.currency_id and website.currency_id.decimal_places == 0) else ('%f' % (available_max_price))</attribute>
+            <attribute name="t-att-value">('%d,%d' % (int(round(min_price or 0)), int(round(max_price or 0)))) if (website and website.currency_id and website.currency_id.decimal_places == 0) else ('%f,%f' % (min_price, max_price))</attribute>
+        </xpath>
+        <xpath expr="(//input[@type='range'])[2]" position="attributes">
+            <attribute name="t-att-step">'1' if (website and website.currency_id and website.currency_id.decimal_places == 0) else website.currency_id.rounding</attribute>
+            <attribute name="t-att-min">str(int(round(available_min_price or 0))) if (website and website.currency_id and website.currency_id.decimal_places == 0) else ('%f' % (available_min_price))</attribute>
+            <attribute name="t-att-max">str(int(round(available_max_price or 0))) if (website and website.currency_id and website.currency_id.decimal_places == 0) else ('%f' % (available_max_price))</attribute>
+            <attribute name="t-att-value">('%d,%d' % (int(round(min_price or 0)), int(round(max_price or 0)))) if (website and website.currency_id and website.currency_id.decimal_places == 0) else ('%f,%f' % (min_price, max_price))</attribute>
+        </xpath>
+    </template>
+
+    <!-- CR-07: Việt hóa khối Tổng kết giỏ hàng, ẩn dòng Thuế và hiển thị Phí gói cố định trên Web 1 -->
+    <template
+        id="wbh_cart_total_packaging_fee"
+        inherit_id="website_sale.total"
+        name="WBH — Tổng kết Giỏ hàng &amp; Phí gói Web 1"
+        priority="25"
+    >
+        <xpath expr="//tr[@name='o_order_delivery']/td[1]" position="replace">
+            <td class="ps-0 pt-0 pb-2 border-0 text-muted" colspan="2">
+                <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">Giao hàng</t>
+                <t t-else="">Delivery</t>
+            </td>
+        </xpath>
+        <xpath expr="//tr[@name='o_order_total_untaxed']/td[1]" position="replace">
+            <td class="border-0 pb-2 ps-0 pt-0 text-start text-muted" colspan="2">
+                <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">Thành tiền</t>
+                <t t-else="">Subtotal</t>
+            </td>
+        </xpath>
+        <xpath expr="//tr[@name='o_order_total_untaxed']/td[2]" position="replace">
+            <td class="text-end border-0 pb-2 pe-0 pt-0">
+                <span
+                    t-if="website and website.wbh_store_type == 'gift' and website.wbh_packaging_fee_enabled"
+                    t-out="website_sale_order.wbh_amount_products"
+                    class="monetary_field"
+                    style="white-space: nowrap;"
+                    t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                />
+                <span
+                    t-else=""
+                    t-field="website_sale_order.amount_untaxed"
+                    class="monetary_field"
+                    style="white-space: nowrap;"
+                    t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                />
+            </td>
+        </xpath>
+        <xpath expr="//tr[@name='o_order_total_taxes']" position="attributes">
+            <attribute name="t-attf-class">{{'d-none' if website and website.wbh_store_type == 'gift' and website.wbh_packaging_fee_enabled else ''}}</attribute>
+        </xpath>
+        <xpath expr="//tr[@name='o_order_total_taxes']" position="after">
+            <tr
+                t-if="website and website.wbh_store_type == 'gift' and website.wbh_packaging_fee_enabled and website_sale_order.wbh_packaging_fee_amount &gt; 0"
+                name="o_order_packaging_fee"
+            >
+                <td colspan="2" class="text-muted border-0 p-0 pe-3 pb-2">Phí gói</td>
+                <td class="text-end border-0 p-0 ps-3 pb-2">
+                    <span
+                        t-out="website_sale_order.wbh_packaging_fee_amount"
+                        class="monetary_field"
+                        style="white-space: nowrap;"
+                        t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                    />
+                </td>
+            </tr>
+        </xpath>
+        <xpath expr="//tr[@name='o_order_total']/td[1]" position="replace">
+            <td colspan="2" class="border-0 ps-0 pt-2">
+                <strong>
+                    <t t-if="website and website.wbh_store_type in ('gift', 'fashion')">Tổng</t>
+                    <t t-else="">Total</t>
+                </strong>
+            </td>
         </xpath>
     </template>
 </odoo>

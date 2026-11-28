@@ -11,6 +11,10 @@
                     Đơn hàng được giữ tại cửa hàng để gộp chuyến gửi sau hoặc khách ghé lấy trực tiếp.
                 </div>
             </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <field name="wbh_fb_link" widget="url" invisible="not wbh_fb_link"/>
+                <field name="wbh_shipping_info_note" invisible="not wbh_shipping_info_note"/>
+            </xpath>
             <xpath expr="//field[@name='shipping_weight']" position="after">
                 <field name="wbh_is_hold_order"/>
                 <field name="wbh_tracking_code"/>

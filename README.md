@@ -1,6 +1,6 @@
 # Hệ Sinh Thái 2 Website Bán Hàng (E-Commerce Multi-Store — Thuần Odoo 19.0 Community)
 
-> **Trạng thái dự án**: `v0.4.0` — Hoàn thiện trọn bộ **Giai đoạn 1–4** (`wbh_core` `v19.0.1.2.0`, `theme_gift_store` `v19.0.1.3.0`, `theme_fashion_store` `v19.0.1.3.0`, `wbh_payment_vietqr` `v19.0.1.0.0`, `wbh_delivery_vn` `v19.0.1.0.0`): CRUD sản phẩm nhanh <60s & giá gạch `-XX%`, Bộ lọc động 100% không hardcode, Tư vấn 3 kênh (Web Livechat · Facebook · Zalo), Thanh toán VietQR EMVCo + SePay Webhook + COD rules, Địa giới VN 3 cấp + Gom đơn 0đ + GHN.  
+> **Trạng thái dự án**: `v0.4.1` — Hoàn thiện Giai đoạn 1–4 & triển khai trọn bộ **10 yêu cầu chỉnh sửa khách hàng Manh Dao Dao (`CR-01`..`CR-10`)** cho Web 1 (`wbh_core` `v19.0.1.3.0`, `theme_gift_store` `v19.0.1.4.0`, `theme_fashion_store` `v19.0.1.3.0`, `wbh_payment_vietqr` `v19.0.1.1.0`, `wbh_delivery_vn` `v19.0.1.1.0`): thương hiệu *Manh Dao Dao - Boku no Hero Academia Anime Goods Shop*, slogan *Tiền trao tay, quýt về ngay*, bộ logo mèo đen + lựu đạn xanh & bảng màu Xanh dương – Đen, chỉ giữ Facebook + Chat Web (bỏ Zalo/SĐT), lọc `Loại goods` 9 phân loại & giá VNĐ không `,00`, Phí gói 5.000đ/đơn thay Thuế, form `/shop/address` 3 ô + 3 cấp VN, ĐVVC Viettel Post 12k–20k và chỉ CK trước (QR chủ shop + Upload bill CK).  
 > **Thư mục gốc dự án**: `F:\BACKUP_LINUX\web_ban_hang`  
 > **Repository**: `https://github.com/MATan1808/Na_website.git` (nhánh `main`)  
 > **Quy trình phát triển**: `/idea` ➜ `/req` ➜ `/spec` ➜ `/plan` ➜ `/build` ➜ `/code-review` ➜ `/test` ➜ `/review` ➜ `/ship`
@@ -88,11 +88,11 @@ F:\BACKUP_LINUX\web_ban_hang\
 │   ├── CHANGELOGS.md                # [v0.3.7] Nhật ký thay đổi các phiên bản dự án
 │   └── AUDIT_ROADMAP.md             # [Tạo ở /review-/ship] Checklist kiểm duyệt & bàn giao
 ├── addons\                          # Custom Modules Odoo 19.0 Community (100% LGPL-3)
-│   ├── wbh_core\                    # [v19.0.1.2.0] Lõi Multi-Website, form SP nhanh, bộ lọc động 100%, cấu hình 3 kênh
-│   ├── theme_gift_store\            # [v19.0.1.3.0] Custom Theme Web 1 (Quà tặng) — giá gạch -XX%, filter UI, 3-in-1 contact
+│   ├── wbh_core\                    # [v19.0.1.3.0] Lõi Multi-Website, Loại goods, Phí gói 5k, script apply_cr_manhdaodao.py
+│   ├── theme_gift_store\            # [v19.0.1.4.0] Custom Theme Web 1 (Manh Dao Dao — Xanh dương – Đen, logo mới, 4 dòng PDP)
 │   ├── theme_fashion_store\         # [v19.0.1.3.0] Custom Theme Web 2 (Thời trang) — giá gạch -XX%, filter UI, 3-in-1 contact
-│   ├── wbh_payment_vietqr\          # [v19.0.1.0.0] Thanh toán VietQR EMVCo offline + Webhook SePay Free + COD rules
-│   ├── wbh_delivery_vn\             # [v19.0.1.0.0] Địa giới VN 3 cấp + Đồng giá/Freeship/Gom đơn 0đ + GHN
+│   ├── wbh_payment_vietqr\          # [v19.0.1.1.0] VietQR EMVCo + QR chủ shop + Upload bill CK (chỉ CK trước trên Web 1)
+│   ├── wbh_delivery_vn\             # [v19.0.1.1.0] Form /shop/address 3 ô + 3 cấp VN + ĐVVC Viettel Post (12k–20k) + GHN
 │   ├── wbh_gift_store\              # [M2 mở rộng] Nghiệp vụ đặc thù Web 1 (Gói quà, Cá nhân hóa, So sánh size, Combo)
 │   └── wbh_fashion_store\           # [M2 mở rộng] Nghiệp vụ đặc thù Web 2 (Gợi ý Size, Shop The Look, Video, Đổi size)
 └── data\                            # [Ignored trong Git] Dữ liệu runtime cục bộ (filestore/, sessions/)

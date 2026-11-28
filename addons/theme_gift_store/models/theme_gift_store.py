@@ -14,6 +14,7 @@ class ThemeUtils(models.AbstractModel):
         self.enable_view('website_sale.option_collapse_products_categories')
         self.enable_view('website_sale_wishlist.add_to_wishlist')
         self.enable_view('website_sale_wishlist.product_add_to_wishlist')
+        self.enable_view('website_sale.product_terms_and_conditions')
         self.enable_view('website.option_footer_scrolltop')
         self.disable_view('website.footer_custom')
         self.disable_view('website.header_text_element')

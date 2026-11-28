@@ -2,6 +2,7 @@
 import logging
 
 from odoo import _, api, fields, models
+from odoo.tools.image import image_data_uri
 
 from odoo.addons.payment import utils as payment_utils
 from odoo.addons.wbh_payment_vietqr.const import (
@@ -10,6 +11,8 @@ from odoo.addons.wbh_payment_vietqr.const import (
     VN_BANK_SELECTION,
 )
 from odoo.addons.wbh_payment_vietqr.models.vietqr_emvco import (
+    build_vietqr_payload,
+    generate_qr_png_base64,
     get_bank_display_name,
     sanitize_vietqr_text,
 )
@@ -67,6 +70,14 @@ class PaymentProvider(models.Model):
         copy=False,
         help='Mã API Key / Secret dùng xác thực header Authorization gửi từ SePay, PayOS hoặc Casso.',
     )
+    wbh_custom_qr_image = fields.Binary(
+        string='Ảnh mã QR chuyển khoản riêng',
+        attachment=True,
+        help='Nếu chủ shop tải ảnh QR ngân hàng riêng lên đây, hệ thống ưu tiên hiển thị ảnh QR này tại /shop/payment; nếu để trống sẽ tự sinh QR động EMVCo.',
+    )
+    wbh_custom_qr_filename = fields.Char(
+        string='Tên tệp ảnh QR riêng',
+    )
 
     def _get_default_payment_method_codes(self):
         """Trả về mã phương thức thanh toán mặc định cho VietQR và COD."""
@@ -108,10 +119,24 @@ class PaymentProvider(models.Model):
             **kwargs,
         )
         sale_order_id = kwargs.get('sale_order_id')
+        website_id = kwargs.get('website_id')
+        order = self.env['sale.order'].sudo().browse(sale_order_id).exists() if sale_order_id else self.env['sale.order']
+        website = (
+            order.website_id
+            if order and order.website_id
+            else (self.env['website'].sudo().browse(website_id).exists() if website_id else self.env['website'])
+        )
         cod_providers = providers.filtered(lambda p: p.code == 'wbh_cod')
-        if sale_order_id and cod_providers:
-            order = self.env['sale.order'].sudo().browse(sale_order_id).exists()
-            if order:
+        if cod_providers:
+            if website and website.wbh_store_type == 'gift':
+                providers -= cod_providers
+                payment_utils.add_to_report(
+                    report,
+                    cod_providers,
+                    available=False,
+                    reason=_("Cửa hàng chỉ hỗ trợ Chuyển khoản trước rồi ship (không hỗ trợ COD)."),
+                )
+            elif order:
                 eligible, reason = order._wbh_is_cod_eligible()
                 if not eligible:
                     providers -= cod_providers
@@ -127,6 +152,36 @@ class PaymentProvider(models.Model):
         """Trả về tên ngân hàng dễ đọc cho template QWeb."""
         self.ensure_one()
         return get_bank_display_name(self.wbh_vietqr_bank_bin)
+
+    def _wbh_get_vietqr_reference_for_order(self, order=None, reference=None):
+        """Sinh mã nội dung chuyển khoản ASCII ngắn gọn dùng hiển thị trước tại /shop/payment."""
+        self.ensure_one()
+        raw_ref = reference or (order.name if order else 'WBH')
+        return self.env['payment.transaction']._wbh_format_vietqr_reference(
+            raw_ref,
+            prefix=self.wbh_vietqr_prefix or 'WBH',
+        )
+
+    def _wbh_get_qr_data_uri_for_order(self, order=None, amount=None, reference=None):
+        """Ưu tiên trả về ảnh QR riêng của chủ shop; nếu chưa có thì fallback về QR động EMVCo."""
+        self.ensure_one()
+        provider_sudo = self.sudo()
+        if provider_sudo.wbh_custom_qr_image:
+            return image_data_uri(provider_sudo.wbh_custom_qr_image)
+
+        if not provider_sudo.wbh_vietqr_bank_bin or not provider_sudo.wbh_vietqr_account_no:
+            return ''
+
+        pay_amount = amount if amount is not None else (order.amount_total if order else 0.0)
+        vietqr_ref = provider_sudo._wbh_get_vietqr_reference_for_order(order=order, reference=reference)
+        payload = build_vietqr_payload(
+            bank_bin=provider_sudo.wbh_vietqr_bank_bin,
+            account_no=provider_sudo.wbh_vietqr_account_no,
+            amount=pay_amount or 0.0,
+            transfer_note=vietqr_ref,
+        )
+        qr_b64 = generate_qr_png_base64(self.env, payload)
+        return image_data_uri(qr_b64) if qr_b64 else ''
 
     def _wbh_parse_webhook_payload(self, payload):
         """Chuẩn hóa payload webhook từ SePay Free, PayOS hoặc Casso về một cấu trúc thống nhất.

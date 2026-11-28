@@ -3,21 +3,25 @@
      DESIGN TOKENS — HỆ THỐNG BIẾN TOÀN CỤC WEB BÁN HÀNG
      ========================================================================= */
 
-  /* Web 1: Cửa Hàng Quà Tặng (Warm & Playful) */
-  --wbh-gift-color-primary: #FF6B8B;
-  --wbh-gift-color-secondary: #FFB347;
-  --wbh-gift-color-bg: #FFF6F0;
+  /* Web 1: Manh Dao Dao - Boku no Hero Academia Anime Goods Shop (Blue & Black) */
+  --wbh-gift-color-primary: #1D4ED8;
+  --wbh-gift-color-primary-hover: #1E40AF;
+  --wbh-gift-color-topbar: #0B1220;
+  --wbh-gift-color-secondary: #0F172A;
+  --wbh-gift-color-bg: #F4F7FB;
   --wbh-gift-color-surface: #FFFFFF;
-  --wbh-gift-color-text: #3D2C2E;
-  --wbh-gift-color-text-muted: #8C7A7C;
-  --wbh-gift-color-border: #FFE4D6;
-  --wbh-gift-radius-sm: 10px;
-  --wbh-gift-radius-md: 18px;
-  --wbh-gift-radius-lg: 28px;
-  --wbh-gift-radius-pill: 50rem;
-  --wbh-gift-shadow-soft: 0 10px 30px rgba(255, 107, 139, 0.12);
-  --wbh-gift-shadow-hover: 0 16px 36px rgba(255, 107, 139, 0.22);
-  --wbh-gift-font-heading: 'Quicksand', -apple-system, sans-serif;
+  --wbh-gift-color-raised: #E9EFF7;
+  --wbh-gift-color-text: #0B1220;
+  --wbh-gift-color-text-secondary: #334155;
+  --wbh-gift-color-text-muted: #52627A;
+  --wbh-gift-color-border: #DCE4F0;
+  --wbh-gift-radius-sm: 8px;
+  --wbh-gift-radius-md: 12px;
+  --wbh-gift-radius-lg: 16px;
+  --wbh-gift-radius-btn: 10px;
+  --wbh-gift-shadow-soft: 0 1px 2px rgba(11, 18, 32, 0.05);
+  --wbh-gift-shadow-hover: 0 8px 20px rgba(11, 18, 32, 0.08);
+  --wbh-gift-font-heading: 'Quicksand', 'Be Vietnam Pro', -apple-system, sans-serif;
   --wbh-gift-font-body: 'Be Vietnam Pro', -apple-system, sans-serif;
 
   /* Web 2: Cửa Hàng Thời Trang (Editorial & Minimalist) */
@@ -36,7 +40,7 @@
   --wbh-fashion-font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --wbh-fashion-font-body: 'Inter', -apple-system, sans-serif;
 
-  /* Spacing Scale */
+  /* Spacing Scale (4px grid) */
   --wbh-space-1: 0.25rem;
   --wbh-space-2: 0.5rem;
   --wbh-space-3: 1rem;

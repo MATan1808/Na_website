@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
+import base64
 import hmac
 import json
 import logging
+import os
 import re
 
 from markupsafe import Markup, escape
 
-from odoo import _
+from odoo import _, fields
 from odoo.exceptions import ValidationError
 from odoo.http import Controller, request, route
 
@@ -285,3 +287,127 @@ class VietQRController(Controller):
                     return True
 
         return False
+
+    MAX_PROOF_IMAGE_BYTES = 5 * 1024 * 1024  # 5MB
+
+    @staticmethod
+    def _detect_proof_image_type(raw_bytes):
+        """Kiểm tra magic bytes của ảnh (chỉ cho phép PNG, JPEG, WEBP)."""
+        if not raw_bytes:
+            return None, None
+        if raw_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
+            return '.png', 'image/png'
+        if raw_bytes.startswith(b'\xff\xd8\xff'):
+            return '.jpg', 'image/jpeg'
+        if len(raw_bytes) >= 12 and raw_bytes[:4] == b'RIFF' and raw_bytes[8:12] == b'WEBP':
+            return '.webp', 'image/webp'
+        return None, None
+
+    @staticmethod
+    def _sanitize_proof_filename(raw_name, order_name, ext):
+        base = os.path.basename(raw_name or 'bill_ck')
+        stem = os.path.splitext(base)[0]
+        clean_stem = re.sub(r'[^A-Za-z0-9._-]+', '_', stem).strip('._-') or 'bill_ck'
+        clean_order = re.sub(r'[^A-Za-z0-9_-]+', '_', order_name or 'order')
+        return f"bill_ck_{clean_order}_{clean_stem[:40]}{ext}"
+
+    def _can_access_sale_order(self, order_sudo, access_token=None):
+        """Kiểm tra phiên đặt hàng, access_token hoặc chủ đơn hàng chống IDOR."""
+        if not order_sudo or not order_sudo.exists():
+            return False
+
+        cart = getattr(request, 'cart', False)
+        if order_sudo.id in (
+            request.session.get('sale_order_id'),
+            request.session.get('sale_last_order_id'),
+            cart.id if cart else None,
+        ):
+            return True
+
+        user = request.env.user
+        if not user._is_public():
+            if user._is_internal():
+                return True
+            if order_sudo.partner_id.commercial_partner_id == user.partner_id.commercial_partner_id:
+                return True
+
+        if access_token:
+            token_str = str(access_token).strip()
+            if order_sudo.access_token and hmac.compare_digest(token_str, str(order_sudo.access_token)):
+                return True
+            if payment_utils.check_access_token(
+                token_str,
+                order_sudo.partner_invoice_id.id,
+                order_sudo.amount_total,
+                order_sudo.currency_id.id,
+            ):
+                return True
+            for tx in order_sudo.transaction_ids:
+                if self._can_access_transaction(tx, access_token=token_str):
+                    return True
+
+        return False
+
+    @route('/payment/vietqr/upload_proof', type='http', auth='public', methods=['POST'], website=True, sitemap=False)
+    def vietqr_upload_payment_proof(self, order_id=None, access_token=None, **kwargs):
+        """Nhận ảnh chụp màn hình chuyển khoản ('cap màn hình ck'), kiểm tra chặt magic bytes & <= 5MB."""
+        try:
+            parsed_order_id = int(order_id)
+        except (TypeError, ValueError):
+            return self._json_response({'success': False, 'error': 'Mã đơn hàng không hợp lệ.'}, status=400)
+
+        order_sudo = request.env['sale.order'].sudo().browse(parsed_order_id).exists()
+        if not order_sudo or order_sudo.state == 'cancel':
+            return self._json_response({'success': False, 'error': 'Không tìm thấy đơn hàng hợp lệ.'}, status=404)
+
+        if not self._can_access_sale_order(order_sudo, access_token=access_token):
+            return self._json_response({'success': False, 'error': 'Không có quyền tải bill cho đơn hàng này.'}, status=403)
+
+        upload_file = request.httprequest.files.get('proof_file')
+        if not upload_file:
+            return self._json_response({'success': False, 'error': 'Vui lòng chọn ảnh chụp màn hình chuyển khoản.'}, status=400)
+
+        raw_bytes = upload_file.stream.read(self.MAX_PROOF_IMAGE_BYTES + 1)
+        if not raw_bytes:
+            return self._json_response({'success': False, 'error': 'Tệp ảnh trống, vui lòng chọn lại.'}, status=400)
+        if len(raw_bytes) > self.MAX_PROOF_IMAGE_BYTES:
+            return self._json_response({'success': False, 'error': 'Dung lượng ảnh vượt quá giới hạn 5MB.'}, status=400)
+
+        ext, detected_mime = self._detect_proof_image_type(raw_bytes)
+        if not ext or not detected_mime:
+            return self._json_response(
+                {'success': False, 'error': 'Chỉ hỗ trợ ảnh định dạng PNG, JPG/JPEG hoặc WEBP.'},
+                status=400,
+            )
+
+        safe_filename = self._sanitize_proof_filename(upload_file.filename, order_sudo.name, ext)
+        attachment = request.env['ir.attachment'].sudo().create({
+            'name': safe_filename,
+            'datas': base64.b64encode(raw_bytes),
+            'res_model': 'sale.order',
+            'res_id': order_sudo.id,
+            'mimetype': detected_mime,
+            'description': _('Ảnh chụp màn hình chuyển khoản khách hàng gửi từ trang thanh toán.'),
+        })
+
+        uploaded_at = fields.Datetime.now()
+        order_sudo.sudo().write({
+            'wbh_payment_proof_attachment_id': attachment.id,
+            'wbh_payment_proof_uploaded_at': uploaded_at,
+        })
+        size_kb = max(1, (len(raw_bytes) + 1023) // 1024)
+        order_sudo.sudo().message_post(
+            body=Markup(
+                "<p><strong>[Bill Chuyển Khoản]</strong> Khách hàng đã tải lên ảnh xác nhận chuyển khoản "
+                "<code>%s</code> (%s KB).</p>"
+            ) % (escape(safe_filename), escape(str(size_kb))),
+            attachment_ids=[attachment.id],
+        )
+
+        return self._json_response({
+            'success': True,
+            'attachment_id': attachment.id,
+            'filename': safe_filename,
+            'size_kb': size_kb,
+            'message': 'Đã gửi ảnh bill chuyển khoản thành công! Shop sẽ kiểm tra và xác nhận đơn cho bạn.',
+        }, status=200)

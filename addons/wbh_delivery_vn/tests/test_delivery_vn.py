@@ -31,9 +31,12 @@ class TestWbhDeliveryVn(TransactionCase):
         cls.province_hn = cls.env.ref('wbh_delivery_vn.vn_province_hn')
         cls.district_hk = cls.env.ref('wbh_delivery_vn.vn_district_hn_hoan_kiem')
 
+        cls.carrier_vtp = cls.env.ref('wbh_delivery_vn.carrier_wbh_viettel_post')
         cls.carrier_std = cls.env.ref('wbh_delivery_vn.carrier_wbh_standard')
         cls.carrier_hold = cls.env.ref('wbh_delivery_vn.carrier_wbh_hold_order')
         cls.carrier_ghn = cls.env.ref('wbh_delivery_vn.carrier_wbh_ghn')
+        cls.province_ct = cls.env.ref('wbh_delivery_vn.vn_province_ct')
+        cls.province_dn = cls.env.ref('wbh_delivery_vn.vn_province_dn')
 
         cls.partner = cls.env['res.partner'].create({
             'name': 'Khách Hàng Test WBH',
@@ -69,12 +72,16 @@ class TestWbhDeliveryVn(TransactionCase):
         })
 
     def test_01_seeded_data_and_hidden_delivery_products(self):
-        """Kiểm tra đủ 5 thành phố mẫu và sản phẩm dịch vụ ship không lộ ra /shop."""
+        """Kiểm tra đủ 5 thành phố mẫu, chỉ bật ĐVVC VIETTEL POST và ẩn sản phẩm dịch vụ ship."""
         provinces = self.env['wbh.vn.province'].search([
             ('code', 'in', ['HCM', 'HN', 'DN', 'HP', 'CT']),
         ])
         self.assertEqual(len(provinces), 5)
-        for carrier in (self.carrier_std, self.carrier_hold, self.carrier_ghn):
+        self.assertTrue(self.carrier_vtp.is_published)
+        self.assertFalse(self.carrier_std.is_published)
+        self.assertFalse(self.carrier_hold.is_published)
+        self.assertFalse(self.carrier_ghn.is_published)
+        for carrier in (self.carrier_vtp, self.carrier_std, self.carrier_hold, self.carrier_ghn):
             self.assertEqual(carrier.product_id.type, 'service')
             self.assertFalse(carrier.product_id.sale_ok)
             self.assertFalse(carrier.product_id.is_published)
@@ -187,6 +194,64 @@ class TestWbhDeliveryVn(TransactionCase):
             self.assertEqual(res_offline['price'], 35000.0)
             self.assertTrue(res_offline['warning_message'])
 
+    def test_06_viettel_post_dynamic_rate_by_province(self):
+        """Kiểm tra ĐVVC VIETTEL POST tính cước động 12.000đ - 20.000đ theo tỉnh/vùng miền."""
+        # Nội tỉnh HCM (origin mặc định HCM) -> 12.000đ
+        order_hcm = self._create_order(qty=1)
+        rate_hcm = self.carrier_vtp.rate_shipment(order_hcm)
+        self.assertTrue(rate_hcm['success'])
+        self.assertEqual(rate_hcm['price'], 12000.0)
+
+        # Cùng miền Nam (Cần Thơ) -> 15.000đ
+        partner_ct = self.partner.copy({
+            'wbh_vn_province_id': self.province_ct.id,
+            'wbh_vn_district_id': False,
+            'wbh_vn_ward_id': False,
+        })
+        order_ct = self._create_order(qty=1)
+        order_ct.partner_shipping_id = partner_ct
+        rate_ct = self.carrier_vtp.rate_shipment(order_ct)
+        self.assertTrue(rate_ct['success'])
+        self.assertEqual(rate_ct['price'], 15000.0)
+
+        # Liên miền (Hà Nội / Đà Nẵng) -> 20.000đ
+        partner_hn = self.partner.copy({
+            'wbh_vn_province_id': self.province_hn.id,
+            'wbh_vn_district_id': self.district_hk.id,
+            'wbh_vn_ward_id': False,
+        })
+        order_hn = self._create_order(qty=1)
+        order_hn.partner_shipping_id = partner_hn
+        rate_hn = self.carrier_vtp.rate_shipment(order_hn)
+        self.assertTrue(rate_hn['success'])
+        self.assertEqual(rate_hn['price'], 20000.0)
+
+        # Chủ shop chỉnh cấu hình giá trên delivery.carrier
+        self.carrier_vtp.write({
+            'wbh_vtp_inner_price': 13000.0,
+            'wbh_vtp_inter_region_price': 19000.0,
+        })
+        self.assertEqual(self.carrier_vtp.rate_shipment(order_hcm)['price'], 13000.0)
+        self.assertEqual(self.carrier_vtp.rate_shipment(order_hn)['price'], 19000.0)
+
+    def test_07_partner_and_order_fb_shipping_sync(self):
+        """Kiểm tra đồng bộ wbh_fb_link & wbh_shipping_info_note lên res.partner và sale.order."""
+        fb_partner = self.env['res.partner'].create({
+            'name': 'Manh Dao Test',
+            'wbh_fb_link': 'https://facebook.com/manhdaodao.test',
+            'wbh_shipping_info_note': 'Anh An, 0909888777, 12 Lê Lợi, Q1',
+            'country_id': self.env.ref('base.vn').id,
+        })
+        order = self.env['sale.order'].create({
+            'website_id': self.website.id,
+            'partner_id': fb_partner.id,
+            'partner_shipping_id': fb_partner.id,
+            'pricelist_id': self.pricelist_vnd.id,
+            'order_line': [Command.create({'product_id': self.product_100k.id, 'product_uom_qty': 1})],
+        })
+        self.assertEqual(order.wbh_fb_link, 'https://facebook.com/manhdaodao.test')
+        self.assertEqual(order.wbh_shipping_info_note, 'Anh An, 0909888777, 12 Lê Lợi, Q1')
+
 
 @tagged('post_install', '-at_install')
 class TestWbhVnAddressHttp(HttpCase):
@@ -209,3 +274,63 @@ class TestWbhVnAddressHttp(HttpCase):
         self.assertIsInstance(wards, list)
         self.assertGreaterEqual(len(wards), 1)
         self.assertEqual(set(wards[0].keys()), {'id', 'name'})
+
+    def test_02_simplified_gift_address_submit_with_fb_url(self):
+        """Kiểm tra /shop/address trên Web 1 cho phép nhập Link FB (URL) và Thông tin ship không lỗi @."""
+        import re as _re
+        website_gift = self.env.ref('wbh_core.website_gift_store')
+        website_gift.domain = 'localhost'
+        product = self.env['product.product'].create({
+            'name': 'Card Bakugo HTTP Test',
+            'type': 'consu',
+            'list_price': 50000.0,
+            'is_published': True,
+            'website_id': website_gift.id,
+        })
+        # Thêm vào giỏ hàng để mở /shop/address
+        resp_shop = self.url_open('/shop')
+        csrf_match = _re.search(r'csrf_token:\s*"([^"]+)"', resp_shop.text) or _re.search(
+            r'name="csrf_token"\s+value="([^"]+)"', resp_shop.text
+        )
+        if csrf_match:
+            csrf_token = csrf_match.group(1)
+            self.url_open(
+                '/shop/cart/update',
+                data={
+                    'product_id': product.id,
+                    'add_qty': 1,
+                    'csrf_token': csrf_token,
+                },
+            )
+            addr_page = self.url_open('/shop/address')
+            self.assertEqual(addr_page.status_code, 200)
+            self.assertIn('Tên fb', addr_page.text)
+            self.assertIn('Link fb', addr_page.text)
+            self.assertIn('Thông tin ship', addr_page.text)
+            submit_csrf = _re.search(r'name="csrf_token"\s+value="([^"]+)"', addr_page.text)
+            if submit_csrf:
+                province_hcm = self.env.ref('wbh_delivery_vn.vn_province_hcm')
+                resp_submit = self.url_open(
+                    '/shop/address/submit',
+                    data={
+                        'csrf_token': submit_csrf.group(1),
+                        'name': 'Khách FB Test',
+                        'email': 'https://facebook.com/manhdaodao.buyer',
+                        'phone': 'Nguyễn Bảo, 0901234567, 12 Lê Lợi, Phường Bến Nghé',
+                        'wbh_vn_province_id': province_hcm.id,
+                        'address_type': 'billing',
+                        'use_delivery_as_billing': 'True',
+                        'required_fields': 'name,email,phone',
+                    },
+                )
+                self.assertEqual(resp_submit.status_code, 200)
+                payload = json.loads(resp_submit.content.decode('utf-8'))
+                self.assertIn('redirectUrl', payload)
+                partner = self.env['res.partner'].search(
+                    [('wbh_fb_link', '=', 'https://facebook.com/manhdaodao.buyer')],
+                    limit=1,
+                )
+                self.assertTrue(partner)
+                self.assertEqual(partner.phone, '0901234567')
+                self.assertEqual(partner.country_id, self.env.ref('base.vn'))
+                self.assertIn('@fb.wbh.local', partner.email)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+        Sản phẩm dịch vụ nội bộ đại diện cho khoản Phí gói cố định trên đơn hàng Web 1 (CR-07).
+        sale_ok=False, is_published=False để tuyệt đối không hiển thị trên /shop và taxes_id rỗng để không tính thuế %.
+    -->
+    <record id="wbh_product_packaging_fee" model="product.product">
+        <field name="name">Phí gói</field>
+        <field name="default_code">WBH_PACKAGING_FEE</field>
+        <field name="type">service</field>
+        <field name="sale_ok" eval="False"/>
+        <field name="purchase_ok" eval="False"/>
+        <field name="is_published" eval="False"/>
+        <field name="list_price" eval="5000.0"/>
+        <field name="taxes_id" eval="[Command.clear()]"/>
+        <field name="invoice_policy">order</field>
+    </record>
+</odoo>

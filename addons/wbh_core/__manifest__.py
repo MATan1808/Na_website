@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang',
-    'version': '19.0.1.2.0',
+    'version': '19.0.1.3.0',
     'category': 'Website/Website',
     'summary': 'Hạ tầng lõi Multi-Website thuần Odoo 19.0 Community cho 2 cửa hàng Quà tặng & Thời trang.',
     'description': """
 WBH Core — Hạ Tầng Đa Cửa Hàng Quà Tặng & Thời Trang — Changelog
 ================================================================
+
+v19.0.1.3.0 (2026-11-28)
+------------------------
+- [NEW] CR-01/CR-02/CR-03: Cập nhật dữ liệu mặc định Web 1 (`Manh Dao Dao - Boku no Hero Academia Anime Goods Shop`, slogan `Tiền trao tay, quýt về ngay`), bỏ hotline & Zalo, bổ sung trường `wbh_support_facebook_url` đồng bộ hai chiều với `wbh_fb_messenger_url`.
+- [NEW] CR-04/CR-05: Bổ sung thuộc tính `Loại goods` (`no_variant`) kèm 9 giá trị chuẩn (`CARD`, `POSTCARD (PC)`, `STANDEE`, `KEY`, `FIGURE`, `BADGE`, `CLEAR FILE`, `DOLL`, `KHÁC`), ẩn `Mẫu Thẻ Sưu Tầm` khỏi sidebar `/shop` và loại bỏ `,00` thập phân trên bộ lọc khoảng giá VNĐ.
+- [NEW] CR-07: Bổ sung `wbh_packaging_fee` (5.000đ) và `wbh_packaging_fee_enabled` trên `website`, tự động đồng bộ dòng `Phí gói` không thuế trên `sale.order` Web 1, ẩn dòng `Thuế` và hiển thị rõ `Thành tiền + Phí gói + Giao hàng = Tổng` trên `/shop/cart`, `/shop/checkout`, `/shop/payment`.
+- [NEW] Bổ sung script idempotent `scripts/apply_cr_manhdaodao.py` đồng bộ DB đang chạy theo toàn bộ yêu cầu Manh Dao Dao.
 
 v19.0.1.2.0 (2026-11-28)
 ------------------------
@@ -64,6 +71,7 @@ v19.0.1.0.0 (2026-11-26)
         'security/wbh_security.xml',
         'security/ir.model.access.csv',
         'data/website_data.xml',
+        'data/wbh_packaging_data.xml',
         'data/product_public_category_data.xml',
         'data/product_attribute_data.xml',
         'data/wbh_filter_data.xml',
@@ -79,6 +87,7 @@ v19.0.1.0.0 (2026-11-26)
             'wbh_core/static/lib/gsap/gsap.min.js',
             'wbh_core/static/lib/gsap/ScrollTrigger.min.js',
             'wbh_core/static/lib/lucide/lucide.min.js',
+            'wbh_core/static/src/js/wbh_price_format.js',
         ],
     },
     'installable': True,

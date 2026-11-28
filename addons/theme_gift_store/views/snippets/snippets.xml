@@ -3,14 +3,14 @@
     <!-- Đăng ký 3 Building Blocks của Web 1 vào Website Builder (Odoo 19.0) -->
     <template id="gift_snippets" inherit_id="website.snippets" name="WBH Gift Store Snippets">
         <xpath expr="//snippets[@id='snippet_structure']" position="inside">
-            <t t-snippet="theme_gift_store.s_gift_hero" string="Hero Quà Tặng" group="intro">
-                <keywords>quà tặng, gift, hero, banner, gấu bông, móc khóa, blind box</keywords>
+            <t t-snippet="theme_gift_store.s_gift_hero" string="Hero Manh Dao Dao" group="intro">
+                <keywords>manh dao dao, boku no hero, anime goods, hero, banner, doll, card</keywords>
             </t>
-            <t t-snippet="theme_gift_store.s_gift_occasion_bar" string="Thanh Chọn Quà Theo Dịp" group="columns">
-                <keywords>quà tặng, dịp lễ, sinh nhật, valentine, combo, danh mục, occasion</keywords>
+            <t t-snippet="theme_gift_store.s_gift_occasion_bar" string="Thanh Chọn Nhanh Goods" group="columns">
+                <keywords>goods, card, postcard, standee, key, badge, figure, clear file, danh mục</keywords>
             </t>
-            <t t-snippet="theme_gift_store.s_gift_featured_grid" string="Lưới Quà Tặng Nổi Bật" group="catalog">
-                <keywords>quà tặng, sản phẩm nổi bật, gấu bông, móc khóa, blind box, grid</keywords>
+            <t t-snippet="theme_gift_store.s_gift_featured_grid" string="Lưới Goods Nổi Bật" group="catalog">
+                <keywords>goods, sản phẩm nổi bật, doll, card, standee, badge, grid</keywords>
             </t>
         </xpath>
     </template>

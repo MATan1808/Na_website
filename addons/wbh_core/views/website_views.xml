@@ -10,14 +10,16 @@
                     <group>
                         <field name="wbh_store_type"/>
                         <field name="specific_user_account"/>
-                        <field name="wbh_brand_tagline" placeholder="VD: Gửi trọn cảm xúc trong từng món quà nhỏ"/>
-                        <field name="wbh_contact_prompt" placeholder="Cần xem ảnh thật hoặc tư vấn chọn hàng?"/>
+                        <field name="wbh_brand_tagline" placeholder="VD: Tiền trao tay, quýt về ngay"/>
+                        <field name="wbh_contact_prompt" placeholder="Cần vid check hoặc tư vấn chọn hàng?"/>
+                        <field name="wbh_packaging_fee_enabled" widget="boolean_toggle"/>
+                        <field name="wbh_packaging_fee" invisible="not wbh_packaging_fee_enabled"/>
                     </group>
                     <group>
                         <field name="wbh_livechat_enabled" widget="boolean_toggle"/>
-                        <field name="wbh_support_hotline" placeholder="VD: 0900 000 001"/>
-                        <field name="wbh_support_zalo_url" widget="url" placeholder="https://zalo.me/..."/>
-                        <field name="wbh_fb_messenger_url" widget="url" placeholder="https://m.me/..."/>
+                        <field name="wbh_support_facebook_url" widget="url" placeholder="https://www.facebook.com/..."/>
+                        <field name="wbh_support_hotline" placeholder="Để trống nếu ẩn SĐT"/>
+                        <field name="wbh_support_zalo_url" widget="url" placeholder="Để trống nếu ẩn Zalo"/>
                     </group>
                 </group>
             </xpath>
@@ -36,7 +38,8 @@
                        optional="show"/>
                 <field name="specific_user_account" optional="show"/>
                 <field name="wbh_livechat_enabled" widget="boolean_toggle" optional="show"/>
-                <field name="wbh_support_hotline" optional="show"/>
+                <field name="wbh_packaging_fee_enabled" widget="boolean_toggle" optional="show"/>
+                <field name="wbh_support_facebook_url" optional="show"/>
             </xpath>
         </field>
     </record>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     <record id="payment_provider_vietqr" model="payment.provider">
-        <field name="name">Chuyển khoản VietQR (Napas 24/7)</field>
+        <field name="name">Chuyển khoản trước (VietQR / QR Ngân hàng)</field>
         <field name="code">vietqr</field>
         <field name="sequence">10</field>
-        <field name="state">disabled</field>
-        <field name="is_published" eval="False"/>
+        <field name="state">enabled</field>
+        <field name="is_published" eval="True"/>
         <field name="image_128" type="base64" file="wbh_payment_vietqr/static/img/vietqr.png"/>
         <field name="module_id" ref="base.module_wbh_payment_vietqr"/>
         <field name="redirect_form_view_id" ref="wbh_payment_vietqr.redirect_form"/>

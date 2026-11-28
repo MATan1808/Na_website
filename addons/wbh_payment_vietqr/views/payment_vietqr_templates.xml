@@ -20,25 +20,130 @@
         </form>
     </template>
 
-    <!-- Tóm tắt Inline trên /shop/payment khi chọn VietQR -->
-    <template id="vietqr_inline_form">
-        <div class="wbh-vietqr-inline alert alert-light border mb-0">
-            <div class="d-flex align-items-start gap-2">
-                <i data-lucide="qr-code" class="wbh-lucide-icon mt-1"/>
-                <div>
-                    <div class="fw-semibold">Chuyển khoản nhanh VietQR — Napas 24/7</div>
-                    <p class="mb-0 small text-muted">
-                        Mã QR kèm số tiền và nội dung chuyển khoản chính xác sẽ hiển thị ngay sau khi bạn bấm xác nhận thanh toán.
-                        <t t-if="provider_sudo.wbh_vietqr_bank_bin">
-                            Ngân hàng nhận: <strong t-out="provider_sudo._wbh_get_bank_display_name()"/>.
-                        </t>
-                    </p>
+    <!-- Khối Upload ảnh chụp màn hình chuyển khoản ('cap màn hình ck') dùng chung cho /shop/payment và /shop/confirmation -->
+    <template id="vietqr_proof_upload_box" name="WBH VietQR Upload Bill CK">
+        <div t-if="wbh_order"
+             class="wbh-vietqr-proof-box mt-3 p-3 border rounded"
+             data-wbh-upload-url="/payment/vietqr/upload_proof"
+             t-att-data-wbh-order-id="wbh_order.id"
+             t-att-data-wbh-access-token="wbh_access_token or ''">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" data-wbh-csrf="1"/>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                <div class="fw-semibold d-flex align-items-center gap-2">
+                    <i data-lucide="upload" class="wbh-lucide-icon"/>
+                    <span>Tải ảnh chụp màn hình chuyển khoản (cap màn hình CK)</span>
                 </div>
+                <span class="badge text-bg-light border">PNG / JPG / WEBP · Tối đa 5MB</span>
+            </div>
+            <p class="small text-muted mb-2">
+                Sau khi chuyển khoản theo mã QR ở trên, bạn có thể đính kèm ảnh chụp màn hình bill CK ngay tại đây để shop đối chiếu và đi đơn nhanh hơn.
+            </p>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <input type="file"
+                       class="form-control wbh-vietqr-proof-input"
+                       accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp"
+                       data-wbh-proof-input="1"
+                       aria-label="Chọn ảnh chụp màn hình chuyển khoản"/>
+                <button type="button"
+                        class="btn btn-primary wbh-vietqr-action-btn"
+                        data-wbh-proof-upload-btn="1">
+                    <i data-lucide="check-circle" class="wbh-lucide-icon"/>
+                    <span>Gửi ảnh bill CK</span>
+                </button>
+            </div>
+            <div class="wbh-vietqr-proof-preview mt-2 d-none" data-wbh-proof-preview-wrap="1">
+                <img src="" alt="Xem trước ảnh bill chuyển khoản" class="wbh-vietqr-proof-img rounded border" data-wbh-proof-preview="1"/>
+            </div>
+            <div class="mt-2 small" data-wbh-proof-status="1">
+                <t t-if="wbh_order.wbh_payment_proof_attachment_id">
+                    <span class="text-success fw-semibold">
+                        Đã đính kèm bill CK: <t t-out="wbh_order.wbh_payment_proof_filename"/>
+                    </span>
+                </t>
             </div>
         </div>
     </template>
 
-    <!-- Tóm tắt Inline trên /shop/payment khi chọn COD -->
+    <!-- Hiển thị QR chủ shop (hoặc QR động EMVCo) + thông tin CK + Upload bill CK ngay trên /shop/payment -->
+    <template id="vietqr_inline_form">
+        <t t-set="wbh_order" t-value="website_sale_order or sale_order or order"/>
+        <t t-set="wbh_pay_amount" t-value="amount if amount is not None else (wbh_order.amount_total if wbh_order else 0.0)"/>
+        <t t-set="wbh_qr_uri" t-value="provider_sudo._wbh_get_qr_data_uri_for_order(order=wbh_order, amount=wbh_pay_amount)"/>
+        <t t-set="wbh_ref_note" t-value="provider_sudo._wbh_get_vietqr_reference_for_order(order=wbh_order)"/>
+        <t t-set="wbh_order_token" t-value="access_token or (wbh_order and wbh_order.sudo()._portal_ensure_token()) or ''"/>
+        <div class="wbh-vietqr-inline wbh-vietqr-inline-card border rounded p-3 mb-0">
+            <div class="row g-3 align-items-center">
+                <div class="col-12 col-md-5 text-center">
+                    <div class="wbh-vietqr-qr-box mx-auto">
+                        <img t-if="wbh_qr_uri"
+                             t-att-src="wbh_qr_uri"
+                             alt="Mã QR chuyển khoản ngân hàng của shop"
+                             class="wbh-vietqr-qr-img img-fluid"/>
+                        <div t-else="" class="p-3 text-muted small">
+                            Chủ shop chưa tải ảnh QR hoặc cấu hình tài khoản ngân hàng.
+                        </div>
+                    </div>
+                    <div class="small text-muted mt-2">
+                        Quét mã QR bằng ứng dụng ngân hàng để chuyển khoản trước khi giao hàng
+                    </div>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="fw-semibold mb-2 d-flex align-items-center gap-2">
+                        <i data-lucide="qr-code" class="wbh-lucide-icon"/>
+                        <span>Chuyển khoản trước rồi ship (VietQR / QR Ngân hàng)</span>
+                    </div>
+                    <div class="wbh-vietqr-info-list">
+                        <div t-if="provider_sudo.wbh_vietqr_bank_bin" class="wbh-vietqr-info-row">
+                            <span class="wbh-vietqr-info-label">Ngân hàng</span>
+                            <strong class="wbh-vietqr-info-value" t-out="provider_sudo._wbh_get_bank_display_name()"/>
+                        </div>
+                        <div t-if="provider_sudo.wbh_vietqr_account_name" class="wbh-vietqr-info-row">
+                            <span class="wbh-vietqr-info-label">Chủ tài khoản</span>
+                            <strong class="wbh-vietqr-info-value" t-out="provider_sudo.wbh_vietqr_account_name"/>
+                        </div>
+                        <div t-if="provider_sudo.wbh_vietqr_account_no" class="wbh-vietqr-info-row">
+                            <span class="wbh-vietqr-info-label">Số tài khoản</span>
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <strong class="wbh-vietqr-code-text" t-out="provider_sudo.wbh_vietqr_account_no"/>
+                                <button type="button"
+                                        class="btn btn-outline-secondary wbh-vietqr-copy-btn"
+                                        t-att-data-wbh-copy="provider_sudo.wbh_vietqr_account_no"
+                                        aria-label="Sao chép số tài khoản">
+                                    <i data-lucide="copy" class="wbh-lucide-icon"/>
+                                    <span data-wbh-copy-label="1">Sao chép</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div t-if="wbh_order" class="wbh-vietqr-info-row">
+                            <span class="wbh-vietqr-info-label">Số tiền cần chuyển</span>
+                            <strong class="wbh-vietqr-amount"
+                                    t-out="wbh_pay_amount"
+                                    t-options="{'widget': 'monetary', 'display_currency': currency or wbh_order.currency_id}"/>
+                        </div>
+                        <div t-if="wbh_order" class="wbh-vietqr-info-row wbh-vietqr-info-row--highlight">
+                            <span class="wbh-vietqr-info-label">Nội dung chuyển khoản</span>
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <strong class="wbh-vietqr-code-text" t-out="wbh_ref_note"/>
+                                <button type="button"
+                                        class="btn btn-primary wbh-vietqr-copy-btn"
+                                        t-att-data-wbh-copy="wbh_ref_note"
+                                        aria-label="Sao chép nội dung chuyển khoản">
+                                    <i data-lucide="copy" class="wbh-lucide-icon"/>
+                                    <span data-wbh-copy-label="1">Sao chép</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-call="wbh_payment_vietqr.vietqr_proof_upload_box">
+                <t t-set="wbh_order" t-value="wbh_order"/>
+                <t t-set="wbh_access_token" t-value="wbh_order_token"/>
+            </t>
+        </div>
+    </template>
+
+    <!-- Tóm tắt Inline trên /shop/payment khi chọn COD (chỉ Web khác Web 1 nếu bật) -->
     <template id="cod_inline_form">
         <div class="wbh-cod-inline alert alert-light border mb-0">
             <div class="d-flex align-items-start gap-2">
@@ -53,10 +158,10 @@
         </div>
     </template>
 
-    <!-- Thông báo lý do giới hạn COD & gợi ý đặt cọc trên /shop/payment -->
+    <!-- Thông báo lý do giới hạn COD & gợi ý đặt cọc trên /shop/payment (ẩn trên Web 1 vì Web 1 chỉ dùng CK trước) -->
     <template id="website_sale_payment_cod_notice" inherit_id="website_sale.payment" priority="25">
         <xpath expr="//div[@id='payment_method']" position="before">
-            <div t-if="website_sale_order and not website_sale_order.wbh_allow_cod and website_sale_order.wbh_cod_block_reason"
+            <div t-if="website_sale_order and (not website or website.wbh_store_type != 'gift') and not website_sale_order.wbh_allow_cod and website_sale_order.wbh_cod_block_reason"
                  class="wbh-cod-notice alert alert-warning d-flex align-items-start gap-2 mb-3"
                  role="status">
                 <i data-lucide="info" class="wbh-lucide-icon mt-1"/>
@@ -79,6 +184,8 @@
         <t t-set="qr_uri" t-value="tx._wbh_get_qr_data_uri()"/>
         <t t-set="vietqr_ref" t-value="tx.wbh_vietqr_reference or tx.reference"/>
         <t t-set="gateway_mode" t-value="provider_sudo.wbh_vietqr_gateway or 'sepay'"/>
+        <t t-set="wbh_tx_order" t-value="tx.sale_order_ids[:1]"/>
+        <t t-set="wbh_tx_token" t-value="wbh_tx_order and wbh_tx_order.sudo()._portal_ensure_token() or ''"/>
         <div class="wbh-vietqr-card card mb-4"
              t-att-data-wbh-reference="tx.reference"
              t-att-data-wbh-state="tx.state"
@@ -108,7 +215,7 @@
                                  alt="Mã QR chuyển khoản VietQR Napas 24/7"
                                  class="wbh-vietqr-qr-img img-fluid"/>
                             <div t-else="" class="p-4 text-muted small">
-                                Chưa cấu hình đầy đủ mã BIN / Số tài khoản ngân hàng cho VietQR.
+                                Chưa cấu hình đầy đủ mã BIN / Số tài khoản ngân hàng hoặc ảnh QR riêng.
                             </div>
                         </div>
                         <div class="small text-muted mt-2">
@@ -118,25 +225,24 @@
 
                     <div class="col-12 col-md-7">
                         <div class="wbh-vietqr-info-list">
-                            <div class="wbh-vietqr-info-row">
+                            <div t-if="provider_sudo.wbh_vietqr_bank_bin" class="wbh-vietqr-info-row">
                                 <span class="wbh-vietqr-info-label">Ngân hàng</span>
                                 <strong class="wbh-vietqr-info-value"
-                                        t-out="provider_sudo._wbh_get_bank_display_name() or 'Chưa cấu hình'"/>
+                                        t-out="provider_sudo._wbh_get_bank_display_name()"/>
                             </div>
 
-                            <div class="wbh-vietqr-info-row">
+                            <div t-if="provider_sudo.wbh_vietqr_account_name" class="wbh-vietqr-info-row">
                                 <span class="wbh-vietqr-info-label">Chủ tài khoản</span>
                                 <strong class="wbh-vietqr-info-value"
-                                        t-out="provider_sudo.wbh_vietqr_account_name or '-'"/>
+                                        t-out="provider_sudo.wbh_vietqr_account_name"/>
                             </div>
 
-                            <div class="wbh-vietqr-info-row">
+                            <div t-if="provider_sudo.wbh_vietqr_account_no" class="wbh-vietqr-info-row">
                                 <span class="wbh-vietqr-info-label">Số tài khoản</span>
                                 <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <strong class="wbh-vietqr-code-text"
-                                            t-out="provider_sudo.wbh_vietqr_account_no or '-'"/>
-                                    <button t-if="provider_sudo.wbh_vietqr_account_no"
-                                            type="button"
+                                            t-out="provider_sudo.wbh_vietqr_account_no"/>
+                                    <button type="button"
                                             class="btn btn-outline-secondary wbh-vietqr-copy-btn"
                                             t-att-data-wbh-copy="provider_sudo.wbh_vietqr_account_no"
                                             aria-label="Sao chép số tài khoản">
@@ -184,6 +290,10 @@
                         </div>
                     </div>
                 </div>
+                <t t-if="wbh_tx_order" t-call="wbh_payment_vietqr.vietqr_proof_upload_box">
+                    <t t-set="wbh_order" t-value="wbh_tx_order"/>
+                    <t t-set="wbh_access_token" t-value="wbh_tx_token"/>
+                </t>
             </div>
         </div>
     </template>

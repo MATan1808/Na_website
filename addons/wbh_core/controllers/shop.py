@@ -2,6 +2,8 @@
 from urllib.parse import urlencode
 
 from odoo import fields
+from odoo.addons.website_sale.controllers.cart import Cart
+from odoo.addons.website_sale.controllers.delivery import Delivery
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.fields import Domain
 from odoo.http import request, route
@@ -11,6 +13,10 @@ TAG_GROUP_LABELS = {
     'promo': 'Ưu đãi & Trạng thái',
     'collection': 'Chủ đề / Bộ sưu tập',
     'other': 'Nhãn khác',
+}
+
+WBH_GIFT_HIDDEN_ATTRIBUTE_NAMES = {
+    'mẫu thẻ sưu tầm',
 }
 
 
@@ -415,6 +421,14 @@ class WbhWebsiteSale(WebsiteSale):
             if visible_attr_ids
             else ProductAttribute
         )
+        if website and website.wbh_store_type == 'gift' and filtered_attributes:
+            hidden_attrs = filtered_attributes.filtered(
+                lambda attr: (attr.name or '').strip().lower() in WBH_GIFT_HIDDEN_ATTRIBUTE_NAMES
+            )
+            if hidden_attrs:
+                filtered_attributes = filtered_attributes - hidden_attrs
+                hidden_val_ids = set(hidden_attrs.mapped('value_ids').ids)
+                wbh_available_attr_value_ids -= hidden_val_ids
 
         # 5. Active Filter Chips
         active_chips = []
@@ -534,6 +548,8 @@ class WbhWebsiteSale(WebsiteSale):
             'clear_all_url': '/shop',
             'total_active_filters': len(active_chips),
             'available_attribute_value_ids': sorted(wbh_available_attr_value_ids),
+            'min_price_display': self._wbh_format_vnd(cur_min_price) if cur_min_price > 0 else '',
+            'max_price_display': self._wbh_format_vnd(cur_max_price) if cur_max_price > 0 else '',
         }
         grouped_attributes_values = (
             ProductAttributeValue.browse(sorted(attrib_set)).sorted().grouped('attribute_id')
@@ -556,7 +572,26 @@ class WbhWebsiteSale(WebsiteSale):
         merged_values = dict(values)
         merged_values.update(res)
         res.update(self._wbh_compute_filter_ctx(merged_values, **kwargs))
+        website = request.env['website'].get_current_website()
+        if website and website.currency_id and website.currency_id.decimal_places == 0:
+            for price_key in ('min_price', 'max_price', 'available_min_price', 'available_max_price'):
+                if price_key in merged_values and merged_values[price_key] is not None:
+                    res[price_key] = float(int(round(merged_values[price_key])))
         return res
+
+    @route()
+    def shop_checkout(self, try_skip_step=None, **query_params):
+        order_sudo = request.cart
+        if order_sudo and order_sudo.state in ('draft', 'sent'):
+            order_sudo._wbh_sync_packaging_fee_line()
+        return super().shop_checkout(try_skip_step=try_skip_step, **query_params)
+
+    @route()
+    def shop_payment(self, **post):
+        order_sudo = request.cart
+        if order_sudo and order_sudo.state in ('draft', 'sent'):
+            order_sudo._wbh_sync_packaging_fee_line()
+        return super().shop_payment(**post)
 
     @route()
     def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, tags='', **post):
@@ -607,3 +642,43 @@ class WbhWebsiteSale(WebsiteSale):
         finally:
             if hasattr(request, '_wbh_shop_params'):
                 delattr(request, '_wbh_shop_params')
+
+
+class WbhWebsiteSaleCart(Cart):
+    """Đảm bảo Phí gói cố định được đồng bộ mỗi khi mở trang Giỏ hàng /shop/cart."""
+
+    @route()
+    def cart(self, id=None, access_token=None, revive_method='', **post):
+        order_sudo = request.cart
+        if order_sudo and order_sudo.state in ('draft', 'sent'):
+            order_sudo._wbh_sync_packaging_fee_line()
+        return super().cart(
+            id=id,
+            access_token=access_token,
+            revive_method=revive_method,
+            **post,
+        )
+
+
+class WbhWebsiteSaleDelivery(Delivery):
+    """Đồng bộ số liệu Thành tiền sản phẩm & Phí gói khi cập nhật phương thức vận chuyển."""
+
+    def _order_summary_values(self, order, **kwargs):
+        res = super()._order_summary_values(order, **kwargs)
+        if (
+            order
+            and order.website_id
+            and order.website_id.wbh_store_type == 'gift'
+            and order.website_id.wbh_packaging_fee_enabled
+        ):
+            Monetary = request.env['ir.qweb.field.monetary']
+            currency = order.currency_id
+            res['amount_untaxed'] = Monetary.value_to_html(
+                order.wbh_amount_products,
+                {'display_currency': currency},
+            )
+            res['wbh_packaging_fee_amount'] = Monetary.value_to_html(
+                order.wbh_packaging_fee_amount,
+                {'display_currency': currency},
+            )
+        return res

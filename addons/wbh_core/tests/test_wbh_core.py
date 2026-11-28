@@ -267,23 +267,114 @@ class TestWbhCore(TransactionCase):
                 })
 
     def test_10_website_three_channel_contact_fields(self):
-        """Kiểm tra các trường kênh liên hệ đa kênh Giai đoạn 3 trên website."""
+        """Kiểm tra các trường kênh liên hệ & cấu hình thương hiệu mới trên Web 1 và Web 2."""
+        self.assertEqual(
+            self.website_gift.name,
+            'Manh Dao Dao - Boku no Hero Academia Anime Goods Shop',
+        )
+        self.assertEqual(self.website_gift.wbh_brand_tagline, 'Tiền trao tay, quýt về ngay')
+        self.assertFalse(self.website_gift.wbh_support_hotline)
+        self.assertFalse(self.website_gift.wbh_support_zalo_url)
+        self.assertTrue(self.website_gift.wbh_support_facebook_url)
+        self.assertEqual(
+            self.website_gift.wbh_support_facebook_url,
+            self.website_gift.wbh_fb_messenger_url,
+        )
         self.assertTrue(self.website_gift.wbh_livechat_enabled)
         self.assertEqual(
             self.website_gift.wbh_contact_prompt,
-            'Cần xem ảnh thật hoặc tư vấn chọn hàng?',
+            'Cần vid check hoặc tư vấn chọn hàng?',
         )
+        self.assertTrue(self.website_gift.wbh_packaging_fee_enabled)
+        self.assertEqual(self.website_gift.wbh_packaging_fee, 5000.0)
+        self.assertFalse(self.website_fashion.wbh_packaging_fee_enabled)
+
         self.website_gift.write({
-            'wbh_fb_messenger_url': 'https://m.me/wbh.gift.test',
+            'wbh_support_facebook_url': 'https://m.me/wbh.gift.test',
             'wbh_livechat_enabled': False,
             'wbh_contact_prompt': 'Nhắn tin ngay để xem ảnh thực tế!',
         })
         self.assertEqual(self.website_gift.wbh_fb_messenger_url, 'https://m.me/wbh.gift.test')
+        self.assertEqual(self.website_gift.wbh_support_facebook_url, 'https://m.me/wbh.gift.test')
         self.assertFalse(self.website_gift.wbh_livechat_enabled)
         self.assertEqual(self.website_gift.wbh_contact_prompt, 'Nhắn tin ngay để xem ảnh thực tế!')
         # Đảm bảo không ảnh hưởng Web 2
         self.assertTrue(self.website_fashion.wbh_livechat_enabled)
         self.assertFalse(self.website_fashion.wbh_fb_messenger_url)
+
+    def test_10b_goods_type_attribute_and_packaging_fee_order_math(self):
+        """Kiểm tra thuộc tính Loại goods (9 giá trị) và Phí gói 5.000đ trên đơn hàng Web 1 vs Web 2."""
+        goods_attr = self.env.ref('wbh_core.attr_goods_type')
+        self.assertEqual(goods_attr.name, 'Loại goods')
+        self.assertEqual(goods_attr.create_variant, 'no_variant')
+        self.assertEqual(goods_attr.visibility, 'visible')
+        expected_goods_vals = {
+            'CARD', 'POSTCARD (PC)', 'STANDEE', 'KEY',
+            'FIGURE', 'BADGE', 'CLEAR FILE', 'DOLL', 'KHÁC',
+        }
+        self.assertTrue(expected_goods_vals.issubset(set(goods_attr.value_ids.mapped('name'))))
+
+        pkg_product = self.env.ref('wbh_core.wbh_product_packaging_fee')
+        self.assertEqual(pkg_product.type, 'service')
+        self.assertFalse(pkg_product.sale_ok)
+        self.assertFalse(pkg_product.is_published)
+        self.assertFalse(pkg_product.taxes_id)
+
+        vnd = self.env.ref('base.VND')
+        vnd.active = True
+        self.env.company.currency_id = vnd
+
+        partner = self.env['res.partner'].create({'name': 'Khách Web 1 Test Phí Gói'})
+        item = self.env['product.product'].create({
+            'name': 'Standee Bakugo Test',
+            'type': 'consu',
+            'list_price': 150000.0,
+            'taxes_id': [Command.clear()],
+            'wbh_store_scope': 'gift',
+        })
+        order_gift = self.env['sale.order'].create({
+            'website_id': self.website_gift.id,
+            'partner_id': partner.id,
+            'order_line': [
+                Command.create({
+                    'product_id': item.id,
+                    'product_uom_qty': 1.0,
+                    'price_unit': 150000.0,
+                    'tax_ids': [Command.clear()],
+                }),
+            ],
+        })
+        pkg_lines = order_gift.order_line.filtered('wbh_is_packaging_fee')
+        self.assertEqual(len(pkg_lines), 1)
+        self.assertEqual(pkg_lines.price_unit, 5000.0)
+        self.assertFalse(pkg_lines.tax_ids)
+        self.assertEqual(order_gift.wbh_amount_products, 150000.0)
+        self.assertEqual(order_gift.wbh_packaging_fee_amount, 5000.0)
+        self.assertEqual(order_gift.amount_total, 155000.0)
+        self.assertEqual(order_gift.cart_quantity, 1)
+        self.assertNotIn(pkg_lines, order_gift.website_order_line)
+
+        # Xóa sản phẩm cuối -> tự gỡ dòng Phí gói
+        order_gift.order_line.filtered(lambda l: not l.wbh_is_packaging_fee).unlink()
+        self.assertFalse(order_gift.order_line)
+        self.assertEqual(order_gift.amount_total, 0.0)
+
+        # Web 2 Thời trang KHÔNG cộng Phí gói
+        order_fashion = self.env['sale.order'].create({
+            'website_id': self.website_fashion.id,
+            'partner_id': partner.id,
+            'order_line': [
+                Command.create({
+                    'product_id': item.id,
+                    'product_uom_qty': 1.0,
+                    'price_unit': 150000.0,
+                    'tax_ids': [Command.clear()],
+                }),
+            ],
+        })
+        self.assertFalse(order_fashion.order_line.filtered('wbh_is_packaging_fee'))
+        self.assertEqual(order_fashion.wbh_packaging_fee_amount, 0.0)
+        self.assertEqual(order_fashion.amount_total, 150000.0)
 
 
 @tagged('post_install', '-at_install', 'wbh_core')
@@ -491,3 +582,40 @@ class TestWbhShopDynamicFilters(HttpCase):
             f'/shop?tags={self.tag_hot.id}&wbh_on_sale=1&min_price=100000&max_price=300000'
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_14_hidden_card_pattern_attr_and_integer_vnd_format(self):
+        """Kiểm tra ẩn thuộc tính 'Mẫu Thẻ Sưu Tầm' trên Web 1 và bỏ ',00' thập phân VNĐ."""
+        hidden_card_attr = self.ProductAttribute.create({
+            'name': 'Mẫu Thẻ Sưu Tầm',
+            'display_type': 'select',
+            'create_variant': 'no_variant',
+            'visibility': 'visible',
+        })
+        hidden_val = self.ProductAttributeValue.create({
+            'name': 'Card Bo Góc Test',
+            'attribute_id': hidden_card_attr.id,
+        })
+        self.ProductTemplate.create({
+            'name': 'Card Test Ẩn Thuộc Tính Cũ',
+            'wbh_store_scope': 'gift',
+            'is_published': True,
+            'list_price': 20000.0,
+            'attribute_line_ids': [Command.create({
+                'attribute_id': hidden_card_attr.id,
+                'value_ids': [Command.set([hidden_val.id])],
+            })],
+        })
+
+        ctx_gift = self._call_shop(
+            self.website_gift,
+            query_params=[('min_price', '15000'), ('max_price', '380000')],
+            min_price=15000.0,
+            max_price=380000.0,
+        )
+        self.assertNotIn(hidden_card_attr, ctx_gift['attributes'])
+        self.assertNotIn(hidden_val.id, ctx_gift['wbh_available_attr_value_ids'])
+        self.assertEqual(WbhWebsiteSale._wbh_format_vnd(15000.0), '15.000₫')
+        self.assertEqual(ctx_gift['wbh_filter_ctx']['min_price_display'], '15.000₫')
+        self.assertEqual(ctx_gift['wbh_filter_ctx']['max_price_display'], '380.000₫')
+        self.assertNotIn(',00', ctx_gift['wbh_filter_ctx']['min_price_display'])
+        self.assertNotIn(',00', ctx_gift['wbh_filter_ctx']['max_price_display'])

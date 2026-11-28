@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WBH Payment VietQR & COD Rules',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'category': 'Accounting/Payment Providers',
     'sequence': 355,
-    'summary': 'Thanh toán chuyển khoản VietQR EMVCo/Napas 247 (SePay/PayOS/Casso) và quy tắc COD/Đặt cọc cho 2 cửa hàng WBH.',
+    'summary': 'Chuyển khoản trước VietQR / QR riêng chủ shop, Upload ảnh bill CK bảo mật và tắt COD trên Web 1 thuần Odoo 19.0 Community.',
     'description': """
 WBH Payment VietQR & COD Rules — Changelog
 ==========================================
+
+v19.0.1.1.0 (2026-11-28)
+------------------------
+- [IMPROVE] Bật sẵn `payment_provider_vietqr` (`state='enabled'`, `is_published=True`) & `payment_method_vietqr` (`active=True`), tắt hoàn toàn COD trên Web 1 (`wbh_store_type == 'gift'`) theo `CR-09` & `CR-10`.
+- [NEW] Bổ sung `wbh_custom_qr_image` (`Binary`) trên `payment.provider` (kèm view Backend): ưu tiên hiển thị ảnh QR chủ shop ngay trên `/shop/payment` và trang xác nhận, tự fallback về QR động EMVCo khi chưa upload.
+- [NEW] Thêm tính năng Upload ảnh chụp màn hình chuyển khoản (`'cap màn hình ck'`) ngay tại `/shop/payment` và trang xác nhận qua route `POST /payment/vietqr/upload_proof` (kiểm tra session/`access_token`, magic bytes PNG/JPEG/WEBP, giới hạn `<= 5MB`, lưu `ir.attachment` gắn `sale.order`, hiển thị ảnh trên form Backend `sale.order` và ghi chatter `markupsafe.Markup`).
 
 v19.0.1.0.0 (2026-11-28)
 ------------------------

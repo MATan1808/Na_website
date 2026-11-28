@@ -103,8 +103,11 @@ class PaymentTransaction(models.Model):
             tx.wbh_vietqr_qr_base64 = generate_qr_png_base64(tx.env, tx.wbh_vietqr_payload) or False
 
     def _wbh_get_qr_data_uri(self):
-        """Trả về Data URI PNG an toàn để hiển thị trong QWeb."""
+        """Ưu tiên trả về ảnh QR riêng của chủ shop nếu có; ngược lại fallback về QR động EMVCo."""
         self.ensure_one()
+        provider_sudo = self.provider_id.sudo()
+        if provider_sudo and provider_sudo.wbh_custom_qr_image:
+            return image_data_uri(provider_sudo.wbh_custom_qr_image)
         if not self.wbh_vietqr_qr_base64:
             return ''
         return image_data_uri(self.wbh_vietqr_qr_base64)

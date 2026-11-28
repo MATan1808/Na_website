@@ -275,4 +275,59 @@
         <field name="sequence" eval="20"/>
         <field name="attribute_id" ref="wbh_core.attr_blindbox_edition"/>
     </record>
+
+    <!-- ==================== 8. LOẠI GOODS (CR-04, CR-05) ==================== -->
+    <record id="attr_goods_type" model="product.attribute">
+        <field name="name">Loại goods</field>
+        <field name="display_type">pills</field>
+        <field name="create_variant">no_variant</field>
+        <field name="visibility">visible</field>
+        <field name="sequence" eval="5"/>
+    </record>
+
+    <record id="attr_val_goods_card" model="product.attribute.value">
+        <field name="name">CARD</field>
+        <field name="sequence" eval="10"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_postcard" model="product.attribute.value">
+        <field name="name">POSTCARD (PC)</field>
+        <field name="sequence" eval="20"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_standee" model="product.attribute.value">
+        <field name="name">STANDEE</field>
+        <field name="sequence" eval="30"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_key" model="product.attribute.value">
+        <field name="name">KEY</field>
+        <field name="sequence" eval="40"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_figure" model="product.attribute.value">
+        <field name="name">FIGURE</field>
+        <field name="sequence" eval="50"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_badge" model="product.attribute.value">
+        <field name="name">BADGE</field>
+        <field name="sequence" eval="60"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_clear_file" model="product.attribute.value">
+        <field name="name">CLEAR FILE</field>
+        <field name="sequence" eval="70"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_doll" model="product.attribute.value">
+        <field name="name">DOLL</field>
+        <field name="sequence" eval="80"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
+    <record id="attr_val_goods_other" model="product.attribute.value">
+        <field name="name">KHÁC</field>
+        <field name="sequence" eval="90"/>
+        <field name="attribute_id" ref="wbh_core.attr_goods_type"/>
+    </record>
 </odoo>

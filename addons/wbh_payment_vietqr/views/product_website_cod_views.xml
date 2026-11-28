@@ -31,7 +31,7 @@
         </field>
     </record>
 
-    <!-- Đơn hàng: hiển thị trạng thái điều kiện COD -->
+    <!-- Đơn hàng: hiển thị trạng thái điều kiện COD và ảnh bill chuyển khoản -->
     <record id="wbh_sale_order_cod_form_view" model="ir.ui.view">
         <field name="name">sale.order.form.cod.inherit.wbh_payment_vietqr</field>
         <field name="model">sale.order</field>
@@ -41,6 +41,25 @@
                 <field name="wbh_allow_cod" readonly="1"/>
                 <field name="wbh_cod_block_reason" readonly="1" invisible="wbh_allow_cod"/>
                 <field name="wbh_cod_deposit_amount" readonly="1" invisible="wbh_allow_cod or wbh_cod_deposit_amount &lt;= 0"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="wbh_payment_proof_page"
+                      string="Ảnh bill chuyển khoản"
+                      invisible="not wbh_payment_proof_attachment_id">
+                    <group>
+                        <group string="Thông tin xác nhận chuyển khoản">
+                            <field name="wbh_payment_proof_attachment_id" readonly="1"/>
+                            <field name="wbh_payment_proof_filename" readonly="1"/>
+                            <field name="wbh_payment_proof_uploaded_at" readonly="1"/>
+                        </group>
+                        <group string="Ảnh chụp màn hình bill CK">
+                            <field name="wbh_payment_proof_image"
+                                   widget="image"
+                                   nolabel="1"
+                                   options="{'size': [360, 360]}"/>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

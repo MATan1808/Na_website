@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="s_gift_featured_grid" name="Lưới Quà Tặng Nổi Bật">
+    <template id="s_gift_featured_grid" name="Lưới Goods Nổi Bật">
         <section
             class="s_gift_featured_grid o_colored_level pt48 pb56"
             data-snippet="s_gift_featured_grid"
-            data-name="Lưới Quà Tặng Nổi Bật"
+            data-name="Lưới Goods Nổi Bật"
         >
             <div class="container">
                 <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
                     <div>
                         <p class="wbh-gift-kicker mb-1">Dòng sản phẩm nổi bật</p>
-                        <h2 class="h4 fw-semibold mb-0">Hàng sẵn tại tủ trưng bày</h2>
+                        <h2 class="h4 fw-semibold mb-0">Goods Boku no Hero sẵn hàng</h2>
                     </div>
                     <a href="/shop" class="btn wbh-gift-btn-outline">
                         <span>Xem toàn bộ cửa hàng</span>
@@ -19,53 +19,53 @@
                 </div>
                 <div class="row g-3 g-lg-4 row-cols-2 row-cols-lg-4">
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
+                        <a href="/shop?search=Doll" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
                             <div class="wbh-gift-featured-card__media">
                                 <img src="/wbh_core/static/src/img/anime_goods/bakugo_doll_fullset.jpg" alt="Cotton Doll 20cm kèm Outfit Sporty" loading="lazy"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
-                                <span class="wbh-gift-tag mb-2">Doll 20cm</span>
+                                <span class="wbh-gift-tag mb-2">Doll</span>
                                 <h3 class="h6 fw-semibold mb-1">Cotton Doll &amp; Outfit</h3>
-                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Fullset doll 20cm kèm áo khoác zip, quần và giày mini.</p>
+                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Doll 20cm kèm outfit, giày mini và phụ kiện nhân vật.</p>
                                 <span class="btn btn-sm wbh-gift-btn-primary w-100">Xem mẫu Doll</span>
                             </div>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-card-bo-goc-photocards-23" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
+                        <a href="/shop?search=Card" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
                             <div class="wbh-gift-featured-card__media">
-                                <img src="/wbh_core/static/src/img/anime_goods/todoroki_goods_collection.jpg" alt="Card Bo Góc và Huy Hiệu Todoroki" loading="lazy"/>
+                                <img src="/wbh_core/static/src/img/anime_goods/todoroki_goods_collection.jpg" alt="Card, Postcard và Badge Todoroki" loading="lazy"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
                                 <span class="wbh-gift-tag mb-2">Card &amp; Badge</span>
-                                <h3 class="h6 fw-semibold mb-1">Card Bo Góc &amp; Huy Hiệu</h3>
-                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Card thường, hologram bạc hiếm và can badge 58mm kim tuyến.</p>
+                                <h3 class="h6 fw-semibold mb-1">Card, Postcard &amp; Badge</h3>
+                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Card các loại, postcard (pc) và badge sưu tầm chính hãng.</p>
                                 <span class="btn btn-sm wbh-gift-btn-primary w-100">Xem bộ sưu tập</span>
                             </div>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-bup-be-bong-doll-20cm-outfit-22" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
+                        <a href="/shop?search=Standee" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
                             <div class="wbh-gift-featured-card__media">
-                                <img src="/wbh_core/static/src/img/anime_goods/bakugo_doll_body.jpg" alt="Body Cotton Doll thêu chi tiết" loading="lazy"/>
+                                <img src="/wbh_core/static/src/img/anime_goods/bakugo_doll_body.jpg" alt="Standee, Key và Figure Boku no Hero" loading="lazy"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
-                                <span class="wbh-gift-tag mb-2">Body &amp; Outfit rời</span>
-                                <h3 class="h6 fw-semibold mb-1">Body Bông &amp; Đồ Rời</h3>
-                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Tùy chọn mua riêng body bông thêu bụng hoặc set đồ phối thêm.</p>
+                                <span class="wbh-gift-tag mb-2">Standee &amp; Key</span>
+                                <h3 class="h6 fw-semibold mb-1">Standee, Key &amp; Figure</h3>
+                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Standee trưng bày, móc khóa key acrylic và figure.</p>
                                 <span class="btn btn-sm wbh-gift-btn-primary w-100">Chọn phân loại</span>
                             </div>
                         </a>
                     </div>
                     <div class="col">
-                        <a href="/shop/category/anime-goods-merch-21" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
+                        <a href="/shop" class="wbh-gift-featured-card h-100 d-flex flex-column text-decoration-none">
                             <div class="wbh-gift-featured-card__media">
-                                <img src="/wbh_core/static/src/img/anime_goods/bakugo_poster.jpg" alt="Tranh ký Shikishi viền vàng" loading="lazy"/>
+                                <img src="/wbh_core/static/src/img/anime_goods/bakugo_poster.jpg" alt="Clear File, Bookmark và Goods khác" loading="lazy"/>
                             </div>
                             <div class="p-3 d-flex flex-column flex-grow-1">
-                                <span class="wbh-gift-tag mb-2">Shikishi &amp; Poster</span>
-                                <h3 class="h6 fw-semibold mb-1">Tranh Ký Shikishi Ép Kim</h3>
-                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Bìa cứng viền vàng trưng bày bàn học, kèm bọc bảo vệ.</p>
+                                <span class="wbh-gift-tag mb-2">Clear File &amp; Bookmark</span>
+                                <h3 class="h6 fw-semibold mb-1">Clear File &amp; Bookmark</h3>
+                                <p class="small wbh-gift-subtext mb-3 flex-grow-1">Clear file, bookmark, shikishi kèm bọc bảo vệ gọn gàng.</p>
                                 <span class="btn btn-sm wbh-gift-btn-primary w-100">Xem toàn bộ</span>
                             </div>
                         </a>

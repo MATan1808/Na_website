@@ -1,10 +1,12 @@
 (function () {
     'use strict';
 
+    var GIFT_SHIP_PLACEHOLDER = 'VD: Nguyễn Văn A, 0901234567, 12 Lê Lợi, Phường Bến Nghé...';
+
     /**
      * Cascading Vietnam 3-level address selector on /shop/address:
-     * Tỉnh / Thành phố -> Quận / Huyện -> Phường / Xã
-     * No inline handlers; strictly uses textContent for XSS-safe DOM updates.
+     * Tỉnh/TP -> Quận/Huyện -> Phường/Xã
+     * Also protects simplified Web 1 fields from CustomerAddress auto-country side effects.
      */
     function resetSelect(selectEl, placeholderText, disable) {
         if (!selectEl) {
@@ -55,10 +57,47 @@
         });
     }
 
-    function toggleVnFieldsByCountry(form) {
-        var countrySelect = form.querySelector('select[name="country_id"]');
+    function isGiftSimplified(form) {
+        var flag = form.querySelector('input[name="wbh_gift_simplified"]');
+        return Boolean(flag && flag.value === '1');
+    }
+
+    function enforceGiftSimplifiedFields(form) {
+        if (!isGiftSimplified(form)) {
+            return;
+        }
+        ['street', 'street2', 'city', 'zip', 'country_id', 'state_id', 'company_name', 'vat'].forEach(
+            function (fname) {
+                var fieldEl = form.querySelector('[name="' + fname + '"]');
+                if (fieldEl) {
+                    fieldEl.required = false;
+                    fieldEl.removeAttribute('required');
+                }
+            }
+        );
+        var phoneInput = form.querySelector('#o_phone');
+        if (phoneInput && phoneInput.placeholder !== GIFT_SHIP_PLACEHOLDER) {
+            phoneInput.placeholder = GIFT_SHIP_PLACEHOLDER;
+        }
         var vnBlocks = form.querySelectorAll('.wbh-vn-address-field');
-        if (!countrySelect || !vnBlocks.length) {
+        vnBlocks.forEach(function (el) {
+            el.classList.remove('d-none');
+        });
+    }
+
+    function toggleVnFieldsByCountry(form) {
+        var vnBlocks = form.querySelectorAll('.wbh-vn-address-field');
+        if (!vnBlocks.length) {
+            return;
+        }
+        if (isGiftSimplified(form)) {
+            vnBlocks.forEach(function (el) {
+                el.classList.remove('d-none');
+            });
+            return;
+        }
+        var countrySelect = form.querySelector('select[name="country_id"]');
+        if (!countrySelect) {
             return;
         }
         var selectedOption = countrySelect.selectedOptions && countrySelect.selectedOptions[0];
@@ -86,22 +125,35 @@
         }
         form.dataset.wbhVnBound = '1';
 
+        enforceGiftSimplifiedFields(form);
+        if (isGiftSimplified(form) && typeof window.MutationObserver === 'function') {
+            var observer = new window.MutationObserver(function () {
+                enforceGiftSimplifiedFields(form);
+            });
+            observer.observe(form, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['required', 'placeholder'],
+            });
+        }
+
         var countrySelect = form.querySelector('select[name="country_id"]');
         if (countrySelect) {
             toggleVnFieldsByCountry(form);
             countrySelect.addEventListener('change', function () {
                 toggleVnFieldsByCountry(form);
+                enforceGiftSimplifiedFields(form);
             });
         }
 
         provinceSelect.addEventListener('change', function () {
             var provinceId = provinceSelect.value;
-            resetSelect(districtSelect, 'Chọn Quận / Huyện...', true);
-            resetSelect(wardSelect, 'Chọn Phường / Xã...', true);
+            resetSelect(districtSelect, 'Chọn Quận/Huyện...', true);
+            resetSelect(wardSelect, 'Chọn Phường/Xã...', true);
 
             var cityInput = form.querySelector('input[name="city"]');
             var selectedProvOpt = provinceSelect.selectedOptions && provinceSelect.selectedOptions[0];
-            if (cityInput && provinceId && selectedProvOpt && !cityInput.value.trim()) {
+            if (cityInput && provinceId && selectedProvOpt && (!cityInput.value.trim() || isGiftSimplified(form))) {
                 cityInput.value = selectedProvOpt.textContent.trim();
             }
 
@@ -111,17 +163,17 @@
             fetchJson('/wbh/vn/districts/' + encodeURIComponent(provinceId))
                 .then(function (items) {
                     if (provinceSelect.value === provinceId) {
-                        populateSelect(districtSelect, items, 'Chọn Quận / Huyện...');
+                        populateSelect(districtSelect, items, 'Chọn Quận/Huyện...');
                     }
                 })
                 .catch(function () {
-                    resetSelect(districtSelect, 'Không tải được Quận / Huyện', true);
+                    resetSelect(districtSelect, 'Không tải được Quận/Huyện', true);
                 });
         });
 
         districtSelect.addEventListener('change', function () {
             var districtId = districtSelect.value;
-            resetSelect(wardSelect, 'Chọn Phường / Xã...', true);
+            resetSelect(wardSelect, 'Chọn Phường/Xã...', true);
 
             if (!districtId) {
                 return;
@@ -129,11 +181,11 @@
             fetchJson('/wbh/vn/wards/' + encodeURIComponent(districtId))
                 .then(function (items) {
                     if (districtSelect.value === districtId) {
-                        populateSelect(wardSelect, items, 'Chọn Phường / Xã...');
+                        populateSelect(wardSelect, items, 'Chọn Phường/Xã...');
                     }
                 })
                 .catch(function () {
-                    resetSelect(wardSelect, 'Không tải được Phường / Xã', true);
+                    resetSelect(wardSelect, 'Không tải được Phường/Xã', true);
                 });
         });
     }

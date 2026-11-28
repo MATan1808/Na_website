@@ -11,6 +11,7 @@ _logger = logging.getLogger(__name__)
 GHN_SANDBOX_BASE_URL = 'https://dev-online-gateway.ghn.vn/shiip/public-api'
 GHN_PROD_BASE_URL = 'https://online-gateway.ghn.vn/shiip/public-api'
 GHN_TRACKING_BASE_URL = 'https://donhang.ghn.vn/?order_code='
+VTP_TRACKING_BASE_URL = 'https://viettelpost.com.vn/tra-cuu-hanh-trinh-don/?id='
 
 
 class DeliveryCarrier(models.Model):
@@ -20,10 +21,12 @@ class DeliveryCarrier(models.Model):
         selection_add=[
             ('wbh_local', 'WBH — Giao hàng Nội bộ / Đồng giá / Gom đơn'),
             ('wbh_ghn', 'WBH — Giao Hàng Nhanh (GHN)'),
+            ('wbh_vtp', 'WBH — ĐVVC VIETTEL POST (Theo tỉnh thành)'),
         ],
         ondelete={
             'wbh_local': 'set default',
             'wbh_ghn': 'set default',
+            'wbh_vtp': 'set default',
         },
     )
 
@@ -71,6 +74,45 @@ class DeliveryCarrier(models.Model):
         string='Ghi chú vận chuyển',
         translate=True,
         help='Mô tả ngắn hiển thị tại bước chọn vận chuyển ở Checkout và Portal.',
+    )
+
+    wbh_vtp_origin_province_id = fields.Many2one(
+        'wbh.vn.province',
+        string='Tỉnh/TP kho gửi (Viettel Post)',
+        ondelete='set null',
+        help='Tỉnh/TP nơi shop gửi hàng để phân định nội tỉnh / cùng miền / liên miền.',
+    )
+    wbh_vtp_inner_price = fields.Float(
+        string='Cước nội tỉnh Viettel Post (VNĐ)',
+        default=12000.0,
+        help='Cước áp dụng khi khách nhận hàng cùng Tỉnh/TP với kho gửi (mặc định 12.000đ).',
+    )
+    wbh_vtp_same_region_price = fields.Float(
+        string='Cước cùng miền Viettel Post (VNĐ)',
+        default=15000.0,
+        help='Cước áp dụng khi khách ở Tỉnh/TP khác nhưng cùng vùng miền với kho gửi (mặc định 15.000đ).',
+    )
+    wbh_vtp_inter_region_price = fields.Float(
+        string='Cước liên miền Viettel Post (VNĐ)',
+        default=20000.0,
+        help='Cước áp dụng khi khách ở vùng miền khác với kho gửi (mặc định 20.000đ).',
+    )
+    wbh_vtp_min_price = fields.Float(
+        string='Cước tối thiểu Viettel Post (VNĐ)',
+        default=12000.0,
+        help='Ngưỡng sàn bảo vệ dải cước Viettel Post.',
+    )
+    wbh_vtp_max_price = fields.Float(
+        string='Cước tối đa Viettel Post (VNĐ)',
+        default=20000.0,
+        help='Ngưỡng trần bảo vệ dải cước Viettel Post.',
+    )
+
+    _check_wbh_vtp_prices = models.Constraint(
+        'CHECK(wbh_vtp_inner_price >= 0 AND wbh_vtp_same_region_price >= 0 '
+        'AND wbh_vtp_inter_region_price >= 0 AND wbh_vtp_min_price >= 0 '
+        'AND wbh_vtp_max_price >= wbh_vtp_min_price)',
+        'Cước Viettel Post phải >= 0 và cước tối đa phải >= cước tối thiểu.',
     )
 
     def _wbh_local_compute_price(self, order):
@@ -318,6 +360,112 @@ class DeliveryCarrier(models.Model):
         return False
 
     # ------------------------------------------------------------------ #
+    # ĐVVC VIETTEL POST — Tính cước động 12.000đ - 20.000đ theo tỉnh     #
+    # ------------------------------------------------------------------ #
+
+    def _wbh_vtp_resolve_province(self, partner):
+        """Tìm bản ghi Tỉnh/TP VN từ partner.wbh_vn_province_id hoặc state_id."""
+        if not partner:
+            return self.env['wbh.vn.province']
+        if partner.wbh_vn_province_id:
+            return partner.wbh_vn_province_id
+        if partner.state_id:
+            return self.env['wbh.vn.province'].sudo().search(
+                [('state_id', '=', partner.state_id.id), ('active', '=', True)],
+                limit=1,
+            )
+        return self.env['wbh.vn.province']
+
+    def _wbh_vtp_compute_price(self, order):
+        """Tính phí Viettel Post theo tỉnh thành trong khoảng [min_price, max_price]."""
+        self.ensure_one()
+        origin_prov = self.wbh_vtp_origin_province_id or self.env.ref(
+            'wbh_delivery_vn.vn_province_hcm', raise_if_not_found=False
+        )
+        dest_prov = self._wbh_vtp_resolve_province(order.partner_shipping_id if order else False)
+
+        inner_fee = self.wbh_vtp_inner_price if self.wbh_vtp_inner_price >= 0 else 12000.0
+        same_region_fee = self.wbh_vtp_same_region_price if self.wbh_vtp_same_region_price >= 0 else 15000.0
+        inter_region_fee = self.wbh_vtp_inter_region_price if self.wbh_vtp_inter_region_price >= 0 else 20000.0
+
+        if dest_prov and origin_prov:
+            if dest_prov.id == origin_prov.id:
+                raw_fee = inner_fee
+                note = _('Cước nội tỉnh %(province)s (ĐVVC Viettel Post).', province=dest_prov.name)
+            elif dest_prov.wbh_region == origin_prov.wbh_region:
+                raw_fee = same_region_fee
+                note = _('Cước cùng miền tới %(province)s (ĐVVC Viettel Post).', province=dest_prov.name)
+            else:
+                raw_fee = inter_region_fee
+                note = _('Cước liên miền tới %(province)s (ĐVVC Viettel Post).', province=dest_prov.name)
+        else:
+            raw_fee = same_region_fee
+            note = False
+
+        min_fee = self.wbh_vtp_min_price if self.wbh_vtp_min_price >= 0 else 12000.0
+        max_fee = self.wbh_vtp_max_price if self.wbh_vtp_max_price >= min_fee else max(min_fee, 20000.0)
+        clamped_company_fee = min(max(raw_fee, min_fee), max_fee)
+        order_price = self._compute_currency(order, clamped_company_fee, 'company_to_pricelist')
+        return order_price, note
+
+    def wbh_vtp_rate_shipment(self, order):
+        """Tính phí vận chuyển ĐVVC VIETTEL POST (12.000đ - 20.000đ theo tỉnh thành)."""
+        self.ensure_one()
+        if not self._match_address(order.partner_shipping_id):
+            return {
+                'success': False,
+                'price': 0.0,
+                'error_message': _('ĐVVC Viettel Post không áp dụng cho địa chỉ đã chọn.'),
+                'warning_message': False,
+            }
+        price, warning_msg = self._wbh_vtp_compute_price(order)
+        return {
+            'success': True,
+            'price': price,
+            'error_message': False,
+            'warning_message': warning_msg,
+        }
+
+    def wbh_vtp_send_shipping(self, pickings):
+        """Tạo mã vận đơn ĐVVC VIETTEL POST và ghi nhận lên đơn hàng."""
+        self.ensure_one()
+        results = []
+        for picking in pickings:
+            order = picking.sale_id
+            exact_price = (
+                self._wbh_vtp_compute_price(order)[0]
+                if order
+                else (self.wbh_vtp_same_region_price or 15000.0)
+            )
+            tracking_number = f'VTP-{picking.name or picking.id}'
+            tracking_url = f'{VTP_TRACKING_BASE_URL}{tracking_number}'
+            if order:
+                order.sudo().write({
+                    'wbh_tracking_code': tracking_number,
+                    'wbh_tracking_url': tracking_url,
+                    'wbh_is_hold_order': False,
+                })
+                order.message_post(
+                    body=Markup(
+                        '<p>Đã tạo vận đơn ĐVVC Viettel Post: <strong>%s</strong> '
+                        '(<a href="%s" target="_blank" rel="noopener noreferrer">Tra cứu</a>)</p>'
+                    )
+                    % (tracking_number, tracking_url)
+                )
+            results.append({
+                'exact_price': exact_price,
+                'tracking_number': tracking_number,
+            })
+        return results
+
+    def wbh_vtp_get_tracking_link(self, picking):
+        """Trả về URL tra cứu vận đơn ĐVVC Viettel Post."""
+        self.ensure_one()
+        if picking.carrier_tracking_ref:
+            return f'{VTP_TRACKING_BASE_URL}{picking.carrier_tracking_ref}'
+        return False
+
+    # ------------------------------------------------------------------ #
     # Hook mở rộng cho các đơn vị vận chuyển VN khác (GHTK / Viettel Post) #
     # ------------------------------------------------------------------ #
 
@@ -327,6 +475,7 @@ class DeliveryCarrier(models.Model):
         adapters = {
             'wbh_local': self._wbh_local_adapter_info,
             'wbh_ghn': self._wbh_ghn_adapter_info,
+            'wbh_vtp': self._wbh_vtp_adapter_hook,
             'ghtk': self._wbh_ghtk_adapter_hook,
             'vtp': self._wbh_vtp_adapter_hook,
         }
@@ -344,5 +493,5 @@ class DeliveryCarrier(models.Model):
         return {'code': 'ghtk', 'name': 'Giao Hàng Tiết Kiệm (GHTK)', 'active': False}
 
     def _wbh_vtp_adapter_hook(self):
-        """Hook chuẩn bị tích hợp Viettel Post (VTP)."""
-        return {'code': 'vtp', 'name': 'Viettel Post (VTP)', 'active': False}
+        """Adapter ĐVVC Viettel Post (VTP)."""
+        return {'code': 'wbh_vtp', 'name': 'ĐVVC Viettel Post (VTP)', 'active': True}
